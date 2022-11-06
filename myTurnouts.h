@@ -1,5 +1,5 @@
 /*myTurnouts.h
-*
+* Stored now on github https://github.com/BMRG-Holgat/Config-Files.git
 *Defineturnoutshere
 *
 *SERVO_TURNOUT(id,ping,throw,close,speed,desc)
