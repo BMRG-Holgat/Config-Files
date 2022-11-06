@@ -1,5 +1,7 @@
 /* mySensors.h
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Define Sensors and Aliases
 *
 * ALIAS(Sensor_name, pin#)

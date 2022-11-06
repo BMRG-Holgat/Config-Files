@@ -1,4 +1,6 @@
 /*
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
  *  © 2021 Neil McKechnie
  *  © 2020-2021 Harald Barth
  *  © 2020-2021 Fred Decker

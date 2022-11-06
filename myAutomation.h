@@ -1,6 +1,11 @@
 /*
  * Holgate automation file
  *  
+ * Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+ *
+ * V 0.0.1
+ * Moved config files to github for better control
+ *
  * V 0.0.0
  * Adding Fiddleyards & main lines
  *  aliases for turnouts

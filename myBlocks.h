@@ -1,5 +1,7 @@
 /* myBlocks
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Define blocks Aliases
 *
 * ALIAS(block, [value])

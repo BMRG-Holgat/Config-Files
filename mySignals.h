@@ -1,5 +1,6 @@
 /* mySignals.h
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
 * setup any signals that are required
 *
 * SIGNALH(red,amber(0),green)

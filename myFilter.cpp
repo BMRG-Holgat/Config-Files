@@ -1,6 +1,8 @@
 //  myFilter.cpp  to enable use of DCC accessory commands from JMRI Lights table to DCC++EX pins/vpins
 //                -- note the overlap in DCC addresses 
 
+/* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*/
 //  updated to remove accessory status in <s> command
 //  <c> reports pincounts for analog pins A2, A3, A4, A5
 

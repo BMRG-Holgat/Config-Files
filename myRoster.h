@@ -1,5 +1,7 @@
 /* myRoster.h
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Define Roster locos
 *
 * ROSTER(dcc-addr,desc,functions{},...)

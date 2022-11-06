@@ -1,5 +1,7 @@
 /* Definitions
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Definitions for operations
 *
 */

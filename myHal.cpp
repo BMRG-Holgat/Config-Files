@@ -1,5 +1,7 @@
 //  Sample myHal.cpp file.
-//
+// 
+/* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*/
 // To use this file, copy it to myHal.cpp and uncomment the directives and/or
 // edit them to satisfy your requirements.  If you only want to use up to 
 // two MCP23017 GPIO Expander modules and/or up to two PCA9685 Servo modules,

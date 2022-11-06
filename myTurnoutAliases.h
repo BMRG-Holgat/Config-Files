@@ -1,5 +1,7 @@
 /* Turnout Aliases
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Define turnout aliaes for inside dcc-ex
 * 
 * See myTurnouts.h for descriptions shown on handset

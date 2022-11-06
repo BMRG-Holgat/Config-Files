@@ -1,5 +1,7 @@
-//myStartup
-/*
+/*myStartup
+*
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * This file is for reassembly testing of the layout before trains are run
 *
 */

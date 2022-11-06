@@ -1,5 +1,7 @@
 /* This should be mySetup file for turnouts
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 */
 
 SETUP("<0>"); // tracks off at startup

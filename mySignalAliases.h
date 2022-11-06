@@ -1,5 +1,7 @@
 /* Signall Aliases
 *
+* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
+*
 * Define all the signal aliases
 *
 */
