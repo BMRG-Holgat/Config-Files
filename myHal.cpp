@@ -41,6 +41,13 @@ void halSetup() {
   //   I2C address of module=0x40
 
   //PCA9685::create(100, 16, 0x40);
+  //PCA9685::create(116, 16, 0x41);
+  //PCA9685::create(132, 16, 0x42);
+  //PCA9685::create(148, 16, 0x43);
+  PCA9685::create(164, 16, 0x44);
+  //PCA9685::create(180, 16, 0x45);
+  //PCA9685::create(196, 16, 0x46);
+  //PCA9685::create(212, 16, 0x47);
 
 
   //=======================================================================
@@ -59,7 +66,15 @@ void halSetup() {
   // all the time, only when a change takes place. Multiple modules' INT pins
   // may be connected to the same Arduino pin.
 
-  //MCP23017::create(196, 16, 0x22, 40);
+  MCP23017::create(228, 16, 0x22, 40);
+  MCP23017::create(244, 16, 0x23, 40);
+  MCP23017::create(260, 16, 0x24, 40);
+  MCP23017::create(276, 16, 0x25, 40);
+  MCP23017::create(292, 16, 0x26, 40);
+  MCP23017::create(308, 16, 0x27, 40);
+  MCP23017::create(324, 16, 0x28, 40);
+  MCP23017::create(340, 16, 0x29, 40);
+
 
 
   //=======================================================================
