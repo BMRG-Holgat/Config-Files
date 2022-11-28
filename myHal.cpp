@@ -1,7 +1,5 @@
 //  Sample myHal.cpp file.
-// 
-/* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
-*/
+//
 // To use this file, copy it to myHal.cpp and uncomment the directives and/or
 // edit them to satisfy your requirements.  If you only want to use up to 
 // two MCP23017 GPIO Expander modules and/or up to two PCA9685 Servo modules,
@@ -40,15 +38,14 @@ void halSetup() {
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
 
-  //PCA9685::create(100, 16, 0x40);
-  //PCA9685::create(116, 16, 0x41);
-  //PCA9685::create(132, 16, 0x42);
-  //PCA9685::create(148, 16, 0x43);
+  PCA9685::create(100, 16, 0x40);
+  PCA9685::create(116, 16, 0x41);
+  PCA9685::create(132, 16, 0x42);
+  PCA9685::create(148, 16, 0x43);
   PCA9685::create(164, 16, 0x44);
-  //PCA9685::create(180, 16, 0x45);
-  //PCA9685::create(196, 16, 0x46);
-  //PCA9685::create(212, 16, 0x47);
-
+  PCA9685::create(180, 16, 0x45);
+  PCA9685::create(196, 16, 0x46);
+  PCA9685::create(212, 16, 0x47);
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -58,7 +55,9 @@ void halSetup() {
   //   Number of VPINs=16 (numbered 196-211)
   //   I2C address of module=0x22
 
-  //MCP23017::create(196, 16, 0x22);
+  //MCP23017::create(164, 16, 0x26);
+ 
+  
 
 
   // Alternative form, which allows the INT pin of the module to request a scan
@@ -66,15 +65,14 @@ void halSetup() {
   // all the time, only when a change takes place. Multiple modules' INT pins
   // may be connected to the same Arduino pin.
 
-  MCP23017::create(228, 16, 0x22, 40);
-  MCP23017::create(244, 16, 0x23, 40);
-  MCP23017::create(260, 16, 0x24, 40);
-  MCP23017::create(276, 16, 0x25, 40);
-  MCP23017::create(292, 16, 0x26, 40);
-  MCP23017::create(308, 16, 0x27, 40);
-  MCP23017::create(324, 16, 0x28, 40);
-  MCP23017::create(340, 16, 0x29, 40);
-
+  MCP23017::create(228, 16, 0x20, 40);
+  MCP23017::create(244, 16, 0x21, 40);
+  MCP23017::create(260, 16, 0x22, 40);
+  MCP23017::create(276, 16, 0x23, 40);
+  MCP23017::create(292, 16, 0x24, 40);
+  MCP23017::create(308, 16, 0x25, 40);
+  MCP23017::create(324, 16, 0x26, 40);
+  MCP23017::create(340, 16, 0x27, 40);
 
 
   //=======================================================================
@@ -96,7 +94,7 @@ void halSetup() {
   //   Number of VPINs=8 (numbered 200-207)
   //   I2C address of module=0x23
 
-  //PCF8574::create(200, 8, 0x23);
+  //PCF8574::create(200, 8, 0x20);
 
 
   // Alternative form using INT pin (see above)
