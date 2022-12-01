@@ -7,6 +7,8 @@
 *  Setup basics
 */
 
+//Fiddle yard hold sequence
+
 SEQUENCE(USG_BK11__USG_BK12)
  //insert BO detection here
     RESERVE(USG_BK12_Hold)
@@ -24,7 +26,6 @@ SEQUENCE(USG_BK10__USG_BK11)
     FREE(USG_BK10_Hold)
     FOLLOW(USG_BK11__USG_BK12)
 
-
 SEQUENCE(USG_BK9__USG_BK10)
 //insert BO detection here
     RESERVE(USG_BK10_Hold)
@@ -33,7 +34,9 @@ SEQUENCE(USG_BK9__USG_BK10)
     STOP
     FREE(USG_BK9_Hold)
     FOLLOW(USG_BK10__USG_BK11)
+//End fiddle yard hold sequence
 
+//Enter fiddle yard B bypass
 SEQUENCE(USG_BK8__USG_BK9)
 //insert BO detection here
     RESERVE(USG_BK9_Hold)
