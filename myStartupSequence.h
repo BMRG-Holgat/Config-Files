@@ -1,4 +1,4 @@
-/*myStartup
+/*myStartupSequence
 *
 * Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
 *
