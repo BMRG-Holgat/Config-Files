@@ -88,15 +88,14 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
    DELAY(2000) \
    DONE
   */
-RED(190)
+
 DONE
 
 /* Build sequences
 *
 */
-SEQUENCE(1)
-AT(SNS1_TRN1_APP)
-STOP
+#include "myTrackA.h"
+
 /* Build Routes
 *
 */
