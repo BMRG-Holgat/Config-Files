@@ -57,11 +57,12 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 * myStartupSequence defines how and what to start on power on
 * 
 */
-
+#include "mySequenceAliase.h"
 #include "myTurnouts.h"
 #include "mySensors.h"
 #include "myDefinitions.h"
 #include "myTurnoutAliases.h"
+#include "myTrackA.h"
 #include "myBlocks.h"
 #include "mySignals.h"
 #include "mySignalAliases.h"
