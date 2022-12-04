@@ -15,7 +15,7 @@ SEQUENCE(USG_BK11__USG_BK12)
     FWD(10)
     AT(USG_SNS_12)
     STOP
-    FREE(USG_BK_11_Hold)
+    FREE(USG_BK11_Hold)
 
 SEQUENCE(USG_BK10__USG_BK11)
 //insert BO detection here
