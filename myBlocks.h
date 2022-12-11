@@ -1,7 +1,5 @@
 /* myBlocks
 *
-* Kept now on github https://github.com/BMRG-Holgat/Config-Files.git
-*
 * Define blocks Aliases
 *
 * ALIAS(block, [value])
@@ -14,18 +12,18 @@
 */
 
 //Up Goods Slow
-ALIAS(USG_BK1_Stn_App) //Station approach from fiddle yard
-ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line
-ALIAS(USG_BK3_Stn_Hold) //Station Hold for effect
-ALIAS(UGS_BK4_Stn_Exit)  //Exit from station
-ALIAS(UGS_BK5_UFM_Access_Hold) // Wait here for board 4 to be clear
-ALIAS(UGS_BK6) // Wait here for board 8 to be clear
-ALIAS(UGS_BK7) // Wait here for board 9 to be clear
-ALIAS(UGS_BK8_BF_App) //Wait for Fiddle yard clearance
-ALIAS(USG_BK9_Hold) //Fiddle yard bypass holding 1
-ALIAS(USG_BK10_Hold) //Fiddle yard bypass holding 2
-ALIAS(USG_BK11_Hold) //Fiddle yard bypass holding 3
-ALIAS(USG_BK12_Hold) //Fiddle yard bypass holding 4
+ALIAS(USG_BK1_Stn_App) //Station approach from fiddle yard B1
+ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line B1
+ALIAS(USG_BK3_Stn_Hold) //Station Hold for effect B1
+ALIAS(UGS_BK4_Stn_Exit)  //Exit from station B1
+ALIAS(UGS_BK5_UFM_Access_Hold) // Wait here for board 4 to be clear B3
+ALIAS(UGS_BK6) // Wait here for board 8 to be clear B4
+ALIAS(UGS_BK7) // Wait here for board 9 to be clear B8
+ALIAS(UGS_BK8_BF_App) //Wait for Fiddle yard clearance B9
+ALIAS(USG_BK9_Hold) //Fiddle yard bypass holding 4
+ALIAS(USG_BK10_Hold) //Fiddle yard bypass holding 3
+ALIAS(USG_BK11_Hold) //Fiddle yard bypass holding 2
+ALIAS(USG_BK12_Hold) //Fiddle yard bypass holding 1
 
 //Up Mixed Fast
 ALIAS(UMF_BK1_1_STN_App) //Station approach from fiddleyard

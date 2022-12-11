@@ -28,16 +28,16 @@
 
 //Test sequence of LED signals
  #define signalTest \
-   signalLedTest(SIG_N1) \
-   signalLedTest(SIG_N2) \
-   signalLedTest(SIG_N3) \
-   signalLedTest(SIG_N4) \
-   signalLedTest(SIG_N5) \
-   signalLedTest(SIG_N6) \
-   signalLedTest(SIG_S1) \
-   signalLedTest(SIG_S2) \
-   signalLedTest(SIG_S3) \
-   ledReset \
+   //signalLedTest(SIG_N1) \
+   //signalLedTest(SIG_N2) \
+   //signalLedTest(SIG_N3) \
+   //signalLedTest(SIG_N4) \
+   //signalLedTest(SIG_N5) \
+   //signalLedTest(SIG_N6) \
+   //signalLedTest(SIG_S1) \
+   //signalLedTest(SIG_S2) \
+  // signalLedTest(SIG_S3) \
+   //ledReset \
    myLCDOutput(signals)
    
 //Test turnout sequence
