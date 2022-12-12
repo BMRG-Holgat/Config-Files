@@ -15,6 +15,7 @@
 
 //Up Goods Slow
 ALIAS(UGS_STN_App)  //Station approach from fiddle yard
+ALIAS(UGS_STN_Hold) //wait in station
 ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line
 ALIAS(UGS_BK3_STN_1_AB_App)  //Exit from station
 ALIAS(UGS_BK3_2_AC_App) //Approach points on board 3

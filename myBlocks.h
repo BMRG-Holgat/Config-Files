@@ -14,8 +14,10 @@
 //Up Goods Slow
 ALIAS(USG_BK1_Stn_App) //Station approach from fiddle yard B1
 ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line B1
-ALIAS(USG_BK3_Stn_Hold) //Station Hold for effect B1
+ALIAS(UGS_STN_Hold) //Station Hold for effect B1
 ALIAS(UGS_BK4_Stn_Exit)  //Exit from station B1
+ALIAS(UGS_BK4_3__8_Hold)
+ALIAS(UGS_BK5_9_Hold)
 ALIAS(UGS_BK5_UFM_Access_Hold) // Wait here for board 4 to be clear B3
 ALIAS(UGS_BK6) // Wait here for board 8 to be clear B4
 ALIAS(UGS_BK7) // Wait here for board 9 to be clear B8
