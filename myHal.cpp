@@ -65,14 +65,14 @@ void halSetup() {
   // all the time, only when a change takes place. Multiple modules' INT pins
   // may be connected to the same Arduino pin.
 
-  //MCP23017::create(228, 16, 0x20, 40);
-  //MCP23017::create(244, 16, 0x21, 40);
-  //MCP23017::create(260, 16, 0x22, 40);
-  //MCP23017::create(276, 16, 0x23, 40);
-  //MCP23017::create(292, 16, 0x24, 40);
-  //MCP23017::create(308, 16, 0x25, 40);
-  //MCP23017::create(324, 16, 0x26, 40);
-  //MCP23017::create(340, 16, 0x27, 40);
+  MCP23017::create(228, 16, 0x20, 40);
+  MCP23017::create(244, 16, 0x21, 40);
+  MCP23017::create(260, 16, 0x22, 40);
+  MCP23017::create(276, 16, 0x23, 40);
+  MCP23017::create(292, 16, 0x24, 40);
+  MCP23017::create(308, 16, 0x25, 40);
+  MCP23017::create(324, 16, 0x26, 40);
+  MCP23017::create(340, 16, 0x27, 40);
 
 
   //=======================================================================
