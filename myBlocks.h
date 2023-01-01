@@ -12,20 +12,20 @@
 */
 
 //Up Goods Slow
-ALIAS(USG_BK1_Stn_App) //Station approach from fiddle yard B1
-ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line B1
-ALIAS(UGS_STN_Hold) //Station Hold for effect B1
-ALIAS(UGS_BK4_Stn_Exit)  //Exit from station B1
-ALIAS(UGS_BK4_3__8_Hold)
-ALIAS(UGS_BK5_9_Hold)
-ALIAS(UGS_BK5_UFM_Access_Hold) // Wait here for board 4 to be clear B3
-ALIAS(UGS_BK6) // Wait here for board 8 to be clear B4
-ALIAS(UGS_BK7) // Wait here for board 9 to be clear B8
-ALIAS(UGS_BK8_BF_App) //Wait for Fiddle yard clearance B9
-ALIAS(USG_BK9_Hold) //Fiddle yard bypass holding 4
-ALIAS(USG_BK10_Hold) //Fiddle yard bypass holding 3
-ALIAS(USG_BK11_Hold) //Fiddle yard bypass holding 2
-ALIAS(USG_BK12_Hold) //Fiddle yard bypass holding 1
+ALIAS(USG_BK1_Stn_App,700) //Station approach from fiddle yard B1
+ALIAS(UGS_BK2_HEAD_1_AA_Ex,701)  //Header line B1
+ALIAS(UGS_STN_Hold,702) //Station Hold for effect B1
+ALIAS(UGS_BK4_Stn_Exit,703)  //Exit from station B1
+ALIAS(UGS_BK4_3__8_Hold,704)
+ALIAS(UGS_BK5_9_Hold,705)
+ALIAS(UGS_BK5_UFM_Access_Hold,706) // Wait here for board 4 to be clear B3
+ALIAS(UGS_BK6,707) // Wait here for board 8 to be clear B4
+ALIAS(UGS_BK7,708) // Wait here for board 9 to be clear B8
+ALIAS(UGS_BK8_BF_App,709) //Wait for Fiddle yard clearance B9
+ALIAS(USG_BK9_Hold,710) //Fiddle yard bypass holding 4
+ALIAS(USG_BK10_Hold,711) //Fiddle yard bypass holding 3
+ALIAS(USG_BK11_Hold,712) //Fiddle yard bypass holding 2
+ALIAS(USG_BK12_Hold,713) //Fiddle yard bypass holding 1
 
 //Up Mixed Fast
 ALIAS(UMF_BK1_1_STN_App) //Station approach from fiddleyard

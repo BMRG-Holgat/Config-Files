@@ -47,13 +47,16 @@ SEQUENCE(USG_BK8__USG_BK9)
     FOLLOW(USG_BK9__USG_BK10)
 
 //Station Approach from A and stop
-SEQUENCE(USG_BK1_ST_App)
+SEQUENCE(USG_BK1_ST_App) // seq 600
 //insert BO detection here
-    IFRESERVE(UGS_STN_Hold)
-      IFCLOSED(UGS_T1_H)
-        THROW(UGS_T1_H)
+    IFRESERVE(USG_BK1_Stn_App)
+     IFRESERVE(UGS_BK2_HEAD_1_AA_Ex)
+        IFCLOSED(UGS_T1_H)
+          THROW(UGS_T1_H)
+        ENDIF
       ENDIF
-    FWD(10)
+      RESERVE(UGS_STN_Hold)
+      FWD(10)
     ENDIF
     //Insert signals here
     AT(USG_SNS_STN)
@@ -63,7 +66,7 @@ SEQUENCE(USG_BK1_ST_App)
     FOLLOW(USG_BK2_STN_EX)
 
 //Header line
-SEQUENCE(UGS_Head_Entry)
+SEQUENCE(UGS_Head_Entry) //seq 601
 //insert BO detection here for station
  //Check BO on header
     RESERVE(UGS_STN_Hold)  
@@ -77,7 +80,7 @@ SEQUENCE(UGS_Head_Entry)
 DONE
 
 //Leave Header Line and go back to Fiddle Yard
-SEQUENCE(UGS_Head_Exit)
+SEQUENCE(UGS_Head_Exit) // seq 602
     //insert BO detection here for station-Fiddle yard
     IFRESERVE(UGS_STN_Hold)
         CLOSE(UGS_T1_H)
@@ -91,19 +94,37 @@ SEQUENCE(UGS_Head_Exit)
 
        
 //Exit Station Onto board 2
-SEQUENCE(USG_BK2_STN_EX)
+SEQUENCE(USG_BK2_STN_EX) // seq 603
 //insert BO detection here for boards 3-8
-  RESERVE(UGS_BK4_3__8_Hold)
-  IFTHROWN(UGS_T2_E__DFM_T1_A)
+  IFRESERVE(UGS_BK4_3__8_Hold)
+    IFTHROWN(UGS_T2_E__DFM_T1_A)
     //Set Signal Red
-    DELAY(5000)
-    CLOSE(UGS_T2_E__DFM_T1_A)
-    IFTHROWN(UGS_T3_A__UFM_T3_E)
-      CLOSE(UGS_T3_A__UFM_T3_E)
+      DELAY(5000)
+      CLOSE(UGS_T2_E__DFM_T1_A)
+      IFTHROWN(UGS_T3_A__UFM_T3_E)
+        CLOSE(UGS_T3_A__UFM_T3_E)
+      ENDIF
     ENDIF
+    FWD(30)
+    AT(SNS6_TRN2_STN_EX)
+    FWD(50)
+    FREE(USG_BK1_Stn_App)
+    FREE(UGS_BK2_HEAD_1_AA_Ex)
+    FREE(UGS_STN_Hold)
   ENDIF
-  FWD(50)
-  AT(SNS6_TRN2_EX)
-  FWD(30)
-  FREE(UGS_STN_Hold)
-  FOLLOW(UGS_BK5_9_Hold)
+  FOLLOW(USG_BK8__USG_BK9)
+
+  //Main run to board 9
+  SEQUENCE(USG_BK8__USG_BK9)
+  //Insert BO for board 9    
+    IFRESERVE(UGS_BK5_9_Hold)
+      IFTHROWN(UGS_T4_E__UFM_T5_A)
+        CLOSE(UGS_T4_E__UFM_T5_A)
+        FREE(UGS_BK4_3__8_Hold)
+      ENDIF
+    ELSE
+      FWD(30)
+      AT(SNS7_MAIN_TRN3_APP)
+      STOP
+    ENDIF
+    FOLLOW(USG_BK8__USG_BK9)
