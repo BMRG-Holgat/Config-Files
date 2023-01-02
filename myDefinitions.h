@@ -21,7 +21,7 @@
     CLOSE(UFM_T5_E__UMF_T3_A) \
     CLOSE(UFM_T6_A__UGS_T5_E) \
     CLOSE(UMF_T7_E__UMF_T8_A) \
-    CLOSE(UFM_T8_E__UMF_T9_A) \
+    CLOSE(UFM_T8_E__UMT_T9_A) \
     CLOSE(UMF_T9_E__UMF_T10_A) \
     CLOSE(UMF_T10) \
     CLOSE(UMF_T11_E__UMF_T12_A) \
@@ -46,7 +46,7 @@
     CLOSE(UFM_T5_E__UMF_T6_A) \
     CLOSE(UFM_T6_E__UGS_T7_A) \
     CLOSE(UFM_T7) \
-    CLOSE(UFM_T8_E__UMF_T9_A) \
+    CLOSE(UFM_T8_E__UMT_T9_A) \
     CLOSE(UFM_T9_E__UFM_T10_A) \
     CLOSE(UFM_T10_E__UFM_T11_A) \
     CLOSE(UFM_T11) \
@@ -121,7 +121,7 @@
   turnTest(UFM_T5_E__UMF_T3_A) \
   turnTest(UFM_T6_A__UGS_T5_E) \
   turnTest(UMF_T7_E__UMF_T8_A) \
-  turnTest(UFM_T8_E__UMF_T9_A) \
+  turnTest(UFM_T8_E__UMT_T9_A) \
   turnTest(UMF_T9_E__UMF_T10_A) \
   turnTest(UMF_T10) \
   turnTest(UMF_T11_E__UMF_T12_A) \
@@ -146,7 +146,7 @@
   turnTest(UFM_T5_E__UMF_T6_A) \
   turnTest(UFM_T6_E__UGS_T7_A) \
   turnTest(UFM_T7) \
-  turnTest(UFM_T8_E__UMF_T9_A) \
+  turnTest(UFM_T8_E__UMT_T9_A) \
   turnTest(UFM_T9_E__UFM_T10_A) \
   turnTest(UFM_T10_E__UFM_T11_A) \
   turnTest(UFM_T11) \
