@@ -101,8 +101,8 @@
    //signalLedTest(SIG_N6) \
    //signalLedTest(SIG_S1) \
    //signalLedTest(SIG_S2) \
-  // signalLedTest(SIG_S3) \
-   //ledReset \
+   //signalLedTest(SIG_S3) \
+   ledReset \
    myLCDOutput(signals)
    
 //Test turnout sequence
