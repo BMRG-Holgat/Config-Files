@@ -16,11 +16,12 @@
 //Up Goods Slow
 ALIAS(UGS_STN_App,1)  //Station approach from fiddle yard
 ALIAS(UGS_STN_Hold,2) //wait in station
-ALIAS(UGS_BK2_HEAD_1_AA_Ex)  //Header line
-ALIAS(UGS_BK3_STN_1_AB_App)  //Exit from station
-ALIAS(UGS_BK3_2_AC_App) //Approach points on board 3
-ALIAS(UGS_BK4_3__8_Hold) // Wait here for board 4 to be clear
-ALIAS(UGS_BK5_9_Hold) // Wait here for board 9 to be clear
+ALIAS(UGS_BK2_HEAD_1_AA_Ex,3)  //Header line
+ALIAS(UGS_BK3_STN_1_AB_App,4)  //Exit from station
+ALIAS(UGS_BK3_2_AC_App,5) //Approach points on board 3
+ALIAS(UGS_BK4_3__8_Hold,6) // Wait here for board 4 to be clear
+ALIAS(UGS_BK5_9_Hold,7) // Wait here for board 9 to be clear
+ALIAS(USG_BK12_Hold,12) //Wait here for access to board 1
 
 
 //Up Mixed Fast

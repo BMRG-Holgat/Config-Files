@@ -12,7 +12,7 @@
 */
 
 //Up Goods Slow
-ALIAS(USG_BK1_Stn_App,700) //Station approach from fiddle yard B1
+ALIAS(UGS_BK1_Stn_App,700) //Station approach from fiddle yard B1
 ALIAS(UGS_BK2_HEAD_1_AA_Ex,701)  //Header line B1
 ALIAS(UGS_STN_Hold,702) //Station Hold for effect B1
 ALIAS(UGS_BK4_Stn_Exit,703)  //Exit from station B1
@@ -24,8 +24,8 @@ ALIAS(UGS_BK7,708) // Wait here for board 9 to be clear B8
 ALIAS(UGS_BK8_BF_App,709) //Wait for Fiddle yard clearance B9
 ALIAS(USG_BK9_Hold,710) //Fiddle yard bypass holding 4
 ALIAS(USG_BK10_Hold,711) //Fiddle yard bypass holding 3
-ALIAS(USG_BK11_Hold,712) //Fiddle yard bypass holding 2
-ALIAS(USG_BK12_Hold,713) //Fiddle yard bypass holding 1
+ALIAS(USG_BK11_Hold,112) //Fiddle yard bypass holding 2
+ALIAS(USG_BK12_Hold,113) //Fiddle yard bypass holding 1
 
 //Up Mixed Fast
 ALIAS(UMF_BK1_1_STN_App) //Station approach from fiddleyard
@@ -36,6 +36,17 @@ ALIAS(UMF_BK5_4__6_Hold)
 ALIAS(UMF_BK8_7_App) // Wait here if double slip is against us
 ALIAS(UMF_BK9_8_App) //Wait here for board 9 to clear
 ALIAS(UMF_BK10_9_Hold) //Wait here for fiddleyard entrance to clear
+ALIAS(FB_App,48) // FB approach track from Board 9 all trains wait here until space available
+ALIAS(FB_T1_E_Hold,49) //FB Track 1 exit block
+ALIAS(FB_T1_A_Hold,50) // FB Track 1 access block
+ALIAS(FB_T2_E_Hold,51) // FB Track 2 exit block
+ALIAS(FB_T2_A_Hold,52) // FB Track 2 access block
+ALIAS(FB_T3_E_Hold,53) //FB Track 3 exit block
+ALIAS(FB_T3_A_Hold,54) // FB Track 3 access block
+ALIAS(FB_T4_E_Hold,55) // FB Track 4 exit block
+ALIAS(FB_T4_A_Hold,56) // FB Track 4 access block
+ALIAS(FB_T5_E_Hold,57) // FB Track 5 exit block
+ALIAS(FB_T5_A_Hold,58) // FB Track 5 access block
 
 //Down Main Fast
 ALIAS(DMF_BK1_1_DF_App) //Wait here for D Fiddle yard to clear

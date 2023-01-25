@@ -83,12 +83,14 @@ The configuration file for DCC-EX Command Station
 //
 // Your SSID may not contain ``"'' (double quote, ASCII 0x22).
 #define WIFI_SSID "Your network name"
+//#define WIFI_SSID "SmartNet"
 //
 // WIFI_PASSWORD is the network password for your home network or if
 // you want to change the password from default AP mode password
 // to the AP password you want. 
 // Your password may not contain ``"'' (double quote, ASCII 0x22).
-#define WIFI_PASSWORD "bmrc-holgate"
+#define WIFI_PASSWORD "Bmrc_h0lgate"
+//#define WIFI_PASSWORD "5martn3t2020"
 //
 // WIFI_HOSTNAME: You probably don't need to change this
 #define WIFI_HOSTNAME "dccex"
@@ -123,12 +125,12 @@ The configuration file for DCC-EX Command Station
 // To enable, uncomment one of the #define lines below
 
 // define LCD_DRIVER for I2C address 0x27, 16 cols, 2 rows
-#define LCD_DRIVER  0x27,16,2
+//#define LCD_DRIVER  0x27,128,16
 
 //OR define OLED_DRIVER width,height in pixels (address auto detected)
 // 128x32 or 128x64 I2C SSD1306-based devices are supported.
 // Use 132,64 for a SH1106-based I2C device with a 128x64 display.
-// #define OLED_DRIVER 128,32
+//#define OLED_DRIVER 128,32
 
 // Define scroll mode as 0, 1 or 2
 //  *  #define SCROLLMODE 0 is scroll continuous (fill screen if poss),

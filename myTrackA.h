@@ -15,14 +15,18 @@ SEQUENCE(USG_BK11__USG_BK12)
     FWD(10)
     AT(USG_SNS_12)
     STOP
+    PRINT("STOPPED")
     FREE(USG_BK11_Hold)
+    DONE
+
 
 SEQUENCE(USG_BK10__USG_BK11)
 //insert BO detection here
     RESERVE(USG_BK11_Hold)
     FWD(10)
-    AT(USG_SNS_11)
-    STOP
+    DELAY(5000)
+ //   AT(USG_SNS_11)
+ //   STOP
     FREE(USG_BK10_Hold)
     FOLLOW(USG_BK11__USG_BK12)
 
@@ -47,9 +51,9 @@ SEQUENCE(USG_BK8__USG_BK9)
     FOLLOW(USG_BK9__USG_BK10)
 
 //Station Approach from A and stop
-SEQUENCE(USG_BK1_ST_App) // seq 600
+SEQUENCE(UGS_BK1_ST_App) // seq 600
 //insert BO detection here
-    IFRESERVE(USG_BK1_Stn_App)
+    IFRESERVE(UGS_BK1_Stn_App)
      IFRESERVE(UGS_BK2_HEAD_1_AA_Ex)
         IFCLOSED(UGS_T1_H)
           THROW(UGS_T1_H)
@@ -61,6 +65,8 @@ SEQUENCE(USG_BK1_ST_App) // seq 600
     //Insert signals here
     AT(USG_SNS_STN)
     STOP
+    PRINT("Stopped at station")
+    FREE(USG_BK12_Hold)
     DELAYRANDOM(10000, 15000)
     //Insert Signal change here
     FOLLOW(USG_BK2_STN_EX)
@@ -90,7 +96,7 @@ SEQUENCE(UGS_Head_Exit) // seq 602
         STOP
         DELAY(5000)
     ENDIF
-    FOLLOW(USG_BK1_ST_App)
+    FOLLOW(UGS_BK1_ST_App)
 
        
 //Exit Station Onto board 2
@@ -108,23 +114,40 @@ SEQUENCE(USG_BK2_STN_EX) // seq 603
     FWD(30)
     AT(SNS6_TRN2_STN_EX)
     FWD(50)
-    FREE(USG_BK1_Stn_App)
+    FREE(UGS_BK1_Stn_App)
     FREE(UGS_BK2_HEAD_1_AA_Ex)
     FREE(UGS_STN_Hold)
   ENDIF
   FOLLOW(USG_BK8__USG_BK9)
 
-  //Main run to board 9
-  SEQUENCE(USG_BK8__USG_BK9)
+//Main run to board 9
+SEQUENCE(USG_BK8__USG_BK9)
   //Insert BO for board 9    
-    IFRESERVE(UGS_BK5_9_Hold)
-      IFTHROWN(UGS_T4_E__UFM_T5_A)
-        CLOSE(UGS_T4_E__UFM_T5_A)
-        FREE(UGS_BK4_3__8_Hold)
-      ENDIF
-    ELSE
-      FWD(30)
-      AT(SNS7_MAIN_TRN3_APP)
-      STOP
+  IFRESERVE(UGS_BK5_9_Hold)
+    IFTHROWN(UGS_T4_E__UFM_T5_A)
+      CLOSE(UGS_T4_E__UFM_T5_A)
+      FREE(UGS_BK4_3__8_Hold)
     ENDIF
-    FOLLOW(USG_BK8__USG_BK9)
+  ELSE
+    FWD(30)
+    AT(SNS7_MAIN_TRN3_APP)
+    STOP
+  ENDIF
+FOLLOW(USG_BK8__USG_BK9)
+
+// Switch tracks from UGS to UFM
+//SEQUENCE(UGS_BK8__UFM_BK9)
+
+
+//Move Track A into B Fiddle yard
+SEQUENCE(UGS__BF_A)
+  //insert BO here
+  RESERVE(UMF_BK10_9_Hold)
+  RESERVE(FB_App)
+  trackChange(UGS_T5_E__FYUG_T7_A,UFM_T6_A__UGS_T5_E)
+  FWD(10)
+  FOLLOW(FYard_Ladder_T1_A)
+  
+  
+DONE
+

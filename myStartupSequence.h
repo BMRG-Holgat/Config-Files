@@ -28,7 +28,13 @@ AUTOSTART AUTOMATION(1000,"System Test")
   turnoutTest
   PARSE("<c>")
   DELAY(10000)
-  
+DONE
+
+SEQUENCE(501) // Reset all turnouts to closed position
+    PRINT("Reseting turnouts")
+    turnoutReset
+    PRINT("All turnouts closed")
+DONE
 
 // BIG RED BUTTON!
 AUTOSTART SEQUENCE(999)

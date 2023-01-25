@@ -62,7 +62,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySensors.h"
 #include "myDefinitions.h"
 #include "myTurnoutAliases.h"
-#include "myTrackA.h"
+//#include "myTrackA.h"
 #include "myBlocks.h"
 #include "mySignals.h"
 #include "mySignalAliases.h"
@@ -98,6 +98,7 @@ DONE
 *
 */
 #include "myTrackA.h"
+#include "myTrackB.h"
 
 /* Build Routes
 *
