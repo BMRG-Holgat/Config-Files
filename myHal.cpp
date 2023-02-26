@@ -20,7 +20,8 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 #include "IO_DFPlayer.h"  // MP3 sound player
-
+//#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
+//#include "IO_EXFastClock.h"  // FastClock driver
 
 //==========================================================================
 // The function halSetup() is invoked from CS if it exists within the build.
@@ -30,13 +31,6 @@
 
 void halSetup() {
 
-
-  //=======================================================================
-  // Change I2C bus speed
-  //=======================================================================
-  I2CManager.forceClock(100000); // Set to 100Hz
-
-  
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
   //=======================================================================
@@ -45,14 +39,15 @@ void halSetup() {
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
 
-  PCA9685::create(100, 16, 0x40);
-  PCA9685::create(116, 16, 0x41);
-  PCA9685::create(132, 16, 0x42);
-  PCA9685::create(148, 16, 0x43);
-  PCA9685::create(164, 16, 0x44);
-  PCA9685::create(180, 16, 0x45);
-  PCA9685::create(196, 16, 0x46);
-  PCA9685::create(212, 16, 0x47);
+   PCA9685::create(100, 16, 0x40);
+   PCA9685::create(116, 16, 0x41);
+   PCA9685::create(132, 16, 0x42);
+   PCA9685::create(148, 16, 0x43);
+   PCA9685::create(164, 16, 0x44);
+   PCA9685::create(180, 16, 0x45);
+   PCA9685::create(196, 16, 0x46);
+   PCA9685::create(212, 16, 0x47);
+
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -62,16 +57,7 @@ void halSetup() {
   //   Number of VPINs=16 (numbered 196-211)
   //   I2C address of module=0x22
 
-  //MCP23017::create(164, 16, 0x26);
- 
-  MCP23017::create(228, 16, 0x20);
-  MCP23017::create(244, 16, 0x21);
-  MCP23017::create(260, 16, 0x22);
-  MCP23017::create(276, 16, 0x23);
-  MCP23017::create(292, 16, 0x24);
-  MCP23017::create(308, 16, 0x25);
-  MCP23017::create(324, 16, 0x26);
-  MCP23017::create(340, 16, 0x27);
+  //MCP23017::create(196, 16, 0x22);
 
 
   // Alternative form, which allows the INT pin of the module to request a scan
@@ -79,14 +65,7 @@ void halSetup() {
   // all the time, only when a change takes place. Multiple modules' INT pins
   // may be connected to the same Arduino pin.
 
-  //MCP23017::create(228, 16, 0x20, 40);
-  //MCP23017::create(244, 16, 0x21, 40);
-  //MCP23017::create(260, 16, 0x22, 40);
-  //MCP23017::create(276, 16, 0x23, 40);
-  //MCP23017::create(292, 16, 0x24, 40);
-  //MCP23017::create(308, 16, 0x25, 40);
-  //MCP23017::create(324, 16, 0x26, 40);
-  //MCP23017::create(340, 16, 0x27, 40);
+  //MCP23017::create(196, 16, 0x22, 40);
 
 
   //=======================================================================
@@ -108,7 +87,7 @@ void halSetup() {
   //   Number of VPINs=8 (numbered 200-207)
   //   I2C address of module=0x23
 
-  //PCF8574::create(200, 8, 0x20);
+  //PCF8574::create(200, 8, 0x23);
 
 
   // Alternative form using INT pin (see above)
@@ -188,6 +167,63 @@ void halSetup() {
 
   // DFPlayer::create(10000, 10, Serial1);
 
+
+  //=======================================================================
+  // The following directive defines an EX-Turntable turntable instance.
+  //=======================================================================
+  // EXTurntable::create(VPIN, Number of VPINs, I2C Address)
+  //
+  // The parameters are:
+  //   VPIN=600
+  //   Number of VPINs=1 (Note there is no reason to change this)
+  //   I2C address=0x60
+  //
+  // Note that the I2C address is defined in the EX-Turntable code, and 0x60 is the default.
+
+  //EXTurntable::create(600, 1, 0x60);
+
+
+  //=======================================================================
+  // The following directive defines an EX-IOExpander instance.
+  //=======================================================================
+  // EXIOExpander::create(VPIN, Number of VPINs, I2C Address)
+  //
+  // The parameters are:
+  //   VPIN=an available Vpin
+  //   Number of VPINs=pin count (must match device in use as per documentation)
+  //   I2C address=an available I2C address (default 0x65)
+  //
+  // Note that the I2C address is defined in the EX-IOExpander code, and 0x65 is the default.
+  // The example is for an Arduino Nano.
+
+  EXIOExpander::create(800, 62, 0x65);
+
+
+  //=======================================================================
+  // The following directive defines a rotary encoder instance.
+  //=======================================================================
+  // The parameters are: 
+  //   firstVpin = First available Vpin to allocate
+  //   numPins= Number of Vpins to allocate, can be either 1 or 2
+  //   i2cAddress = Available I2C address (default 0x70)
+
+  //RotaryEncoder::create(firstVpin, numPins, i2cAddress);
+  //RotaryEncoder::create(700, 1, 0x70);
+  //RotaryEncoder::create(701, 2, 0x71);
+
+ //=======================================================================
+  // The following directive defines an EX-FastClock instance.
+  //=======================================================================
+  // EXFastCLock::create(I2C Address)
+  //
+  // The parameters are:
+  //   
+  //   I2C address=0x55 (decimal 85)
+  //
+  // Note that the I2C address is defined in the EX-FastClock code, and 0x55 is the default.
+
+ 
+  //   EXFastClock::create(0x55);
 
 }
 

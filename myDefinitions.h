@@ -37,11 +37,11 @@
 //Test turnout sequence
  #define turnoutTest \
   turnTest(UGS_T1_H) \
-  turnTest(DFM_T1_A__DFM_T2_E) \ 
+  turnTest(DFM_T1_A__DFM_T2_E) \
   turnTest(UGS_T2_E__DFM_T1_A) \
   turnTest(UFM_T1_A__UGS_T2_E) \
   turnTest(DMF_T1_E__UMF_T1_A) \
-  turnTest(UMF_T1_A__DMF_T1_E) \  
+  turnTest(UMF_T1_A__DMF_T1_E) \
   turnTest(DGS_T3_E__DFM) \
   turnTest(DGS_T1_A__HS_T2_E) \
   turnTest(UGS_T3_A__UFM_T3_E) \
@@ -100,7 +100,7 @@
   turnTest(UMF_T8_E__UMF_T9_A) \
   turnTest(UFM_T9_E__UFM_T10_A) \
   turnTest(UFM_T10_E__UFM_T11_A) \
-  turnTest(UFM_T11) \ 
+  turnTest(UFM_T11) \
   turnoutReset \
   myLCDOutput(turnouts)
 

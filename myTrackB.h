@@ -7,6 +7,10 @@
 *  Setup basics
 */
 
+// Start routines for track B
+// Sets up from Station app
+
+
 //Fiddle yard B
 //Test ladder Entrance
 SEQUENCE(FYard_Ladder_T1_A)
