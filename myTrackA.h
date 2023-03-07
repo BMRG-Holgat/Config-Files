@@ -2,9 +2,11 @@
 * myTrackA.h
 *
 * Sequences for Track A
+* Up Goods Slow
 *
 * V. 0.0.1
 *  Setup basics
+*  All Sequences start from Board 1 and end on Board 2
 */
 
 //Station Approach from A and stop
