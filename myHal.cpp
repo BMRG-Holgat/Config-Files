@@ -40,13 +40,13 @@ void halSetup() {
   //   I2C address of module=0x40
 
    PCA9685::create(100, 16, 0x40);
-   PCA9685::create(116, 16, 0x41);
-   PCA9685::create(132, 16, 0x42);
-   PCA9685::create(148, 16, 0x43);
-   PCA9685::create(164, 16, 0x44);
-   PCA9685::create(180, 16, 0x45);
-   PCA9685::create(196, 16, 0x46);
-   PCA9685::create(212, 16, 0x47);
+   //PCA9685::create(116, 16, 0x41);
+   //PCA9685::create(132, 16, 0x42);
+   //PCA9685::create(148, 16, 0x43);
+   //PCA9685::create(164, 16, 0x44);
+   //PCA9685::create(180, 16, 0x45);
+   //PCA9685::create(196, 16, 0x46);
+   //PCA9685::create(212, 16, 0x47);
 
 
   //=======================================================================
@@ -196,7 +196,7 @@ void halSetup() {
   // Note that the I2C address is defined in the EX-IOExpander code, and 0x65 is the default.
   // The example is for an Arduino Nano.
 
-  EXIOExpander::create(800, 62, 0x65);
+  // EXIOExpander::create(800, 62, 0x65);
 
 
   //=======================================================================

@@ -51,7 +51,7 @@
   turnTest(DMF_T2_A__DMF_T1_E) \
   turnTest(DMF_T3_E__DFM_T1_A) \
   turnTest(UMF_T2_E__UFM_T1_A) \
-  turnTest(DFM_T4_A__DFMT3_E) \
+  turnTest(DFM_T4_A__DFM_T3_E) \
   turnTest(DGS_T2_A__HS_T3_A) \
   turnTest(HS_T1_A__HS_T2_E) \
   turnTest(HS_T2_A__HS_T3_E) \
@@ -121,7 +121,7 @@
   turnReset(DMF_T2_A__DMF_T1_E)\
   turnReset(DMF_T3_E__DFM_T1_A)\
   turnReset(UMF_T2_E__UFM_T1_A)\
-  turnReset(DFM_T4_A__DFMT3_E)\
+  turnReset(DFM_T4_A__DFM_T3_E)\
   turnReset(DGS_T2_A__HS_T3_A)\
   turnReset(HS_T1_A__HS_T2_E)\
   turnReset(HS_T2_A__HS_T3_E)\
