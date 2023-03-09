@@ -21,9 +21,9 @@ AUTOSTART AUTOMATION(1000,"System Test")
 */ 
  SEQUENCE(500) //Testing system before starting
   PRINT("Testing Signals")
-  DELAY(3000)
-  signalTest
-  DELAY(5000)
+//  DELAY(3000)
+//  signalTest
+//  DELAY(5000)
   PRINT("Testing Turnouts")
   turnoutTest
   PARSE("<c>")
