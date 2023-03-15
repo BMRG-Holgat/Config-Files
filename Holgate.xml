@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xml/XSLT/panelfile-4-19-2.xsl" type="text/xsl"?>
+<layout-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/layout-4-19-2.xsd">
+  <jmriversion>
+    <major>5</major>
+    <minor>0</minor>
+    <test>0</test>
+    <modifier />
+  </jmriversion>
+  <turnouts class="jmri.jmrix.dccpp.configurexml.DCCppTurnoutManagerXml">
+    <operations automate="false">
+      <operation name="NoFeedback" class="jmri.configurexml.turnoutoperations.NoFeedbackTurnoutOperationXml" interval="300" maxtries="2" />
+      <operation name="Raw" class="jmri.configurexml.turnoutoperations.RawTurnoutOperationXml" interval="300" maxtries="1" />
+      <operation name="Sensor" class="jmri.configurexml.turnoutoperations.SensorTurnoutOperationXml" interval="300" maxtries="3" />
+    </operations>
+    <defaultclosedspeed>Normal</defaultclosedspeed>
+    <defaultthrownspeed>Restricted</defaultthrownspeed>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT500</systemName>
+      <userName>UGS_T1_H</userName>
+      <comment>AA</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT501</systemName>
+      <userName>UGS_T2_E__DFM_T1_A</userName>
+      <comment>AB</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT502</systemName>
+      <userName>UGS_T3_A__UFM_T3_E</userName>
+      <comment>AC</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT503</systemName>
+      <userName>UGS_T4_E__UFM_T5_A</userName>
+      <comment>AD</comment>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>DT504</systemName>
+      <userName>UGS_T5_E__FYUG_T7_A</userName>
+      <comment>AE</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT505</systemName>
+      <userName>UGS_T6_A__FYUG_T10_E</userName>
+      <comment>AF</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT508</systemName>
+      <userName>UFM_T1_A__UGS_T2_E</userName>
+      <comment>BA</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT509</systemName>
+      <userName>UFM_T2_E__DMF_T2_A</userName>
+      <comment>BB</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT510</systemName>
+      <userName>DMF_T2_E__UGS_T1_A</userName>
+      <comment>BC</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT511</systemName>
+      <userName>DMF_T3_A__DMF_T1_E</userName>
+      <comment>BD</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT512</systemName>
+      <userName>UFM_T4_A__UGS_T5_E</userName>
+      <comment>BE</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT513</systemName>
+      <userName>UFM_T5_E__UMF_T3_A</userName>
+      <comment>BF</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT514</systemName>
+      <userName>UFM_T6_A__UGS_T5_E</userName>
+      <comment>BG</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT515</systemName>
+      <userName>UMF_T7_E__UMF_T8_A</userName>
+      <comment>BH</comment>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>DT516</systemName>
+      <userName>UFM_T8_E__UMT_T9_A</userName>
+      <comment>BI</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT517</systemName>
+      <userName>BJ</userName>
+      <comment>UMF_T9_E__UMF_T10_A</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT518</systemName>
+      <userName>UMF_T10</userName>
+      <comment>BK</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT519</systemName>
+      <userName>UMF_T11_E__UMF_T12_A</userName>
+      <comment>BL</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT520</systemName>
+      <userName>UMF_T12_E__UMF_T13_A</userName>
+      <comment>BM</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT521</systemName>
+      <userName>UMF_T13_E__UMF_T14_A</userName>
+      <comment>BN</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT522</systemName>
+      <userName>UMF_T14_E</userName>
+      <comment>BO</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT523</systemName>
+      <userName>UFM_T8_E__UMF_T9_A</userName>
+      <comment>BI</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT524</systemName>
+      <userName>UMF_T15_E__UGS_T6_A</userName>
+      <comment>BP</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT525</systemName>
+      <userName>DMF_T1_E__UMF_T1_A</userName>
+      <comment>CA</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT526</systemName>
+      <userName>DMF_T2_A__DMF_T1_E</userName>
+      <comment>CB</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT527</systemName>
+      <userName>DMF_T3_E__DFM_T1_A</userName>
+      <comment>CC</comment>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>DT528</systemName>
+      <userName>DMF_T4_E__DMF_T5_A</userName>
+      <comment>CD</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT529</systemName>
+      <userName>DMF_T5_E__DMF_T6_A</userName>
+      <comment>CE</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT530</systemName>
+      <userName>DMF_T6_E__DMF_T7_A</userName>
+      <comment>CF</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT531</systemName>
+      <userName>DMF_T7</userName>
+      <comment>CG</comment>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>DT532</systemName>
+      <userName>DMF_T8_E__DMF_T9_A</userName>
+      <comment>CH</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT533</systemName>
+      <userName>DMF_T9_E__DMT_T10_A</userName>
+      <comment>CI</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT534</systemName>
+      <userName>DMF_T10_E__DMT_T11_A</userName>
+      <comment>CJ</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT535</systemName>
+      <userName>DMF_T11_E</userName>
+      <comment>CK</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT536</systemName>
+      <userName>UMF_T8_E__UMF_T9_A</userName>
+      <comment>DH</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT538</systemName>
+      <userName>UMF_T1_A__DMF_T1_E</userName>
+      <comment>DA</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT539</systemName>
+      <userName>UMF_T2_E__UFM_T1_A</userName>
+      <comment>DB</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT540</systemName>
+      <userName>UFM_T3_E__UMF_T2_A</userName>
+      <comment>DC</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT541</systemName>
+      <userName>UFM_T4_E__UMF_T5_A</userName>
+      <comment>DD</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT542</systemName>
+      <userName>UFM_T5_E__UMF_T6_A</userName>
+      <comment>DE</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT543</systemName>
+      <userName>UFM_T6_E__UGS_T7_A</userName>
+      <comment>DF</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT544</systemName>
+      <userName>UFM_T7</userName>
+      <comment>DG</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT546</systemName>
+      <userName>UFM_T9_E__UFM_T10_A</userName>
+      <comment>DI</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT547</systemName>
+      <userName>UFM_T10_E__UFM_T11_A</userName>
+      <comment>DJ</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT548</systemName>
+      <userName>UFM_T11</userName>
+      <comment>DK</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT549</systemName>
+      <userName>DMF_T8_E__DMT_T9_A</userName>
+      <comment>DH</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT551</systemName>
+      <userName>DFM_T1_A__DFM_T2_E</userName>
+      <comment>EA</comment>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>DT552</systemName>
+      <userName>DFM_T2_E__DFM_T1_A</userName>
+      <comment>EB</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT553</systemName>
+      <userName>DGS_T3_E__DFM</userName>
+      <comment>EC</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT554</systemName>
+      <userName>DFM_T4_A__DFM_T3_E</userName>
+      <comment>ED</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT555</systemName>
+      <userName>DFM_T5_E__DGS_T4_A</userName>
+      <comment>EE</comment>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT556</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT557</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT558</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT559</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT560</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT561</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT562</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT563</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT564</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT565</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT568</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT569</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT570</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT571</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT573</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT576</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT577</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT578</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT579</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT580</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT581</systemName>
+    </turnout>
+    <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
+      <systemName>DT582</systemName>
+      <userName>UFM_T5_E__UMF_T3A_A</userName>
+      <comment>BF-A</comment>
+    </turnout>
+  </turnouts>
+  <signalmastlogics class="jmri.managers.configurexml.DefaultSignalMastLogicManagerXml">
+    <logicDelay>500</logicDelay>
+  </signalmastlogics>
+  <LayoutEditor class="jmri.jmrit.display.layoutEditor.configurexml.LayoutEditorXml" name="My Layout" x="2798" y="95" windowheight="1087" windowwidth="2127" panelheight="613" panelwidth="777" sliders="yes" scrollable="both" editable="no" positionable="yes" controlling="yes" animating="yes" showhelpbar="no" drawgrid="yes" snaponadd="no" snaponmove="no" antialiasing="yes" turnoutcircles="no" tooltipsnotedit="no" tooltipsinedit="yes" mainlinetrackwidth="4" xscale="1.0" yscale="1.0" sidetrackwidth="2" defaulttrackcolor="darkGray" defaultoccupiedtrackcolor="red" defaultalternativetrackcolor="white" defaulttextcolor="black" turnoutcirclecolor="black" turnoutcirclesize="4" turnoutdrawunselectedleg="yes" turnoutbx="20.0" turnoutcx="20.0" turnoutwid="10.0" xoverlong="30.0" xoverhwid="10.0" xovershort="10.0" autoblkgenerate="no" redBackground="192" greenBackground="192" blueBackground="192" gridSize="10" gridSize2nd="10" openDispatcher="no" useDirectTurnoutControl="no">
+    <layoutTrackDrawingOptions name="My Layout" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutTrackDrawingOptionsXml">
+      <mainBallastColor>#000000</mainBallastColor>
+      <mainBallastWidth>0</mainBallastWidth>
+      <mainBlockLineDashPercentageX10>0</mainBlockLineDashPercentageX10>
+      <mainBlockLineWidth>4</mainBlockLineWidth>
+      <mainRailColor>#404040</mainRailColor>
+      <mainRailCount>1</mainRailCount>
+      <mainRailGap>0</mainRailGap>
+      <mainRailWidth>2</mainRailWidth>
+      <mainTieColor>#000000</mainTieColor>
+      <mainTieGap>0</mainTieGap>
+      <mainTieLength>0</mainTieLength>
+      <mainTieWidth>0</mainTieWidth>
+      <sideBallastColor>#000000</sideBallastColor>
+      <sideBallastWidth>0</sideBallastWidth>
+      <sideBlockLineDashPercentageX10>0</sideBlockLineDashPercentageX10>
+      <sideBlockLineWidth>2</sideBlockLineWidth>
+      <sideRailColor>#404040</sideRailColor>
+      <sideRailCount>1</sideRailCount>
+      <sideRailGap>0</sideRailGap>
+      <sideRailWidth>1</sideRailWidth>
+      <sideTieColor>#000000</sideTieColor>
+      <sideTieGap>0</sideTieGap>
+      <sideTieLength>0</sideTieLength>
+      <sideTieWidth>0</sideTieWidth>
+    </layoutTrackDrawingOptions>
+    <layoutturnout ident="TO1" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="4" xcen="226.0" ycen="467.0" xa="226.0" ya="487.0" xb="226.0" yb="447.0" xc="236.0" yc="447.0" xd="226.0" yd="487.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="UGS_T1_H" connectbname="T2" connectcname="T1" />
+    <layoutturnout ident="TO2" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="477.0" ycen="185.0" xa="457.0" ya="185.0" xb="497.0" yb="185.0" xc="497.0" yc="195.0" xd="457.0" yd="185.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="UGS_T2_E__DFM_T1_A" secondturnoutname="UFM_T1_A__UGS_T2_E" connectaname="T1" connectbname="T5" connectcname="T3" />
+    <layoutturnout ident="TO3" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="537.0" ycen="216.0" xa="557.0" ya="216.0" xb="517.0" yb="216.0" xc="516.0" yc="206.0" xd="557.0" yd="216.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="UFM_T1_A__UGS_T2_E" secondturnoutname="UGS_T2_E__DFM_T1_A" connectaname="T12" connectcname="T3" />
+    <layoutturnout ident="TO7" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="707.0" ycen="186.0" xa="727.0" ya="186.0" xb="687.0" yb="186.0" xc="686.0" yc="196.0" xd="727.0" yd="186.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="UGS_T3_A__UFM_T3_E" secondturnoutname="DMF_T2_E__UGS_T1_A" connectbname="T5" connectcname="T15" />
+    <layoutturnout ident="TO9" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="534.0" ycen="250.0" xa="554.0" ya="250.0" xb="514.0" yb="250.0" xc="514.0" yc="260.0" xd="554.0" yd="250.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DMF_T1_E__UMF_T1_A" secondturnoutname="UMF_T1_A__DMF_T1_E" connectaname="T13" connectcname="T7" />
+    <layoutturnout ident="TO10" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="475.0" ycen="280.0" xa="455.0" ya="280.0" xb="495.0" yb="280.0" xc="495.0" yc="270.0" xd="455.0" yd="280.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="UMF_T1_A__DMF_T1_E" connectcname="T7" />
+    <layoutturnout ident="TO11" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="628.0" ycen="298.0" xa="608.0" ya="298.0" xb="648.0" yb="298.0" xc="648.0" yc="308.0" xd="608.0" yd="298.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="DGS_T3_E__DFM" connectaname="T10" connectcname="T8" />
+    <layoutturnout ident="TO12" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="679.0" ycen="323.0" xa="699.0" ya="323.0" xb="659.0" yb="323.0" xc="659.0" yc="313.0" xd="699.0" yd="323.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="DT568" secondturnoutname="DGS_T3_E__DFM" connectcname="T8" />
+    <layoutturnout ident="TO13" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="518.0" ycen="300.0" xa="538.0" ya="300.0" xb="498.0" yb="300.0" xc="498.0" yc="310.0" xd="538.0" yd="300.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DFM_T2_E__DFM_T1_A" connectaname="T10" connectbname="T16" connectcname="T17" />
+    <layoutturnout ident="TO14" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="521.0" ycen="553.0" xa="541.0" ya="553.0" xb="501.0" yb="553.0" xc="501.0" yc="563.0" xd="541.0" yd="553.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DFM_T1_A__DFM_T2_E" connectbname="T17" connectcname="T16" />
+    <layoutturnout ident="TO15" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="610.0" ycen="251.0" xa="590.0" ya="251.0" xb="630.0" yb="251.0" xc="630.0" yc="241.0" xd="590.0" yd="251.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DMF_T2_A__DMF_T1_E" secondturnoutname="UFM_T2_E__DMF_T2_A" connectaname="T13" connectcname="T14" />
+    <tracksegment ident="T1" connect1name="TO1" type1="TURNOUT_C" connect2name="TO2" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" arc="yes" flip="no" circle="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T2" connect1name="TO1" type1="TURNOUT_B" connect2name="A1" type2="POS_POINT" dashed="no" mainline="no" hidden="no" arc="yes" flip="no" circle="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T3" connect1name="TO2" type1="TURNOUT_C" connect2name="TO3" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T5" connect1name="TO2" type1="TURNOUT_B" connect2name="TO7" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T7" connect1name="TO10" type1="TURNOUT_C" connect2name="TO9" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T8" connect1name="TO11" type1="TURNOUT_C" connect2name="TO12" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T10" connect1name="TO13" type1="TURNOUT_A" connect2name="TO11" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T12" connect1name="TO3" type1="TURNOUT_A" connect2name="SL1" type2="SLIP_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T13" connect1name="TO9" type1="TURNOUT_A" connect2name="TO15" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T14" connect1name="TO15" type1="TURNOUT_C" connect2name="SL1" type2="SLIP_B" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T15" connect1name="SL1" type1="SLIP_D" connect2name="TO7" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T16" connect1name="TO13" type1="TURNOUT_B" connect2name="TO14" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" bezier="yes" hideConLines="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml">
+      <controlpoints>
+        <controlpoint index="0" x="303.67" y="319.33" />
+        <controlpoint index="1" x="304.33" y="546.67" />
+      </controlpoints>
+    </tracksegment>
+    <tracksegment ident="T17" connect1name="TO13" type1="TURNOUT_C" connect2name="TO14" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" bezier="yes" hideConLines="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml">
+      <controlpoints>
+        <controlpoint index="0" x="359.33" y="327.67" />
+        <controlpoint index="1" x="303.67" y="501.33" />
+      </controlpoints>
+    </tracksegment>
+    <tracksegment ident="T18" connect1name="A1" type1="POS_POINT" connect2name="EB1" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <positionablepoint ident="A1" type="ANCHOR" x="423.0" y="152.0" connect1name="T2" connect2name="T18" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EB1" type="END_BUMPER" x="599.0" y="151.0" connect1name="T18" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <layoutSlip ident="SL1" slipType="DOUBLE_SLIP" hidden="no" disabled="no" disableWhenOccupied="no" xcen="658.9038628183034" ycen="216.56899766305156" xa="638.9038628183034" ya="216.56899766305156" xb="644.9038628183034" yb="230.56899766305156" connectaname="T12" connectbname="T14" connectdname="T15" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutDoubleSlipXml">
+      <turnout>UFM_T2_E__DMF_T2_A</turnout>
+      <turnoutB>DMF_T2_E__UGS_T1_A</turnoutB>
+      <states>
+        <A-C>
+          <turnout>2</turnout>
+          <turnoutB>2</turnoutB>
+        </A-C>
+        <A-D>
+          <turnout>2</turnout>
+          <turnoutB>4</turnoutB>
+        </A-D>
+        <B-D>
+          <turnout>4</turnout>
+          <turnoutB>4</turnoutB>
+        </B-D>
+        <B-C>
+          <turnout>4</turnout>
+          <turnoutB>2</turnoutB>
+        </B-C>
+      </states>
+    </layoutSlip>
+  </LayoutEditor>
+  <filehistory>
+    <operation>
+      <type>app</type>
+      <date>Mon Mar 13 10:43:12 GMT 2023</date>
+      <filename>JMRI program</filename>
+    </operation>
+    <operation>
+      <type>Load OK</type>
+      <date>Mon Mar 13 10:43:22 GMT 2023</date>
+      <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
+      <filehistory>
+        <operation>
+          <type>app</type>
+          <date>Tue Mar 07 10:37:33 GMT 2023</date>
+          <filename>JMRI program</filename>
+        </operation>
+        <operation>
+          <type>Store</type>
+          <date>Tue Mar 07 16:23:34 GMT 2023</date>
+          <filename />
+        </operation>
+      </filehistory>
+    </operation>
+    <operation>
+      <type>Store</type>
+      <date>Mon Mar 13 13:17:32 GMT 2023</date>
+      <filename />
+    </operation>
+  </filehistory>
+  <!--Written by JMRI version 5.0+Rc441642522 on Mon Mar 13 13:17:32 GMT 2023-->
+</layout-config>
