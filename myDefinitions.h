@@ -231,7 +231,7 @@
 
 #define forwardStop(speed,sns) \
   FWD(speed) \
-  DELAY(5000)
+  AT(sns) \
   STOP 
 
 //LCD information
