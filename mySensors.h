@@ -4,30 +4,24 @@
 *
 * Define Sensors and Aliases
 *
-*   App     __  Approach
-*   Stop    __  Stop at this point
-*   EX      __  Exit
-*
 * ALIAS(Sensor_name, pin#)
 * 
 * Verson 0.1
-*
-* UGS sensor setup
 */
 
-//Up Goods Slow
-ALIAS(UGS_SNS_TRN_1_App) //Approach turnout AA          --  B1
-ALIAS(UGS_SNS_Stn_Stop) //Station stopping point        --  B1
-ALIAS(USG_HEAD_Stop)    // Header line stopping point   --  B1
-ALIAS(UGS_SNS_TRN_2_App) //Approach turnout AB          --  B2
-ALIAS(UGS_SNS_TRN_3_App) //Approach turnout AC          --  B3
-ALIAS(UGS_SNS_TRN_4_App) //Approach turnout AD          --  B8
-ALIAS(UGS_SNS_TRN_4_Ex) // Check speed for FY approach  --  B9
-ALIAS(UGS_SNS_TRN_5_App) // Approach turnout AE         --  B9
-ALIAS(UGS_SNS_Str_1_Stop) //Storage hold position 1     --  B7
-ALIAS(UGS_SNS_Str_2_Stop) //Storage hold position 2     --  B5
-ALIAS(UGS_SNS_Str_3_Stop) //Storage hold position 3     --  B3
-ALIAS(UGS_SNS_TRN_6_App) // Approach turnout AF         --  B2
+//Track A Up goods slow
+ALIAS(USG_SNS_STN,53)
+ALIAS(USG_Head_End)
+ALIAS(SNS2_MAIN_TRN1_EX, 25)
+ALIAS(SNS3_STN, 26)
+ALIAS(SNS4_MAIN_TRN2_APP, 27)
+ALIAS(SNS5_STN_TRN2_APP, 28)
+ALIAS(SNS6_TRN2_STN_EX, 819)
+ALIAS(SNS7_MAIN_TRN3_APP, 820)
+ALIAS(USG_SNS_12,340)
+ALIAS(USG_SNS_11,245)
+ALIAS(USG_SNS_10,246)
+ALIAS(USG_SNS_9,247)
 
 
 // Track B Up Fast Mixed
