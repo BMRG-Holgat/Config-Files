@@ -20,6 +20,7 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 #include "IO_DFPlayer.h"  // MP3 sound player
+//#include "IO_DFPlayerPro.h"  // MP3 sound player
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
@@ -165,7 +166,8 @@ void halSetup() {
   //      LCD(4, " ")       // Clear LCD/OLED line 
   //      FOLLOW(1)         // Go back to start
 
-  // DFPlayer::create(10000, 10, Serial1);
+    DFPlayer::create(1000, 5, Serial3, true);
+  //  DFPlayerPro::create(5000, 5, Serial2, true);
 
 
   //=======================================================================

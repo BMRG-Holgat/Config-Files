@@ -67,6 +67,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySignals.h"
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
+#include "myRoutes-TrackB.h"
 
 
 
@@ -103,6 +104,20 @@ DONE
 /* Build Routes
 *
 */
+AUTOMATION(10,"HST B to Station to B")
+    RESERVE(UGS_BK1_Stn_App)
+    RESERVE(UGS_BK2_HEAD_1_AA_Ex)
+    IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
+        trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
+    ENDIF
+    SET(1000)
+    //set station signal red
+    FWD(30)
+    AT(-1000)
+    PRINT("DID IT WORK!")
+    AT(USG_SNS_STN)
+    FWD(0)
+DONE
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
