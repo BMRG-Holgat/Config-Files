@@ -20,7 +20,6 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 #include "IO_DFPlayer.h"  // MP3 sound player
-//#include "IO_DFPlayerPro.h"  // MP3 sound player
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
@@ -44,8 +43,8 @@ void halSetup() {
    //PCA9685::create(116, 16, 0x41);
    PCA9685::create(132, 16, 0x42);
    PCA9685::create(148, 16, 0x43);
-   PCA9685::create(164, 16, 0x44);
-   PCA9685::create(180, 16, 0x45);
+   PCA9685::create(228, 16, 0x44);
+   PCA9685::create(244, 16, 0x45);
    PCA9685::create(196, 16, 0x46);
    PCA9685::create(212, 16, 0x47);
 
@@ -166,8 +165,7 @@ void halSetup() {
   //      LCD(4, " ")       // Clear LCD/OLED line 
   //      FOLLOW(1)         // Go back to start
 
-    DFPlayer::create(1000, 5, Serial3, true);
-  //  DFPlayerPro::create(5000, 5, Serial2, true);
+  // DFPlayer::create(10000, 10, Serial1);
 
 
   //=======================================================================
