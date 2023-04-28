@@ -70,6 +70,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 
 
 
+
 /* Startup test sequence for signals and servos
  *  Use this on rebuild
  */
@@ -103,6 +104,35 @@ DONE
 /* Build Routes
 *
 */
+
+#include "myRoutes-TrackB.h"
+
+
+AUTOMATION(10,"HST B to Station Auto")
+    RESERVE(UGS_BK1_Stn_App)
+    RESERVE(UGS_BK2_HEAD_1_AA_Ex)
+    IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
+        trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
+    ENDIF
+    IFCLOSED(UGS_T1_H)
+      THROW(UGS_T1_H)
+    ENDIF
+    RESERVE(UGS_STN_Hold)
+    SET(1004)
+    //set station signal red
+    FWD(30)
+    AT(-1004)
+    
+    PRINT("DID IT WORK!")
+    AT(USG_SNS_STN)
+    FWD(0)
+    DELAYRANDOM(10000,15000)
+    RESERVE(UGS_BK4_Stn_Exit)
+    FWD(50)
+    DELAY(1000)
+    FREE(UGS_BK1_Stn_App)
+    FREE(UGS_BK2_HEAD_1_AA_Ex)
+DONE
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
