@@ -347,7 +347,7 @@
     </turnout>
     <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
       <systemName>DT570</systemName>
-      <userName>DGS_T3_A__DFM_T2_E</userName>
+      <userName>DGS_T3_E__HS_A</userName>
       <comment>FC</comment>
     </turnout>
     <turnout feedback="BSTURNOUT" inverted="false" automate="Off">
@@ -497,17 +497,17 @@
     <layoutturnout ident="TO10" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="295.0" ycen="215.0" xa="275.0" ya="215.0" xb="315.0" yb="215.0" xc="315.0" yc="205.0" xd="275.0" yd="215.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="UMF_T1_A__DMF_T1_E" secondturnoutname="DMF_T1_E__UMF_T1_A" connectaname="T13" connectbname="T26" connectcname="T39" />
     <layoutturnout ident="TO12" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="356.0" ycen="186.0" xa="376.0" ya="186.0" xb="336.0" yb="186.0" xc="336.0" yc="196.0" xd="376.0" yd="186.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DMF_T1_E__UMF_T1_A" secondturnoutname="UMF_T1_A__DMF_T1_E" connectaname="T5" connectbname="T12" connectcname="T39" />
     <layoutturnout ident="TO8" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="548.0" ycen="257.0" xa="528.0" ya="257.0" xb="568.0" yb="257.0" xc="568.0" yc="267.0" xd="528.0" yd="257.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="DGS_T2_A__HS_E" connectaname="T47" connectbname="T58" connectcname="T46" />
-    <layoutturnout ident="TO11" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="588.0" ycen="236.0" xa="568.0" ya="236.0" xb="608.0" yb="236.0" xc="608.0" yc="226.0" xd="568.0" yd="236.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DFM_T4_A__DMF_T3_E" connectaname="T45" connectbname="T67" connectcname="T43" />
+    <layoutturnout ident="TO11" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="588.0" ycen="236.0" xa="568.0" ya="236.0" xb="608.0" yb="236.0" xc="608.0" yc="226.0" xd="568.0" yd="236.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DFM_T4_A__DMF_T3_E" secondturnoutname="DMF_T3_E__DFM_T1_A" connectaname="T45" connectbname="T67" connectcname="T43" />
     <layoutturnout ident="TO13" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="688.0" ycen="185.0" xa="708.0" ya="185.0" xb="668.0" yb="185.0" xc="668.0" yc="195.0" xd="708.0" yd="185.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DMF_T3_E__DFM_T1_A" secondturnoutname="DFM_T4_A__DMF_T3_E" connectaname="T52" connectbname="T41" connectcname="T44" />
-    <layoutturnout ident="TO17" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="618.0" ycen="293.0" xa="600.6794919243113" ya="283.0" xb="635.3205080756887" yb="303.0" xc="640.3205080756887" yc="294.33974596215563" xd="600.6794919243113" yd="283.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T1_A__HS_T2_E" connectaname="T46" connectbname="T11" connectcname="T60" />
-    <layoutturnout ident="TO18" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="652.6410161513775" ycen="313.0" xa="636.3205080756887" ya="303.0" xb="668.9615242270662" yb="323.0" xc="674.9615242270662" yc="314.33974596215563" xd="636.3205080756887" yd="303.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T2_A__HS_T3_E" connectaname="T11" connectbname="T48" connectcname="T61" />
-    <layoutturnout ident="TO19" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="694.2820323027549" ycen="335.0" xa="668.9615242270662" ya="323.0" xb="719.6025403784437" yb="347.0" xc="725.6025403784437" yc="334.33974596215563" xd="668.9615242270662" yd="323.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T3" connectaname="T48" connectbname="T63" connectcname="T62" />
+    <layoutturnout ident="TO17" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="618.0" ycen="293.0" xa="600.6795043945312" ya="283.0" xb="635.3204956054688" yb="303.0" xc="640.3204956054688" yc="294.3397521972656" xd="600.6795043945312" yd="283.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T1_A__HS_T2_E" connectaname="T46" connectbname="T11" connectcname="T60" />
+    <layoutturnout ident="TO18" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="652.6409912109375" ycen="313.0" xa="636.3204345703125" ya="303.0" xb="668.9615478515625" yb="323.0" xc="674.9615478515625" yc="314.3397521972656" xd="636.3204345703125" yd="303.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T2_A__HS_T3_E" connectaname="T11" connectbname="T48" connectcname="T61" />
+    <layoutturnout ident="TO19" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="694.2820434570312" ycen="335.0" xa="668.9615478515625" ya="323.0" xb="719.6025390625" yb="347.0" xc="725.6025390625" yc="334.3397521972656" xd="668.9615478515625" yd="323.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T3" connectaname="T48" connectbname="T63" connectcname="T62" />
     <layoutturnout ident="TO20" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="945.0" ycen="122.0" xa="925.0" ya="122.0" xb="965.0" yb="122.0" xc="958.0" yc="133.0" xd="925.0" yd="122.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="UGS_T4_E__UFM_T5_A" secondturnoutname="UFM_T4_A__UGS_T5_E" secondturnoutinverted="true" connectaname="T50" connectbname="T74" connectcname="T49" />
     <layoutturnout ident="TO21" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1074.0" ycen="215.0" xa="1094.0" ya="215.0" xb="1054.0" yb="215.0" xc="1054.0" yc="205.0" xd="1094.0" yd="215.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="UFM_T3_E__UMF_T2_A" secondturnoutname="UFM_T5_E__UMF_T3_A" secondturnoutinverted="true" connectaname="T71" connectbname="T53" connectcname="T54" />
-    <layoutturnout ident="TO22" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="931.7179676972451" ycen="291.0" xa="951.4141227574892" ya="287.5270364466614" xb="912.021812637001" yb="294.4729635533386" xc="913.7582944136702" yc="304.32104108346067" xd="951.4141227574892" yd="287.5270364466614" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T4" connectaname="T57" connectbname="T60" connectcname="T64" />
-    <layoutturnout ident="TO23" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="972.3589838486225" ycen="285.0" xa="992.0551389088668" ya="281.52703644666144" xb="952.6628287883783" yb="288.47296355333856" xc="954.3993105650477" yc="298.32104108346067" xd="992.0551389088668" yd="281.52703644666144" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T4_E__HS_T5_A" connectaname="T56" connectbname="T57" connectcname="T65" />
-    <layoutturnout ident="TO24" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1013.0" ycen="277.0" xa="1032.696155060244" ya="273.5270364466614" xb="993.3038449397559" yb="280.4729635533386" xc="995.0403267164252" yc="290.32104108346067" xd="1032.696155060244" yd="273.5270364466614" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T6_A__HS_T5_E" connectaname="T59" connectbname="T56" connectcname="T66" />
-    <layoutturnout ident="TO25" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1075.0" ycen="258.0" xa="1095.0" ya="258.0" xb="1055.0" yb="258.0" xc="1053.0" yc="268.0" xd="1095.0" yd="258.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DGS_T3_A__DFM_T2_E" connectaname="T68" connectbname="T58" connectcname="T59" />
+    <layoutturnout ident="TO22" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="931.7179565429688" ycen="291.0" xa="951.4141235351562" ya="287.52703857421875" xb="912.0217895507812" yb="294.47296142578125" xc="913.75830078125" yc="304.321044921875" xd="951.4141235351562" yd="287.52703857421875" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T4" connectaname="T57" connectbname="T60" connectcname="T64" />
+    <layoutturnout ident="TO23" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="972.3590087890625" ycen="285.0" xa="992.05517578125" ya="281.52703857421875" xb="952.662841796875" yb="288.47296142578125" xc="954.3992919921875" yc="298.321044921875" xd="992.05517578125" yd="281.52703857421875" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T4_E__HS_T5_A" connectaname="T56" connectbname="T57" connectcname="T65" />
+    <layoutturnout ident="TO24" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1013.0" ycen="277.0" xa="1032.6961669921875" ya="273.52703857421875" xb="993.3038330078125" yb="280.47296142578125" xc="995.0403442382812" yc="290.321044921875" xd="1032.6961669921875" yd="273.52703857421875" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="HS_T6_A__HS_T5_E" connectaname="T59" connectbname="T56" connectcname="T66" />
+    <layoutturnout ident="TO25" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1075.0" ycen="258.0" xa="1095.0" ya="258.0" xb="1055.0" yb="258.0" xc="1053.0" yc="268.0" xd="1095.0" yd="258.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DGS_T3_E__HS_A" connectaname="T68" connectbname="T58" connectcname="T59" />
     <layoutturnout ident="TO27" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1178.0" ycen="237.0" xa="1198.0" ya="237.0" xb="1158.0" yb="237.0" xc="1158.0" yc="247.0" xd="1198.0" yd="237.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DFM_T5_E__DGS_T4_A" secondturnoutname="DGS_T4_A__DFM_T5_E" connectaname="T70" connectbname="T67" connectcname="T75" />
     <layoutturnout ident="TO26" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" continuing="2" xcen="1138.0" ycen="258.0" xa="1118.0" ya="258.0" xb="1158.0" yb="258.0" xc="1158.0" yc="248.0" xd="1118.0" yd="258.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="DGS_T4_A__DFM_T5_E" secondturnoutname="DFM_T5_E__DGS_T4_A" connectaname="T68" connectbname="T69" connectcname="T75" />
     <tracksegment ident="T18" connect1name="A1" type1="POS_POINT" connect2name="EB1" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
@@ -642,7 +642,7 @@
         </B-C>
       </states>
     </layoutSlip>
-    <layoutSlip ident="SL3" slipType="SINGLE_SLIP" hidden="no" disabled="no" disableWhenOccupied="no" xcen="974.9230769230769" ycen="149.38461538461536" xa="960.780941299346" ya="135.2424797608844" xb="955.1240870498535" yb="149.38461538461536" connectaname="T49" connectbname="T51" connectcname="T55" connectdname="T73" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutSingleSlipXml">
+    <layoutSlip ident="SL3" slipType="SINGLE_SLIP" hidden="no" disabled="no" disableWhenOccupied="no" xcen="974.923095703125" ycen="149.38461303710938" xa="960.7809448242188" ya="135.2424774169922" xb="955.1240844726562" yb="149.38461303710938" connectaname="T49" connectbname="T51" connectcname="T55" connectdname="T73" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutSingleSlipXml">
       <turnout>UFM_T4_A__UGS_T5_E</turnout>
       <turnoutB>UFM_T5_E__UMF_T3_A</turnoutB>
       <states>
@@ -671,104 +671,104 @@
   <filehistory>
     <operation>
       <type>app</type>
-      <date>Fri May 05 07:36:50 BST 2023</date>
+      <date>Fri May 05 10:23:15 BST 2023</date>
       <filename>JMRI program</filename>
     </operation>
     <operation>
       <type>Load OK</type>
-      <date>Fri May 05 07:37:01 BST 2023</date>
+      <date>Fri May 05 10:23:33 BST 2023</date>
       <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
       <filehistory>
         <operation>
           <type>app</type>
-          <date>Fri May 05 07:30:32 BST 2023</date>
+          <date>Fri May 05 07:36:50 BST 2023</date>
           <filename>JMRI program</filename>
         </operation>
         <operation>
           <type>Load OK</type>
-          <date>Fri May 05 07:30:58 BST 2023</date>
+          <date>Fri May 05 07:37:01 BST 2023</date>
           <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
           <filehistory>
             <operation>
               <type>app</type>
-              <date>Sat Apr 29 11:31:14 BST 2023</date>
+              <date>Fri May 05 07:30:32 BST 2023</date>
               <filename>JMRI program</filename>
             </operation>
             <operation>
               <type>Load OK</type>
-              <date>Sat Apr 29 11:31:31 BST 2023</date>
+              <date>Fri May 05 07:30:58 BST 2023</date>
               <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
               <filehistory>
                 <operation>
                   <type>app</type>
-                  <date>Sat Apr 29 07:24:03 BST 2023</date>
+                  <date>Sat Apr 29 11:31:14 BST 2023</date>
                   <filename>JMRI program</filename>
                 </operation>
                 <operation>
                   <type>Load OK</type>
-                  <date>Sat Apr 29 07:24:18 BST 2023</date>
+                  <date>Sat Apr 29 11:31:31 BST 2023</date>
                   <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
                   <filehistory>
                     <operation>
                       <type>app</type>
-                      <date>Fri Apr 28 18:20:32 BST 2023</date>
+                      <date>Sat Apr 29 07:24:03 BST 2023</date>
                       <filename>JMRI program</filename>
                     </operation>
                     <operation>
                       <type>Load OK</type>
-                      <date>Fri Apr 28 18:20:45 BST 2023</date>
+                      <date>Sat Apr 29 07:24:18 BST 2023</date>
                       <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
                       <filehistory>
                         <operation>
                           <type>app</type>
-                          <date>Thu Apr 27 12:12:24 BST 2023</date>
+                          <date>Fri Apr 28 18:20:32 BST 2023</date>
                           <filename>JMRI program</filename>
                         </operation>
                         <operation>
                           <type>Load OK</type>
-                          <date>Thu Apr 27 12:12:38 BST 2023</date>
+                          <date>Fri Apr 28 18:20:45 BST 2023</date>
                           <filename>/C:/Users/Gary/JMRI/My_JMRI_Railroad.jmri/Holgate.xml</filename>
                         </operation>
                         <operation>
                           <type>Store</type>
-                          <date>Thu Apr 27 16:26:30 BST 2023</date>
+                          <date>Fri Apr 28 18:57:10 BST 2023</date>
                           <filename />
                         </operation>
                       </filehistory>
                     </operation>
                     <operation>
                       <type>Store</type>
-                      <date>Fri Apr 28 18:57:10 BST 2023</date>
+                      <date>Sat Apr 29 11:22:53 BST 2023</date>
                       <filename />
                     </operation>
                   </filehistory>
                 </operation>
                 <operation>
                   <type>Store</type>
-                  <date>Sat Apr 29 11:22:53 BST 2023</date>
+                  <date>Sat Apr 29 11:50:28 BST 2023</date>
                   <filename />
                 </operation>
               </filehistory>
             </operation>
             <operation>
               <type>Store</type>
-              <date>Sat Apr 29 11:50:28 BST 2023</date>
+              <date>Fri May 05 07:36:03 BST 2023</date>
               <filename />
             </operation>
           </filehistory>
         </operation>
         <operation>
           <type>Store</type>
-          <date>Fri May 05 07:36:03 BST 2023</date>
+          <date>Fri May 05 09:59:31 BST 2023</date>
           <filename />
         </operation>
       </filehistory>
     </operation>
     <operation>
       <type>Store</type>
-      <date>Fri May 05 09:59:31 BST 2023</date>
+      <date>Fri May 05 10:32:44 BST 2023</date>
       <filename />
     </operation>
   </filehistory>
-  <!--Written by JMRI version 5.0+Rc441642522 on Fri May 05 09:59:31 BST 2023-->
+  <!--Written by JMRI version 5.0+Rc441642522 on Fri May 05 10:32:44 BST 2023-->
 </layout-config>
