@@ -17,7 +17,7 @@
       <userName>UGS_BK1_Stn_App</userName>
     </sensor>
     <sensor inverted="false">
-      <systemName>DS31</systemName>
+      <systemName>DS518</systemName>
       <userName>USG_SNS_STN</userName>
       <useGlobalDebounceTimer>yes</useGlobalDebounceTimer>
     </sensor>

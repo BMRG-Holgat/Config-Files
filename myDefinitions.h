@@ -43,8 +43,8 @@
   turnTest(DMF_T1_E__UMF_T1_A) \
   turnTest(UMF_T1_A__DMF_T1_E) \
   turnTest(DFM_T2_E__DFM_T1_A) \
-  turnTest(DFM_T3_A__DGS_T1_E) \
-  turnTest(DGS_T1_E__DFM_T3_A) \
+  turnTest(DGS_T3_E__DFM) \
+  turnTest(DGS_T1_A__HS_T2_E) \
   turnTest(UGS_T3_A__UFM_T3_E) \
   turnTest(UFM_T2_E__DMF_T2_A) \
   turnTest(DMF_T2_E__UGS_T1_A) \
@@ -52,19 +52,19 @@
   turnTest(DMF_T2_A__DMF_T1_E) \
   turnTest(DMF_T3_E__DFM_T1_A) \
   turnTest(UMF_T2_E__UFM_T1_A) \
-  turnTest(DFM_T4_A__DMF_T3_E) \
-  turnTest(DGS_T2_A__HS_E) \
+  turnTest(DFM_T4_A__DFM_T3_E) \
+  turnTest(DGS_T2_A__HS_T3_A) \
   turnTest(HS_T1_A__HS_T2_E) \
   turnTest(HS_T2_A__HS_T3_E) \
   turnTest(UGS_T4_E__UFM_T5_A) \
   turnTest(UFM_T5_E__UMF_T3_A) \
   turnTest(UFM_T5_E__UMF_T3A_A) \
   turnTest(UFM_T3_E__UMF_T2_A) \
-  turnTest(DFM_T3_A__DGS_T1_E) \
+  turnTest(DGS_T3_A__DFM_T2_E) \
   turnTest(HS_T3) \
-  turnTest(HS_T4) \
-  turnTest(HS_T5_A__HS_T4_E) \
-  turnTest(HS_T6_A__HS_T5_E) \
+  turnTest(HS_T4_E__HS_T5_A) \
+  turnTest(HS_T5_A__HS_T6) \
+  turnTest(HS_T6) \
   turnTest(DGS_T4_A__DFM_T5_E) \
   turnTest(UFM_T6_A__UGS_T5_E) \
   turnTest(DFM_T5_E__DGS_T4_A) \
@@ -113,9 +113,9 @@
   turnReset(UFM_T1_A__UGS_T2_E)\
   turnReset(DMF_T1_E__UMF_T1_A)\
   turnReset(UMF_T1_A__DMF_T1_E)\
-  turnReset(DFM_T3_A__DGS_T1_E)\
+  turnReset(DGS_T3_E__DFM)\
   turnReset(DFM_T2_E__DFM_T1_A) \
-  turnReset(DGS_T1_E__DFM_T3_A)\
+  turnReset(DGS_T1_A__HS_T2_E)\
   turnReset(UGS_T3_A__UFM_T3_E)\
   turnReset(UFM_T2_E__DMF_T2_A)\
   turnReset(DMF_T2_E__UGS_T1_A)\
@@ -123,19 +123,19 @@
   turnReset(DMF_T2_A__DMF_T1_E)\
   turnReset(DMF_T3_E__DFM_T1_A)\
   turnReset(UMF_T2_E__UFM_T1_A)\
-  turnReset(DFM_T4_A__DMF_T3_E)\
-  turnReset(DGS_T2_A__HS_E)\
+  turnReset(DFM_T4_A__DFM_T3_E)\
+  turnReset(DGS_T2_A__HS_T3_A)\
   turnReset(HS_T1_A__HS_T2_E)\
   turnReset(HS_T2_A__HS_T3_E)\
   turnReset(UGS_T4_E__UFM_T5_A)\
   turnReset(UFM_T5_E__UMF_T3_A)\
   turnReset(UFM_T5_E__UMF_T3A_A)\
   turnReset(UFM_T3_E__UMF_T2_A)\
-  turnReset(DFM_T3_A__DGS_T1_E)\
+  turnReset(DGS_T3_A__DFM_T2_E)\
   turnReset(HS_T3)\
-  turnReset(HS_T4)\
-  turnReset(HS_T5_A__HS_T4_E)\
-  turnReset(HS_T6_A__HS_T5_E)\
+  turnReset(HS_T4_E__HS_T5_A)\
+  turnReset(HS_T5_A__HS_T6)\
+  turnReset(HS_T6)\
   turnReset(DGS_T4_A__DFM_T5_E)\
   turnReset(UFM_T6_A__UGS_T5_E)\
   turnReset(DFM_T5_E__DGS_T4_A)\

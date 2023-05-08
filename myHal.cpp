@@ -39,16 +39,14 @@ void halSetup() {
   //   First Vpin=100
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
-
-   //PCA9685::create(100, 16, 0x40);
-   //PCA9685::create(116, 16, 0x41);
-   PCA9685::create(132, 16, 0x42);
-   PCA9685::create(148, 16, 0x43);
-   PCA9685::create(228, 16, 0x44);
-   PCA9685::create(244, 16, 0x45);
-   PCA9685::create(196, 16, 0x46);
-   PCA9685::create(212, 16, 0x47);
-
+   PCA9685::create(100, 16, {I2CMux_0,SubBus_0,0x40});
+   PCA9685::create(116, 16, {I2CMux_0,SubBus_0,0x41});
+   PCA9685::create(132, 16, {I2CMux_0,SubBus_0,0x42});
+   PCA9685::create(148, 16, {I2CMux_0,SubBus_0,0x43});
+   PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44});
+   PCA9685::create(244, 16, {I2CMux_0,SubBus_1,0x45});
+   PCA9685::create(196, 16, {I2CMux_0,SubBus_1,0x46});
+   PCA9685::create(212, 16, {I2CMux_0,SubBus_1,0x47});
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -198,7 +196,12 @@ void halSetup() {
   // Note that the I2C address is defined in the EX-IOExpander code, and 0x65 is the default.
   // The example is for an Arduino Nano.
 
-  // EXIOExpander::create(800, 62, 0x65);
+    EXIOExpander::create(500, 62, {I2CMux_0,SubBus_2,0x65});
+    EXIOExpander::create(562, 62, {I2CMux_0,SubBus_2,0x66});
+    EXIOExpander::create(624, 62, {I2CMux_0,SubBus_2,0x67});
+    EXIOExpander::create(686, 62, {I2CMux_0,SubBus_2,0x68});
+    EXIOExpander::create(748, 62, {I2CMux_0,SubBus_2,0x69});
+   // EXIOExpander::create(600, 62, 0x67);
 
 
   //=======================================================================
