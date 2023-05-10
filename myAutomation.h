@@ -68,8 +68,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
 
-SIGNALH(518,520,522)
-SIGNALH(519,521,523)
+
 
 
 /* Startup test sequence for signals and servos
@@ -101,6 +100,7 @@ DONE
 */
 #include "myTrackA.h"
 #include "myTrackB.h"
+#include "myTrackB_FiddleYard.h"
 
 /* Build Routes
 *

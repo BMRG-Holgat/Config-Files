@@ -6,22 +6,12 @@
 * SIGNALH(red,amber(0),green)
 */
 //Define signals 4 i/o devices needed
-// North
-// A
-SIGNALH(519,521,523)
-// B
-// C
-// D
-// E
-// F
-SIGNALH(518,520,522)
-
-// Sidings
-
-//Dickie Bridge
-
-//South 
-
-//South Twin
-
-//South C
+SIGNALH(518, 520, 522) // Board 3 track F
+SIGNALH(519, 521, 523) // Board 3 track A
+SIGNALH(524, 526, 528)
+SIGNALH(525, 527, 529)
+SIGNALH(530, 532, 534)
+SIGNALH(531, 533, 535) // Board 3
+SIGNALH(580, 582, 584) // Board 1
+SIGNALH(581, 583, 585) // Board 1
+SIGNALH(586, 588, 590) // Board 1 

@@ -58,7 +58,7 @@ The configuration file for DCC-EX Command Station
 // NOTE: Only supported on Arduino Mega
 // Set to false if you not even want it on the Arduino Mega
 //
-#define ENABLE_WIFI false
+#define ENABLE_WIFI true
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -146,7 +146,8 @@ The configuration file for DCC-EX Command Station
 // and want to use the EX-RAIL automation. Otherwise you do not have enough RAM
 // to do that. Of course, then none of the EEPROM related commands work.
 //
-//#define DISABLE_EEPROM
+#define DISABLE_EEPROM
+#define DISABLE_PROG
 
 /////////////////////////////////////////////////////////////////////////////////////
 // REDEFINE WHERE SHORT/LONG ADDR break is. According to NMRA the last short address

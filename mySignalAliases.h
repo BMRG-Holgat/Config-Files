@@ -5,10 +5,17 @@
 * Define all the signal aliases
 *
 */
-ALIAS(SIG_N1_A, 519) //Noth bypass 1 exit signal
-ALIAS(SIG_N1_B, 518) //North bypass 1 through signal
-ALIAS(SIG_N1_C, 524) // approach bypass 2
-ALIAS(SIG_N1_D, 525) //sig exit bypass 2
+ALIAS(SIG_A1, 580) // Track A board 1
+ALIAS(SIG_B1, 581) //Track B board 1
+ALIAS(SIG_D1, 586) // Track D board 1
+ALIAS(SIG_A2, 518) //Track A board 3
+ALIAS(SIG_B2, 519) // Track B board 3
+ALIAS(SIG_C1, 524) // Track C board 3
+ALIAS(SIG_D2, 525) // Track D board 3
+ALIAS(SIG_E1, 530) // Track E board 3
+ALIAS(SIG_F1, 531) // Track F board 3
+ALIAS(SIG_A3, 600) // Track A board 8
+ALIAS(SIG_B3, 601) // Track B board 8
 /*
 ALIAS(SIG_N1_E, 182) //sig bypass 2 through signal
 ALIAS(SIG_N1_F, 185) //bypass 1 approach

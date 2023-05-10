@@ -196,8 +196,8 @@ void halSetup() {
   // Note that the I2C address is defined in the EX-IOExpander code, and 0x65 is the default.
   // The example is for an Arduino Nano.
 
-    EXIOExpander::create(500, 62, {I2CMux_0,SubBus_2,0x65});
-    EXIOExpander::create(562, 62, {I2CMux_0,SubBus_2,0x66});
+    EXIOExpander::create(500, 62, {I2CMux_0,SubBus_2,0x65}); // Board 3
+    EXIOExpander::create(562, 62, {I2CMux_0,SubBus_2,0x66}); // Board 1
     EXIOExpander::create(624, 62, {I2CMux_0,SubBus_2,0x67});
     EXIOExpander::create(686, 62, {I2CMux_0,SubBus_2,0x68});
     EXIOExpander::create(748, 62, {I2CMux_0,SubBus_2,0x69});

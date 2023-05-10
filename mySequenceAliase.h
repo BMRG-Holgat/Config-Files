@@ -19,6 +19,11 @@ ALIAS(USG_BK8__USG_BK9,604)
 ALIAS(UGS__BF_A,608)
 
 //Up Mixed Fast
+ALIAS(FYARD_EXIT)
+ALIAS(STN_ByPass)
+ALIAS(STN_Exit_TB)
+ALIAS(STN_Exit_TA)
+ALIAS(SSlip_App) // Aproach single slip
 ALIAS(FYard_Ladder_T1_A,620)
 ALIAS(FYard_Ladder_T1_E,621)
 ALIAS(FYard_Ladder_T2_A,622)

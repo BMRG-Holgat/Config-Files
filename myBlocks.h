@@ -28,12 +28,13 @@ ALIAS(USG_BK11_Hold,22) //Fiddle yard bypass holding 2
 ALIAS(USG_BK12_Hold,23) //Fiddle yard bypass holding 1
 
 //Up Mixed Fast
-ALIAS(UMF_BK1_1_STN_App) //Station approach from fiddleyard
+ALIAS(UMF_FY_Ex) // Leave Fiddle Yard Board 4->3
+ALIAS(UMF_BK1_1_STN_App) //Station approach from fiddleyard board 2->1
 ALIAS(UMF_BK2_1_STN_Ex) //Exit from station
-ALIAS(UMF_BK3_2_BA_App) //Approach to ponts on board 2
+ALIAS(UMF_BK3_2_BA_App) //Approach to points on board 2
 ALIAS(UMF_BK4_BB__BD_3_Hold) //Wait here if double slip or BC is against us 
 ALIAS(UMF_BK5_4__6_Hold)
-ALIAS(UMF_BK8_7_App) // Wait here if double slip is against us
+ALIAS(UMF_BK8_7_App) // Wait here if single slip is against us
 ALIAS(UMF_BK9_8_App) //Wait here for board 9 to clear
 ALIAS(UMF_BK10_9_Hold) //Wait here for fiddleyard entrance to clear
 ALIAS(FB_App,48) // FB approach track from Board 9 all trains wait here until space available
