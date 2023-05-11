@@ -93,7 +93,7 @@
   turnTest(DFM_T14_E__DFM_T13_A) \
   turnTest(UGS_T6_A__FYUG_T10_E)\
   turnTest(UMF_T15_E__UGS_T6_A) \
-  turnTest(DFM_T15_A__DGS_T6_E) \
+  
   turnTest(DGS_T6_E__DFM_T15_A) \
   turnTest(DMF_T8_E__DMT_T9_A) \
   turnTest(DMF_T9_E__DMT_T10_A) \
@@ -164,7 +164,7 @@
   turnReset(DFM_T14_E__DFM_T13_A)\
   turnReset(UGS_T6_A__FYUG_T10_E)\
   turnReset(UMF_T15_E__UGS_T6_A)\
-  turnReset(DFM_T15_A__DGS_T6_E)\
+  turnReset(DFM_T16_A__DGS_T6_E)\
   turnReset(DGS_T6_E__DFM_T15_A)\
   turnReset(DMF_T8_E__DMT_T9_A)\
   turnReset(DMF_T9_E__DMT_T10_A)\

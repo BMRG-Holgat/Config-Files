@@ -60,7 +60,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySequenceAliase.h"
 #include "myTurnouts.h"
 #include "mySensors.h"
-#include "myDefinitions.h"
+//#include "myDefinitions.h"
 #include "myTurnoutAliases.h"
 //#include "myTrackA.h"
 #include "myBlocks.h"
