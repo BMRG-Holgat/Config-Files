@@ -12,6 +12,7 @@
 //Station Approach from A and stop
 SEQUENCE(UGS_BK1_ST_App) // seq 600
 //insert BO detection here
+  RED(SIG_A1)
     IFRESERVE(UGS_BK1_Stn_App)
      IFRESERVE(UGS_BK2_HEAD_1_AA_Ex)
         IFCLOSED(UGS_T1_H)
@@ -21,13 +22,14 @@ SEQUENCE(UGS_BK1_ST_App) // seq 600
       RESERVE(UGS_STN_Hold)
       FWD(40)
     ENDIF
-    //Insert signals here
-    AT(USG_SNS_STN)
+    DELAY(12000) // <-set this value
+    //AT(USG_SNS_STN)
     STOP
     PRINT("Stopped at station")
     FREE(USG_BK12_Hold)
     DELAYRANDOM(10000, 15000)
     //Insert Signal change here
+    GREEN(SIG_A1)
     FOLLOW(USG_BK2_STN_EX)
 
 //Header line
@@ -61,14 +63,16 @@ SEQUENCE(UGS_Head_Exit) // seq 602
 //Exit Station Onto board 2
 SEQUENCE(USG_BK2_STN_EX) // seq 603
 //insert BO detection here for boards 3-8
-  IFRESERVE(UGS_BK4_3__8_Hold)
+  RESERVE(UGS_BK4_3__8_Hold)
     IFTHROWN(UGS_T2_E__DFM_T1_A)
     //Set Signal Red
+      RED(SIG_A1)
       DELAY(5000)
       CLOSE(UGS_T2_E__DFM_T1_A)
       IFTHROWN(UGS_T3_A__UFM_T3_E)
         CLOSE(UGS_T3_A__UFM_T3_E)
       ENDIF
+      GREEN(SIG_A1)
     ENDIF
     FWD(50)
     AT(SNS6_TRN2_STN_EX)

@@ -4,8 +4,6 @@
 *
 */
 SETUP("<D DIAG ON>");
-SETUP("<D WIFI OFF");
-SETUP("<D ETHERNET OFF");
 SETUP("<0>"); // tracks off at startup
 SETUP("<D CMD 1>"); // can be set to ON for testing in the serial monitor
 SETUP("<D EXRAIL ON>");
