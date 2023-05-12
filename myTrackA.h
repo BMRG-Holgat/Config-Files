@@ -110,7 +110,7 @@ SEQUENCE(UGS__BF_A)
   RESERVE(FB_App)
   trackChange(UGS_T5_E__FYUG_T7_A,UFM_T6_A__UGS_T5_E)
   FWD(10)
-  FOLLOW(FYard_Ladder_T1_A)
+  FOLLOW(BYard_Ladder_T1_A)
   
 //Fiddle yard hold sequence
 

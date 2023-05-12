@@ -46,6 +46,6 @@ ROUTE(1,"HST B to Station to B")
     AT(SNS_FB_T1_E) // Board 9
     FWD(30)
 
-    FOLLOW(FYard_Ladder_T1_A) //Fiddleyard enterance
+    FOLLOW(BYard_Ladder_T1_A) //Fiddleyard enterance
 
     DONE

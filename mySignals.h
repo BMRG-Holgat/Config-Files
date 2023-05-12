@@ -15,3 +15,9 @@ SIGNALH(531, 533, 535) // Board 3
 SIGNALH(580, 582, 584) // Board 1
 SIGNALH(581, 583, 585) // Board 1
 SIGNALH(586, 588, 590) // Board 1 
+SIGNALH(580, 582, 584) // Board 7 -- change when added
+SIGNALH(581, 583, 585) // Board 7
+SIGNALH(586, 588, 590) // Board 7 
+SIGNALH(580, 582, 584) // Board 9
+SIGNALH(581, 583, 585) // Board 9
+SIGNALH(586, 588, 590) // Board 9 

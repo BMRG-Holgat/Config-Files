@@ -11,7 +11,7 @@
 
 // Start routines for track B Fiddle Yard
 
-SEQUENCE(FYARD_EXIT)
+SEQUENCE(BYard_EXIT)
     RESERVE(UMF_FY_Ex)
     FWD(10)
 FOLLOW(STN_ByPass)
@@ -76,4 +76,4 @@ SEQUENCE(SSlip_App)
     ENDIF
 
 
-FOLLOW(FYard_Ladder_T1_A)
+FOLLOW(BYard_Ladder_T1_A)

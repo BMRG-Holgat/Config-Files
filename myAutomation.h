@@ -62,7 +62,6 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySensors.h"
 #include "myDefinitions.h"
 #include "myTurnoutAliases.h"
-//#include "myTrackA.h"
 #include "myBlocks.h"
 #include "mySignals.h"
 #include "mySignalAliases.h"
@@ -101,6 +100,13 @@ DONE
 #include "myTrackA.h"
 #include "myTrackB.h"
 #include "myTrackB_FiddleYard.h"
+#include "myTrackC.h"
+#include "myTrackC_FiddleYard.h"
+#include "myTrackD.h"
+#include "myTrackD_FiddleYard.h"
+#include "myTrackE.h"
+#include "myTrackE_FiddleYard.h"
+#include "myTrackF.h"
 
 /* Build Routes
 *
@@ -109,7 +115,7 @@ DONE
 #include "myRoutes-TrackB.h"
 
 
-AUTOMATION(10,"HST B to Station Auto")
+AUTOMATION(10,"HST B test to Station Auto")
     RESERVE(UGS_BK1_Stn_App)
     RESERVE(UGS_BK2_HEAD_1_AA_Ex)
     IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross

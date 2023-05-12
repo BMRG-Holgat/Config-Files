@@ -10,27 +10,39 @@
 
 //Startup led sequence
 #define ledReset \
-    RED(SIG_N1) \
-    RED(SIG_N2) \
-    RED(SIG_N3) \
-    RED(SIG_N4) \
-    RED(SIG_N5) \
-    RED(SIG_N6) \
-    RED(SIG_S1) \
-    RED(SIG_S2) \
-    RED(SIG_S3) 
+   RED(SIG_A1) \
+   RED(SIG_B1) \
+   RED(SIG_D1) \
+   RED(SIG_A2) \
+   RED(SIG_B2) \
+   RED(SIG_C2) \
+   RED(SIG_D2) \
+   RED(SIG_E2) \
+   RED(SIG_F2) \
+   RED(SIG_A3) \
+   RED(SIG_B3) \
+   RED(SIG_C3) \
+   RED(SIG_D3) \
+   RED(SIG_E3) \
+   RED(SIG_F3)
 
 //Test sequence of LED signals
  #define signalTest \
-   signalLedTest(SIG_N1) \
-   signalLedTest(SIG_N2) \
-   signalLedTest(SIG_N3) \
-   signalLedTest(SIG_N4) \
-   signalLedTest(SIG_N5) \
-   signalLedTest(SIG_N6) \
-   signalLedTest(SIG_S1) \
-   signalLedTest(SIG_S2) \
-   signalLedTest(SIG_S3) \
+   signalLedTest(SIG_A1) \
+   signalLedTest(SIG_B1) \
+   signalLedTest(SIG_D1) \
+   signalLedTest(SIG_A2) \
+   signalLedTest(SIG_B2) \
+   signalLedTest(SIG_C2) \
+   signalLedTest(SIG_D2) \
+   signalLedTest(SIG_E2) \
+   signalLedTest(SIG_F2) \
+   signalLedTest(SIG_A3) \
+   signalLedTest(SIG_B3) \
+   signalLedTest(SIG_C3) \
+   signalLedTest(SIG_D3) \
+   signalLedTest(SIG_E3) \
+   signalLedTest(SIG_F3) \
    ledReset \
    myLCDOutput(signals)
    
@@ -183,8 +195,9 @@
   turnReset(HS_T3) \
   turnReset(HS_T4_E__HS_T5_A) \
   turnReset(HS_T5_A__HS_T6) \
-  turnReset(HS_T6)
-
+  turnReset(HS_T6) \
+  defaultPosition(UGS_T1_H) \
+  defaultPosition(DGS_T4_A__DFM_T5_E)
 
    
 //Test signals indicators macro
@@ -219,6 +232,11 @@
     PRINT("Closing: " #id) \
     CLOSE(id) \
     DELAY(500)
+
+  #define defaultPosition(id) \
+    PRINT("Setting Default: " #id) \
+      THROW(id) \
+      DELAY(100) 
 
 //Change paired turnouts
 #define trackChange(id,ad)\
