@@ -33,6 +33,12 @@
 void halSetup() {
 
   //=======================================================================
+  // I2C bus speed
+  //=======================================================================
+  I2CManager.forceClock(100000);
+
+
+  //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
   //=======================================================================
   // The parameters are: 
@@ -197,10 +203,10 @@ void halSetup() {
   // The example is for an Arduino Nano.
 
     EXIOExpander::create(500, 62, {I2CMux_0,SubBus_2,0x65}); // Board 3
-    EXIOExpander::create(562, 62, {I2CMux_0,SubBus_2,0x66}); // Board 1
-    EXIOExpander::create(624, 62, {I2CMux_0,SubBus_2,0x67});
-    EXIOExpander::create(686, 62, {I2CMux_0,SubBus_2,0x68});
-    EXIOExpander::create(748, 62, {I2CMux_0,SubBus_2,0x69});
+    //EXIOExpander::create(562, 62, {I2CMux_0,SubBus_2,0x66}); // Board 1
+    //EXIOExpander::create(624, 62, {I2CMux_0,SubBus_2,0x67});
+    //EXIOExpander::create(686, 62, {I2CMux_0,SubBus_2,0x68});
+    //EXIOExpander::create(748, 62, {I2CMux_0,SubBus_2,0x69});
    // EXIOExpander::create(600, 62, 0x67);
 
 
