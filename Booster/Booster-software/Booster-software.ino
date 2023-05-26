@@ -1,4 +1,4 @@
-#include <LiquidCrystal.h>
+
 
 /*
    As posted on web page - uses modified board
@@ -20,7 +20,7 @@ float TmpPotReading = 0;
 int CurrentPin = 0;
 int CurrentPinReading = 0;
 int SetPotFlag = 0;
-float version = 3.2;
+float version = 3.4;
 #include <Wire.h>
 #include <LCD.h>
 #include <LiquidCrystal_I2C.h>
@@ -139,13 +139,14 @@ void showPercentage() {
     lcd.print("%  ");
     now = millis();
   }
-  if (percentage > 100) turnPowerOff();
+  if (percentage > 90) turnPowerOff();
 }
 void turnPowerOff() {
   digitalWrite(PowerOn, LOW);
   lcd.setCursor(0, 0);
   lcd.print("OFF-5sec");
-  delay(5000);
+  lcd.print("OFF");
+  delay(35000);
   turnPowerOn();
   lcd.setCursor(0, 0);
   lcd.print("               ");
