@@ -82,14 +82,14 @@ The configuration file for DCC-EX Command Station
 // The AP mode password must be at least 8 characters long.
 //
 // Your SSID may not contain ``"'' (double quote, ASCII 0x22).
-#define WIFI_SSID "Your network name"
+#define WIFI_SSID "bmrs_holgate"
 //#define WIFI_SSID "SmartNet"
 //
 // WIFI_PASSWORD is the network password for your home network or if
 // you want to change the password from default AP mode password
 // to the AP password you want. 
 // Your password may not contain ``"'' (double quote, ASCII 0x22).
-#define WIFI_PASSWORD "Bmrc_h0lgate"
+#define WIFI_PASSWORD "bmrs_H0lg1t3"
 //#define WIFI_PASSWORD "5martn3t2020"
 //
 // WIFI_HOSTNAME: You probably don't need to change this
@@ -99,7 +99,7 @@ The configuration file for DCC-EX Command Station
 // WiFi will be enabled (Mega only). The default channel is set to "1" whether
 // this line exists or not. If you need to use an alternate channel (we recommend
 // using only 1,6, or 11) you may change it here.
-#define WIFI_CHANNEL 1
+#define WIFI_CHANNEL 11
 
 /////////////////////////////////////////////////////////////////////////////////////
 //

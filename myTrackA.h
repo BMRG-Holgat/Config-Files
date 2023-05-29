@@ -12,6 +12,7 @@
 //Station Approach from A and stop
 SEQUENCE(UGS_BK1_ST_App) // seq 600
 //insert BO detection here
+IF(-BD_S1_A)
   RED(SIG_A1)
     IFRESERVE(UGS_BK1_Stn_App)
      IFRESERVE(UGS_BK2_HEAD_1_AA_Ex)
@@ -31,19 +32,25 @@ SEQUENCE(UGS_BK1_ST_App) // seq 600
     //Insert Signal change here
     GREEN(SIG_A1)
     FOLLOW(USG_BK2_STN_EX)
+ENDIF
 
 //Header line
 SEQUENCE(UGS_Head_Entry) //seq 601
 //insert BO detection here for station
  //Check BO on header
+ IF(-BD_S1_HE)
+  IF(-BD_S2_HE)
     RESERVE(UGS_STN_Hold)  
     IFTHROWN(UGS_T1_H) //Header Point
        CLOSE(UGS_T1_H)
+    ENDIF
        RESERVE(UGS_BK2_HEAD_1_AA_Ex)
        FWD(20)
        AT(USG_Head_End)
        STOP
        FREE(UGS_STN_Hold)
+  ENDIF
+ ENDIF
 DONE
 
 //Leave Header Line and go back to Fiddle Yard
