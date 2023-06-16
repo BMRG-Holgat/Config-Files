@@ -11,7 +11,6 @@ DeviceAddress insideThermometer;
 #include<EEPROM.h>
 int LED = 13; // LED to blink when DCC packets are sent in loop
 int PowerOn = 3; // pin to turn booster on/off
-boolean PowerOffBool = false;
 int Pot1 = 1; // max current pot
 int Pot2 = 2; // max temperature pot
 float PotReading = 0;
@@ -19,7 +18,7 @@ float TmpPotReading = 0;
 int CurrentPin = 0;
 int CurrentPinReading = 0;
 int SetPotFlag = 0;
-float version = 3.4;
+float version = 3.2;
 #include <Wire.h>
 #include <LCD.h>
 #include <LiquidCrystal_I2C.h>
@@ -117,15 +116,11 @@ void loop() {
       turnPowerOff();
     }
     CurrentPinReading = analogRead(CurrentPin);
-    //Debug information on serial link
-    Serial.print("currentPinReading: "); Serial.print(CurrentPinReading);
     cAverage = cAverage + CurrentPinReading;
   }
   CurrentPinReading = cAverage / avgTimes;
-  Serial.print("raw current: ");  Serial.print(CurrentPinReading);
-  if(!PowerOffBool){
-    turnPowerOn();
-  }
+  Serial.print("raw current ");  Serial.print(CurrentPinReading);
+  turnPowerOn();
   lastAverage = CurrentPinReading; // keep for compare & print
   Serial.print("   Current = ");   Serial.println(CurrentPinReading - CurrentAdjustValue); // gives near zero with filter & 100K pull down
 }  //END LOOP
@@ -146,13 +141,10 @@ void showPercentage() {
 }
 void turnPowerOff() {
   digitalWrite(PowerOn, LOW);
-  PowerOffBool = true;
   lcd.setCursor(0, 0);
   lcd.print("OFF-5sec");
-  lcd.print("OFF: Press Reset to restart");
-  delay(35000);
-  
-  //turnPowerOn();
+  delay(5000);
+  turnPowerOn();
   lcd.setCursor(0, 0);
   lcd.print("               ");
 }

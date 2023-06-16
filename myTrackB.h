@@ -11,12 +11,20 @@
 
 // Start routines for track B Fiddle Yard
 
-SEQUENCE(BYard_EXIT)
+SEQUENCE(BYard_Exit)
     RESERVE(UMF_FY_Ex)
-    FWD(10)
+    FWD(40)
 FOLLOW(STN_ByPass)
 
-SEQUENCE(STN_ByPass)
+SEQUENCE(BYard_Exit__A)
+    RESERVE(UMF_FY_Ex)
+    FWD(40)
+    IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
+        trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
+    ENDIF
+FOLLOW(UGS_FY_Ex)
+
+SEQUENCE(STN_ByPass) 
     IFTHROWN(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross fyard
         trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
     ENDIF

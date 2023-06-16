@@ -147,7 +147,7 @@ The configuration file for DCC-EX Command Station
 // to do that. Of course, then none of the EEPROM related commands work.
 //
 #define DISABLE_EEPROM
-#define DISABLE_PROG
+// #define DISABLE_PROG
 
 /////////////////////////////////////////////////////////////////////////////////////
 // REDEFINE WHERE SHORT/LONG ADDR break is. According to NMRA the last short address

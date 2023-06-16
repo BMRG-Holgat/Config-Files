@@ -59,10 +59,11 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 */
 #include "mySequenceAliase.h"
 #include "myTurnouts.h"
-#include "mySensors.h"
-#include "myDefinitions.h"
 #include "myTurnoutAliases.h"
+#include "mySensors.h"
 #include "myBlocks.h"
+#include "myBlockDetectors.h"
+#include "myDefinitions.h"
 #include "mySignals.h"
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
@@ -116,8 +117,7 @@ DONE
 
 
 AUTOMATION(10,"HST B test to Station Auto")
-    RESERVE(UGS_BK1_Stn_App)
-    RESERVE(UGS_BK2_HEAD_1_AA_Ex)
+    RESERVE(UGS_FY_Exit)
     IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
         trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
     ENDIF
@@ -128,17 +128,15 @@ AUTOMATION(10,"HST B test to Station Auto")
     SET(1004)
     //set station signal red
     FWD(30)
-    AT(-1004)
-    
-    PRINT("DID IT WORK!")
-    AT(USG_SNS_STN)
+    AT(BD_S1_AA)
+    DELAY(2000)
     FWD(0)
     DELAYRANDOM(10000,15000)
     RESERVE(UGS_BK4_Stn_Exit)
     IFCLOSED(UGS_T2_E__DFM_T1_A)
       trackChange(UGS_T2_E__DFM_T1_A,UFM_T1_A__UGS_T2_E)
     ENDIF
-    DELAY(500)
+    DELAY(1000)
     IFTHROWN(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
         trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
     ENDIF
@@ -153,6 +151,8 @@ AUTOMATION(10,"HST B test to Station Auto")
     ENDIF
     FWD(0)
 DONE
+
+
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     

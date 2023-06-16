@@ -36,9 +36,19 @@ SEQUENCE(501) // Reset all turnouts to closed position
     PRINT("All turnouts closed")
 DONE
 
+// Reserve all fiddle yard blocks
+AUTOSTART SEQUENCE(998)
+ //RESERVE(21)
+ //RESERVE(22)
+ //RESERVE(23)
+
+DONE
+
 // BIG RED BUTTON!
 AUTOSTART SEQUENCE(999)
   AT(BIG_RED_BUTTON)
   PARSE("<!>")
   DELAY(10000)
   FOLLOW(999)
+
+
