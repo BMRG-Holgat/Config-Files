@@ -276,7 +276,7 @@
 
 //LCD information
 #define myLCDOutput(item)\
-  LCD(0, "Restting " #item)\
+  LCD(0, "Resetting " #item)\
     LCD(1, "To default state")\
     LCD(2,"Test Completed")\
     LCD(3,"%z")

@@ -7,15 +7,18 @@
 */
 ALIAS(BIG_RED_BUTTON,44)
  
- SEQUENCE(500) //Testing system before starting
+ ROUTE(995,"Test turnouts and signals") //Testing system before starting
+ IFNOT(252)
   PRINT("Testing Signals")
-//  DELAY(3000)
-//  signalTest
-//  DELAY(5000)
+  DELAY(1000)
+  signalTest
+  DELAY(1000)
   PRINT("Testing Turnouts")
   turnoutTest
-  PARSE("<c>")
-  DELAY(10000)
+  DELAY(5000)
+  LATCH(252)
+  LATCH(254)
+ENDIF
 DONE
 
 SEQUENCE(501) // Reset all turnouts to closed position
@@ -32,7 +35,13 @@ AUTOSTART SEQUENCE(998)
 
 DONE
 
-
+ROUTE(997,"Set Default Positions")
+  IFNOT(254)
+    defaultPosition(UGS_T1_H)
+    defaultPosition(DGS_T4_A__DFM_T5_E)
+    LATCH(254)
+  ENDIF
+DONE
 
 // BIG RED BUTTON!
 AUTOSTART SEQUENCE(999)
