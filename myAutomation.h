@@ -152,6 +152,14 @@ AUTOMATION(10,"HST B test to Station Auto")
     FWD(0)
 DONE
 
+ROUTE(997,"Set Default Positions")
+  IFNOT(254)
+    defaultPosition(UGS_T1_H)
+    defaultPosition(DGS_T4_A__DFM_T5_E)
+    LATCH(254)
+  ENDIF
+DONE
+
 
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 

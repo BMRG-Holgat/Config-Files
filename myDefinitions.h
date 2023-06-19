@@ -243,9 +243,9 @@
 
   #define defaultPosition(id) \
     PRINT("Setting Default: " #id) \
-      IF CLOSED(id) \
+      IFCLOSED(id) \
         THROW(id) \
-        DELAY(100) 
+        DELAY(100) \
       ENDIF
 
 //Change paired turnouts

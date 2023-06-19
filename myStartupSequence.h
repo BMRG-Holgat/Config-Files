@@ -6,19 +6,7 @@
 *
 */
 ALIAS(BIG_RED_BUTTON,44)
-/*
-AUTOSTART AUTOMATION(1000,"System Test")
-
- IFNOT(254) //read latch to prevent process running all the while
-  IF(31) //Read button press
-    LATCH(254) //Set latch
-    FOLLOW(500)
-  ENDIF
-  FOLLOW(1000)
- ENDIF
-
- DONE
-*/ 
+ 
  SEQUENCE(500) //Testing system before starting
   PRINT("Testing Signals")
 //  DELAY(3000)
@@ -44,13 +32,7 @@ AUTOSTART SEQUENCE(998)
 
 DONE
 
-ROUTE(998,"Set Default Positions")
-  IF(-512)
-    defaultPosition(UGS_T1_H)
-    defaultPosition(DGS_T4_A__DFM_T5_E)
-  LATCH(512)
-  ENDIF
-DONE
+
 
 // BIG RED BUTTON!
 AUTOSTART SEQUENCE(999)
