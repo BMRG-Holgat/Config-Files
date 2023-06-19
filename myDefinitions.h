@@ -243,8 +243,10 @@
 
   #define defaultPosition(id) \
     PRINT("Setting Default: " #id) \
-      THROW(id) \
-      DELAY(100) 
+      IF CLOSED(id) \
+        THROW(id) \
+        DELAY(100) 
+      ENDIF
 
 //Change paired turnouts
 #define trackChange(id,ad)\

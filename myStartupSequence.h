@@ -44,6 +44,14 @@ AUTOSTART SEQUENCE(998)
 
 DONE
 
+ROUTE(998,"Set Default Positions")
+  IF(-512)
+    defaultPosition(UGS_T1_H)
+    defaultPosition(DGS_T4_A__DFM_T5_E)
+  LATCH(512)
+  ENDIF
+DONE
+
 // BIG RED BUTTON!
 AUTOSTART SEQUENCE(999)
   AT(BIG_RED_BUTTON)
