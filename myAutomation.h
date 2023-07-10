@@ -60,6 +60,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySequenceAliase.h"
 #include "myTurnouts.h"
 #include "myTurnoutAliases.h"
+#include "myTurnoutPairs.h"
 #include "mySensors.h"
 #include "myBlocks.h"
 #include "myBlockDetectors.h"
@@ -69,37 +70,15 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "myStartupSequence.h"
 
 
-
-
-/* Startup test sequence for signals and servos
- *  Use this on rebuild
- */
-/* #define reBuildLEDTest(id)
-   RED(id) \
-   DELAY(1000) \
-   AMBER(id) \
-   DELAY(1000) \
-   GREEN(id) \
-   DELAY(1000) \
-   DONE
-
- #define seqTest
-   reBuildLEDTest(100) \
-   DELAY(2000) \
-   rebuildLEDTest(101) \
-   DELAY(2000) \
-   DONE
-  */
-
 DONE
 
 
 
-/* Build sequences
-*
-*/
+// Track sequences to be replace with call/return sequences.
+
 #include "myTrackA.h"
-#include "myTrackB.h"
+#include "myTrackA-Call.h"
+/*#include "myTrackB.h"
 #include "myTrackB_FiddleYard.h"
 #include "myTrackC.h"
 #include "myTrackC_FiddleYard.h"
@@ -108,14 +87,14 @@ DONE
 #include "myTrackE.h"
 #include "myTrackE_FiddleYard.h"
 #include "myTrackF.h"
-
+*/
 /* Build Routes
 *
 */
-
-#include "myRoutes-TrackB.h"
-
-
+#include "myRoutes-TrackA.h"
+/*#include "myRoutes-TrackB.h"
+*/
+/*
 AUTOMATION(10,"HST B test to Station Auto")
     RESERVE(UGS_FY_Exit)
     IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
@@ -150,9 +129,19 @@ AUTOMATION(10,"HST B test to Station Auto")
       trackChange(UGS_T2_E__DFM_T1_A,UFM_T1_A__UGS_T2_E)
     ENDIF
     FWD(0)
-DONE
+DONE*/
 
-
+SEQUENCE(30)
+AT(566)
+  GREEN(519)
+    AT(504)
+    STOP
+    DELAYRANDOM(5000,10000)
+    FWD(30)
+    RED(519)
+    THROW(9009)
+    
+FOLLOW(30)
 
 
 
