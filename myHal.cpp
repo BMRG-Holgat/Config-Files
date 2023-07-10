@@ -59,7 +59,7 @@ I2CManager.forceClock(100000);
   //   I2C address of module=0x22
 
   //MCP23017::create(196, 16, 0x22);
-  MCP23017::create(688, 16, {I2CMux_0,SubBus_0,0x22}); // Board 9
+  MCP23017::create(688, 16, {I2CMux_0,SubBus_0,0x27}); // Board 9
 
 
   // Alternative form, which allows the INT pin of the module to request a scan
@@ -207,7 +207,7 @@ I2CManager.forceClock(100000);
     EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x68}); // Board 4
     EXIOExpander::create(548, 62, {I2CMux_0,SubBus_3,0x69}); // Board 6
     EXIOExpander::create(610, 62, {I2CMux_0,SubBus_3,0x70}); // Board 7
-    EXIOExpander::create(672, 62, {I2CMux_0,SubBus_3,0x71}); // Board 8
+    EXIOExpander::create(672, 62, {I2CMux_0,SubBus_3,0x71}); // Board 8 
    // EXIOExpander::create(600, 62, 0x67);
 
 

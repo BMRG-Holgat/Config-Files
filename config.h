@@ -82,7 +82,8 @@ The configuration file for DCC-EX Command Station
 // The AP mode password must be at least 8 characters long.
 //
 // Your SSID may not contain ``"'' (double quote, ASCII 0x22).
-#define WIFI_SSID "bmrs_holgate"
+#define WIFI_SSID "Your network name"
+//#define WIFI_SSID "bmrs_holgate"
 //#define WIFI_SSID "SmartNet"
 //
 // WIFI_PASSWORD is the network password for your home network or if
@@ -147,7 +148,7 @@ The configuration file for DCC-EX Command Station
 // to do that. Of course, then none of the EEPROM related commands work.
 //
 #define DISABLE_EEPROM
-// #define DISABLE_PROG
+#define DISABLE_PROG
 
 /////////////////////////////////////////////////////////////////////////////////////
 // REDEFINE WHERE SHORT/LONG ADDR break is. According to NMRA the last short address
