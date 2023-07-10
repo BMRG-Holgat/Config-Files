@@ -10,6 +10,7 @@
 */
 
 //Exit track A fiddle yard
+/*
 SEQUENCE(UGS_FY_Ex_App)
   IFTHROWN(UGS_T6_A__FYUG_T10_E)
     trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
@@ -21,7 +22,7 @@ SEQUENCE(UGS_FY_Ex)
   FWD(40)
   AT(SNS1_MAIN_TRN1_APP)
   IFCLOSED(UGS_T6_A__FYUG_T10_E)
-    FREE(USG_BK12_Hold)
+    FREE(UGS_BK12_Hold)
   ELSE 
     FREE(UMF_FY_Ex)
   ENDIF
@@ -40,12 +41,12 @@ PRINT("UGS_BK1_Stn_App Reserved!")
       RESERVE(UGS_STN_Hold)
       FWD(40)
     
-    AT(USG_SNS_STN)
+    AT(UGS_SNS_STN)
     DELAY(2000)
     STOP
     PRINT("Stopped at station")
     FREE(UGS_FY_Exit)
-    FOLLOW(USG_BK2_STN_EX)
+    FOLLOW(UGS_BK2_STN_EX)
 ENDIF
 
 //Header line
@@ -60,7 +61,7 @@ SEQUENCE(UGS_Head_Entry) //seq 601
     ENDIF
        RESERVE(UGS_BK2_HEAD_1_AA_Ex)
        FWD(20)
-       AT(USG_Head_End)
+       AT(UGS_Head_End)
        STOP
        FREE(UGS_STN_Hold)
   ENDIF
@@ -82,7 +83,7 @@ SEQUENCE(UGS_Head_Exit) // seq 602
 
        
 //Exit Station Onto board 2
-SEQUENCE(USG_BK2_STN_EX) // seq 603
+SEQUENCE(UGS_BK2_STN_EX) // seq 603
 //insert BO detection here for boards 3-8
 PRINT("BOARD 2-3 SEQ")
   DELAYRANDOM(10000, 15000)
@@ -101,10 +102,10 @@ PRINT("BOARD 2-3 SEQ")
     FREE(UGS_BK1_Stn_App)
     FREE(UGS_BK2_HEAD_1_AA_Ex)
     FREE(UGS_STN_Hold)
-  FOLLOW(USG_BK8__USG_BK9)
+  FOLLOW(UGS_BK8__UGS_BK9)
 
 //Main run to board 9
-SEQUENCE(USG_BK8__USG_BK9)
+SEQUENCE(UGS_BK8__UGS_BK9)
 PRINT("BOARD 8 SEQ")
   //Insert BO for board 9    
   RESERVE(UGS_BK5_9_Hold)
@@ -116,7 +117,7 @@ PRINT("BOARD 8 SEQ")
   FWD(30)
   FREE(UGS_BK4_3__8_Hold)
   
-FOLLOW(USG_BK9__USG_FY_App)
+FOLLOW(UGS_BK9__UGS_FY_App)
 
 // Switch tracks from UGS to UFM
 //SEQUENCE(UGS_BK8__UFM_BK9)
@@ -130,51 +131,40 @@ SEQUENCE(UGS__BF_A)
   trackChange(UGS_T5_E__FYUG_T7_A,UFM_T6_A__UGS_T5_E)
   FWD(10)
   FOLLOW(BYard_Ladder_T1_A)
-  
+  */
 //Fiddle yard hold sequence
 
-//Enter fiddle yard A storage chain
-SEQUENCE(USG_BK9__USG_FY_App)
-PRINT("BOARD 9 SEQ")
-//insert BO detection here
-    RESERVE(USG_BK9_Hold)
-    FWD(10)
-    AT(USG_SNS_9)
-    STOP
-    GREEN(SIG_A1)
-    PRINT("Holding in BK 9")
-    FREE(UGS_BK5_9_Hold)
-    FOLLOW(USG_BK9__USG_BK10)
 
-SEQUENCE(USG_BK9__USG_BK10)
+SEQUENCE(UGS_BK9__UGS_BK10)
 //insert BO detection here
-    RESERVE(USG_BK10_Hold)
+    RESERVE(UGS_BK10_Hold)
     FWD(10)
-    AT(USG_SNS_10)
+    AT(UGS_SNS_10)
     STOP
+    GREEN(SIG_A3)
     PRINT("Holding in BK 10")
-    FREE(USG_BK9_Hold)
-    FOLLOW(USG_BK10__USG_BK11)
+    FREE(UGS_BK9_AF_App)
+    FOLLOW(UGS_BK10__UGS_BK11)
 
-SEQUENCE(USG_BK10__USG_BK11)
+SEQUENCE(UGS_BK10__UGS_BK11)
 //insert BO detection here
-    RESERVE(USG_BK11_Hold)
+    RESERVE(UGS_BK11_Hold)
     FWD(10)
-    AT(USG_SNS_11)
+    AT(UGS_SNS_11)
     STOP
     PRINT("Holding in BK 11")
-    FREE(USG_BK10_Hold)
-    FOLLOW(USG_BK11__USG_BK12)
+    FREE(UGS_BK10_Hold)
+    FOLLOW(UGS_BK11__UGS_BK12)
 
 
-SEQUENCE(USG_BK11__USG_BK12)
+SEQUENCE(UGS_BK11__UGS_BK12)
  //insert BO detection here
-    RESERVE(USG_BK12_Hold)
+    RESERVE(UGS_BK12_Hold)
     FWD(10)
-    AT(USG_SNS_12)
+    AT(UGS_SNS_12)
     STOP
     PRINT("STOPPED")
-    FREE(USG_BK11_Hold)
+    FREE(UGS_BK11_Hold)
     DONE
 //End fiddle yard hold sequence
   

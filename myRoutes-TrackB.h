@@ -2,7 +2,7 @@
 Routes for Track B
 */
 
-//Station stop from A move to Track C HST
+//Station stop from A move to Track B HST
 ROUTE(1,"HST B to Station to B")
     RESERVE(UGS_BK1_Stn_App)
     RESERVE(UGS_BK2_HEAD_1_AA_Ex)

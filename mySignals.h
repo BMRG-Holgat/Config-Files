@@ -6,8 +6,8 @@
 * SIGNALH(red,amber(0),green)
 */
 //Define signals 4 i/o devices needed
-SIGNALH(518, 520, 522) // Board 3 track A
-SIGNALH(519, 521, 523) // Board 3 track B
+SIGNAL(518, 520, 522) // Board 3 track A
+SIGNAL(519, 521, 523) // Board 3 track B
 SIGNALH(524, 526, 528) // Board 3 track C
 SIGNALH(525, 527, 529) // Board 3 track D
 SIGNALH(530, 532, 534) // Board 3 track E
