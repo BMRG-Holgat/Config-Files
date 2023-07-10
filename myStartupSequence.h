@@ -37,8 +37,25 @@ DONE
 
 ROUTE(997,"Set Default Positions")
   IFNOT(254)
-    defaultPosition(UGS_T1_H)
-    defaultPosition(DGS_T4_A__DFM_T5_E)
+    defaultPosition(UGS_T2_H) 
+    defaultPosition(DGS_T4_A__DFM_T5_E) 
+    defaultPosition(DGS_T5_A__DFM_T7_E)
+    PRINT("Setting all signals to green") \
+    GREEN(SIG_A1) 
+    GREEN(SIG_B1) 
+    GREEN(SIG_D1) 
+    GREEN(SIG_A2) 
+    GREEN(SIG_B2) 
+    GREEN(SIG_C2) 
+    GREEN(SIG_D2) 
+    GREEN(SIG_E2) 
+    GREEN(SIG_F2) 
+    GREEN(SIG_A3) 
+    GREEN(SIG_B3) 
+    GREEN(SIG_C3) 
+    GREEN(SIG_D3) 
+    GREEN(SIG_E3) 
+    GREEN(SIG_F3)
     LATCH(254)
   ENDIF
 DONE
