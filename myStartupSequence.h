@@ -27,13 +27,10 @@ SEQUENCE(501) // Reset all turnouts to closed position
     PRINT("All turnouts closed")
 DONE
 
-// Reserve all fiddle yard blocks
-AUTOSTART SEQUENCE(998)
- //RESERVE(21)
- //RESERVE(22)
- //RESERVE(23)
-
-DONE
+// Fiddle yard auto turnout select
+//AUTOSTART SEQUENCE(998)
+//  AT(504) THROW(9118) DELAY(30000)
+//FOLLOW(998)
 
 ROUTE(997,"Set Default Positions")
   IFNOT(254)
