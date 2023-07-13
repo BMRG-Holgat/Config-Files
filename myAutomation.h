@@ -143,7 +143,22 @@ AT(566)
     
 FOLLOW(30)
 
-
+AUTOMATION(31,"TRACK A TEST")
+RESERVE(1)
+FREE(3)
+  FWD(10)
+  DELAY(10000)
+RESERVE(2)
+FREE(1)
+  FWD(50)
+  DELAY(30000)
+RESERVE(3)
+FREE(2)
+  FWD(20)
+  AT(44)
+  STOP
+  PRINT("STOPPED")
+DONE
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
