@@ -7,7 +7,7 @@
 */
 ALIAS(BIG_RED_BUTTON,44)
  
- ROUTE(995,"Test turnouts and signals") //Testing system before starting
+ ROUTE(995,"Startup test") //Testing system before starting
  IFNOT(252)
   PRINT("Testing Signals")
   DELAY(1000)
