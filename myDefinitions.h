@@ -49,83 +49,80 @@
 //Test turnout sequence
  #define turnoutTest \
   turnTest(UGS_T1_E__UFM_T1_A) \
+  turnTest(UFM_T1_A__UGS_T1_E) \
+  turnTest(DMF_T1_A__UMF_T1_E) \
+  turnTest(UMF_T1_E__DMF_T1_A) \
+  turnTest(DFM_T1_A__DFM_T2_E) \
   turnTest(UGS_T2_H) \
   turnTest(UGS_T3_E__UFM_T2_A) \
-  turnTest(UGS_T4_A__UMF_T3_E) \
-  turnTest(UGS_T5_E__UFM_T6_A) \
-  turnTest(UGS_T6_E__UFM_T8_A) \
-  turnTest(UGS_T7_A__UFM_T17_E) \
-  turnTest(UFM_T1_A__UGS_T1_E) \
   turnTest(UFM_T2_A__UGS_T3_E) \
+  turnTest(DMF_T2_E__UMF_T2_A) \
+  turnTest(UMF_T2_A__DMF_T2_E) \
+  turnTest(DFM_T2_E__DFM_T1_A) \
+  turnTest(UGS_T4_A__UMF_T3_E) \
   turnTest(UFM_T3_E__UGS_T4_A) \
   turnTest(UFM_T4_A__DMF_T3_E) \
   turnTest(UFM_T5_A__UMF_T3_E) \
+  turnTest(DMF_T3_E__UFM_T4_A) \
+  turnTest(DMF_T4_E__DFM_T4_A) \
+  turnTest(UMF_T3_E__UFM_T5_A) \
+  turnTest(DFM_T4_A__DMF_T4_E) \
+  turnTest(DGS_T2_A__HS_T1_E) \
+  turnTest(HS_T1_E__DGS_T2_A) \
+  turnTest(HS_T2_E__HS_T1_A) \
+  turnTest(HS_T3_E__HS_T2_A) \
+  turnTest(UGS_T5_E__UFM_T6_A) \
   turnTest(UFM_T6_A__UGS_T5_E) \
   turnTest(UFM_T7_E__UMF_T4_A) \
+  turnTest(UMF_T4_A__UFM_T7_E) \
+  turnTest(DGS_T3_A__HS_T6_A) \
+  turnTest(DFM_T5_E__DGS_T4_A) \
+  turnTest(DGS_T4_A__DFM_T5_E) \
+  turnTest(UGS_T6_E__UFM_T8_A) \
   turnTest(UFM_T8_A__UGS_T6_E) \
+  turnTest(DMF_T5_A__DFM_T4_E) \
+  turnTest(DFM_T6_E__DMF_T5_A) \
+  turnTest(DGS_T5_A__DFM_T7_E) \
   turnTest(UFM_T9_E__UFM_T10_A) \
   turnTest(UFM_T10_E__UFM_T11_A) \
   turnTest(UFM_T11_E__UFM_T12_A) \
   turnTest(UFM_T12) \
-  turnTest(UFM_T13_E__UFM_T14_A) \
-  turnTest(UFM_T14_E__UFM_T15_A) \
-  turnTest(UFM_T15_E__UFM_T16_A) \
-  turnTest(UFM_T16_E) \
-  turnTest(UFM_T17_E__UGS_T7_A) \
-  turnTest(DMF_T1_A__UMF_T1_E) \
-  turnTest(DMF_T2_E__UMF_T2_A) \
-  turnTest(DMF_T3_E__UFM_T4_A) \
-  turnTest(DMF_T4_E__DFM_T4_A) \
-  turnTest(DMF_T5_A__DFM_T4_E) \
-  turnTest(DMF_T6_A__DMF_T7_E) \
-  turnTest(DMF_T7_A__DMF_T8_E) \
-  turnTest(DMF_T8_A__DMF_T9_E) \
-  turnTest(DMF_T9) \
-  turnTest(DMF_T10) \
-  turnTest(DMF_T11_E__DMT_T10_A) \
-  turnTest(DMF_T12_E__DMT_T11_A) \
-  turnTest(DMF_T13_E__DMF_T12_A) \
-  turnTest(UMF_T1_E__DMF_T1_A) \
-  turnTest(UMF_T2_A__DMF_T2_E) \
-  turnTest(UMF_T3_E__UFM_T5_A) \
-  turnTest(UMF_T4_A__UFM_T7_E) \
-  turnTest(UMF_T5_E__UMF_T6_A) \
-  turnTest(UMF_T6_E__UMF_T7_A) \
-  turnTest(UMF_T7_E__UMF_T8_A) \
-  turnTest(UFM_T8) \
-  turnTest(UMF_T9) \
-  turnTest(UMF_T10_A__UMF_T9_E) \
-  turnTest(UMF_T11_A__UMF_T10_E) \
-  turnTest(UFM_T12_A__UFM_T11_E) \
-  turnTest(DFM_T1_A__DFM_T2_E) \
-  turnTest(DFM_T2_E__DFM_T1_A) \
-  turnTest(DFM_T3_A__DGS_T1_E) \
-  turnTest(DFM_T4_A__DMF_T4_E) \
-  turnTest(DFM_T5_E__DGS_T4_A) \
-  turnTest(DFM_T6_E__DMF_T5_A) \
   turnTest(DFM_T7_E__DGS_T5_A) \
   turnTest(DFM_T8_E__DFM_T7_A) \
   turnTest(DFM_T9_E__DFM_T8_A) \
   turnTest(DFM_T10_E__DFM_T9_A) \
   turnTest(DFM_T11_E__DFM_T10_A) \
+  turnTest(HS_T4_A__HS_T5_E) \
+  turnTest(HS_T5_A__HS_T6_E) \
+  turnTest(HS_T6_A__DGS_T3_E) \
+  turnTest(UFM_T13_E__UFM_T14_A) \
+  turnTest(UFM_T14_E__UFM_T15_A) \
+  turnTest(UFM_T15_E__UFM_T16_A) \
+  turnTest(UFM_T16_E) \
+  turnTest(DMF_T6_A__DMF_T7_E) \
+  turnTest(DMF_T7_A__DMF_T8_E) \
+  turnTest(DMF_T8_A__DMF_T9_E) \
+  turnTest(DMF_T9) \
+  turnTest(UMF_T5_E__UMF_T6_A) \
+  turnTest(UMF_T6_E__UMF_T7_A) \
+  turnTest(UMF_T7_E__UMF_T8_A) \
+  turnTest(UFM_T8) \
   turnTest(DFM_T12) \
   turnTest(DFM_T13_E__DFM_T12_A) \
   turnTest(DFM_T14_E__DFM_T13_A) \
   turnTest(DFM_T15_E__DFM_T14_A) \
-  turnTest(DFM_T15_A__DFM_T14_E) \
+  turnTest(UGS_T7_A__UFM_T17_E) \
+  turnTest(UFM_T17_E__UGS_T7_A) \
   turnTest(DFM_T16_A__DGS_T6_E) \
-  turnTest(DGS_T1_E__DFM_T3_A) \
-  turnTest(DGS_T2_A__HS_T1_E) \
-  turnTest(DGS_T3_A__HS_T6_A) \
-  turnTest(DGS_T4_A__DFM_T5_E) \
-  turnTest(DGS_T5_A__DFM_T7_E) \
   turnTest(DGS_T6_E__DFM_T16_A) \
-  turnTest(HS_T1_E__DGS_T2_A) \
-  turnTest(HS_T2_E__HS_T1_A) \
-  turnTest(HS_T3_E__HS_T2_A) \
-  turnTest(HS_T4_A__HS_T5_E) \
-  turnTest(HS_T5_A__HS_T6_E) \
-  turnTest(HS_T6_A__DGS_T3_E) \
+  turnTest(DMF_T10) \
+  turnTest(DMF_T11_E__DMT_T10_A) \
+  turnTest(DMF_T12_E__DMT_T11_A) \
+  turnTest(DMF_T13_E__DMF_T12_A) \
+  turnTest(UMF_T9) \
+  turnTest(UMF_T10_A__UMF_T9_E) \
+  turnTest(UMF_T11_A__UMF_T10_E) \
+  turnTest(UFM_T12_A__UFM_T11_E) \
   turnoutReset \
   myLCDOutput(turnouts)
 
@@ -133,80 +130,81 @@
 #define turnoutReset \
   turnReset(UGS_T1_E__UFM_T1_A) \
   turnReset(UGS_T2_H) \
-  turnReset(UGS_T3_E__UFM_T2_A) \
-  turnReset(UGS_T4_A__UMF_T3_E) \
-  turnReset(UGS_T5_E__UFM_T6_A) \
-  turnReset(UGS_T6_E__UFM_T8_A) \
-  turnReset(UGS_T7_A__UFM_T17_E) \
   turnReset(UFM_T1_A__UGS_T1_E) \
-  turnReset(UFM_T2_A__UGS_T3_E) \
-  turnReset(UFM_T3_E__UGS_T4_A) \
-  turnReset(UFM_T4_A__DMF_T3_E) \
-  turnReset(UFM_T5_A__UMF_T3_E) \
-  turnReset(UFM_T6_A__UGS_T5_E) \
-  turnReset(UFM_T7_E__UMF_T4_A) \
-  turnReset(UFM_T8_A__UGS_T6_E) \
-  turnReset(UFM_T9_E__UFM_T10_A) \
-  turnReset(UFM_T10_E__UFM_T11_A) \
-  turnReset(UFM_T11_E__UFM_T12_A) \
-  turnReset(UFM_T12) \
-  turnReset(UFM_T13_E__UFM_T14_A) \
-  turnReset(UFM_T14_E__UFM_T15_A) \
-  turnReset(UFM_T15_E__UFM_T16_A) \
-  turnReset(UFM_T16_E) \
-  turnReset(UFM_T17_E__UGS_T7_A) \
   turnReset(DMF_T1_A__UMF_T1_E) \
+  turnReset(UMF_T1_E__DMF_T1_A) \
+  turnReset(DFM_T1_A__DFM_T2_E) \
+  turnReset(UGS_T3_E__UFM_T2_A) \
+  turnReset(UFM_T2_A__UGS_T3_E) \
   turnReset(DMF_T2_E__UMF_T2_A) \
-  turnReset(DMF_T3_E__UFM_T4_A) \
-  turnReset(DMF_T4_E__DFM_T4_A) \
-  turnReset(DMF_T5_A__DFM_T4_E) \
-  turnReset(DMF_T6_A__DMF_T7_E) \
-  turnReset(DMF_T7_A__DMF_T8_E) \
-  turnReset(DMF_T8_A__DMF_T9_E) \
-  turnReset(DMF_T9) \
+  turnReset(UMF_T2_A__DMF_T2_E) \
+  turnReset(DFM_T2_E__DFM_T1_A) \
+  turnReset(DFM_T3_A__DGS_T1_E) \
+  turnReset(DGS_T1_E__DFM_T3_A) \
   turnReset(DMF_T10) \
   turnReset(DMF_T11_E__DMT_T10_A) \
   turnReset(DMF_T12_E__DMT_T11_A) \
   turnReset(DMF_T13_E__DMF_T12_A) \
-  turnReset(UMF_T1_E__DMF_T1_A) \
-  turnReset(UMF_T2_A__DMF_T2_E) \
-  turnReset(UMF_T3_E__UFM_T5_A) \
-  turnReset(UMF_T4_A__UFM_T7_E) \
-  turnReset(UMF_T5_E__UMF_T6_A) \
-  turnReset(UMF_T6_E__UMF_T7_A) \
-  turnReset(UMF_T7_E__UMF_T8_A) \
+  turnReset(UMF_T9) \
   turnReset(UMF_T10_A__UMF_T9_E) \
   turnReset(UMF_T11_A__UMF_T10_E) \
   turnReset(UFM_T12_A__UFM_T11_E) \
-  turnReset(DFM_T1_A__DFM_T2_E) \
-  turnReset(DFM_T2_E__DFM_T1_A) \
-  turnReset(DFM_T3_A__DGS_T1_E) \
+  turnReset(UGS_T4_A__UMF_T3_E) \
+  turnReset(UFM_T3_E__UGS_T4_A) \
+  turnReset(UFM_T4_A__DMF_T3_E) \
+  turnReset(UFM_T5_A__UMF_T3_E) \
+  turnReset(DMF_T3_E__UFM_T4_A) \
+  turnReset(DMF_T4_E__DFM_T4_A) \
+  turnReset(UMF_T3_E__UFM_T5_A) \
   turnReset(DFM_T4_A__DMF_T4_E) \
-  turnReset(DFM_T5_E__DGS_T4_A) \
-  turnReset(DFM_T6_E__DMF_T5_A) \
+  turnReset(DGS_T2_A__HS_T1_E) \
+  turnReset(HS_T1_E__DGS_T2_A) \
+  turnReset(UGS_T7_A__UFM_T17_E) \
+  turnReset(UFM_T17_E__UGS_T7_A) \
+  turnReset(DFM_T16_A__DGS_T6_E) \
+  turnReset(DGS_T6_E__DFM_T16_A) \
+  turnReset(HS_T2_E__HS_T1_A) \
+  turnReset(HS_T3_E__HS_T2_A) \
+  turnReset(UFM_T13_E__UFM_T14_A) \
+  turnReset(UFM_T14_E__UFM_T15_A) \
+  turnReset(UFM_T15_E__UFM_T16_A) \
+  turnReset(UFM_T16_E) \
+  turnReset(DMF_T6_A__DMF_T7_E) \
+  turnReset(DMF_T7_A__DMF_T8_E) \
+  turnReset(DMF_T8_A__DMF_T9_E) \
+  turnReset(DMF_T9) \
+  turnReset(UMF_T5_E__UMF_T6_A) \
+  turnReset(UMF_T6_E__UMF_T7_A) \
+  turnReset(UMF_T7_E__UMF_T8_A) \
+  turnReset(UFM_T8) \
+  turnReset(DFM_T12) \
+  turnReset(DFM_T13_E__DFM_T12_A) \
+  turnReset(DFM_T14_E__DFM_T13_A) \
+  turnReset(DFM_T15_E__DFM_T14_A) \
+  turnReset(UGS_T5_E__UFM_T6_A) \
+  turnReset(UFM_T6_A__UGS_T5_E) \
+  turnReset(UFM_T7_E__UMF_T4_A) \
+  turnReset(UMF_T4_A__UFM_T7_E) \
+  turnReset(DGS_T3_A__HS_T6_A) \
+  turnReset(UFM_T9_E__UFM_T10_A) \
+  turnReset(UFM_T10_E__UFM_T11_A) \
+  turnReset(UFM_T11_E__UFM_T12_A) \
+  turnReset(UFM_T12) \
   turnReset(DFM_T7_E__DGS_T5_A) \
   turnReset(DFM_T8_E__DFM_T7_A) \
   turnReset(DFM_T9_E__DFM_T8_A) \
   turnReset(DFM_T10_E__DFM_T9_A) \
   turnReset(DFM_T11_E__DFM_T10_A) \
-  turnReset(DFM_T12) \
-  turnReset(DFM_T13_E__DFM_T12_A) \
-  turnReset(DFM_T14_E__DFM_T13_A) \
-  turnReset(DFM_T15_E__DFM_T14_A) \
-  turnReset(DFM_T15_A__DFM_T14_E) \
-  turnReset(DFM_T16_A__DGS_T6_E) \
-  turnReset(DGS_T1_E__DFM_T3_A) \
-  turnReset(DGS_T2_A__HS_T1_E) \
-  turnReset(DGS_T3_A__HS_T6_A) \
-  turnReset(DGS_T4_A__DFM_T5_E) \
-  turnReset(DGS_T5_A__DFM_T7_E) \
-  turnReset(DGS_T6_E__DFM_T16_A) \
-  turnReset(HS_T1_E__DGS_T2_A) \
-  turnReset(HS_T2_E__HS_T1_A) \
-  turnReset(HS_T3_E__HS_T2_A) \
   turnReset(HS_T4_A__HS_T5_E) \
   turnReset(HS_T5_A__HS_T6_E) \
   turnReset(HS_T6_A__DGS_T3_E) \
+  turnReset(DFM_T5_E__DGS_T4_A) \
+  turnReset(DGS_T4_A__DFM_T5_E) \
+  turnReset(UGS_T6_E__UFM_T8_A) \
+  turnReset(UFM_T8_A__UGS_T6_E) \
+  turnReset(DMF_T5_A__DFM_T4_E) \
+  turnReset(DFM_T6_E__DMF_T5_A) \
+  turnReset(DGS_T5_A__DFM_T7_E) \
   defaultPosition(UGS_T2_H) \
   defaultPosition(DGS_T4_A__DFM_T5_E) \
   defaultPosition(DGS_T5_A__DFM_T7_E) 
