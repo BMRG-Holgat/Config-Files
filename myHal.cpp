@@ -59,7 +59,7 @@ I2CManager.forceClock(100000);
   //   I2C address of module=0x22
 
   //MCP23017::create(196, 16, 0x22);
-  MCP23017::create(688, 16, {I2CMux_0,SubBus_0,0x27}); // Board 9
+  MCP23017::create(796, 16, {I2CMux_0,SubBus_0,0x27}); // Board 9
 
 
   // Alternative form, which allows the INT pin of the module to request a scan
@@ -167,7 +167,7 @@ I2CManager.forceClock(100000);
   //      LCD(4, " ")       // Clear LCD/OLED line 
   //      FOLLOW(1)         // Go back to start
 
-    DFPlayer::create(1000, 5, Serial3, true);
+  //  DFPlayer::create(1000, 5, Serial3, true);
   //  DFPlayerPro::create(5000, 5, Serial2, true);
 
 
@@ -201,13 +201,14 @@ I2CManager.forceClock(100000);
     
     
     //EXIOExpander::create(300, 62, 0x65); // Testing board
-    EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x65}); // Board 1
-    EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x66}); // Board 2
-    EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x67}); // Board 3
-    EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x68}); // Board 4
-    EXIOExpander::create(548, 62, {I2CMux_0,SubBus_3,0x69}); // Board 6
-    EXIOExpander::create(610, 62, {I2CMux_0,SubBus_3,0x70}); // Board 7
-    EXIOExpander::create(672, 62, {I2CMux_0,SubBus_3,0x71}); // Board 8 
+    //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
+    //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
+    //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
+    //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
+    //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_2,0x64}); // Board 5
+    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_3,0x65}); // Board 6
+    //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_3,0x66}); // Board 7
+    //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_3,0x67}); // Board 8 
    // EXIOExpander::create(600, 62, 0x67);
 
 

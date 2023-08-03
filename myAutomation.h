@@ -76,8 +76,8 @@ DONE
 
 // Track sequences to be replace with call/return sequences.
 
-#include "myTrackA.h"
-#include "myTrackA-Call.h"
+//#include "myTrackA.h"
+//#include "myTrackA-Call.h"
 /*#include "myTrackB.h"
 #include "myTrackB_FiddleYard.h"
 #include "myTrackC.h"
@@ -91,7 +91,7 @@ DONE
 /* Build Routes
 *
 */
-#include "myRoutes-TrackA.h"
+//#include "myRoutes-TrackA.h"
 /*#include "myRoutes-TrackB.h"
 */
 /*
@@ -130,7 +130,7 @@ AUTOMATION(10,"HST B test to Station Auto")
     ENDIF
     FWD(0)
 DONE*/
-
+/*
 SEQUENCE(30)
 AT(566)
   GREEN(519)
@@ -159,6 +159,7 @@ RESERVE(3)
   STOP
   PRINT("STOPPED")
 DONE
+*/
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
