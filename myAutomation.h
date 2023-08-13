@@ -142,24 +142,32 @@ AT(566)
     THROW(9009)
     
 FOLLOW(30)
-
+*/
 AUTOMATION(31,"TRACK A TEST")
 RESERVE(1)
 FREE(3)
   FWD(30)
+  LCD(3,"Speed 30")
+  LCD(4,"")
+  LCD(5,"")
   DELAY(15000)
 RESERVE(2)
 FREE(1)
   FWD(70)
+  LCD(4,"Speed 70")
+  LCD(3,"")
   DELAY(40000)
 RESERVE(3)
   FWD(40)
-  AT(581)
+  DELAY(40000)
   FREE(2)
   STOP
-  PRINT("STOPPED")
+  LCD(4,"")
+  LCD(5,"STOPPED")
 DONE
-*/
+
+
+
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
