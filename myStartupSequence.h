@@ -36,11 +36,11 @@ ROUTE(993,"System: End Session") // end Session setting
 DONE
 
 // Fiddle yard auto turnout select
-AUTOSTART SEQUENCE(998)
+AUTOSTART SEQUENCE(991)
   AT(50) THROW(9118) DELAY(30000)
-FOLLOW(998)
+FOLLOW(991)
 
-ROUTE(997,"System: Set Default Positions")
+ROUTE(992,"System: Set Default Positions")
   IFNOT(254)
     turnoutReset
     defaultPosition(UGS_T2_H) 
@@ -68,32 +68,23 @@ ROUTE(997,"System: Set Default Positions")
   ENDIF
 DONE
 
-/*
-AUTOSTART SEQUENCE(888)//Test sequence
-IF(811)
-  RED(519)
-ELSE 
-  GREEN(519)
-ENDIF 
-FOLLOW(888)
-*/
-ROUTE(555,"Resume?")
-  RESUME
-DONE
+AUTOSTART SEQUENCE(998)
+  AFTER(BIG_RED_BUTTON)
+  START(999)
+  DELAY(200)
+FOLLOW(998)
 
 // BIG RED BUTTON!
-AUTOSTART SEQUENCE(999)
-  AT(BIG_RED_BUTTON)
-    IFNOT(252)
-      PRINT("Stopped")
-      LATCH(252)
-      PARSE("</PAUSE>")
-    ELSE 
-      PARSE("</RESUME>")
+ROUTE(999,"System: Stop/Resume")
+  AFTER(BIG_RED_BUTTON)
+    IF(252)
+      RESUME
       PRINT("Resuming")
       UNLATCH(252)
-    ENDIF
-  DELAY(10000)
-  FOLLOW(999)
+      DONE ENDIF   
+    PRINT("Paused!")
+      LATCH(252)
+      PAUSE    
+  IF(252) FOLLOW(999) ENDIF DONE
 
 
