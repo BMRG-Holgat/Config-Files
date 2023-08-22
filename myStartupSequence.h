@@ -74,6 +74,51 @@ AUTOSTART SEQUENCE(998)
   DELAY(200)
 FOLLOW(998)
 
+// This resets normal DCC
+ROUTE(11, "Set Up DCC on A & B")
+        PRINT("Set up DCC on A & B")
+        SET_TRACK(A, MAIN)
+        SET_TRACK(B, MAIN)
+        SET_TRACK(C, MAIN)
+    DONE
+    
+ONOVERLOAD(A)
+    LCD(7, "OVERLOAD A - POWEROFF")
+    PRINT("Overload Detected on A - Turn Off Power")
+    SET_TRACK(A, NONE)
+DONE
+
+ONOVERLOAD(B)
+    LCD(7, "OVERLOAD B - POWEROFF")
+    PRINT("Overload Detected on B - Turn Off Power")
+    SET_TRACK(B, NONE)
+DONE
+
+ONOVERLOAD(C)
+    LCD(7, "OVERLOAD C - POWEROFF")
+    PRINT("Overload Detected on C - Turn Off Power")
+    SET_TRACK(C, NONE)
+DONE
+
+ROUTE(12,"Reset A")
+    LCD(7,"")
+    SET_TRACK(A, MAIN)
+    POWERON
+DONE
+
+ROUTE(13,"Reset B")
+    LCD(7,"")
+    SET_TRACK(B, MAIN)
+    POWERON
+DONE
+
+ROUTE(14,"Reset C")
+    LCD(7,"")
+    SET_TRACK(C, MAIN)
+    POWERON
+DONE
+
+
 // BIG RED BUTTON!
 ROUTE(999,"System: Stop/Resume")
   AFTER(BIG_RED_BUTTON)
