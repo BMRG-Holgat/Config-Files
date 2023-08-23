@@ -46,7 +46,26 @@ The configuration file for DCC-EX Command Station
 //   |
 //   +-----------------------v
 //
-#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD
+#define MAX_CURRENT 1000
+//#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD
+// EX 8874 based shield connected to a 3V3 system with 12-bit (4096) ADC
+// Jumpers set to ALT for everything **except** FAULT!
+#define EX8874_ALT_SHIELD F("EX8874-ALT"), \
+ new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, A4), \
+ new MotorDriver(5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, A5)
+
+
+// EX8874 based shield connected to a 3V3 system with 12-bit (4096) ADC
+// Jumpers set to ALT for everything **except** FAULT!
+// Stacked with STANDARD MOTOR SHIELD in standard config
+#define EX8874_L298_STACKED_SHIELDS F("EX8874-L298-STACK"), \
+ new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, A4), \
+ new MotorDriver(5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, A5), \
+ new MotorDriver(3, 12, UNUSED_PIN, 9, A0, 0.488, 1500, UNUSED_PIN), \
+ new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 0.488, 1500, UNUSED_PIN)
+
+#define MOTOR_SHIELD_TYPE EX8874_L298_STACKED_SHIELDS
+//#define MOTOR_SHIELD_TYPE EX8874_ALT_SHIELD
 /////////////////////////////////////////////////////////////////////////////////////
 //
 // The IP port to talk to a WIFI or Ethernet shield.
@@ -148,7 +167,7 @@ The configuration file for DCC-EX Command Station
 // to do that. Of course, then none of the EEPROM related commands work.
 //
 #define DISABLE_EEPROM
-#define DISABLE_PROG
+//#define DISABLE_PROG
 
 /////////////////////////////////////////////////////////////////////////////////////
 // REDEFINE WHERE SHORT/LONG ADDR break is. According to NMRA the last short address
