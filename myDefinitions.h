@@ -298,26 +298,27 @@
   AMBER(id) \
   DELAY(1000) \
   PRINT(#id " Green") \
-  GREEN(id)
+  GREEN(id) \
+  DELAY(1000)
   
 //Test all turnouts and double slips
  #define turnTest(id) \
   PRINT("Testing turnout " #id) \
   IFCLOSED(id) \
     THROW(id) \
-    DELAY(3000) \
+    DELAY(2000) \
     CLOSE(id) \
   ELSE \
     CLOSE(id) \
-    DELAY(3000) \
+    DELAY(2000) \
     THROW(id) \
   ENDIF \
-  DELAY(3000)
+  DELAY(2000)
 
   #define turnReset(id) \
     PRINT("Closing: " #id) \
     CLOSE(id) \
-    DELAY(500)
+    DELAY(100)
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \
@@ -326,7 +327,9 @@
         DELAY(100) \
       ENDIF 
     
-
+/* ===================
+   not needed since myTurnoutPairs.
+   ===================
 //Change paired turnouts
 #define trackChange(tr1,tr2)\
   IFTHROWN(tr1) \
@@ -336,6 +339,7 @@
         THROW(tr1) \
         THROW(tr2) \
   ENDIF
+
 
 //Fiddle Yard Ladder
 #define throwFiddleYardLadder(t1) \
@@ -347,6 +351,8 @@
     IFTHROWN(t1) \
       CLOSE(t1) \
       ENDIF
+*/
+// Not needed since myTunroutPairs.
 
 #define forwardStop(speed,sns) \
   FWD(speed) \
