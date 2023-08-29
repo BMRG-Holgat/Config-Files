@@ -64,7 +64,13 @@ The configuration file for DCC-EX Command Station
  new MotorDriver(3, 12, UNUSED_PIN, 9, A0, 0.488, 1500, UNUSED_PIN), \
  new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 0.488, 1500, UNUSED_PIN)
 
-#define MOTOR_SHIELD_TYPE EX8874_L298_STACKED_SHIELDS
+ #define DUAL_EX8874_STACKED_SHIELDS F("DUAL-EX8874-STACK"), \
+ new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, PC2), \
+ new MotorDriver(5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, PC3), \
+ new MotorDriver(3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
+ new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5)
+
+#define MOTOR_SHIELD_TYPE DUAL_EX8874_STACKED_SHIELDS
 //#define MOTOR_SHIELD_TYPE EX8874_ALT_SHIELD
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -86,7 +92,7 @@ The configuration file for DCC-EX Command Station
 // If DONT_TOUCH_WIFI_CONF is set, all WIFI config will be done with
 // the <+> commands and this sketch will not change anything over
 // AT commands and the other WIFI_* defines below do not have any effect.
-//#define DONT_TOUCH_WIFI_CONF
+#define DONT_TOUCH_WIFI_CONF
 //
 // WIFI_SSID is the network name IF you want to use your existing home network.
 // Do NOT change this if you want to use the WiFi in Access Point (AP) mode. 
