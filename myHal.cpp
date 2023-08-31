@@ -241,6 +241,15 @@ I2CManager.forceClock(100000);
  
   //   EXFastClock::create(0x55);
 
+ //==========================================================================
+ //  Folllowing sets up displays
+ //==========================================================================
+ // HALDisplay<LiquidCrystal>::create(2, {I2CMux_0,SubBus_0,0x27}, 20, 4);
+ //
+ // 
+  HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_3,0x27 }, 16, 2);
+  HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_2,0x26 }, 16, 2);
+  HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
 
 }
 
