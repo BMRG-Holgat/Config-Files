@@ -7,7 +7,7 @@
 */
 ALIAS(BIG_RED_BUTTON,44)
  
- ROUTE(995,"System: Startup test") //Testing system before starting
+ ROUTE(997,"System: Startup test") //Testing system before starting
  IFNOT(252)
   PRINT("Testing Signals")
   DELAY(1000)
@@ -20,13 +20,13 @@ ALIAS(BIG_RED_BUTTON,44)
 ENDIF
 DONE
 
-ROUTE(994,"System: Close all turnouts") // Reset all turnouts to closed position
+ROUTE(996,"System: Close all turnouts") // Reset all turnouts to closed position
     PRINT("Reseting turnouts")
     turnoutReset
     PRINT("All turnouts closed")
 DONE
 
-ROUTE(993,"System: End Session") // end Session setting
+ROUTE(995,"System: End Session") // end Session setting
   PRINT("Ending Session")
   POWEROFF
   endSession
@@ -36,11 +36,11 @@ ROUTE(993,"System: End Session") // end Session setting
 DONE
 
 // Fiddle yard auto turnout select
-AUTOSTART SEQUENCE(991)
+AUTOSTART SEQUENCE(901)
   AT(50) THROW(9118) DELAY(30000)
-FOLLOW(991)
+FOLLOW(901)
 
-ROUTE(992,"System: Set Default Positions")
+ROUTE(994,"System: Set Default Positions")
   IFNOT(254)
     turnoutReset
     defaultPosition(UGS_T2_H) 
@@ -75,47 +75,53 @@ AUTOSTART SEQUENCE(998)
 FOLLOW(998)
 
 // This resets normal DCC
-ROUTE(11, "Set Up DCC on A & B")
-        PRINT("Set up DCC on A & B")
+ROUTE(993, "Power: Set Up DCC on A, B, C")
+        PRINT("Set up DCC on A, B, C")
         SET_TRACK(A, MAIN)
         SET_TRACK(B, MAIN)
         SET_TRACK(C, MAIN)
     DONE
     
 ONOVERLOAD(A)
-    LCD(7, "OVERLOAD A - POWEROFF")
+    SCREEN(2,1,"OVERLOAD A - POWEROFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
 DONE
 
 ONOVERLOAD(B)
-    LCD(7, "OVERLOAD B - POWEROFF")
+    SCREEN(3,1, "OVERLOAD B - POWEROFF")
     PRINT("Overload Detected on B - Turn Off Power")
     SET_TRACK(B, NONE)
 DONE
 
 ONOVERLOAD(C)
-    LCD(7, "OVERLOAD C - POWEROFF")
+    SCREEN(4,1, "OVERLOAD C - POWEROFF")
     PRINT("Overload Detected on C - Turn Off Power")
     SET_TRACK(C, NONE)
 DONE
 
-ROUTE(12,"Reset A")
-    LCD(7,"")
+ROUTE(992,"Power: Reset District A")
+    SCREEN(2,1,"Reseting Power")
     SET_TRACK(A, MAIN)
     POWERON
+    DELAY(5000)
+    SCREEN(2,1,"")
 DONE
 
-ROUTE(13,"Reset B")
-    LCD(7,"")
+ROUTE(991,"Power: Reset District B")
+    SCREEN(4,1,"Reseting Power")
     SET_TRACK(B, MAIN)
     POWERON
+    DELAY(5000)
+    SCREEN(4,1,"")
 DONE
 
-ROUTE(14,"Reset C")
-    LCD(7,"")
+ROUTE(990,"Power: Reset District C")
+    SCREEN(3,1,"Reseting Power")
     SET_TRACK(C, MAIN)
     POWERON
+    DELAY(5000)
+    SCREEN(3,1,"")
 DONE
 
 
@@ -124,10 +130,14 @@ ROUTE(999,"System: Stop/Resume")
   AFTER(BIG_RED_BUTTON)
     IF(252)
       RESUME
-      PRINT("Resuming")
+      SCREEN(2,1,"Resuming")
+      SCREEN(3,1,"Resuming")
+      SCREEN(4,1,"Resuming")
       UNLATCH(252)
       DONE ENDIF   
-    PRINT("Paused!")
+    SCREEN(2,1,"Paused!")
+    SCREEN(3,1,"Paused!")
+    SCREEN(4,1,"Paused!")
       LATCH(252)
       PAUSE    
   IF(252) FOLLOW(999) ENDIF DONE

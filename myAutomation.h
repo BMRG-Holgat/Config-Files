@@ -12,14 +12,19 @@
  *  Define turnouts
  * 
 */
-
-
+#include "IO_HALDisplay.h"
+//HAL(HALDisplay<LiquidCrystal>, 2, 0x27, 128, 16)
 
 EXRAIL   // myAutomation must start with the EXRAIL instruction
   // This is the default starting route, AKA SEQUENCE(0)  
 //  SENDLOCO(3,1) // send loco 3 off along route 1
 //  SENDLOCO(10,2) // send loco 10 off along route 2
   DONE     // This just ends the startup thread, leaving 2 others running.
+
+//LCD Displays
+  HAL(HALDisplay<LiquidCrystal>, 2, {I2CMux_0,SubBus_0,0x27}, 20, 4) 
+  HAL(HALDisplay<LiquidCrystal>, 3, {I2CMux_0,SubBus_0,0x26}, 20, 4) 
+  HAL(HALDisplay<LiquidCrystal>, 4, {I2CMux_0,SubBus_2,0x27}, 20, 4)
 /*
  * Holgate
  * Key 
@@ -145,32 +150,16 @@ AT(566)
     
 FOLLOW(30)
 */
-AUTOMATION(31,"TRACK A TEST")
-RESERVE(1)
-FREE(3)
-  FWD(30)
-  LCD(3,"Speed 30")
-  LCD(4,"")
-  LCD(5,"")
-  DELAY(15000)
-RESERVE(2)
-FREE(1)
-  FWD(70)
-  LCD(4,"Speed 70")
-  LCD(3,"")
-  DELAY(40000)
-RESERVE(3)
-  FWD(40)
-  DELAY(40000)
-  FREE(2)
-  STOP
-  LCD(4,"")
-  LCD(5,"STOPPED")
-DONE
 
 
+ROUTE(11,"test of I2c")
+  AFTER(804)
+    GREEN(519)
+  AFTER(812)
+    RED(519)
+FOLLOW(11)
 
-
+ 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
    
