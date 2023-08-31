@@ -20,7 +20,6 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 #include "IO_DFPlayer.h"  // MP3 sound player
-//#include "IO_DFPlayerPro.h"  // MP3 sound player
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
@@ -32,6 +31,8 @@
 
 void halSetup() {
 I2CManager.forceClock(100000);
+
+
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
   //=======================================================================
@@ -39,7 +40,7 @@ I2CManager.forceClock(100000);
   //   First Vpin=100
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
-  //PCA9685::create(100, 16, 0x41);
+  //PCA9685::create(100, 16, 0x43);
   //PCA9685::create(116, 16, 0x47);
    PCA9685::create(100, 16, {I2CMux_0,SubBus_1,0x40});
    PCA9685::create(116, 16, {I2CMux_0,SubBus_1,0x41});
@@ -48,7 +49,7 @@ I2CManager.forceClock(100000);
    PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44});
    PCA9685::create(244, 16, {I2CMux_0,SubBus_0,0x45});
    PCA9685::create(196, 16, {I2CMux_0,SubBus_0,0x46});
-   PCA9685::create(212, 16, {I2CMux_0,SubBus_0,0x47});
+   PCA9685::create(212, 16, {I2CMux_0,SubBus_0,0x42});
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -58,7 +59,7 @@ I2CManager.forceClock(100000);
   //   Number of VPINs=16 (numbered 196-211)
   //   I2C address of module=0x22
 
-  //MCP23017::create(196, 16, 0x22);
+  //MCP23017::create(796, 16, 0x26);
   MCP23017::create(796, 16, {I2CMux_0,SubBus_0,0x27}); // Board 9
 
 
@@ -89,7 +90,7 @@ I2CManager.forceClock(100000);
   //   Number of VPINs=8 (numbered 200-207)
   //   I2C address of module=0x23
 
-  //PCF8574::create(200, 8, 0x23);
+  //PCF8574::create(812, 8, 0x23);
 
 
   // Alternative form using INT pin (see above)
@@ -167,7 +168,8 @@ I2CManager.forceClock(100000);
   //      LCD(4, " ")       // Clear LCD/OLED line 
   //      FOLLOW(1)         // Go back to start
 
-  //  DFPlayer::create(1000, 5, Serial3, true);
+    //DFPlayer::create(1000, 5, Serial3, true);
+    //DFPlayer::create(2000, 15, Serial5, true);
   //  DFPlayerPro::create(5000, 5, Serial2, true);
 
 
@@ -200,15 +202,16 @@ I2CManager.forceClock(100000);
   // The example is for an Arduino Nano.
     
     
-    //EXIOExpander::create(300, 62, 0x65); // Testing board
+    //EXIOExpander::create(486, 62, 0x63); // Testing board
+    //EXIOExpander::create(548, 62, 0x64); // Testing board
     //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
     //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
     //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
     //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
-    //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_2,0x64}); // Board 5
-    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_3,0x65}); // Board 6
-    //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_3,0x66}); // Board 7
-    //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_3,0x67}); // Board 8 
+    EXIOExpander::create(548, 62, {I2CMux_0,SubBus_0,0x64}); // Board 5
+    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_0,0x65}); // Board 6
+    EXIOExpander::create(672, 62, {I2CMux_0,SubBus_0,0x66}); // Board 7
+    //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_3,0x67});
    // EXIOExpander::create(600, 62, 0x67);
 
 
@@ -237,6 +240,7 @@ I2CManager.forceClock(100000);
 
  
   //   EXFastClock::create(0x55);
+
 
 }
 
