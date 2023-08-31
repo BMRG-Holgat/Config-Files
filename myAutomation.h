@@ -45,8 +45,10 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
  * 
  * DS -> Double Slip
  * 
- * /
+ */
+
  
+
 /* Include the following files
 * 
 * myTurnouts defines the servo turnouts
