@@ -28,11 +28,17 @@ DONE
 
 ROUTE(995,"System: End Session") // end Session setting
   PRINT("Ending Session")
+  SCREEN(2,1,"Ending Session") 
+  SCREEN(3,1,"Ending Session") 
+  SCREEN(4,1,"Ending Session") 
   POWEROFF
   endSession
   UNLATCH(252)
   UNLATCH(254)
   PRINT("Shutdown now!")
+  SCREEN(2,2,"Completed" )
+  SCREEN(3,2,"Start ")
+  SCREEN(4,2,"Dismantling")
 DONE
 
 // Fiddle yard auto turnout select
@@ -66,6 +72,7 @@ ROUTE(994,"System: Set Default Positions")
     GREEN(SIG_F3)
     LATCH(254)
   ENDIF
+  SCREEN(3,1,"System ready")
 DONE
 
 AUTOSTART SEQUENCE(998)

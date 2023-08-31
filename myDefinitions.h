@@ -285,25 +285,32 @@
   THROW(HS_T4_A__HS_T5_E)\
   CLOSE(HS_T5_A__HS_T6_E)\
   CLOSE(HS_T6_A__DGS_T3_E)
+  
 
 //Test signals indicators macro
 #define signalLedTest(id) \
   DELAY(1000)\
   BROADCAST("<* " #id " signal *>") \
   PRINT("Testing signal " #id) \
+  SCREEN(2,1,"Testing Signal: ") \
   PRINT(#id " Red") \
+  SCREEN(2,2,#id" Red") \
   RED(id) \
   DELAY(1000)\
   PRINT(#id " Amber") \
+  SCREEN(2,2,#id" Amber") \
   AMBER(id) \
   DELAY(1000) \
   PRINT(#id " Green") \
+  SCREEN(2,2,#id" Green") \
   GREEN(id) \
   DELAY(1000)
   
 //Test all turnouts and double slips
  #define turnTest(id) \
   PRINT("Testing turnout " #id) \
+  SCREEN(3,1,"Testing Turnout:") \
+  SCREEN(3,2,#id) \
   IFCLOSED(id) \
     THROW(id) \
     DELAY(2000) \
@@ -317,11 +324,15 @@
 
   #define turnReset(id) \
     PRINT("Closing: " #id) \
+    SCREEN(3,1,"Closing: ") \
+    SCREEN(3,2,#id)\
     CLOSE(id) \
     DELAY(100)
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \
+    SCREEN(3,1,"Setting Default:") \
+    SCREEN(3,2,""#turnout) \
       IFCLOSED(turnout) \
         THROW(turnout) \
         DELAY(100) \
@@ -375,8 +386,8 @@
 
 //LCD information
 #define myLCDOutput(item)\
-  LCD(0, "Resetting " #item)\
-    LCD(1, "To default state")\
-    LCD(2,"Test Completed")\
-    LCD(3,"%z")
+  SCREEN(3,0, "Resetting " #item)\
+  SCREEN(3,1, "To default state")\
+  SCREEN(3,2,"Test Completed")\
+  SCREEN(3,3,"%z")
 
