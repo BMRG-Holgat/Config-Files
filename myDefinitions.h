@@ -289,50 +289,68 @@
 
 //Test signals indicators macro
 #define signalLedTest(id) \
+  SCREEN(2,0,"Testing Signal: ") \
+  SCREEN(3,0,"") \
+  SCREEN(3,1,"") \
+  SCREEN(4,0,"") \
+  SCREEN(4,1,"") \
   DELAY(1000)\
   BROADCAST("<* " #id " signal *>") \
   PRINT("Testing signal " #id) \
-  SCREEN(2,1,"Testing Signal: ") \
+  SCREEN(2,0,"Testing Signal: ") \
   PRINT(#id " Red") \
-  SCREEN(2,2,#id" Red") \
+  SCREEN(3,0,#id) \
+  SCREEN(3,1,"RED") \
   RED(id) \
   DELAY(1000)\
   PRINT(#id " Amber") \
-  SCREEN(2,2,#id" Amber") \
+  SCREEN(3,0,#id) \
+  SCREEN(3,1,"AMBER") \
   AMBER(id) \
   DELAY(1000) \
   PRINT(#id " Green") \
-  SCREEN(2,2,#id" Green") \
+  SCREEN(3,0,#id) \
+  SCREEN(3,1,"GREEN") \
   GREEN(id) \
   DELAY(1000)
   
 //Test all turnouts and double slips
  #define turnTest(id) \
+  SCREEN(4,0,"") \
+  SCREEN(4,1,"") \
   PRINT("Testing turnout " #id) \
-  SCREEN(3,1,"Testing Turnout:") \
-  SCREEN(3,2,#id) \
+  SCREEN(2,0,"Testing Turnout:") \
+  SCREEN(3,0,#id) \
   IFCLOSED(id) \
+    SCREEN(3,1,"THROW") \
     THROW(id) \
     DELAY(2000) \
+    SCREEN(3,1,"CLOSE") \
     CLOSE(id) \
   ELSE \
+    SCREEN(3,1,"CLOSE") \
     CLOSE(id) \
     DELAY(2000) \
+    SCREEN(3,1,"THROW") \
     THROW(id) \
   ENDIF \
   DELAY(2000)
 
   #define turnReset(id) \
+    SCREEN(4,0,"") \
+    SCREEN(4,1,"") \
+    SCREEN(2,0,"Turnout Reset") \
+    SCREEN(2,1,"") \
     PRINT("Closing: " #id) \
-    SCREEN(3,1,"Closing: ") \
-    SCREEN(3,2,#id)\
+    SCREEN(3,0,"Closing: ") \
+    SCREEN(3,1,#id)\
     CLOSE(id) \
     DELAY(100)
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \
-    SCREEN(3,1,"Setting Default:") \
-    SCREEN(3,2,""#turnout) \
+    SCREEN(2,0,"Setting Default:") \
+    SCREEN(3,1,""#turnout) \
       IFCLOSED(turnout) \
         THROW(turnout) \
         DELAY(100) \
@@ -386,8 +404,11 @@
 
 //LCD information
 #define myLCDOutput(item)\
-  SCREEN(3,0, "Resetting " #item)\
-  SCREEN(3,1, "To default state")\
-  SCREEN(3,2,"Test Completed")\
-  SCREEN(3,3,"%z")
+  SCREEN(2,1,"") \
+  SCREEN(3,1,"") \
+  SCREEN(4,1,"") \
+  SCREEN(2,0, "Resetting " #item)\
+  SCREEN(3,0, "To default state")\
+  SCREEN(4,0,"Test Completed")
+  
 

@@ -71,8 +71,14 @@ ROUTE(994,"System: Set Default Positions")
     GREEN(SIG_E3) 
     GREEN(SIG_F3)
     LATCH(254)
+    SCREEN(2,0,"System")
+    SCREEN(2,1,"")
+    SCREEN(3,0,"Ready")
+    SCREEN(3,1,"")
+    SCREEN(4,0,"Go..Go..GO")
+    SCREEN(4,1,"")
   ENDIF
-  SCREEN(3,1,"System ready")
+  
 DONE
 
 AUTOSTART SEQUENCE(998)
@@ -90,19 +96,22 @@ ROUTE(993, "Power: Set Up DCC on A, B, C")
     DONE
     
 ONOVERLOAD(A)
-    SCREEN(2,1,"OVERLOAD A - POWEROFF")
+    SCREEN(2,0,"OVERLOAD A")
+    SCREEN(2,1,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
 DONE
 
 ONOVERLOAD(B)
-    SCREEN(3,1, "OVERLOAD B - POWEROFF")
+    SCREEN(4,0, "OVERLOAD B")
+    SCREEN(4,1," PWOER OFF")
     PRINT("Overload Detected on B - Turn Off Power")
     SET_TRACK(B, NONE)
 DONE
 
 ONOVERLOAD(C)
-    SCREEN(4,1, "OVERLOAD C - POWEROFF")
+    SCREEN(3,0, "OVERLOAD C")
+    SCREEN(3,1," POWER OFF")
     PRINT("Overload Detected on C - Turn Off Power")
     SET_TRACK(C, NONE)
 DONE

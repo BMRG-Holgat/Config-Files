@@ -20,6 +20,7 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 #include "IO_DFPlayer.h"  // MP3 sound player
+#include "IO_HALDisplay.h" // Add displays
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
@@ -42,10 +43,10 @@ I2CManager.forceClock(100000);
   //   I2C address of module=0x40
   //PCA9685::create(100, 16, 0x43);
   //PCA9685::create(116, 16, 0x47);
-   PCA9685::create(100, 16, {I2CMux_0,SubBus_1,0x40});
-   PCA9685::create(116, 16, {I2CMux_0,SubBus_1,0x41});
-   PCA9685::create(132, 16, {I2CMux_0,SubBus_1,0x42});
-   PCA9685::create(148, 16, {I2CMux_0,SubBus_1,0x43});
+   PCA9685::create(100, 16, {I2CMux_0,SubBus_2,0x40});
+   PCA9685::create(116, 16, {I2CMux_0,SubBus_2,0x41});
+   PCA9685::create(132, 16, {I2CMux_0,SubBus_2,0x42});
+   PCA9685::create(148, 16, {I2CMux_0,SubBus_2,0x43});
    PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44});
    PCA9685::create(244, 16, {I2CMux_0,SubBus_0,0x45});
    PCA9685::create(196, 16, {I2CMux_0,SubBus_0,0x46});
@@ -247,9 +248,9 @@ I2CManager.forceClock(100000);
  // HALDisplay<LiquidCrystal>::create(2, {I2CMux_0,SubBus_0,0x27}, 20, 4);
  //
  // 
-  HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_3,0x27 }, 16, 2);
-  HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_2,0x26 }, 16, 2);
-  HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
+ HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_1,0x27 }, 16, 2);
+ HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_0,0x26 }, 16, 2);
+ HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_3,0x27 }, 16, 2);
 
 }
 

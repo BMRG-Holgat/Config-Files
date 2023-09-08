@@ -78,7 +78,7 @@ new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
 // If DONT_TOUCH_WIFI_CONF is set, all WIFI config will be done with
 // the <+> commands and this sketch will not change anything over
 // AT commands and the other WIFI_* defines below do not have any effect.
-#define DONT_TOUCH_WIFI_CONF
+//#define DONT_TOUCH_WIFI_CONF
 //
 // WIFI_SSID is the network name IF you want to use your existing home network.
 // Do NOT change this if you want to use the WiFi in Access Point (AP) mode. 

@@ -150,7 +150,14 @@ AT(566)
 FOLLOW(30)
 */
 
-
+AUTOSTART SEQUENCE(33)
+  SCREEN(2,0,"Fiddle Yard")
+  SCREEN(2,1," Left TEST")
+  SCREEN(3,0,"SCENIC")
+  SCREEN(3,1,"TEST")
+  SCREEN(4,0,"Fiddle Yard")
+  SCREEN(4,1," Right TEST")
+  DONE
  
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
