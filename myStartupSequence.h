@@ -10,6 +10,8 @@ ALIAS(BIG_RED_BUTTON,44)
  ROUTE(997,"System: Startup test") //Testing system before starting
  IFNOT(252)
   PRINT("Testing Signals")
+  SCREEN(2,0,"")
+  SCREEN(2,1,"")
   DELAY(1000)
   signalTest
   DELAY(1000)
@@ -42,9 +44,9 @@ ROUTE(995,"System: End Session") // end Session setting
 DONE
 
 // Fiddle yard auto turnout select
-AUTOSTART SEQUENCE(901)
-  AT(50) THROW(9118) DELAY(30000)
-FOLLOW(901)
+//AUTOSTART SEQUENCE(901)
+//  AT(some_sensor_pin) THROW(9118) DELAY(30000)
+//FOLLOW(901)
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(254)
@@ -96,24 +98,42 @@ ROUTE(993, "Power: Set Up DCC on A, B, C")
     DONE
     
 ONOVERLOAD(A)
-    SCREEN(2,0,"OVERLOAD A")
-    SCREEN(2,1,"POWER OFF")
+    SCREEN(3,0,"OVERLOAD District A")
+    SCREEN(3,1,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
+    AFTEROVERLOAD(A)
+      SCREEN(3,0,"Restored District A")
+      SCREEN(3,1,"  POWER ON")
+      PRINT("Overload cleared on District A - Power Restored")
+      DELAY(2000)
+      SCREEN(3,0,"")
 DONE
 
 ONOVERLOAD(B)
-    SCREEN(4,0, "OVERLOAD B")
-    SCREEN(4,1," PWOER OFF")
-    PRINT("Overload Detected on B - Turn Off Power")
+    SCREEN(2,0, "OVERLOAD Scenic")
+    SCREEN(2,1," POWER OFF")
+    PRINT("Overload Detected on Scenic - Turn Off Power")
     SET_TRACK(B, NONE)
+    AFTEROVERLOAD(B)
+      SCREEN(2,0,"Restored Scenic")
+      SCREEN(2,1,"   POWER ON")
+      PRINT("Overload cleared on Scenic - Power Restored")
+      DELAY(2000)
+      SCREEN(2,0,"")
 DONE
 
 ONOVERLOAD(C)
-    SCREEN(3,0, "OVERLOAD C")
-    SCREEN(3,1," POWER OFF")
-    PRINT("Overload Detected on C - Turn Off Power")
+    SCREEN(4,0, "OVERLOAD District B ")
+    SCREEN(4,1," POWER OFF")
+    PRINT("Overload Detected on District B - Turn Off Power")
     SET_TRACK(C, NONE)
+    AFTEROVERLOAD(B)
+      SCREEN(4,0,"Restored District B")
+      SCREEN(4,1,"POWER ON")
+      PRINT("Overload cleared on District B - Power Restored")
+      DELAY(2000)
+      SCREEN(4,0,"")
 DONE
 
 ROUTE(992,"Power: Reset District A")
@@ -124,7 +144,7 @@ ROUTE(992,"Power: Reset District A")
     SCREEN(2,1,"")
 DONE
 
-ROUTE(991,"Power: Reset District B")
+ROUTE(991,"Power: Reset Scenic")
     SCREEN(4,1,"Reseting Power")
     SET_TRACK(B, MAIN)
     POWERON
@@ -132,7 +152,7 @@ ROUTE(991,"Power: Reset District B")
     SCREEN(4,1,"")
 DONE
 
-ROUTE(990,"Power: Reset District C")
+ROUTE(990,"Power: Reset District B")
     SCREEN(3,1,"Reseting Power")
     SET_TRACK(C, MAIN)
     POWERON
