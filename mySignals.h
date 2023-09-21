@@ -19,5 +19,5 @@ SIGNALH(580, 582, 584) // Board 7 -- change when added
 SIGNALH(781, 783, 785) // Board 7
 SIGNALH(586, 588, 590) // Board 7 
 SIGNALH(797, 0, 796) // Board 9   C
-SIGNALH(800, 799, 798) // Board 9   E
+SIGNALH(800, 798, 799) // Board 9   E
 SIGNALH(803, 802, 801) // Board 9   F

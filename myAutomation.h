@@ -159,6 +159,27 @@ AUTOSTART SEQUENCE(33)
   SCREEN(4,1," Right TEST")
   DONE
  
+
+ AUTOMATION(55,"TRACK A STOP")
+    RESERVE(100)
+    FWD(40)
+    DELAY(34000)
+    FREE(102)
+    STOP
+    DELAYRANDOM(10000,15000)
+    RESERVE(101)
+    FWD(40)
+    DELAY(10000)
+    FREE(100)
+    FWD(80)
+    DELAY(35000)
+    RESERVE(102)
+    FWD(20)
+    AT(581)
+      STOP 
+      FREE(101)
+ DONE
+
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     
    

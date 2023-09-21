@@ -44,9 +44,16 @@ ROUTE(995,"System: End Session") // end Session setting
 DONE
 
 // Fiddle yard auto turnout select
+<<<<<<< Updated upstream
 //AUTOSTART SEQUENCE(901)
 //  AT(some_sensor_pin) THROW(9118) DELAY(30000)
 //FOLLOW(901)
+=======
+/*AUTOSTART SEQUENCE(901)
+  AT(some_sensor_pin) THROW(9118) DELAY(30000)
+FOLLOW(901)
+*/
+>>>>>>> Stashed changes
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(254)
