@@ -10,162 +10,168 @@
 */
 
 //Exit track A fiddle yard
-/*
-SEQUENCE(UGS_FY_Ex_App)
-  IFTHROWN(UGS_T6_A__FYUG_T10_E)
-    trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
-  ENDIF
-FOLLOW(UGS_FY_Ex)
+SEQUENCE(Exit_A_Holding)
+SCREEN(3,6,"Leaving Siding")
+    RESERVE(A_Exit)
+    RESERVE(B_Exit)
+    IFTHROWN(9023)
+      CLOSE(9023)
+    ENDIF
+    FWD(40)
+    AT(B2_IR_A)
+    FREE(A_Hold_Finish)
+    DELAY(5000) //Remove
+FOLLOW(Station__Header_App)
 
-SEQUENCE(UGS_FY_Ex)
-  RESERVE(UGS_FY_Exit)
+SEQUENCE(Station__Header_App)
+SCREEN(3,6,"Moving to header")
+    RESERVE(Stn_Head_App)
+    IFTHROWN(9001)
+      CLOSE(9001)
+    ENDIF
+    AT(B1_IR_A) //Board 1
+    FREE(A_Exit)
+    FREE(B_Exit)
+    //Add BD here for station blockage
+    //IF(BD_S1_AA) //If station occupied take avoiding action.
+    //  CLOSE(UGS_T2_H)
+    //ENDIF
+    IFCLOSED(UGS_T2_H)
+    DELAY(5000) //Remove
+      FOLLOW(Head_Shunt_Access)
+    ELSE 
+    DELAY(5000) //Remove
+      FOLLOW(Station_App_Stop)
+    ENDIF
+DONE
+
+SEQUENCE(Station_App_Stop)
+SCREEN(3,6,"Arriving at station")
+  RESERVE(Station_A)
+  AT(BD_S1_AA)
+  RED(SIG_A1)
+  DELAY(8000) //delay stopping at station for 8 seconds
+  STOP
+FOLLOW(Station_Exit)
+
+SEQUENCE(Station_Exit)
+SCREEN(3,6,"Leaving Station")
+  DELAYRANDOM(10000,20000)
+  RESERVE(AC_App)
+  GREEN(SIG_A1)
   FWD(40)
-  AT(SNS1_MAIN_TRN1_APP)
-  IFCLOSED(UGS_T6_A__FYUG_T10_E)
-    FREE(UGS_BK12_Hold)
-  ELSE 
-    FREE(UMF_FY_Ex)
+  FREE(Stn_Head_App)
+  DELAY(5000) // Remove
+FOLLOW(AC_Approach)
+
+SEQUENCE(AC_Approach)
+  //IF(BD_S2_A) //Set block detector take avoinding action
+  /*IFCLOSED(9004)
+    RESERVE(B_Station_Pass)
+    RESERVE(BC_App)
+    THROW(9004)
+  ENDIF*/
+  SCREEN(3,6,"Approaching AC")
+    RESERVE(AD_App)
+    IF(BD_S2_A)
+      RED(SIG_A1)
+    ENDIF
+    FREE(Station_A)
+    DELAY(5000) // Remove
+FOLLOW(AD_Approach)
+
+SEQUENCE(AD_Approach)
+SCREEN(3,6,"Approaching AD")
+  RESERVE(A_Main)
+  GREEN(SIG_A2)
+  IFTHROWN(UGS_T4_A__UMF_T3_E)
+    CLOSE(UGS_T4_A__UMF_T3_E)
+    FWD(40)
+    PRINT("Delayed start")
+    DELAY(3000)
   ENDIF
-FOLLOW(UGS_BK1_ST_App)
+  DELAY(5000) //Remove
+FOLLOW(AE_Approach)
 
-//Station Approach and stop
-SEQUENCE(UGS_BK1_ST_App) // seq 600
-//insert BO detection here
-IF(BD_S1_A) // Board 1 AA turnout approach block detector
-RESERVE(UGS_BK1_Stn_App)
-PRINT("UGS_BK1_Stn_App Reserved!")
-  RED(SIG_A1) // Set signals to red
-    IFCLOSED(UGS_T1_H)
-      THROW(UGS_T1_H)
-    ENDIF
-      RESERVE(UGS_STN_Hold)
-      FWD(40)
-    
-    AT(UGS_SNS_STN)
-    DELAY(2000)
-    STOP
-    PRINT("Stopped at station")
-    FREE(UGS_FY_Exit)
-    FOLLOW(UGS_BK2_STN_EX)
-ENDIF
+SEQUENCE(Exit_A__Station_ByPass_UMF)
+//Move to track B to bypass station, 
+// and stay on Track B
 
-//Header line
-SEQUENCE(UGS_Head_Entry) //seq 601
-//insert BO detection here for station
- //Check BO on header
- IF(-BD_S1_HE)
-  IF(-BD_S2_HE)
-    RESERVE(UGS_STN_Hold)  
-    IFTHROWN(UGS_T1_H) //Header Point
-       CLOSE(UGS_T1_H)
-    ENDIF
-       RESERVE(UGS_BK2_HEAD_1_AA_Ex)
-       FWD(20)
-       AT(UGS_Head_End)
-       STOP
-       FREE(UGS_STN_Hold)
-  ENDIF
- ENDIF
-DONE
+FOLLOW(B_MAIN_Run)
 
-//Leave Header Line and go back to Fiddle Yard
-SEQUENCE(UGS_Head_Exit) // seq 602
-    //insert BO detection here for station-Fiddle yard
-    IFRESERVE(UGS_STN_Hold)
-        CLOSE(UGS_T1_H)
-        REV(20)
-        AFTER(SNS5_STN_TRN2_APP)
-        FREE(UGS_BK2_HEAD_1_AA_Ex)
-        STOP
-        DELAY(5000)
-    ENDIF
-    FOLLOW(UGS_BK1_ST_App)
+SEQUENCE(Exit_A__Station_ByPass_UGS)
+//Move to track B to bypass station
+// then move back to track A
 
-       
-//Exit Station Onto board 2
-SEQUENCE(UGS_BK2_STN_EX) // seq 603
-//insert BO detection here for boards 3-8
-PRINT("BOARD 2-3 SEQ")
-  DELAYRANDOM(10000, 15000)
-  RESERVE(UGS_BK4_3__8_Hold)
-    IFTHROWN(UGS_T2_E__DFM_T1_A)
-      CLOSE(UGS_T2_E__DFM_T1_A)
-      IFTHROWN(UGS_T3_A__UFM_T3_E)
-        CLOSE(UGS_T3_A__UFM_T3_E)
-      ENDIF
-    ENDIF
-    GREEN(SIG_A1)
-    FWD(50)
-    AT(SNS6_TRN2_STN_EX)
-    RED(SIG_A1)
-    FWD(70)
-    FREE(UGS_BK1_Stn_App)
-    FREE(UGS_BK2_HEAD_1_AA_Ex)
-    FREE(UGS_STN_Hold)
-  FOLLOW(UGS_BK8__UGS_BK9)
+FOLLOW(AE_Approach)
 
-//Main run to board 9
-SEQUENCE(UGS_BK8__UGS_BK9)
-PRINT("BOARD 8 SEQ")
-  //Insert BO for board 9    
-  RESERVE(UGS_BK5_9_Hold)
-    IFTHROWN(UGS_T4_E__UFM_T5_A)
-      CLOSE(UGS_T4_E__UFM_T5_A)     
-    ENDIF
-  AT(SNS7_MAIN_TRN3_APP)
+SEQUENCE(AE_Approach)
+SCREEN(3,6,"Approaching AE")
+  AT(BD_S4_A)
+  FREE(AC_App)
   AMBER(SIG_A1)
-  FWD(30)
-  FREE(UGS_BK4_3__8_Hold)
+  RED(SIG_A2)
+  GREEN(SIG_A3)
+  IFTHROWN(UGS_T5_E__UFM_T6_A)
+    CLOSE(UGS_T5_E__UFM_T6_A)
+  ENDIF
+  FWD(90)
+  DELAY(5000) //Remove
+FOLLOW(AF_Approach)
+
+SEQUENCE(AF_Approach)
+SCREEN(3,6,"Approaching AF")
+  AT(BD_S8_A)
+  RED(SIG_A3)
+  AMBER(SIG_A2)
+  GREEN(SIG_A1)
+  FREE(AD_App)
+  FWD(40)
+  DELAY(5000) //Remove
+FOLLOW(Yard_Access)
+
+SEQUENCE(Yard_Access)
+SCREEN(3,6,"Yard Access")
+  AT(B9_IR_A)
+  IFRESERVE(A_Hold_Start)
+  DELAY(10000) //Remove
+    CLOSE(9023)
+    FWD(20)
+    GREEN(SIG_A2)
+    AMBER(SIG_A3)
+    DELAY(5000) //Remove
+    FOLLOW(A_Pos1_Stop)
+  ELSE //Take avoiding action, move to FYard B
+    RESERVE(FB_App)
+    THROW(9023)
+    FWD(20)
+    FREE(A_Main)
+    FOLLOW(BYard_Ladder_T1_A)
+  ENDIF
   
-FOLLOW(UGS_BK9__UGS_FY_App)
-
-// Switch tracks from UGS to UFM
-//SEQUENCE(UGS_BK8__UFM_BK9)
-//To Be done
-
-//Move Track A into B Fiddle yard
-SEQUENCE(UGS__BF_A)
-  //insert BO here
-  RESERVE(UMF_BK10_9_Hold)
-  RESERVE(FB_App)
-  trackChange(UGS_T5_E__FYUG_T7_A,UFM_T6_A__UGS_T5_E)
-  FWD(10)
-  FOLLOW(BYard_Ladder_T1_A)
-  */
-//Fiddle yard hold sequence
-
-
-SEQUENCE(UGS_BK9__UGS_BK10)
-//insert BO detection here
-    RESERVE(UGS_BK10_Hold)
-    FWD(10)
-    AT(UGS_SNS_10)
-    STOP
+SEQUENCE(A_Pos1_Stop)
+SCREEN(3,6,"Stopping B7")
+    AT(B7_IR_A)
+    SCREEN(3,7,"Stopped at B7")
     GREEN(SIG_A3)
-    PRINT("Holding in BK 10")
-    FREE(UGS_BK9_AF_App)
-    FOLLOW(UGS_BK10__UGS_BK11)
+    RESERVE(A_Hold_Mid)
+    FREE(A_Main)    
+    DELAY(5000) //Remove
+    SCREEN(3,7,"")
+FOLLOW(A_Pos2_Stop)
 
-SEQUENCE(UGS_BK10__UGS_BK11)
-//insert BO detection here
-    RESERVE(UGS_BK11_Hold)
-    FWD(10)
-    AT(UGS_SNS_11)
-    STOP
-    PRINT("Holding in BK 11")
-    FREE(UGS_BK10_Hold)
-    FOLLOW(UGS_BK11__UGS_BK12)
+SEQUENCE(A_Pos2_Stop)
+SCREEN(3,6,"Stopping B5")
+    AT(B5_IR_A_2)
+    FREE(A_Hold_Start)
+    RESERVE(A_Hold_Finish)  
+    DELAY(5000) //Remove
+FOLLOW(A_Pos3_Stop)
 
-
-SEQUENCE(UGS_BK11__UGS_BK12)
- //insert BO detection here
-    RESERVE(UGS_BK12_Hold)
-    FWD(10)
-    AT(UGS_SNS_12)
-    STOP
-    PRINT("STOPPED")
-    FREE(UGS_BK11_Hold)
-    DONE
-//End fiddle yard hold sequence
-  
+SEQUENCE(A_Pos3_Stop)
+SCREEN(3,6,"Stopping B3")
+  AT(B3_IR_A)
+  STOP 
+  FREE(A_Hold_Mid)
 DONE
+

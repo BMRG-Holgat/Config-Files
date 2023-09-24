@@ -8,26 +8,27 @@
 *   Test
 */
 //Up Goods Slow Sequences
-ALIAS(UGS_Hold_Ex,598)
-ALIAS(UGS_AB_App,599)
-ALIAS(UGS_STN_App,600)
-ALIAS(UGS_STN_Hold,601)
-ALIAS(UGS_STN_Ex,602)
-ALIAS(UGS_Sig_Test)
-ALIAS(UGS_AD_App,603)
-ALIAS(UGS_Main_Run,604)
-ALIAS(UGS_AE_App,605)
-ALIAS(UGS_AE_Ex,606)
-ALIAS(Set_Signals)
-ALIAS(UGS_AF_App)
-ALIAS(UGS_BK11__UGS_BK12,607)
-ALIAS(UGS_BK10__UGS_BK11,606)
-ALIAS(UGS_BK9__UGS_BK10,605)
-ALIAS(UGS_BK8__UGS_BK9,604)
-ALIAS(UGS_BK9__UGS_FY_App,608)
-ALIAS(UGS__BF_A,609)
+ALIAS(Exit_A_Holding,100)
+ALIAS(Station__Header_App,101)
+ALIAS(Head_Shunt_Access,99)
+ALIAS(Station_App_Stop,102)
+ALIAS(Station_Exit,103)
+ALIAS(Exit_A__Station_ByPass_UMF,104)
+ALIAS(Exit_A__Station_ByPass_UGS,105)
+ALIAS(AC_Approach,106)
+ALIAS(AD_Approach,107)
+ALIAS(AE_Approach,108)
+ALIAS(AF_Approach,109)
+ALIAS(Yard_Access,110)
+ALIAS(A_Pos1_Stop,111)
+ALIAS(A_Pos2_Stop,112)
+ALIAS(A_Pos3_Stop,113)
+
 
 //Up Mixed Fast
+
+
+ALIAS(B_MAIN_Run)
 ALIAS(BYard_Exit,610)
 ALIAS(BYard_Exit__A,611)
 ALIAS(STN_ByPass)
