@@ -7,6 +7,12 @@
 * V. 0.0.1
 *  Setup basics
 *  All Sequences start board 8 fiddle yard entrance
+*
+* V 0.1.0
+* Basic auto ladder selection created.
+*
+* V 0.1.1 @UK_Bloke
+* Update as designed by @UK_Bloke
 */
 
 // Start routines for track B Fiddle Yard
@@ -103,3 +109,19 @@ SEQUENCE(619)
   RESERVE(FB_App)
   FWD(10)
   FOLLOW(BYard_Ladder_T1_A)
+
+  /*
+  SEQUENCE(ladder_entry_seq)
+   RESERVE(ladder_entry)
+   SEQEUNCE(ladder_entry_loop)
+      LADDER(1,9011,9210) 
+      LADDER(2.....)
+      PRINT("ladder full") DELAY(5000)
+      FOLLOW(ladder_entry_loop)
+  */
+ /*
+ AUTOMATION(99,"AUTOPARK")
+    SPEED(30) 
+    AT(ladder_entry_sensor)
+  CALL(ladder_entry_seq) 
+ */
