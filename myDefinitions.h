@@ -4,6 +4,19 @@
 *
 * Definitions for operations
 *
+* V 0.0.1
+* ledReset
+* signalTest
+* turnoutTest
+* turnoutReset
+* signalLedTest(id)
+* turnTest(id)
+* defaultPosition(id)
+* turnReset(id)
+*
+* V 0.1.0
+* endSession
+*
 */
 
 
@@ -411,4 +424,26 @@
   SCREEN(3,0, "To default state")\
   SCREEN(4,0,"Test Completed")
   
-
+/*
+#define ladder(id,entryThrows,exitThrows) \
+   IFRESERVE(ladder_block1_##id)
+    closeFiddleYardLadder(entryThrows)
+    FWD(10)
+     AT(ladder_sensor1__##id)  // middle sensor 
+     FREE(ladder_entry)        // free ladder entry
+     RESERVE(ladder_block2_##id)
+     FWD(10)
+     AT(ladder_sensor2_##id)  // far end sensor
+     ESTOP
+     FREE(ladder_block1_##id) // free the first half track  
+     UNSET(ladder_latch_##id)
+     AT(ladder_latch_##id)   // USER requests exit this track
+     RESERVE(ladder_exit)
+     closeFiddleYardLadder(exitThrows)
+     FWD(30)
+     AT(train_out_of_ladder_sensor)
+     FREE(ladder_block2_##id)
+     FREE(ladder_exit)
+     RETURN
+     ENDIF
+*/

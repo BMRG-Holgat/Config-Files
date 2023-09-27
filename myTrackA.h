@@ -7,7 +7,13 @@
 * V. 0.0.1
 *  Setup basics
 *  All Sequences start from Board 1 and end on Board 2
+*
+* V 0.1.0
+* First single loop created
+* All basic sequences created
+*
 */
+
 
 //Exit track A fiddle yard
 SEQUENCE(Exit_A_Holding)
@@ -86,7 +92,7 @@ SCREEN(3,6,"Approaching AD")
   GREEN(SIG_A2)
   IFTHROWN(UGS_T4_A__UMF_T3_E)
     CLOSE(UGS_T4_A__UMF_T3_E)
-    FWD(40)
+    SPEED(50)
     PRINT("Delayed start")
     DELAY(3000)
   ENDIF
@@ -115,7 +121,7 @@ SCREEN(3,6,"Approaching AE")
   IFTHROWN(UGS_T5_E__UFM_T6_A)
     CLOSE(UGS_T5_E__UFM_T6_A)
   ENDIF
-  FWD(90)
+  SPEED(90)
   DELAY(5000) //Remove
 FOLLOW(AF_Approach)
 
@@ -126,7 +132,7 @@ SCREEN(3,6,"Approaching AF")
   AMBER(SIG_A2)
   GREEN(SIG_A1)
   FREE(AD_App)
-  FWD(40)
+  SPEED(40)
   DELAY(5000) //Remove
 FOLLOW(Yard_Access)
 
@@ -136,7 +142,7 @@ SCREEN(3,6,"Yard Access")
   IFRESERVE(A_Hold_Start)
   DELAY(10000) //Remove
     CLOSE(9023)
-    FWD(20)
+    SPEED(20)
     GREEN(SIG_A2)
     AMBER(SIG_A3)
     DELAY(5000) //Remove
@@ -144,7 +150,7 @@ SCREEN(3,6,"Yard Access")
   ELSE //Take avoiding action, move to FYard B
     RESERVE(FB_App)
     THROW(9023)
-    FWD(20)
+    SPEED(20)
     FREE(A_Main)
     FOLLOW(BYard_Ladder_T1_A)
   ENDIF
