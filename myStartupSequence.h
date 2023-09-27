@@ -5,7 +5,7 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
-ALIAS(BIG_RED_BUTTON,44)
+ALIAS(BIG_RED_BUTTON,444)
  
  ROUTE(997,"System: Startup test") //Testing system before starting
  IFNOT(252)
@@ -44,16 +44,10 @@ ROUTE(995,"System: End Session") // end Session setting
 DONE
 
 // Fiddle yard auto turnout select
-<<<<<<< Updated upstream
-//AUTOSTART SEQUENCE(901)
-//  AT(some_sensor_pin) THROW(9118) DELAY(30000)
-//FOLLOW(901)
-=======
 /*AUTOSTART SEQUENCE(901)
   AT(some_sensor_pin) THROW(9118) DELAY(30000)
 FOLLOW(901)
 */
->>>>>>> Stashed changes
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(254)

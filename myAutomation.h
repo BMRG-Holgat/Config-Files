@@ -74,6 +74,7 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySignals.h"
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
+#include "myRoster.h"
 
 
 DONE
