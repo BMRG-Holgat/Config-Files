@@ -208,12 +208,12 @@ I2CManager.forceClock(100000);
     //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
     //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
     //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
-    EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
-    EXIOExpander::create(548, 62, {I2CMux_0,SubBus_3,0x64}); // Board 5
+    //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
+    //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_3,0x64}); // Board 5
     //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_0,0x65}); // Board 6
     //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_0,0x66}); // Board 7
     //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_3,0x67});
-   // EXIOExpander::create(600, 62, 0x67);
+    //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_0,0x68}); // Board 9 test remove MCP for this mega
 
 
   //=======================================================================
