@@ -5,9 +5,14 @@
 * Define Sensors and Aliases
 *
 * ALIAS(Sensor_name, pin#)
-* Sensor_name(SNS_track_board_sensor)
+* Sensor_name = Board#_{IR|BD}_Track#
 * 
 * Verson 0.1
+*
+* V 0.1.0
+* new sensor format
+*
+*
 */
 
 //==============================================================
@@ -15,6 +20,20 @@
 // FIX ALL SENSOR VALUES
 //
 //==============================================================
+
+ALIAS(B5_IR_A,581)
+ALIAS(B5_IR_B1_E,573)
+ALIAS(B5_IR_B2_E,577)
+ALIAS(B5_IR_B3_E,585)
+ALIAS(B5_IR_C1_E,575)
+ALIAS(B5_IR_C2_E,567)
+ALIAS(B5_IR_C3_E,583)
+ALIAS(B5_IR_C4_E,579)
+ALIAS(B5_IR_C5_E,571)
+
+
+
+
 
 //Track A Up goods slow
 ALIAS(UGS_B1_A1)
