@@ -9,45 +9,20 @@ ALIAS(BIG_RED_BUTTON,444)
  
  ROUTE(997,"System: Startup test") //Testing system before starting
  IFNOT(252)
-  PRINT("Testing Signals")
-  SCREEN(2,0,"")
-  SCREEN(2,1,"")
-  DELAY(1000)
-  signalTest
-  DELAY(1000)
-  PRINT("Testing Turnouts")
-  turnoutTest
-  DELAY(5000)
-  LATCH(252)
+  IFNOT(254)
+    PRINT("Testing Signals")
+    SCREEN(2,0,"")
+    SCREEN(2,1,"")
+    DELAY(1000)
+    signalTest
+    DELAY(1000)
+    PRINT("Testing Turnouts")
+    turnoutTest
+    DELAY(5000)
+    LATCH(252)
+  ENDIF
 ENDIF
 DONE
-
-ROUTE(996,"System: Close all turnouts") // Reset all turnouts to closed position
-    PRINT("Reseting turnouts")
-    turnoutReset
-    PRINT("All turnouts closed")
-DONE
-
-ROUTE(995,"System: End Session") // end Session setting
-  PRINT("Ending Session")
-  SCREEN(2,1,"Ending Session") 
-  SCREEN(3,1,"Ending Session") 
-  SCREEN(4,1,"Ending Session") 
-  POWEROFF
-  endSession
-  UNLATCH(252)
-  UNLATCH(254)
-  PRINT("Shutdown now!")
-  SCREEN(2,2,"Completed" )
-  SCREEN(3,2,"Start ")
-  SCREEN(4,2,"Dismantling")
-DONE
-
-// Fiddle yard auto turnout select
-/*AUTOSTART SEQUENCE(901)
-  AT(some_sensor_pin) THROW(9118) DELAY(30000)
-FOLLOW(901)
-*/
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(254)
@@ -83,6 +58,35 @@ ROUTE(994,"System: Set Default Positions")
   ENDIF
   
 DONE
+
+/*ROUTE(996,"System: Close all turnouts") // Reset all turnouts to closed position
+    PRINT("Reseting turnouts")
+    turnoutReset
+    PRINT("All turnouts closed")
+DONE*/
+
+ROUTE(995,"System: End Session") // end Session setting
+  PRINT("Ending Session")
+  SCREEN(2,1,"Ending Session") 
+  SCREEN(3,1,"Ending Session") 
+  SCREEN(4,1,"Ending Session") 
+  POWEROFF
+  endSession
+  UNLATCH(252)
+  UNLATCH(254)
+  PRINT("Shutdown now!")
+  SCREEN(2,2,"Completed" )
+  SCREEN(3,2,"Start ")
+  SCREEN(4,2,"Dismantling")
+DONE
+
+// Fiddle yard auto turnout select
+/*AUTOSTART SEQUENCE(901)
+  AT(some_sensor_pin) THROW(9118) DELAY(30000)
+FOLLOW(901)
+*/
+
+
 
 AUTOSTART SEQUENCE(998)
   AFTER(BIG_RED_BUTTON)
