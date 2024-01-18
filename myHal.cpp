@@ -19,8 +19,11 @@
 #include "IODevice.h"
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 #include "IO_VL53L0X.h"   // Laser time-of-flight sensor
-#include "IO_DFPlayer.h"  // MP3 sound player
-#include "IO_HALDisplay.h" // Add displays
+//#include "IO_DFPlayer.h"  // MP3 sound player
+#include "IO_I2CDFPlayer.h"
+#include "IO_HALDisplay.h" // Haldisplays
+
+
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
@@ -31,8 +34,8 @@
 //==========================================================================
 
 void halSetup() {
-I2CManager.forceClock(100000);
-
+//I2CManager.forceClock(100000);
+//I2CManager.forceClock(50000);
 
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
@@ -42,15 +45,16 @@ I2CManager.forceClock(100000);
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
   //PCA9685::create(100, 16, 0x43);
-  //PCA9685::create(116, 16, 0x47);
-   PCA9685::create(100, 16, {I2CMux_0,SubBus_2,0x40});
-   PCA9685::create(116, 16, {I2CMux_0,SubBus_2,0x41});
-   PCA9685::create(132, 16, {I2CMux_0,SubBus_2,0x42});
-   PCA9685::create(148, 16, {I2CMux_0,SubBus_2,0x43});
-   PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44});
-   PCA9685::create(244, 16, {I2CMux_0,SubBus_0,0x45});
-   PCA9685::create(196, 16, {I2CMux_0,SubBus_0,0x46});
-   PCA9685::create(212, 16, {I2CMux_0,SubBus_0,0x42});
+  //PCA9685::create(212, 16, 0x48);
+   PCA9685::create(100, 16, {I2CMux_0,SubBus_2,0x40}); // Board 1
+   PCA9685::create(116, 16, {I2CMux_0,SubBus_2,0x41}); // Board 2
+   PCA9685::create(132, 16, {I2CMux_0,SubBus_2,0x42}); // Board 3
+   PCA9685::create(148, 16, {I2CMux_0,SubBus_2,0x43}); // Board 4
+   PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44}); // Board 5
+   PCA9685::create(244, 16, {I2CMux_0,SubBus_0,0x45}); // Board 8
+   PCA9685::create(196, 16, {I2CMux_0,SubBus_0,0x46}); // Board 9
+   PCA9685::create(212, 16, {I2CMux_1,SubBus_0,0x47}); // Board 8
+   PCA9685::create(228, 16, {I2CMux_1,SubBus_2,0x48}); // Board 2
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -60,8 +64,8 @@ I2CManager.forceClock(100000);
   //   Number of VPINs=16 (numbered 196-211)
   //   I2C address of module=0x22
 
-  //MCP23017::create(796, 16, 0x26);
-  MCP23017::create(796, 16, {I2CMux_0,SubBus_0,0x27}); // Board 9
+  
+  //MCP23017::create(796, 16, {I2CMux_1,SubBus_0,0x26}); // Board 9
 
 
   // Alternative form, which allows the INT pin of the module to request a scan
@@ -174,6 +178,11 @@ I2CManager.forceClock(100000);
   //  DFPlayerPro::create(5000, 5, Serial2, true);
 
 
+  //I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
+  I2CDFPlayer::create(10000, 1, 0x4D, 0, 1);
+  I2CDFPlayer::create(10050, 1, 0x49, 0, 1);
+
+
   //=======================================================================
   // The following directive defines an EX-Turntable turntable instance.
   //=======================================================================
@@ -203,17 +212,18 @@ I2CManager.forceClock(100000);
   // The example is for an Arduino Nano.
     
     
-    //EXIOExpander::create(486, 62, 0x63); // Testing board
-    //EXIOExpander::create(548, 62, 0x64); // Testing board
-    //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
-    //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
-    //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
-    //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
-    //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_3,0x64}); // Board 5
-    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_0,0x65}); // Board 6
-    //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_0,0x66}); // Board 7
-    //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_3,0x67});
-    //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_0,0x68}); // Board 9 test remove MCP for this mega
+    //EXIOExpander::create(486, 62,{I2CMux_0,SubBus_0,0x63}); // Testing board
+    //EXIOExpander::create(250, 62, 0x63); // Testing board
+    EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
+    EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
+    EXIOExpander::create(424, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
+    EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x63}); // Board 4
+    EXIOExpander::create(548, 62, {I2CMux_0,SubBus_2,0x64}); // Board 5
+    EXIOExpander::create(610, 62, {I2CMux_0,SubBus_0,0x65}); // Board 6
+    EXIOExpander::create(672, 62, {I2CMux_0,SubBus_0,0x66}); // Board 7
+    EXIOExpander::create(734, 62, {I2CMux_0,SubBus_0,0x67}); // Board 8
+    EXIOExpander::create(796, 62, {I2CMux_0,SubBus_0,0x68}); // Board 9 test
+
 
 
   //=======================================================================
@@ -251,7 +261,7 @@ I2CManager.forceClock(100000);
  HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_1,0x27 }, 16, 2);
  HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_0,0x26 }, 16, 2);
  HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_3,0x27 }, 16, 2);
-
+ //HALDisplay<OLED>::create(2,0x3d,128,32);
 }
 
 

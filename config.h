@@ -53,7 +53,7 @@ The configuration file for DCC-EX Command Station
 // to allow turnout microswitch to change without shorting
 //==========================================================
 //#define DIAG_IO
-#define I2C_USE_WIRE
+//#define I2C_USE_WIRE
 #define MAX_CURRENT 3000
 //#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD
 
@@ -63,7 +63,14 @@ new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
  new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, PC2), \
  new MotorDriver( 5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, PC3)
 
-#define MOTOR_SHIELD_TYPE DUAL_EX8874_STACKED_SHIELDS
+#define F439_4X2 F("F439_4X2"), \
+ new MotorDriver(16, 21, UNUSED_PIN, 10, A13, 1.27, 2000, 20), \
+ new MotorDriver(22, 23, UNUSED_PIN, 5, A6, 1.27, 2000, 25), \
+ new MotorDriver(26, 43, UNUSED_PIN, 28, A2, 1.27, 2000, 27), \
+ new MotorDriver(30, 44, UNUSED_PIN, 29, A8, 1.27, 2000, 31)
+
+//#define MOTOR_SHIELD_TYPE DUAL_EX8874_STACKED_SHIELDS
+#define MOTOR_SHIELD_TYPE F439_4X2
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +120,7 @@ new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
 //#define WIFI_PASSWORD "5martn3t2020"
 //
 // WIFI_HOSTNAME: You probably don't need to change this
-#define WIFI_HOSTNAME "dccex"
+#define WIFI_HOSTNAME "Holgate"
 //
 // WIFI_CHANNEL: If the line "#define ENABLE_WIFI true" is uncommented, 
 // WiFi will be enabled (Mega only). The default channel is set to "1" whether

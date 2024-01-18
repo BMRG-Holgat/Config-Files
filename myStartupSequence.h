@@ -7,7 +7,7 @@
 */
 ALIAS(BIG_RED_BUTTON,444)
  
- ROUTE(997,"System: Startup test") //Testing system before starting
+ ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(252)
   IFNOT(254)
     PRINT("Testing Signals")
@@ -26,6 +26,7 @@ DONE
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(254)
+    SCREEN(2,0,"Setting Defaults")
     turnoutReset
     defaultPosition(UGS_T2_H) 
     defaultPosition(DGS_T4_A__DFM_T5_E) 
@@ -101,6 +102,18 @@ ROUTE(993, "Power: Set Up DCC on A, B, C")
         SET_TRACK(B, MAIN)
         SET_TRACK(C, MAIN)
     DONE
+
+//Enable Prog track
+ROUTE(888,"Power: Enable Prog")
+  PRINT("Set up Prog Track")
+  SET_TRACK(D,PROG)
+DONE
+
+//Enable Prog track
+ROUTE(889,"Power: Disable Prog")
+  PRINT("Remove Prog Track")
+  SET_TRACK(D,NONE)
+DONE
     
 ONOVERLOAD(A)
     SCREEN(3,0,"OVERLOAD District A")

@@ -13,4 +13,4 @@
 ROSTER(4052,"Class 40","Lights")
 ROSTER(5703,"Freightliner","")
 ROSTER(4750,"Freightliner","")
-ROSTER(1083,"Dmu","Lights/F2/F3/Horn/")
+ROSTER(1083,"Dmu","Lights//*Horn/*Brakes/*Release////Sound/*Doors/*D Horn")

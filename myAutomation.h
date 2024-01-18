@@ -21,9 +21,9 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
   DONE     // This just ends the startup thread, leaving 2 others running.
 
 //LCD Displays
-//  HAL(HALDisplay<LiquidCrystal>, 2, {I2CMux_0,SubBus_0,0x27}, 20, 4) 
-//  HAL(HALDisplay<LiquidCrystal>, 3, {I2CMux_0,SubBus_0,0x26}, 20, 4) 
-//  HAL(HALDisplay<LiquidCrystal>, 4, {I2CMux_0,SubBus_2,0x27}, 20, 4)
+  //HAL(HALDisplay<LiquidCrystal>, 2, {I2CMux_0,SubBus_0,0x27}, 20, 4) 
+  //HAL(HALDisplay<LiquidCrystal>, 3, {I2CMux_0,SubBus_0,0x26}, 20, 4) 
+  //HAL(HALDisplay<LiquidCrystal>, 4, {I2CMux_0,SubBus_2,0x27}, 20, 4)
 /*
  * Holgate
  * Key 
@@ -75,15 +75,17 @@ EXRAIL   // myAutomation must start with the EXRAIL instruction
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
 #include "myRoster.h"
+#include "myRoutes.h"
 
 
 DONE
 
-
+//byPass latch aliases
+ALIAS(AC_ByPass,100)
 
 // Track sequences to be replace with call/return sequences.
 
-//#include "myTrackA.h"
+#include "myTrackA.h"
 //#include "myTrackA-Call.h"
 /*#include "myTrackB.h"
 #include "myTrackB_FiddleYard.h"
@@ -159,27 +161,79 @@ AUTOSTART SEQUENCE(33)
   SCREEN(4,0,"Fiddle Yard")
   SCREEN(4,1," Right TEST")
   DONE
- 
 
- AUTOMATION(55,"TRACK A STOP")
-    RESERVE(100)
-    FWD(40)
-    DELAY(34000)
-    FREE(102)
-    STOP
-    DELAYRANDOM(10000,15000)
-    RESERVE(101)
-    FWD(40)
-    DELAY(10000)
-    FREE(100)
-    FWD(80)
-    DELAY(35000)
-    RESERVE(102)
-    FWD(20)
-    AT(581)
-      STOP 
-      FREE(101)
- DONE
+//AUTOSTART SEQUENCE(22)
+//  DELAY(10000)
+//  PRINT("Playing sound Now!")
+//  ANOUT(10010,1,10,0x0F)
+  //PLAYSOUND(10010,1,10,PLAY)
+
+
+  /*AUTOSTART
+   ANOUT(10000,0,0,0x1A) // set DACON
+   ANOUT(10000,0,0,0x07) // set EQ to NORMAL
+   ANOUT(10000,0,0,0x16) // Stop any ongoing play
+   DELAY(2000)
+   ANOUT(10000,0,0,0x0C) // Do reset
+   DELAY(2000)
+   START(1)
+   //START(2)
+  DONE     // This just ends the startup thread, leaving 2 others running.
+
+SEQUENCE(1)
+ANOUT(10100,0,0,0x0C) // Do reset
+   DELAY(2000)
+PRINT("Starting seq 1")
+  //ANOUT(10000,0,0,0x0C) // Do reset
+   //DELAY(2000)
+  ANOUT(10100,0,1,0x2B)   // Set folder to 1
+  DELAY(2000)
+  PRINT("Playing sound4")
+  ANOUT(10100,4,10,0x0F)  // Grant Central
+  WAITFOR(10100)
+  //ANOUT(10000,0,0,0x0C) // Do reset
+  //DELAY(2000)
+  PRINT("Playing railway crossing")
+  ANOUT(10000,0,2,0x2B)   // Set folder to 2
+  DELAY(2000)
+  ANOUT(10000,3,10,0x0F)  // Japanese railway crossing
+  WAITFOR(10000)
+  //ANOUT(10001,0,4,0x2B)   // Set folder to 4
+  //DELAY(2000)
+  //ANOUT(10001,4,15,0x0F)  // Sheep
+  //WAITFOR(10001)
+  //ANOUT(10001,0,6,0x2B)   // Set folder to 6
+  //DELAY(2000)
+  //ANOUT(10001,3,5,0x0F)  // Ships realy big horn 3 times
+  //WAITFOR(10001)
+  //DELAY(2000)
+  PRINT("Ending Seq 1")
+DONE
+
+SEQUENCE(2)
+  DELAY(2000)
+  ANOUT(10000,0,10,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,13,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,17,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,19,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,21,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,23,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,21,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,19,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,17,0x06)
+  DELAY(2000)
+  ANOUT(10000,0,13,0x06)  
+FOLLOW(2)
+DONE */
+  
 
 ENDEXRAIL    // marks the end of the EXRAIL program. 
     

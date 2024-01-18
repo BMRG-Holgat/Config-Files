@@ -25,8 +25,8 @@ ALIAS(A_Hold_Finish,129)
 
 //Fiddle yard B
 ALIAS(B_Exit,130)
-ALIAS(B_Station_Pass)
-ALIAS(BC_App)
+ALIAS(B_Station_Pass,197)
+ALIAS(BC_App,198)
 ALIAS(FB_App,199)
 ALIAS(FB_T1_A_Hold,200)
 ALIAS(FB_T1_E_Hold,201)

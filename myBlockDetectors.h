@@ -6,7 +6,7 @@
 *
 * BlockDetector syntax
 * (BD_{S|F}board_track, pin)
-* 
+*  (S)enic | (F)iddleyard
 */
 
 ALIAS(BD_S1_A)

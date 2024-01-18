@@ -110,7 +110,8 @@ SEQUENCE(619)
   FWD(10)
   FOLLOW(BYard_Ladder_T1_A)
 
-  /*
+  /* 
+  // rest of sequence is in myDefinitions.h
   SEQUENCE(ladder_entry_seq)
    RESERVE(ladder_entry)
    SEQEUNCE(ladder_entry_loop)

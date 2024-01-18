@@ -362,26 +362,11 @@
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \
-    SCREEN(2,0,"Setting Default:") \
-    SCREEN(3,1,""#turnout) \
       IFCLOSED(turnout) \
         THROW(turnout) \
-        DELAY(100) \
       ENDIF 
     
-/* ===================
-   not needed since myTurnoutPairs.
-   ===================
-//Change paired turnouts
-#define trackChange(tr1,tr2)\
-  IFTHROWN(tr1) \
-        CLOSE(tr1) \
-        CLOSE(tr2) \
-  ELSE \
-        THROW(tr1) \
-        THROW(tr2) \
-  ENDIF
-
+/* 
 
 //Fiddle Yard Ladder
 #define throwFiddleYardLadder(t1) \
@@ -446,4 +431,23 @@
      FREE(ladder_exit)
      RETURN
      ENDIF
+
+
+  //Used in the following way
+  SEQUENCE(ladder_entry_seq)
+   RESERVE(ladder_entry)
+   SEQEUNCE(ladder_entry_loop)
+      LADDER(1,9011,9210) 
+      LADDER(2.....)
+      PRINT("ladder full") DELAY(5000)
+      FOLLOW(ladder_entry_loop)
+
+
+  AUTOMATION(99,"AUTOPARK")
+    SPEED(30) 
+    AT(ladder_entry_sensor)
+  CALL(ladder_entry_seq) 
+  //
+  //AT(ladder_entry_sensor)
+  //CALL(ladder_entry_seq)   // will return when train exits ladder after user request
 */

@@ -23,6 +23,7 @@ ALIAS(Yard_Access,110)
 ALIAS(A_Pos1_Stop,111)
 ALIAS(A_Pos2_Stop,112)
 ALIAS(A_Pos3_Stop,113)
+ALIAS(ByPass_AD_Approach,114)
 
 
 //Up Mixed Fast
