@@ -11,3 +11,17 @@ SETUP("<=A MAIN>");
 SETUP("<=B MAIN>");
 SETUP("<=C MAIN>");
 //SETUP("<=D PROG");
+
+//code to test sensors 
+/*
+for(uint8_t p = 164; p < 180; p++){
+   Sensor::create(p, p, 1);
+}
+*/
+// or use an array for specific sensors
+/*
+uint8_t DIO_vpins[] = {183, 185, 186, 187, 191, 193, 194, 195};
+for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
+   Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
+}
+*/
