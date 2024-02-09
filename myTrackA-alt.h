@@ -15,18 +15,20 @@
 */
 
 SEQUENCE(AA_Approach)
-  IF(BD_A_B2)
+  IFNOT(BD_A_B2)
+    RESERVE(A_Store_Ex)
+    RED(SIG_A1)
     IFTHROWN(9026)
         CLOSE(9026)
     ENDIF
-    RESERVE(A_Store_Ex)
-    RED(SIG_A1)
     FWD(15)
+  ELSE 
+    FOLLOW(AA_Approach)
   ENDIF
 RETURN //follow AB_Approach
 
 SEQUENCE(AB_Approach)
-    IF(BD_A_B1a)
+    IFNOT(BD_A_B1a)
         IFTHROWN(9001)
             CLOSE(9001)
         ENDIF
@@ -37,7 +39,7 @@ SEQUENCE(AB_Approach)
 RETURN
 
 SEQUENCE(AB_Emergency)
-    IF(BD_A_B1c)
+    IFNOT(BD_A_B1c)
         CLOSE(UGS_T2_H)
         FOLLOW(AB_Header)
     ELSE
@@ -45,8 +47,17 @@ SEQUENCE(AB_Emergency)
     ENDIF
 DONE 
 
+SEQUENCE(AB_Header)
+    IFNOT(BD_A_B1b)
+        IFTHROWN(UGS_T2_H)
+            CLOSE(UGS_T2_H)
+        ENDIF
+        RESERVE(A_STN_Header)
+    ENDIF
+RETURN
+
 SEQUENCE(A_Station)
-    IF(BD_A_B1d)
+    IFNOT(BD_A_B1c)
         IFCLOSED(UGS_T2_H)
             THROW(UGS_T2_H)
         ENDIF
@@ -59,20 +70,20 @@ SEQUENCE(A_Station)
             FOLLOW(AC_Approach)
         ENDIF 
     ENDIF
-DONE
+RETURN
 
 SEQUENCE(A_STN_Hold)
-    IF(BD_A_B1d)
+    IFNOT(BD_A_B1d)
         RESERVE(A_AC_App)
         GREEN(SIG_A1)
         DELAYRANDOM(7000,15000)
         FOLLOW(AC_Approach)
     ENDIF
-DONE
+RETURN 
 
 SEQUENCE(AC_Approach)
-    IF(BD_A_B2)
-        IF(BD_A_B3)
+    IFNOT(BD_A_B2)
+        IFNOT(BD_A_B3)
             IFTHROWN(9004)
                 CLOSE(9004)
             ENDIF
@@ -83,11 +94,11 @@ FOLLOW(AD_Approach)
 
 SEQUENCE(AD_Approach)
     IFGREEN(SIG_A1)
-        IF(BD_A_B2)
+        IFNOT(BD_A_B2)
             RED(SIG_A1)
         ENDIF
     ENDIF
-    IF(BD_A_B2)
+    IFNOT(BD_A_B2)
         IFRED(SIG_A2)
             STOP
             FOLLOW(AD_Approach)
@@ -105,10 +116,10 @@ SEQUENCE(AD_Approach)
     
 
 SEQUENCE(AD_Exit)
-    IF(BD_A_B7)
-        IF(BD_A_B6)
-            IF(BD_A_B5)
-                IF(BD_A_B4)     
+    IFNOT(BD_A_B7)
+        IFNOT(BD_A_B6)
+            IFNOT(BD_A_B5)
+                IFNOT(BD_A_B4)     
                     RESERVE(A_AE_App)
                     IFGREEN(SIG_A2)
                         SPEED(80)
