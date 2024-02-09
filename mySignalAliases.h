@@ -8,12 +8,12 @@
 ALIAS(SIG_A1, 280) // Track A board 1
 ALIAS(SIG_B1, 281) //Track B board 1
 ALIAS(SIG_D1, 286) // Track D board 1
-ALIAS(SIG_A2, 518) //Track A board 3
-ALIAS(SIG_B2, 519) // Track B board 3
-ALIAS(SIG_C2, 524) // Track C board 3
-ALIAS(SIG_D2, 525) // Track D board 3
-ALIAS(SIG_E2, 530) // Track E board 3
-ALIAS(SIG_F2, 531) // Track F board 3
+ALIAS(SIG_A2, 504) //Track A board 3
+ALIAS(SIG_B2, 507) // Track B board 3
+ALIAS(SIG_C2, 510) // Track C board 3
+ALIAS(SIG_D2, 513) // Track D board 3
+ALIAS(SIG_E2, 516) // Track E board 3
+ALIAS(SIG_F2, 519) // Track F board 3
 ALIAS(SIG_A3, 780) // Track A board 7
 ALIAS(SIG_B3, 781) // Track B board 7
 ALIAS(SIG_C3, 786) // Track C board 7

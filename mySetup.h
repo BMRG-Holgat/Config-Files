@@ -25,3 +25,10 @@ for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
    Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
 }
 */
+//for(uint8_t p = 566; p < 539; p++){
+//   Sensor::create(p, p, 1);
+//}
+//uint8_t DIO_vpins[] = {596, 598, 600, 601, 602, 603, 604, 605, 606, 607 608, 609};
+//for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
+//   Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
+//}
