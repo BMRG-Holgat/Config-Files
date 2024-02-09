@@ -11,6 +11,7 @@
 */
 //Define locos that can be used on this layout
 ROSTER(4052,"Class 40","Lights")
-ROSTER(5703,"Freightliner","")
-ROSTER(4750,"Freightliner","")
+ROSTER(5703,"Freightliner 03","")
+ROSTER(4750,"Freightliner 50","")
 ROSTER(1083,"Dmu","Lights//*Horn/*Brakes/*Release////Sound/*Doors/*D Horn")
+ROSTER(6631,"Thomas Moore","Empty/Forward/Reverse")

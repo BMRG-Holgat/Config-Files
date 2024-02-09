@@ -20,20 +20,6 @@
 //
 //==============================================================
 
-ALIAS(B5_IR_A,581)
-ALIAS(B5_IR_B1_E,573)
-ALIAS(B5_IR_B2_E,577)
-ALIAS(B5_IR_B3_E,585)
-ALIAS(B5_IR_C1_E,575)
-ALIAS(B5_IR_C2_E,567)
-ALIAS(B5_IR_C3_E,583)
-ALIAS(B5_IR_C4_E,579)
-ALIAS(B5_IR_C5_E,571)
-
-
-
-
-
 //Track A Up goods slow
 ALIAS(B1_IR_A)
 ALIAS(B2_IR_A)

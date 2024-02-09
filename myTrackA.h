@@ -30,19 +30,13 @@ SCREEN(2,1,"Leaving Siding")
     DELAY(5000) //Remove
 FOLLOW(Station__Header_App)
 
+
+
 SEQUENCE(Station__Header_App)
-SCREEN(2,1,"Moving to header")
-    IFTHROWN(501)
-      CLOSE(501)
-    ENDIF
-    RESERVE(Stn_Head_App)
-    SPEED(15)
-    AT(B1_IR_A) //Board 1
-    FREE(A_Exit)
     //Add BD here for station blockage
-    //IF(BD_S1_AA) //If station occupied take avoiding action.
-    //  CLOSE(UGS_T2_H)
-    //ENDIF
+    IF(BD_S1_AA) //If station occupied take avoiding action.
+      CLOSE(UGS_T2_H)
+    ENDIF
     IFCLOSED(UGS_T2_H) //AB
     DELAY(5000) //Remove
       FOLLOW(Head_Shunt_Access)
@@ -55,7 +49,11 @@ DONE
 
 
 SEQUENCE(Head_Shunt_Access)
-
+  RESERVE(Stn_Head_App)
+  SPEED(15)
+  AT(300) //replace with BD value
+  STOP
+  FREE(A_Exit)
 DONE
 
 

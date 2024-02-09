@@ -3,7 +3,7 @@ Routes for Track A
 */
 
 AUTOMATION(10,"Track A Stn circuit")
-    CALL(UGS_Hold_Ex)
+    CALL(AA_Approach)
     PRINT("Returned UGS_Hold_Ex")
     CALL(UGS_AB_App)
     PRINT("Returned UGS_AB_App")
@@ -19,4 +19,5 @@ AUTOMATION(10,"Track A Stn circuit")
     //CALL(UGS_AE_Ex)
     //CALL(Set_Signals)
     //CALL(UGS_AF_App)
+    UNLATCH(10)
     //FOLLOW(UGS_BK9__UGS_BK10)

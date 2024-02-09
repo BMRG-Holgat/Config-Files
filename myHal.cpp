@@ -53,8 +53,8 @@ void halSetup() {
    PCA9685::create(228, 16, {I2CMux_0,SubBus_0,0x44}); // Board 5
    PCA9685::create(244, 16, {I2CMux_0,SubBus_0,0x45}); // Board 8
    PCA9685::create(196, 16, {I2CMux_0,SubBus_0,0x46}); // Board 9
-   PCA9685::create(212, 16, {I2CMux_1,SubBus_0,0x47}); // Board 8
-   PCA9685::create(228, 16, {I2CMux_1,SubBus_2,0x48}); // Board 2
+   PCA9685::create(260, 16, {I2CMux_1,SubBus_0,0x47}); // Board 8
+   PCA9685::create(276, 16, {I2CMux_1,SubBus_2,0x48}); // Board 2
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.

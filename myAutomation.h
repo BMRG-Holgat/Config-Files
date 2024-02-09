@@ -85,7 +85,10 @@ ALIAS(AC_ByPass,100)
 
 // Track sequences to be replace with call/return sequences.
 
-#include "myTrackA.h"
+#include "myTrackA-alt.h"
+#include "myTrackA-Seq-Alias.h"
+#include "myTrackA-Blocks.h"
+#include "myTrackA-BD.h"
 //#include "myTrackA-Call.h"
 /*#include "myTrackB.h"
 #include "myTrackB_FiddleYard.h"
@@ -97,15 +100,21 @@ ALIAS(AC_ByPass,100)
 #include "myTrackE_FiddleYard.h"
 #include "myTrackF.h"
 */
+
+/* set standard reserves at startup
+RESERVE(A_Store_1)
+RESERVE(A_Store_2)
+RESERVE(A_Store_3)
+*/
 /* Build Routes
 *
 */
 //#include "myRoutes-TrackA.h"
 /*#include "myRoutes-TrackB.h"
 */
-/*
+
 AUTOMATION(10,"HST B test to Station Auto")
-    RESERVE(UGS_FY_Exit)
+    /*RESERVE(UGS_FY_Exit)
     IFCLOSED(UGS_T6_A__FYUG_T10_E) //Board 2 lane cross
         trackChange(UGS_T6_A__FYUG_T10_E,UMF_T15_E__UGS_T6_A)
     ENDIF
@@ -137,8 +146,8 @@ AUTOMATION(10,"HST B test to Station Auto")
     IFTHROWN(UGS_T2_E__DFM_T1_A)
       trackChange(UGS_T2_E__DFM_T1_A,UFM_T1_A__UGS_T2_E)
     ENDIF
-    FWD(0)
-DONE*/
+    FWD(0)*/
+DONE
 /*
 SEQUENCE(30)
 AT(566)
