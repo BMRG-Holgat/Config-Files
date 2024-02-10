@@ -14,21 +14,21 @@ SETUP("<=C MAIN>");
 
 //code to test sensors 
 /*
-for(uint8_t p = 164; p < 180; p++){
+for(uint16_t p = 164; p < 180; p++){
    Sensor::create(p, p, 1);
 }
 */
 // or use an array for specific sensors
 /*
-uint8_t DIO_vpins[] = {183, 185, 186, 187, 191, 193, 194, 195};
+uint16_t DIO_vpins[] = {183, 185, 186, 187, 191, 193, 194, 195};
 for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
    Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
 }
 */
-//for(uint8_t p = 566; p < 539; p++){
+//for(uint16_t p = 566; p < 539; p++){
 //   Sensor::create(p, p, 1);
 //}
-//uint8_t DIO_vpins[] = {596, 598, 600, 601, 602, 603, 604, 605, 606, 607 608, 609};
+//uint16_t DIO_vpins[] = {596, 598, 600, 601, 602, 603, 604, 605, 606, 607 608, 609};
 //for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
 //   Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
 //}
