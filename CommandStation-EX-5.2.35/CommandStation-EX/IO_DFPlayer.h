@@ -91,13 +91,13 @@ private:
   
 public:
  
-  static void create(VPIN firstVpin, int nPins, HardwareSerial &serial, bool a_Ack = true) {
-    if (checkNoOverlap(firstVpin,nPins)) new DFPlayer(firstVpin, nPins, serial, a_Ack);
+  static void create(VPIN firstVpin, int nPins, HardwareSerial &serial) {
+    if (checkNoOverlap(firstVpin,nPins)) new DFPlayer(firstVpin, nPins, serial);
   }
 
 protected:
   // Constructor
-  DFPlayer(VPIN firstVpin, int nPins, HardwareSerial &serial, bool a_Ack = true) :
+  DFPlayer(VPIN firstVpin, int nPins, HardwareSerial &serial) :
     IODevice(firstVpin, nPins),
     _serial(&serial) 
   {
