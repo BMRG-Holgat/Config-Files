@@ -90,7 +90,8 @@ SEQUENCE(AC_Approach)
             RESERVE(A_AD_App)
             FREE(A_Store_Ex)
             SPEED(40)          
-FOLLOW(AD_Approach)
+//FOLLOW(AD_Approach)
+RETURN 
 
 SEQUENCE(AD_Approach)
     IFGREEN(SIG_A1)
@@ -111,8 +112,9 @@ SEQUENCE(AD_Approach)
             CLOSE(9009)
         ENDIF 
         FREE(A_AB_App)
-        FOLLOW(AE_Approach)
+        //FOLLOW(AE_Approach)
     ENDIF
+RETURN 
     
 
 SEQUENCE(AD_Exit)
@@ -123,19 +125,22 @@ SEQUENCE(AD_Exit)
                     RESERVE(A_AE_App)
                     IFGREEN(SIG_A2)
                         SPEED(80)
+                        AMBER(SIG_A1)
                     ENDIF
                     IFAMBER(SIG_A2)
                         SPEED(60)
+                        AMBER(SIG_A1)
                     ENDIF
-                    IFNOT(BD_A_B4)
-                        RED(SIG_A2)
-                        FREE(A_STN_App)
-                    ENDIF
+                    
+                    RED(SIG_A2)
+                    FREE(A_STN_App)
+                    
                 ENDIF
             ENDIF
         ENDIF
     ENDIF
-FOLLOW(AE_Approach)
+//FOLLOW(AE_Approach)
+RETURN 
 
 SEQUENCE(AE_Approach)
         AT(BD_A_B6)
@@ -143,6 +148,14 @@ SEQUENCE(AE_Approach)
         IFRED(SIG_A3)
             STOP
         ENDIF
+        IFGREEN(SIG_A3)
+            AMBER(SIG_A2)
+        ENDIF 
+        IFAMBER(SIG_A3)
+            AMBER(SIG_A2)
+            SPEED(40)
+        ENDIF 
 
+RETURN 
                 
 DONE //move on from here when we get there.
