@@ -5,10 +5,14 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
-ALIAS(BIG_RED_BUTTON,275)
-ALIAS(Latch_build,274)
-ALIAS(Latch_default,273)
+ALIAS(BIG_RED_BUTTON,75)
+ALIAS(Latch_build,74)
+ALIAS(Latch_default,73)
  
+ROUTE(900,"SIGNAL TEST")
+  signalTest
+DONE
+
  ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(Latch_build)
   IFNOT(Latch_default)
@@ -38,7 +42,8 @@ ROUTE(994,"System: Set Default Positions")
     PRINT("Setting all signals to green") 
     GREEN(SIG_A1) 
     GREEN(SIG_B1) 
-    GREEN(SIG_D1) 
+    GREEN(SIG_D1)
+    //RED(SIG_H1) 
     GREEN(SIG_A2) 
     GREEN(SIG_B2) 
     GREEN(SIG_C2) 
