@@ -31,6 +31,12 @@
 #include "mySignalAliases.h"
 #include "myDefinitions.h"
 #include "myStartupSequence.h"
-//#include "myRoster.h"
+#include "myRoster.h"
 
 
+AUTOSTART SEQUENCE(13)
+    AT(578)
+    FOFF(0)
+    AFTER(578)
+    FON(0)
+FOLLOW(13)

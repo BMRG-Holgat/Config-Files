@@ -20,7 +20,7 @@ DONE
     SCREEN(2,0,"")
     SCREEN(2,1,"")
     DELAY(1000)
-    signalTest
+//    signalTest
     DELAY(1000)
     PRINT("Testing Turnouts")
     turnoutTest
@@ -130,8 +130,8 @@ DONE
  */  
  
 ONOVERLOAD(A)
-    SCREEN(3,0,"OVERLOAD District A")
-    SCREEN(3,1,"POWER OFF")
+    SCREEN(2,0,"OVERLOAD District A")
+    SCREEN(2,1,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
     AFTEROVERLOAD(A)
@@ -140,7 +140,7 @@ ONOVERLOAD(A)
       PRINT("Overload cleared on District A - Power Restored")
       DELAY(2000)
       SCREEN(3,0,"")
-DONE
+DONE<=>
 
 ONOVERLOAD(B)
     SCREEN(2,0, "OVERLOAD Scenic")

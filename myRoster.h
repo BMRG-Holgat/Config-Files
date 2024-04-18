@@ -14,7 +14,8 @@ ROSTER(4052,"Class 40","Lights")
 ROSTER(5703,"Freightliner 03","")
 ROSTER(4750,"Freightliner 50","")
 ROSTER(1083,"Dmu","Lights//*Horn/*Brakes/*Release////Sound/*Doors/*D Horn")
-ROSTER(6631,"Thomas Moore","Empty/Forward/Reverse")
+ROSTER(3,"Thomas Moore","ights//Empty/Forward/Reverse")
+ROSTER(2604,"Coal","Lights//Rear")
 
 //Arthurs locos
 ROSTER(1701,"Clayton D8560","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Clag 2/Light off #1/Notch up/*Rev up 2/*Guard Whistle/Gas Off/*Apply Brake/Light off #2/Flange Squeal/*Buffering up/*Clag passing/*Horn 3/*Rev Rattle/*Horn 4/Mute/Shunting")

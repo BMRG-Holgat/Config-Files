@@ -35,7 +35,7 @@
 
 void halSetup() {
 //I2CManager.forceClock(100000);
-I2CManager.forceClock(50000);
+//I2CManager.forceClock(50000);
 
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
@@ -62,30 +62,29 @@ I2CManager.forceClock(50000);
    //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_0,0x61}); // Board 2
    //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_0,0x62}); // Board 3
    
-   //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_0,0x63}); // Board 4
+   //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_1,0x63}); // Board 4
    
-   //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_7,0x59}); // Board 5
+   EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x64}); // Board 5
    
    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_1,0x65}); // Board 6
    
-  //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_1,0x66}); // Board 7
+  //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_2,0x66}); // Board 7
 
    
    //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_1,0x67}); // Board 8
    
-   //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_1,0x68}); // Board 9 test
+   //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_2,0x68}); // Board 9 test
    
-   
-   PCA9685::create(120, 16, {I2CMux_0,SubBus_0,0x40}); // Board 1
-   PCA9685::create(136, 16, {I2CMux_0,SubBus_0,0x41}); // Board 2
-   PCA9685::create(168, 16, {I2CMux_0,SubBus_0,0x42}); // Board 3
-   PCA9685::create(184, 2, {I2CMux_0,SubBus_0,0x43}); // Board 4
-
-   PCA9685::create(200, 16, {I2CMux_0,SubBus_0,0x44}); // Board 5
-   PCA9685::create(216, 16, {I2CMux_0,SubBus_1,0x45}); // Board 8
-   PCA9685::create(248, 16, {I2CMux_0,SubBus_1,0x42}); // Board 9
-   PCA9685::create(232, 16, {I2CMux_0,SubBus_1,0x46}); // Board 8
-   PCA9685::create(152, 16, {I2CMux_0,SubBus_0,0x48}); // Board 2 
+   PCA9685::create(296, 16, {I2CMux_0,SubBus_2,0x45});
+   PCA9685::create(120, 16, {I2CMux_0,SubBus_2,0x40}); // Board 1
+   PCA9685::create(136, 16, {I2CMux_0,SubBus_2,0x41}); // Board 2
+   PCA9685::create(168, 16, {I2CMux_0,SubBus_2,0x42}); // Board 3
+   PCA9685::create(184, 2, {I2CMux_0,SubBus_2,0x43}); // Board 4
+   PCA9685::create(200, 16, {I2CMux_0,SubBus_1,0x44}); // Board 5
+   PCA9685::create(216, 16, {I2CMux_0,SubBus_4,0x45}); // Board 8
+   PCA9685::create(248, 16, {I2CMux_0,SubBus_4,0x42}); // Board 9
+   PCA9685::create(232, 16, {I2CMux_0,SubBus_4,0x46}); // Board 8
+   PCA9685::create(152, 16, {I2CMux_0,SubBus_2,0x48}); // Board 2 
 
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
@@ -281,9 +280,10 @@ I2CManager.forceClock(50000);
  // HALDisplay<LiquidCrystal>::create(2, {I2CMux_0,SubBus_0,0x27}, 20, 4);
  //
  // 
- //HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_0,0x27 }, 16, 2);
- //HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_0,0x26 }, 16, 2);
- //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_0,0x27 }, 16, 2);
+
+ //HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_1,0x27 }, 16, 2);
+ //HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_1,0x26 }, 16, 2);
+ //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
  //HALDisplay<OLED>::create(2,0x3d,128,32);
 }
 
