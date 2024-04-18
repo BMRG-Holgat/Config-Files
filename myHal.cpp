@@ -22,6 +22,7 @@
 //#include "IO_DFPlayer.h"  // MP3 sound player
 //#include "IO_I2CDFPlayer.h"
 #include "IO_HALDisplay.h" // Haldisplays
+#include "DCC.h"
 
 
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
