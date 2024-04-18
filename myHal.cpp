@@ -27,6 +27,32 @@
 //#include "IO_EXTurntable.h"   // Turntable-EX turntable controller
 //#include "IO_EXFastClock.h"  // FastClock driver
 
+
+//Shows current 8 locos running and direction on 2 screens
+void updateLocoScreen() {
+  for (int i=0; i<4; i++) {
+    if (DCC::speedTable[i].loco > 0) {
+      int speed = DCC::speedTable[i].speedCode;
+      char direction = (speed & 0x80) ? 'F' : 'R';
+      speed = speed & 0x7f;
+      if (speed > 0) speed = speed - 1;
+      SCREEN(3, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
+      speed, direction);
+    }
+  }
+  for (int i=4; i<8; i++) {
+    if (DCC::speedTable[i].loco > 0) {
+      int speed = DCC::speedTable[i].speedCode;
+      char direction = (speed & 0x80) ? 'F' : 'R';
+      speed = speed & 0x7f;
+      if (speed > 0) speed = speed - 1;
+      SCREEN(0, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
+      speed, direction);
+    }
+  }
+}
+
+
 //==========================================================================
 // The function halSetup() is invoked from CS if it exists within the build.
 // The setup calls are included between the open and close braces "{ ... }".
@@ -285,6 +311,9 @@ void halSetup() {
  //HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_1,0x26 }, 16, 2);
  //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
  //HALDisplay<OLED>::create(2,0x3d,128,32);
+
+  // Update displays with loco numbers and direction
+  UserAddin::create(updateLocoScreen, 1000);
 }
 
 
