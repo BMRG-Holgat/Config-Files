@@ -140,7 +140,7 @@ ONOVERLOAD(A)
       PRINT("Overload cleared on District A - Power Restored")
       DELAY(2000)
       SCREEN(3,0,"")
-DONE<=>
+DONE
 
 ONOVERLOAD(B)
     SCREEN(2,0, "OVERLOAD Scenic")
