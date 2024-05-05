@@ -60,10 +60,10 @@ The configuration file for DCC-EX Command Station
 
 #define DUAL_EX8874_STACKED_SHIELDS F("DUAL-EX8874-STACK"), \
 new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
- new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \
+new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, UNUSED_PIN), \
  new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, UNUSED_PIN), \
  new MotorDriver( 5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, PC3)
-
+ /*new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \*/
 
 #define F439_4X2 F("F439_4X2"), \
  new MotorDriver(16, 21, UNUSED_PIN, 10, A13, 1.27, 2000, 20), \
@@ -159,7 +159,9 @@ new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
 // To enable, uncomment one of the #define lines below
 
 // define LCD_DRIVER for I2C address 0x27, 16 cols, 2 rows
-#define LCD_DRIVER  0x27,128,16
+//
+
+//#define LCD_DRIVER  0x27,128,16
 
 //OR define OLED_DRIVER width,height in pixels (address auto detected)
 // 128x32 or 128x64 I2C SSD1306-based devices are supported.

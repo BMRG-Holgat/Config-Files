@@ -8,7 +8,7 @@ SETUP("<0>"); // tracks off at startup
 SETUP("<D CMD 1>"); // can be set to ON for testing in the serial monitor
 SETUP("<D EXRAIL ON>");
 SETUP("<=A MAIN>");
-SETUP("<=B MAIN>");
+SETUP("<=B NONE>");
 SETUP("<=C NONE>");
 SETUP("<=D MAIN>");
 
@@ -25,7 +25,7 @@ for(uint8_t p = 0; p < sizeof DIO_vpins / sizeof DIO_vpins[0]; p++){
    Sensor::create(DIO_vpins[p], DIO_vpins[p], 1);
 }
 */
-for(uint16_t p = 522; p < 547; p++){
+for(uint16_t p = 814; p < 827; p++){
    Sensor::create(p, p, 1);
 }
 //uint16_t DIO_vpins[] = {596, 598, 600, 601, 602, 603, 604, 605, 606, 607 608, 609};

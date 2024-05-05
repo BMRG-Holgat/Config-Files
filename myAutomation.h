@@ -31,12 +31,24 @@
 #include "mySignalAliases.h"
 #include "myDefinitions.h"
 #include "myStartupSequence.h"
-#include "myRoster.h"
 
 
-AUTOSTART SEQUENCE(13)
-    AT(578)
-    FOFF(0)
-    AFTER(578)
-    FON(0)
-FOLLOW(13)
+
+AUTOSTART ROUTE(60,"SIG TEST")
+   AFTER(818)
+    IFGREEN(SIG_F3)
+        RED(SIG_F3)
+    ENDIF
+    DELAY(10000)
+    AMBER(SIG_F3)
+    DELAY(10000)
+    GREEN(SIG_F3) 
+FOLLOW(60)
+
+AUTOSTART SEQUENCE(61)
+    AFTER(825)
+    IFAMBER(SIG_B3)
+        DELAY(5000)
+        GREEN(SIG_B3)
+    ENDIF
+DONE

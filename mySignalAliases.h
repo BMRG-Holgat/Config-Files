@@ -17,10 +17,10 @@ ALIAS(SIG_E2, 516) // Track E board 4
 ALIAS(SIG_F2, 519) // Track F board 4
 ALIAS(SIG_A3, 714) // Track A board 7
 ALIAS(SIG_B3, 687) // Track B board 7
-ALIAS(SIG_C3, 731) // Track C board 7
-ALIAS(SIG_D3, 834) // Track c board 9
-ALIAS(SIG_E3, 828) // Track E board 9
-ALIAS(SIG_F3, 831) // Track F board 9
+ALIAS(SIG_D3, 731) // Track C board 7
+ALIAS(SIG_C3, 834) // Track c board 9
+ALIAS(SIG_E3, 831) // Track E board 9
+ALIAS(SIG_F3, 828) // Track F board 9
 /*
 ALIAS(SIG_N1_E, 182) //sig bypass 2 through signal
 ALIAS(SIG_N1_F, 185) //bypass 1 approach

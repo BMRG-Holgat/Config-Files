@@ -21,5 +21,5 @@ SIGNALH(714, 715, 716) // Board 7 -- change when added
 SIGNALH(687, 688, 689) // Board 7
 SIGNALH(731, 732, 733) // Board 7 
 SIGNALH(834, 0, 835) // Board 9   C
-SIGNALH(828, 829, 830) // Board 9   E
-SIGNALH(831, 832, 833) // Board 9   F
+SIGNALH(828, 829, 830) // Board 9   F
+SIGNALH(831, 832, 833) // Board 9   E

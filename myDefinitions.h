@@ -303,27 +303,20 @@
 //Test signals indicators macro
 #define signalLedTest(id) \
   SCREEN(2,0,"Testing Signal: ") \
-  SCREEN(3,0,"") \
-  SCREEN(3,1,"") \
-  SCREEN(4,0,"") \
-  SCREEN(4,1,"") \
   DELAY(1000)\
   BROADCAST("<* " #id " signal *>") \
   PRINT("Testing signal " #id) \
-  SCREEN(2,0,"Testing Signal: ") \
+  SCREEN(2,1,#id) \
   PRINT(#id " Red") \
-  SCREEN(3,0,#id) \
-  SCREEN(3,1,"RED") \
+  SCREEN(2,2,"RED") \
   RED(id) \
   DELAY(1000)\
   PRINT(#id " Amber") \
-  SCREEN(3,0,#id) \
-  SCREEN(3,1,"AMBER") \
+  SCREEN(2,2,"        AMBER") \
   AMBER(id) \
   DELAY(1000) \
   PRINT(#id " Green") \
-  SCREEN(3,0,#id) \
-  SCREEN(3,1,"GREEN") \
+  SCREEN(2,2,"               GREEN") \
   GREEN(id) \
   DELAY(1000)
   
@@ -350,13 +343,12 @@
   DELAY(2000)
 
   #define turnReset(id) \
-    SCREEN(4,0,"") \
-    SCREEN(4,1,"") \
     SCREEN(2,0,"Turnout Reset") \
     SCREEN(2,1,"") \
+    SCREEN(2,2,"") \
     PRINT("Closing: " #id) \
-    SCREEN(3,0,"Closing: ") \
-    SCREEN(3,1,#id)\
+    SCREEN(2,1,"Closing: ") \
+    SCREEN(2,2,#id)\
     CLOSE(id) \
     DELAY(100)
 

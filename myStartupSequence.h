@@ -37,6 +37,7 @@ ROUTE(994,"System: Set Default Positions")
     defaultPosition(UGS_T2_H) 
     defaultPosition(DGS_T4_A__DFM_T5_E) 
     defaultPosition(DGS_T5_A__DFM_T7_E)
+    CLOSE(UFM_T4_A__DMF_T3_E)
     defaultPosition(DMF_T6_A__DMF_T7_E) // Set track 1 exit on Yard C.
     defaultPosition(DFM_T15_E__DFM_T14_A) //Set track 1 access on Yard E.
     PRINT("Setting all signals to green") 
@@ -57,12 +58,9 @@ ROUTE(994,"System: Set Default Positions")
     GREEN(SIG_E3) 
     GREEN(SIG_F3)
     LATCH(Latch_default)
-    SCREEN(2,0,"System")
+    SCREEN(2,0,"System Ready")
     SCREEN(2,1,"")
-    SCREEN(3,0,"Ready")
-    SCREEN(3,1,"")
-    SCREEN(4,0,"Go..Go..GO")
-    SCREEN(4,1,"")
+    SCREEN(2,2,"")
   ENDIF
   
 DONE
@@ -88,7 +86,7 @@ ROUTE(995,"System: End Session") // end Session setting
   UNLATCH(Latch_default)
   PRINT("Shutdown now!")
   SCREEN(2,2,"Completed" )
-  SCREEN(3,2,"Start ")
+  SCREEN(2,2,"Start ")
   SCREEN(4,2,"Dismantling")
 DONE
 
@@ -141,7 +139,7 @@ ONOVERLOAD(A)
       DELAY(2000)
       SCREEN(3,0,"")
 DONE
-
+/*
 ONOVERLOAD(B)
     SCREEN(2,0, "OVERLOAD Scenic")
     SCREEN(2,1," POWER OFF")
@@ -154,7 +152,7 @@ ONOVERLOAD(B)
       DELAY(2000)
       SCREEN(2,0,"")
 DONE
-
+*/
 /*ONOVERLOAD(C)
     SCREEN(4,0, "OVERLOAD Prog ")
     SCREEN(4,1," POWER OFF")
@@ -188,15 +186,15 @@ ROUTE(992,"Power Reset: Reset District A")
     DELAY(5000)
     SCREEN(2,1,"")
 DONE
-
+/*
 ROUTE(991,"Power Reset: Reset Scenic")
     SCREEN(4,1,"Reseting Power")
-    SET_TRACK(B, MAIN)
+    SET_TRACK(B, NONE)
     POWERON
     DELAY(5000)
     SCREEN(4,1,"")
 DONE
-
+*/
 /*ROUTE(990,"Power: PROG")
     SCREEN(3,1,"Reseting Power")
     SET_TRACK(C, NONE)

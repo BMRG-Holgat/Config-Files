@@ -31,28 +31,17 @@
 
 //Shows current 8 locos running and direction on 2 screens
 void updateLocoScreen() {
-  for (int i=0; i<4; i++) {
+  for (int i=0; i<8; i++) {
     if (DCC::speedTable[i].loco > 0) {
       int speed = DCC::speedTable[i].speedCode;
       char direction = (speed & 0x80) ? 'F' : 'R';
       speed = speed & 0x7f;
       if (speed > 0) speed = speed - 1;
-      SCREEN(3, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
+      SCREEN(2, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
       speed, direction);
     }
   }
-  for (int i=4; i<8; i++) {
-    if (DCC::speedTable[i].loco > 0) {
-      int speed = DCC::speedTable[i].speedCode;
-      char direction = (speed & 0x80) ? 'F' : 'R';
-      speed = speed & 0x7f;
-      if (speed > 0) speed = speed - 1;
-      SCREEN(0, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
-      speed, direction);
-    }
-  }
-}
-
+}  
 
 //==========================================================================
 // The function halSetup() is invoked from CS if it exists within the build.
@@ -62,7 +51,7 @@ void updateLocoScreen() {
 
 void halSetup() {
 //I2CManager.forceClock(100000);
-//I2CManager.forceClock(50000);
+I2CManager.forceClock(50000);
 
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
@@ -85,22 +74,23 @@ void halSetup() {
    PCA9685::create(260, 16, {I2CMux_0,SubBus_1,0x47}); // Board 8
    PCA9685::create(276, 16, {I2CMux_0,SubBus_0,0x48}); // Board 2
 */
-   //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_0,0x60}); // Board 1
-   //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_0,0x61}); // Board 2
-   //EXIOExpander::create(424, 62, {I2CMux_0,SubBus_0,0x62}); // Board 3
+   //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
+   //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
+   //EXIOExpander::create(858, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3
    
-   //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_1,0x63}); // Board 4
+   //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x64}); // Board 4
    
    EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x64}); // Board 5
    
    //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_1,0x65}); // Board 6
    
-  //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_2,0x66}); // Board 7
+  
+  EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
 
    
-   //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_1,0x67}); // Board 8
+   //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
    
-   //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_2,0x68}); // Board 9 test
+   EXIOExpander::create(796, 62, {I2CMux_0,SubBus_4,0x68}); // Board 9 test
    
    PCA9685::create(296, 16, {I2CMux_0,SubBus_2,0x45});
    PCA9685::create(120, 16, {I2CMux_0,SubBus_2,0x40}); // Board 1
@@ -311,7 +301,7 @@ void halSetup() {
  //HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_1,0x27 }, 16, 2);
  //HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_1,0x26 }, 16, 2);
  //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
- //HALDisplay<OLED>::create(2,0x3d,128,32);
+ HALDisplay<OLED>::create(2,{I2CMux_0,SubBus_1,0x3d},128,64);
 
   // Update displays with loco numbers and direction
   UserAddin::create(updateLocoScreen, 1000);
