@@ -34,6 +34,7 @@
 
 
 
+
 AUTOSTART ROUTE(60,"SIG TEST")
    AFTER(818)
     IFGREEN(SIG_F3)
@@ -52,3 +53,62 @@ AUTOSTART SEQUENCE(61)
         GREEN(SIG_B3)
     ENDIF
 DONE
+
+#include "EXRAIL2.h"
+
+STEALTH_GLOBAL(char rag(int16_t sigid) {
+    if(RMFT2::isSignal(sigid,SIGNAL_RED)) return 'R';
+    if(RMFT2::isSignal(sigid,SIGNAL_AMBER)) return 'A';
+    if(RMFT2::isSignal(sigid,SIGNAL_GREEN)) return 'G';
+    return 'X';
+} 
+)
+
+SEQUENCE(77)
+IF(Latch_default)
+SCREEN(2,0,"Signal Status")
+STEALTH( 
+    StringFormatter::lcd2(2,1,
+      F("A: %c   %c   %c"),
+      rag(318), rag(504), rag(714));
+    StringFormatter::lcd2(2,2,
+      F("B: %c   %c   %c"),
+      rag(321), rag(507), rag(687));
+    StringFormatter::lcd2(2,3,
+      F("C:     %c   %c"),
+      rag(510), rag(834));
+    StringFormatter::lcd2(2,4,
+      F("D: %c   %c   %c"),
+      rag(324), rag(513), rag(731));
+    StringFormatter::lcd2(2,5,
+      F("E:     %c   %c"),
+      rag(516), rag(831));
+    StringFormatter::lcd2(2,6,
+      F("F:     %c   %c"),
+      rag(519), rag(828));
+    StringFormatter::lcd2(2,7,
+      F("H: %c"),
+      rag(468));
+)
+ENDIF 
+DELAY(5000)
+FOLLOW(77)
+
+/*StringFormatter::lcd2(2,3,
+      F("B: %c   %c   %c"),
+      rag(321), rag(507), rag(687));
+    StringFormatter::lcd2(2,4,
+      F("C:      %c   %c"),
+      rag(510), rag(834));
+    StringFormatter::lcd2(2,5,
+      F("D: %c   %c   %c"),
+      rag(324), rag(513), rag(731));
+    StringFormatter::lcd2(2,6,
+      F("E:      %c   %c"),
+      rag(516), rag(831));
+    StringFormatter::lcd2(2,7,
+      F("F:      %c   %c"),
+      rag(519), rag(828);
+    StringFormatter::lcd2(2,8,
+      F("H: %c"),
+      rag(468));*/
