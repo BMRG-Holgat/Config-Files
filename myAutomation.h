@@ -22,7 +22,7 @@
  *  SEQUENCE(n) is not visible to Withrottle.
  *  
  */
-
+HAL_IGNORE_DEFAULTS
 
 #include "myTurnouts.h"
 #include "myTurnoutAliases.h"
