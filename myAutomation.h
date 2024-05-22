@@ -24,14 +24,17 @@
  */
 HAL_IGNORE_DEFAULTS
 
+
+#include "myDefinitions.h"
 #include "myTurnouts.h"
 #include "myTurnoutAliases.h"
 #include "myTurnoutPairs.h"
 #include "mySignals.h"
 #include "mySignalAliases.h"
-#include "myDefinitions.h"
 #include "myStartupSequence.h"
 
+
+//JMRI_SENSOR(500,10)
 
 
 
@@ -54,6 +57,8 @@ AUTOSTART SEQUENCE(61)
     ENDIF
 DONE
 
+
+
 #include "EXRAIL2.h"
 
 STEALTH_GLOBAL(char rag(int16_t sigid) {
@@ -66,28 +71,28 @@ STEALTH_GLOBAL(char rag(int16_t sigid) {
 
 SEQUENCE(77)
 IF(Latch_default)
-SCREEN(2,0,"Signal Status")
+SCREEN(2,0,"Board  1  4  7  9")
 STEALTH( 
     StringFormatter::lcd2(2,1,
-      F("A: %c   %c   %c"),
+      F("A:     %c  %c  %c"),
       rag(318), rag(504), rag(714));
     StringFormatter::lcd2(2,2,
-      F("B: %c   %c   %c"),
+      F("B      %c  %c  %c"),
       rag(321), rag(507), rag(687));
     StringFormatter::lcd2(2,3,
-      F("C:     %c   %c"),
+      F("C:        %c     %c"),
       rag(510), rag(834));
     StringFormatter::lcd2(2,4,
-      F("D: %c   %c   %c"),
+      F("D:     %c  %c  %c"),
       rag(324), rag(513), rag(731));
     StringFormatter::lcd2(2,5,
-      F("E:     %c   %c"),
+      F("E:        %c     %c"),
       rag(516), rag(831));
     StringFormatter::lcd2(2,6,
-      F("F:     %c   %c"),
+      F("F:        %c     %c"),
       rag(519), rag(828));
     StringFormatter::lcd2(2,7,
-      F("H: %c"),
+      F("H:       %c"),
       rag(468));
 )
 ENDIF 
