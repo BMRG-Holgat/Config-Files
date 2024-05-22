@@ -20,6 +20,15 @@
 */
 
 
+//Change signals 
+#define changeSignal(signal)\
+  IFRED(signal) \
+    DELAY(500) \
+    AMBER(signal) \
+  ELSE \
+    RED(signal) \
+    DELAY(500) \
+  ENDIF
 
 //Startup led sequence
 #define ledReset \
@@ -358,20 +367,7 @@
         THROW(turnout) \
       ENDIF 
     
-/* 
 
-//Fiddle Yard Ladder
-#define throwFiddleYardLadder(t1) \
-    IFCLOSED(t1) \
-      THROW(t1) \
-    ENDIF
-
-#define closeFiddleYardLadder(t1) \
-    IFTHROWN(t1) \
-      CLOSE(t1) \
-      ENDIF
-*/
-// Not needed since myTunroutPairs.
 
 #define forwardStop(speed,sns) \
   FWD(speed) \
@@ -400,7 +396,25 @@
   SCREEN(2,0, "Resetting " #item)\
   SCREEN(3,0, "To default state")\
   SCREEN(4,0,"Test Completed")
-  
+
+
+
+  /* 
+
+//Fiddle Yard Ladder
+#define throwFiddleYardLadder(t1) \
+    IFCLOSED(t1) \
+      THROW(t1) \
+    ENDIF
+
+#define closeFiddleYardLadder(t1) \
+    IFTHROWN(t1) \
+      CLOSE(t1) \
+      ENDIF
+*/
+// Not needed since myTunroutPairs.
+
+
 /*
 #define ladder(id,entryThrows,exitThrows) \
    IFRESERVE(ladder_block1_##id)
@@ -443,3 +457,5 @@
   //AT(ladder_entry_sensor)
   //CALL(ladder_entry_seq)   // will return when train exits ladder after user request
 */
+
+
