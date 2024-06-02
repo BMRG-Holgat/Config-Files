@@ -60,8 +60,8 @@ The configuration file for DCC-EX Command Station
 
 #define DUAL_EX8874_STACKED_SHIELDS F("DUAL-EX8874-STACK"), \
 new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
-new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, UNUSED_PIN), \
- new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, UNUSED_PIN), \
+new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \
+ new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, PC2), \
  new MotorDriver( 5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, PC3)
  /*new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \*/
 

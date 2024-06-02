@@ -363,6 +363,8 @@
   AT(sns) \
   STOP 
 
+
+//not yet sure if this is required
 #define signalSetTest(signal,slow,fast,seq)\
   IFGREEN(signal) \
     FWD(fast) \
