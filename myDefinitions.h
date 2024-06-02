@@ -19,17 +19,6 @@
 *
 */
 
-
-//Change signals 
-#define changeSignal(signal)\
-  IFRED(signal) \
-    DELAY(500) \
-    AMBER(signal) \
-  ELSE \
-    RED(signal) \
-    DELAY(500) \
-  ENDIF
-
 //Startup led sequence
 #define ledReset \
    RED(SIG_A1) \
