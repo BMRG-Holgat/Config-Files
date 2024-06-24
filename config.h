@@ -55,7 +55,7 @@ The configuration file for DCC-EX Command Station
 //#define DIAG_IO
 //#define I2C_USE_WIRE
 #define MAX_CURRENT 3000
-#define STARTUP_DELAY 5000  //delay start for 5 sec
+#define STARTUP_DELAY 1000  //delay start for 5 sec
 //#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD
 
 #define DUAL_EX8874_STACKED_SHIELDS F("DUAL-EX8874-STACK"), \
