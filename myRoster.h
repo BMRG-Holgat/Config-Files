@@ -13,9 +13,12 @@
 ROSTER(4052,"Class 40","Lights")
 ROSTER(5703,"Freightliner 03","")
 ROSTER(4750,"Freightliner 50","")
-ROSTER(1083,"Dmu","Lights//*Horn/*Brakes/*Release////Sound/*Doors/*D Horn")
-ROSTER(3,"Thomas Moore","ights//Empty/Forward/Reverse")
+ROSTER(1083,"Dmu","Lights/Sound/*Horn/*Brakes/*Release////Sound/*Doors/*D Horn")
+ROSTER(5359,"108-DMU","Lights/Sound/*Horn 1/*Horn 2/*Door Slam/*Air Buildup/*Couple/*Uncouple/Brake/*Flange/Rail Joint/*guard Whistle/Coast///*Uncouple Cycle")
+ROSTER(3,"Thomas Moore","Lights//Empty/Forward/Reverse")
 ROSTER(2604,"Coal","Lights//Rear")
+ROSTER(89,"Azuma-89","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Door/*Compresser/Diesel/Speed Squeal/*Whistle/*Guard-Driver//*Sanders/*Nose Open/*Nose Close/*Announcement/*Speed detonators")
+ROSTER(90,"Azuma-90","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Door/*Compresser/Diesel/Speed Squeal/*Whistle/*Guard-Driver//*Sanders/*Nose Open/*Nose Close/*Announcement/*Speed detonators")
 
 //Arthurs locos
 ROSTER(1701,"Clayton D8560","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Clag 2/Light off #1/Notch up/*Rev up 2/*Guard Whistle/Gas Off/*Apply Brake/Light off #2/Flange Squeal/*Buffering up/*Clag passing/*Horn 3/*Rev Rattle/*Horn 4/Mute/Shunting")
