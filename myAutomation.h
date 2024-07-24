@@ -32,12 +32,64 @@ HAL_IGNORE_DEFAULTS
 #include "mySignals.h"
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
+#include "myRoster.h"
+//#include "myRoutes.h"
 
 
 //JMRI_SENSOR(500,10)
+JMRI_SENSOR(318,26) //BOARD 1
+JMRI_SENSOR(380,26) //BOARD 2
+JMRI_SENSOR(442,43) //BOARD 3
+
+AUTOMATION(33,"TRACK A TEST")
+FWD(40)
+  AT(334)
+  IFCLOSED(UGS_T2_H)
+    THROW(UGS_T2_H)
+  ENDIF
+    FON(2)
+    AFTER(334)
+    FOFF(2)
+    RESERVE(1)
+FOLLOW(34)
+
+SEQUENCE(34)
+  AT(319)
+  DELAY(5000)
+  STOP 
+  DELAYRANDOM(5000,10000)
+  RESERVE(2)
+  FON(4)
+  DELAY(500)
+  FOFF(4)
+  DELAY(300)
+  FON(3)
+  DELAY(300)
+  FOFF(3)
+  SPEED(40)
+FOLLOW(35)
+
+SEQUENCE(35)
+PRINT("AT 35)")
+ AFTER(319)
+ RED(SIG_A1)
+ SPEED(70)
+ PRINT("FREE 1")
+ FREE(1)
+FOLLOW(36)
+
+SEQUENCE(36)
+AFTER(447)
+AMBER(SIG_A1)
+ AT(481)
+ STOP
+ GREEN(SIG_A1)
+ PRINT("FREE 2")
+ FREE(2)
+DONE 
 
 
-
+/*
 AUTOSTART ROUTE(60,"SIG TEST")
    AFTER(818)
     IFGREEN(SIG_F3)
@@ -57,7 +109,7 @@ AUTOSTART SEQUENCE(61)
     ENDIF
 DONE
 
-
+*/
 
 #include "EXRAIL2.h"
 
@@ -71,29 +123,29 @@ STEALTH_GLOBAL(char rag(int16_t sigid) {
 
 SEQUENCE(77)
 IF(Latch_default)
-SCREEN(2,0,"Board  1  4  7  9")
+SCREEN(3,0,"Board  1  4  7  9")
 STEALTH( 
-    StringFormatter::lcd2(2,1,
+    StringFormatter::lcd2(3,1,
       F("A:     %c  %c  %c"),
-      rag(318), rag(504), rag(714));
-    StringFormatter::lcd2(2,2,
+      rag(127), rag(264), rag(280));
+    StringFormatter::lcd2(3,2,
       F("B      %c  %c  %c"),
-      rag(321), rag(507), rag(687));
-    StringFormatter::lcd2(2,3,
+      rag(130), rag(268), rag(284));
+    StringFormatter::lcd2(3,3,
       F("C:        %c     %c"),
-      rag(510), rag(834));
-    StringFormatter::lcd2(2,4,
+      rag(272), rag(262));
+    StringFormatter::lcd2(3,4,
       F("D:     %c  %c  %c"),
-      rag(324), rag(513), rag(731));
-    StringFormatter::lcd2(2,5,
+      rag(133), rag(276), rag(288));
+    StringFormatter::lcd2(3,5,
       F("E:        %c     %c"),
-      rag(516), rag(831));
-    StringFormatter::lcd2(2,6,
+      rag(188), rag(259));
+    StringFormatter::lcd2(3,6,
       F("F:        %c     %c"),
-      rag(519), rag(828));
-    StringFormatter::lcd2(2,7,
+      rag(192), rag(256));
+    StringFormatter::lcd2(3,7,
       F("H:       %c"),
-      rag(468));
+      rag(182));
 )
 ENDIF 
 DELAY(5000)
