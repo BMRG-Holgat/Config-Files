@@ -21,7 +21,7 @@ ROSTER(89,"Azuma-89","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Do
 ROSTER(90,"Azuma-90","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Door/*Compresser/Diesel/Speed Squeal/*Whistle/*Guard-Driver//*Sanders/*Nose Open/*Nose Close/*Announcement/*Speed detonators")
 
 //Arthurs locos
-ROSTER(1701,"Clayton D8560","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Clag 2/Light off #1/Notch up/*Rev up 2/*Guard Whistle/Gas Off/*Apply Brake/Light off #2/Flange Squeal/*Buffering up/*Clag passing/*Horn 3/*Rev Rattle/*Horn 4/Mute/Shunting")
+ROSTER(8560,"Clayton D8560","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Clag 2/Light off #1/Notch up/*Rev up 2/*Guard Whistle/Gas Off/*Apply Brake/Light off #2/Flange Squeal/*Buffering up/*Clag passing/*Horn 3/*Rev Rattle/*Horn 4/Mute/Shunting")
 ROSTER(1702,"Clayton D8507","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Clag 2/Light off #1/Notch up/*Rev up 2/*Guard Whistle/Gas Off/*Apply Brake/Light off #2/Flange Squeal/*Buffering up/*Clag passing/*Horn 3/*Rev Rattle/*Horn 4/Mute/Shunting")
 ROSTER(2491,"Class 24 97201","Lights/Sound/*Double Horn/*Single Horn/*Brake Release/Flange Squeal/*Door slam/Compressor OFF/*Volume/Inertia/*Air release/*Buffering up/Spirax Valves/Tail Lights")
 ROSTER(5804,"58004 Coal","Lights/Sound/Active Brake/*Horn 1/*Horn 2/Tail lights/Notch up/*Brake release/*Guard Whistle/*Cab Beep/Rail Echo/Cab Light/*Announcement/Flange Squeal 1/Flange Squeal 2/*Comms Bell/*Horn 3/*Horn 4/Mute/Shunting")
