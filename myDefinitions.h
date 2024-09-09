@@ -365,6 +365,15 @@
   AT(sns) \
   STOP 
 
+//Standard signal changer
+#define blockSequence(signal,sensor1,sensor2,sensor3) \
+  IFGREEN(signal) \
+    AFTER(sensor1) \
+    RED(signal) \
+    AT(sensor2) \
+    AMBER(signal) \
+    AT(sensor3) \
+    GREEN(signal)
 
 //not yet sure if this is required
 #define signalSetTest(signal,slow,fast,seq)\
