@@ -367,13 +367,22 @@
 
 //Standard signal changer
 #define blockSequence(signal,sensor1,sensor2,sensor3) \
-  IFGREEN(signal) \
     AFTER(sensor1) \
     RED(signal) \
     AT(sensor2) \
     AMBER(signal) \
     AT(sensor3) \
-    GREEN(signal)
+    GREEN(signal) 
+  
+#define blockSequenceTrackChange(signal,signal2,turnoutPair,sensor1,sensor2) \
+  IFTHROWN(turnoutPair) \
+      AFTER(sensor1) \
+      RED(signal) \
+    ENDIF \
+    AT(sensor2) \
+    CLOSE(turnoutPair) \
+    GREEN(signal) \
+  ENDIF
 
 //not yet sure if this is required
 #define signalSetTest(signal,slow,fast,seq)\
