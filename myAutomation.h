@@ -145,6 +145,11 @@ AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,200,201,202)
   FOLLOW(36)
 
+//Test track change blocksignaling
+// Track A - B
+AUTOSTART SEQUENCE(40)
+  blockSequenceTrackChange(SIG_A1,SIG_B1,9004,200,201)
+  FOLLOW(40)
 
 /*
 AUTOSTART ROUTE(60,"SIG TEST")
