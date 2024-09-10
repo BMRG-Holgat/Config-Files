@@ -33,7 +33,8 @@ HAL_IGNORE_DEFAULTS
 #include "mySignalAliases.h"
 #include "myStartupSequence.h"
 #include "myRoster.h"
-//#include "myRoutes.h"
+#include "myRoutes.h"
+#include "myBlockDetectors.h"
 
 
 //JMRI_SENSOR(500,10)
