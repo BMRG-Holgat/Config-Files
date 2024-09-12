@@ -34,32 +34,35 @@ HAL_IGNORE_DEFAULTS
 #include "myStartupSequence.h"
 #include "myRoster.h"
 #include "myRoutes.h"
-#include "myBlockDetectors.h"
 
 
-//JMRI_SENSOR(500,10)
-JMRI_SENSOR(318,26) //BOARD 1
-JMRI_SENSOR(380,26) //BOARD 2
-JMRI_SENSOR(442,43) //BOARD 3
-
-SEQUENCE(43)
+//JMRI_SENSOR(300,18)
+//JMRI_SENSOR(318,27) //BOARD 1
+//JMRI_SENSOR(380,26) //BOARD 2
+//JMRI_SENSOR(380,40) //BOARD 3
+//JMRI_SENSOR(486,62) //Board 4
+//JMRI_SENSOR(818,43) //BOARD 9
+/*
+AUTOMATION(33,"TRACK A TEST")
 RESERVE(1)
 FWD(40)
-  AT(318)
-  RED(SIG_A1)
+  AT(322)
+  FREE(5)
   IFCLOSED(UGS_T2_H)
     THROW(UGS_T2_H)
   ENDIF
+  RED(SIG_A1)
+    AT(322)
     FON(2)
-    AFTER(318)
-    FOFF(2)   
-FOLLOW(44)
+    AFTER(322)
+    FOFF(2)    
+FOLLOW(34)
 
-SEQUENCE(44)
-  AT(319)
-  DELAY(5000)
+SEQUENCE(34)
+  AT(308)
+  DELAY(500)
   STOP 
-  DELAYRANDOM(5000,10000)
+  DELAYRANDOM(10000,15000)
   RESERVE(2)
   GREEN(SIG_A1)
   FON(4)
@@ -69,43 +72,60 @@ SEQUENCE(44)
   FON(3)
   DELAY(300)
   FOFF(3)
-  SPEED(40)
-FOLLOW(45)
+  FWD(40)
+FOLLOW(35)
 
-SEQUENCE(45)
+SEQUENCE(35)
 PRINT("AT 35)")
- AFTER(319)
+ AFTER(308)
  RED(SIG_A1)
  SPEED(70)
  PRINT("FREE 1")
  FREE(1)
-FOLLOW(46)
+FOLLOW(36)
 
-SEQUENCE(46)
-AFTER(320)
+SEQUENCE(36)
+AT(525)
 AMBER(SIG_A1)
- AT(321)
- STOP
- GREEN(SIG_A1)
- PRINT("FREE 2")
- FREE(2)
-DONE 
+AFTER(704)
+RESERVE(3)
+FREE(2)
+GREEN(123)
+FOLLOW(37)
 
+SEQUENCE(37)
+AT(828)
+RESERVE(4)
+FREE(3)
+SPEED(40)
+FOLLOW(38)
+
+SEQUENCE(38)
+AT(721)
+RESERVE(5)
+FREE(4)
+FOLLOW(39)
+
+SEQUENCE(39)
+ AT(482)
+ STOP
+DONE 
+*/
 
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,200,201,202)
+  blockSequence(SIG_A1,308,525,704)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,200,201,202)
+  blockSequence(SIG_A2,525,704,828)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,200,201,202)
+  blockSequence(SIG_A3,704,828,721)
   FOLLOW(24)
 //Track B
 AUTOSTART SEQUENCE(25)
-  blockSequence(SIG_B1,200,201,202)
+  blockSequence(SIG_B1,309,201,202)
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
   blockSequence(SIG_B2,200,201,202)
@@ -115,14 +135,14 @@ AUTOSTART SEQUENCE(27)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
-  blockSequence(SIG_C2,200,201,202)
+  blockSequence(SIG_C2,200,306,202)
   FOLLOW(28)
 AUTOSTART SEQUENCE(29)
   blockSequence(SIG_C3,200,201,202)
   FOLLOW(29)
 //Track D
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_D1,200,201,202)
+  blockSequence(SIG_D1,310,201,202)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
   blockSequence(SIG_D2,200,201,202)
@@ -132,25 +152,18 @@ AUTOSTART SEQUENCE(32)
   FOLLOW(32)
 //Track E
 AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_E2,200,201,202)
+  blockSequence(SIG_E2,200,300,202)
   FOLLOW(33)
 AUTOSTART SEQUENCE(34)
   blockSequence(SIG_E3,200,201,202)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,200,201,202)
+  blockSequence(SIG_F2,200,303,202)
   FOLLOW(35)
-//Track F
 AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,200,201,202)
   FOLLOW(36)
-
-//Test track change blocksignaling
-// Track A - B
-AUTOSTART SEQUENCE(40)
-  blockSequenceTrackChange(SIG_A1,SIG_B1,9004,200,201)
-  FOLLOW(40)
 
 /*
 AUTOSTART ROUTE(60,"SIG TEST")
@@ -190,16 +203,16 @@ SCREEN(3,0,"Board  1  4  7  9")
 STEALTH( 
     StringFormatter::lcd2(3,1,
       F("A:     %c  %c  %c"),
-      rag(127), rag(264), rag(280));
+      rag(123), rag(264), rag(280));
     StringFormatter::lcd2(3,2,
-      F("B      %c  %c  %c"),
-      rag(130), rag(268), rag(284));
+      F("B:     %c  %c  %c"),
+      rag(126), rag(268), rag(284));
     StringFormatter::lcd2(3,3,
       F("C:        %c     %c"),
       rag(272), rag(262));
     StringFormatter::lcd2(3,4,
       F("D:     %c  %c  %c"),
-      rag(133), rag(276), rag(288));
+      rag(129), rag(276), rag(288));
     StringFormatter::lcd2(3,5,
       F("E:        %c     %c"),
       rag(188), rag(259));

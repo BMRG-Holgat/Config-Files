@@ -31,7 +31,7 @@ SCREEN(2,1,"Leaving Siding")
 FOLLOW(Station__Header_App)
 
 
-//board 1 approaching header
+
 SEQUENCE(Station__Header_App)
     //Add BD here for station blockage
     IF(BD_S1_AA) //If station occupied take avoiding action.
@@ -47,7 +47,7 @@ SEQUENCE(Station__Header_App)
     ENDIF
 DONE
 
-//move into head shunt
+
 SEQUENCE(Head_Shunt_Access)
   RESERVE(Stn_Head_App)
   SPEED(15)
@@ -56,7 +56,7 @@ SEQUENCE(Head_Shunt_Access)
   FREE(A_Exit)
 DONE
 
-//enter station and stop
+
 SEQUENCE(Station_App_Stop)
 SCREEN(2,1,"Arriving at station")
   RESERVE(Station_A)
@@ -64,7 +64,6 @@ SCREEN(2,1,"Arriving at station")
   STOP
 FOLLOW(Station_Exit)
 
-//Leave station
 SEQUENCE(Station_Exit)
 SCREEN(2,1,"Leaving Station")
   DELAYRANDOM(10000,20000)
@@ -77,7 +76,6 @@ SCREEN(2,1,"Leaving Station")
   FREE(Stn_Head_App)
 FOLLOW(AC_Approach)
 
-//Left station 
 SEQUENCE(AC_Approach)
   IFNOT(BD_S2_A) //Set block detector board 2 take avoiding action
     IFNOT(BD_S3_A) //Set block detector board 3 avoiding action  
@@ -121,7 +119,6 @@ SEQUENCE(ByPass_AD_Approach)
   ENDIF
 FOLLOW(AE_Approach)
 
-//move to main lines
 SEQUENCE(AD_Approach)
 SCREEN(2,1,"Approaching AD")
 RESERVE(A_Main)
@@ -132,14 +129,12 @@ RESERVE(A_Main)
   SPEED(50) 
 FOLLOW(AE_Approach)
 
-//Move to track B from A
 SEQUENCE(Exit_A__Station_ByPass_UMF)
 //Move to track B to bypass station, 
 // and stay on Track B
 
 FOLLOW(B_MAIN_Run)
 
-//track A station bypass moving from A -> B -> A
 SEQUENCE(Exit_A__Station_ByPass_UGS)
 //Move to track B to bypass station
 // then move back to track A

@@ -52,32 +52,24 @@ The configuration file for DCC-EX Command Station
 // in MotorDriver.h
 // to allow turnout microswitch to change without shorting
 //==========================================================
+
 //#define DIAG_IO
 //#define I2C_USE_WIRE
 #define MAX_CURRENT 3000
-#define STARTUP_DELAY 1000  //delay start for 5 sec
+#define STARTUP_DELAY 2000  //delay start for 5 sec
 //#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD
+#define MOTOR_SHIELD_TYPE EXCSB1_WITH_EX8874
 
-#define DUAL_EX8874_STACKED_SHIELDS F("DUAL-EX8874-STACK"), \
-new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
-new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \
- new MotorDriver( 2, 10, UNUSED_PIN, 7, A2, 1.27, 5000, PC2), \
- new MotorDriver( 5, 4, UNUSED_PIN, 6, A3, 1.27, 5000, PC3)
- /*new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5), \*/
+// GPIO 32 is Booster Input on EX-CSB1
+#define BOOSTER_INPUT 32
 
-#define F439_4X2 F("F439_4X2"), \
- new MotorDriver(16, 21, UNUSED_PIN, 10, A13, 1.27, 2000, 20), \
- new MotorDriver(22, 23, UNUSED_PIN, 5, A6, 1.27, 2000, 25), \
- new MotorDriver(26, 43, UNUSED_PIN, 28, A2, 1.27, 2000, 27), \
- new MotorDriver(30, 44, UNUSED_PIN, 29, A8, 1.27, 2000, 31)
+// ESP32 LED Wifi Indicator
+// GPIO 2 on ESPduino32
+// #define WIFI_LED 2
+//
+// GPIO 33 on EX-CSB1
+#define WIFI_LED 33
 
-#define MY_EX8874 F("MY-EX8874"), \
-new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
- new MotorDriver(11, 13, UNUSED_PIN, 8, A1, 1.27, 5000, A5)
-
-#define MOTOR_SHIELD_TYPE DUAL_EX8874_STACKED_SHIELDS
-//#define MOTOR_SHIELD_TYPE F439_4X2
-//#define MOTOR_SHIELD_TYPE MY_EX8874
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -166,7 +158,7 @@ new MotorDriver( 3, 12, UNUSED_PIN, 9, A0, 1.27, 5000, A4), \
 //OR define OLED_DRIVER width,height in pixels (address auto detected)
 // 128x32 or 128x64 I2C SSD1306-based devices are supported.
 // Use 132,64 for a SH1106-based I2C device with a 128x64 display.
-//#define OLED_DRIVER 128,32
+//#define OLED_DRIVER 128,64
 
 // Define scroll mode as 0, 1 or 2
 //  *  #define SCROLLMODE 0 is scroll continuous (fill screen if poss),

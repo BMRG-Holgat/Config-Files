@@ -350,7 +350,7 @@
     SCREEN(2,1,"Closing: ") \
     SCREEN(2,2,#id)\
     CLOSE(id) \
-    DELAY(100)
+    DELAY(750)
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \
@@ -369,9 +369,9 @@
 #define blockSequence(signal,sensor1,sensor2,sensor3) \
     AFTER(sensor1) \
     RED(signal) \
-    AT(sensor2) \
+    AFTER(sensor2) \
     AMBER(signal) \
-    AT(sensor3) \
+    AFTER(sensor3) \
     GREEN(signal) 
   
 #define blockSequenceTrackChange(signal,signal2,turnoutPair,sensor1,sensor2) \

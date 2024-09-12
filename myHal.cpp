@@ -20,7 +20,7 @@
 #include "IO_HCSR04.h"    // Ultrasonic range sensor
 //#include "IO_VL53L0X.h"   // Laser time-of-flight sensor
 //#include "IO_DFPlayer.h"  // MP3 sound player
-//#include "IO_I2CDFPlayer.h"
+#include "IO_I2CDFPlayer.h"
 #include "IO_HALDisplay.h" // Haldisplays
 #include "DCC.h"
 
@@ -31,6 +31,7 @@
 
 //Shows current 8 locos running and direction on 2 screens
 void updateLocoScreen() {
+
   for (int i=0; i<8; i++) {
     if (DCC::speedTable[i].loco > 0) {
       int speed = DCC::speedTable[i].speedCode;
@@ -50,8 +51,9 @@ void updateLocoScreen() {
 //==========================================================================
 
 void halSetup() {
-//I2CManager.forceClock(100000);
-I2CManager.forceClock(50000);
+I2CManager.forceClock(100000);
+//I2CManager.forceClock(50000);
+
 
   //=======================================================================
   // The following directive defines a PCA9685 PWM Servo driver module.
@@ -60,30 +62,37 @@ I2CManager.forceClock(50000);
   //   First Vpin=100
   //   Number of VPINs=16 (numbered 100-115)
   //   I2C address of module=0x40
-  
-   //EXIOExpander::create(300, 62, {I2CMux_0,SubBus_2,0x60}); // Board 1
-   //EXIOExpander::create(362, 62, {I2CMux_0,SubBus_2,0x61}); // Board 2
-   //EXIOExpander::create(858, 62, {I2CMux_0,SubBus_2,0x62}); // Board 3 
-   //EXIOExpander::create(486, 62, {I2CMux_0,SubBus_2,0x64}); // Board 4 
-   //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x64}); // Board 5  
-   //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_1,0x65}); // Board 6
-   //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
-   //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8 
-   //EXIOExpander::create(796, 62, {I2CMux_0,SubBus_4,0x68}); // Board 9 
-  /* 
-   PCA9685::create(120, 16, {I2CMux_0,SubBus_2,0x40}); // Board 1
-   PCA9685::create(136, 16, {I2CMux_0,SubBus_2,0x41}); // Board 2
-   PCA9685::create(152, 16, {I2CMux_0,SubBus_2,0x48}); // Board 2
-   PCA9685::create(168, 16, {I2CMux_0,SubBus_2,0x42}); // Board 3
-   PCA9685::create(184, 4, {I2CMux_0,SubBus_2,0x43}); // Board 4
-   PCA9685::create(264, 16, {I2CMux_0,SubBus_2,0x45}); // Board 4 (signals?)
-   PCA9685::create(200, 16, {I2CMux_0,SubBus_1,0x44}); // Board 5
-   PCA9685::create(280, 16, {I2CMux_0,SubBus_4,0x47}); // Board 7 (signals?)
-   PCA9685::create(216, 16, {I2CMux_0,SubBus_4,0x45}); // Board 8
+  //PCA9685::create(100, 16, {I2CMux_0,SubBus_7,0x45});
+  //PCA9685::create(212, 16, 0x48);
+ 
+  PCF8574::create(318,8,{I2CMux_0,SubBus_3,0x20});
+ // MCP23017::create(796,16,{I2CMux_0,SubBus_4,0x27});
+
+  EXIOExpander::create(300, 18, {I2CMux_0,SubBus_3,0x69}); // Board 1
+  EXIOExpander::create(362, 62, {I2CMux_0,SubBus_3,0x61}); // Board 2
+  EXIOExpander::create(424, 62, {I2CMux_0,SubBus_3,0x62}); // Board 3
+  EXIOExpander::create(486, 62, {I2CMux_0,SubBus_3,0x63}); // Board 4 
+  //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x60}); // Board 5
+  //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_4,0x65}); // Board 6  
+  EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
+  //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
+  EXIOExpander::create(796, 62, {I2CMux_0,SubBus_4,0x68}); // Board 9 
+
+   //PCA9685::create(296, 16, {I2CMux_0,SubBus_2,0x45});
+  PCA9685::create(120, 16, {I2CMux_0,SubBus_3,0x40}); // Board 1
+   //PCA9685::create(136, 16, {I2CMux_0,SubBus_3,0x41}); // Board 2
+   //PCA9685::create(152, 16, {I2CMux_0,SubBus_3,0x48}); // Board 2
+   //PCA9685::create(168, 16, {I2CMux_0,SubBus_3,0x42}); // Board 3
+   PCA9685::create(184, 16, {I2CMux_0,SubBus_3,0x43}); // Board 4 turnout and signals
+   PCA9685::create(264, 16, {I2CMux_0,SubBus_3,0x45}); // Board 4 (signals?)
+   //PCA9685::create(200, 16, {I2CMux_0,SubBus_1,0x44}); // Board 5
+   PCA9685::create(280, 16, {I2CMux_0,SubBus_4,0x47}); // Board 7 Signals
+   //PCA9685::create(216, 16, {I2CMux_0,SubBus_0,0x45}); // Board 8
    PCA9685::create(248, 16, {I2CMux_0,SubBus_4,0x42}); // Board 9
-   PCA9685::create(232, 16, {I2CMux_0,SubBus_4,0x46}); // Board 8
-    
-*/
+
+   //PCA9685::create(232, 16, {I2CMux_0,SubBus_4,0x46}); // Board 8 Fiddle Yard
+
+
   //=======================================================================
   // The following directive defines an MCP23017 16-port I2C GPIO Extender module.
   //=======================================================================
@@ -115,6 +124,7 @@ I2CManager.forceClock(50000);
   //MCP23008::create(300, 8, 0x22);
 
 
+
   //=======================================================================
   // The following directive defines a PCF8574 8-port I2C GPIO Extender module.
   //=======================================================================
@@ -124,6 +134,7 @@ I2CManager.forceClock(50000);
   //   I2C address of module=0x23
 
   //PCF8574::create(812, 8, 0x23);
+  
 
 
   // Alternative form using INT pin (see above)
@@ -207,7 +218,7 @@ I2CManager.forceClock(50000);
 
 
   //I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
-  //I2CDFPlayer::create(10000, 1, 0x4D, 0, 1);
+  //I2CDFPlayer::create(1000, 4, {I2CMux_0,SubBus_2,0x4D}, 0);
   //I2CDFPlayer::create(10050, 1, 0x49, 0, 1);
 
 
@@ -279,16 +290,16 @@ I2CManager.forceClock(50000);
  //
  // 
 
- //HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_1,0x27 }, 16, 2);
+ //HALDisplay<LiquidCrystal>::create(4, { I2CMux_0,SubBus_0,0x27 }, 16, 2);
  //HALDisplay<LiquidCrystal>::create(3, { I2CMux_0,SubBus_1,0x26 }, 16, 2);
- //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_2,0x27 }, 16, 2);
- //HALDisplay<OLED>::create(2,{I2CMux_0,SubBus_1,0x3d},128,64);
- HALDisplay<OLED>::create(2,0x3c,128,64);
+ //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_,0x27 }, 16, 2);
+HALDisplay<OLED>::create(3,{I2CMux_0,SubBus_1,0x3C},128,64);
+HALDisplay<OLED>::create(2,{I2CMux_0,SubBus_1,0x3D},128,64);
+//HALDisplay<OLED>::create(4,{I2CMux_0,SubBus_0,0x3C},128,64);
+
   // Update displays with loco numbers and direction
-  UserAddin::create(updateLocoScreen, 1000);
+//UserAddin::create(updateLocoScreen, 1000);
+
 }
-
-
-
 
 #endif

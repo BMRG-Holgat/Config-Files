@@ -8,6 +8,8 @@
 ALIAS(BIG_RED_BUTTON,75)
 ALIAS(Latch_build,74)
 ALIAS(Latch_default,73)
+ALIAS(Latch_light,76)
+ALIAS(Latch_church,77)
  
 ROUTE(900,"SIGNAL TEST")
   signalTest
@@ -16,11 +18,12 @@ DONE
  ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(Latch_build)
   IFNOT(Latch_default)
+  POWERON
     PRINT("Testing Signals")
     SCREEN(2,0,"")
     SCREEN(2,1,"")
     DELAY(1000)
-//    signalTest
+    signalTest
     DELAY(1000)
     PRINT("Testing Turnouts")
     turnoutTest
@@ -41,10 +44,11 @@ ROUTE(994,"System: Set Default Positions")
     defaultPosition(DMF_T6_A__DMF_T7_E) // Set track 1 exit on Yard C.
     defaultPosition(DFM_T15_E__DFM_T14_A) //Set track 1 access on Yard E.
     PRINT("Setting all signals to green") 
+    
     GREEN(SIG_A1) 
     GREEN(SIG_B1) 
     GREEN(SIG_D1)
-    //RED(SIG_H1) 
+    RED(SIG_H1) 
     GREEN(SIG_A2) 
     GREEN(SIG_B2) 
     GREEN(SIG_C2) 
@@ -60,8 +64,10 @@ ROUTE(994,"System: Set Default Positions")
     LATCH(Latch_default)
     SCREEN(2,0,"System Ready")
     SCREEN(2,1,"")
-    SCREEN(2,2,"")
-  ENDIF
+    SCREEN(2,2,"") 
+  ELSE 
+    SCREEN(2,0,"Defaults already set")  
+  ENDIF 
   
 DONE
 
@@ -128,55 +134,65 @@ DONE
  */  
  
 ONOVERLOAD(A)
-    SCREEN(2,0,"OVERLOAD District A")
-    SCREEN(2,1,"POWER OFF")
+    SCREEN(2,0,"OVERLOAD")
+    SCREEN(2,1,"OVERLOAD District A")
+    SCREEN(2,2,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
     AFTEROVERLOAD(A)
-      SCREEN(3,0,"Restored District A")
-      SCREEN(3,1,"  POWER ON")
+      SCREEN(2,0,"Restored District A")
+      SCREEN(2,1,"  POWER ON")
+      SCREEN(2,2,"")
       PRINT("Overload cleared on District A - Power Restored")
       DELAY(2000)
-      SCREEN(3,0,"")
+      SCREEN(2,0,"")
+      SCREEN(2,1,"")
 DONE
-/*
+
 ONOVERLOAD(B)
-    SCREEN(2,0, "OVERLOAD Scenic")
-    SCREEN(2,1," POWER OFF")
+    SCREEN(2,0,"OVERLOAD")
+    SCREEN(2,3, "OVERLOAD Scenic")
+    SCREEN(2,4," POWER OFF")
     PRINT("Overload Detected on Scenic - Turn Off Power")
     SET_TRACK(B, NONE)
     AFTEROVERLOAD(B)
       SCREEN(2,0,"Restored Scenic")
-      SCREEN(2,1,"   POWER ON")
+      SCREEN(2,4,"   POWER ON")
+      SCREEN(2,3,"")
       PRINT("Overload cleared on Scenic - Power Restored")
       DELAY(2000)
       SCREEN(2,0,"")
+      SCREEN(2,4,"")
 DONE
-*/
-/*ONOVERLOAD(C)
-    SCREEN(4,0, "OVERLOAD Prog ")
-    SCREEN(4,1," POWER OFF")
-    PRINT("Overload Detected on Prog - Turn Off Power")
-    SET_TRACK(C, NONE)
-    AFTEROVERLOAD(C)
-      SCREEN(4,0,"Restored Prog")
-      SCREEN(4,1,"POWER ON")
-      PRINT("Overload cleared on Prog - Power Restored")
-      DELAY(2000)
-      SCREEN(4,0,"")
-DONE
-*/
+
 ONOVERLOAD(D)
-    SCREEN(4,0, "OVERLOAD District B ")
-    SCREEN(4,1," POWER OFF")
-    PRINT("Overload Detected on District B - Turn Off Power")
+    SCREEN(2,0, "OVERLOAD Prog ")
+    SCREEN(2,7," POWER OFF")
+    PRINT("Overload Detected on Prog - Turn Off Power")
     SET_TRACK(D, NONE)
     AFTEROVERLOAD(D)
-      SCREEN(4,0,"Restored District B")
-      SCREEN(4,1,"POWER ON")
+      SCREEN(2,0,"Restored Prog")
+      SCREEN(2,7,"POWER ON")
+      PRINT("Overload cleared on Prog - Power Restored")
+      DELAY(2000)
+      SCREEN(2,0,"")
+      SCREEN(2,7,"")
+DONE
+
+ONOVERLOAD(C)
+    SCREEN(2,0,"OVERLOAD")
+    SCREEN(2,5, "OVERLOAD District B ")
+    SCREEN(2,6," POWER OFF")
+    PRINT("Overload Detected on District B - Turn Off Power")
+    SET_TRACK(C, NONE)
+    AFTEROVERLOAD(C)
+      SCREEN(2,0,"Restored District B")
+      SCREEN(2,6,"POWER ON")
+      SCREEN(2,5,"")
       PRINT("Overload cleared on District B - Power Restored")
       DELAY(2000)
-      SCREEN(4,0,"")
+      SCREEN(2,0,"")
+      SCREEN(2,6,"")
 DONE
 
 ROUTE(992,"Power Reset: Reset District A")
@@ -186,30 +202,31 @@ ROUTE(992,"Power Reset: Reset District A")
     DELAY(5000)
     SCREEN(2,1,"")
 DONE
-/*
+
 ROUTE(991,"Power Reset: Reset Scenic")
-    SCREEN(4,1,"Reseting Power")
-    SET_TRACK(B, NONE)
+    SCREEN(2,1,"Reseting Power")
+    SET_TRACK(B, MAIN)
     POWERON
     DELAY(5000)
-    SCREEN(4,1,"")
+    SCREEN(2,1,"")
 DONE
-*/
-/*ROUTE(990,"Power: PROG")
+
+ROUTE(990,"Power Reset: Reset District B")
+    SCREEN(2,1,"Reseting District B")
+    SET_TRACK(C, MAIN)
+    POWERON
+    DELAY(5000)
+    SCREEN(2,1,"")
+DONE
+
+/*ROUTE(989,"Power Reset: Reset Prog")
     SCREEN(3,1,"Reseting Power")
-    SET_TRACK(C, NONE)
+    SET_TRACK(D, PROG)
     POWERON
     DELAY(5000)
     SCREEN(3,1,"")
 DONE
 */
-ROUTE(989,"Power Reset: Reset District B")
-    SCREEN(3,1,"Reseting Power")
-    SET_TRACK(D, MAIN)
-    POWERON
-    DELAY(5000)
-    SCREEN(3,1,"")
-DONE
 
 // BIG RED BUTTON!
 ROUTE(999,"System: Stop/Resume")

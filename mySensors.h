@@ -74,7 +74,7 @@ ALIAS(SNS_FB_T5_E)
 ALIAS(SNS_FB_T5_A)
 
 // Track C Down Main Fast
-
+ALIAS(SNS_DFM_B1,319)
 
 // Track D Up Main Fast
 
