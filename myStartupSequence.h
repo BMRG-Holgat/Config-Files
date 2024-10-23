@@ -11,9 +11,6 @@ ALIAS(Latch_default,73)
 ALIAS(Latch_light,76)
 ALIAS(Latch_church,77)
  
-ROUTE(900,"SIGNAL TEST")
-  signalTest
-DONE
 
  ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(Latch_build)
@@ -227,6 +224,10 @@ DONE
     SCREEN(3,1,"")
 DONE
 */
+
+ROUTE(987,"System: Signal Test")
+  signalTest
+DONE
 
 // BIG RED BUTTON!
 ROUTE(999,"System: Stop/Resume")

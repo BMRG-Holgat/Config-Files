@@ -44,14 +44,15 @@
    signalLedTest(SIG_D1) \
    signalLedTest(SIG_A2) \
    signalLedTest(SIG_B2) \
-   signalLedTest(SIG_C2) \
    signalLedTest(SIG_D2) \
+   signalLedTest(SIG_C2) \
    signalLedTest(SIG_E2) \
    signalLedTest(SIG_F2) \
+   signalLedTest(SIG_H1) \
    signalLedTest(SIG_A3) \
    signalLedTest(SIG_B3) \
-   signalLedTest(SIG_C3) \
    signalLedTest(SIG_D3) \
+   signalLedTest(SIG_C3) \
    signalLedTest(SIG_E3) \
    signalLedTest(SIG_F3) \
    ledReset \
@@ -367,11 +368,11 @@
 
 //Standard signal changer
 #define blockSequence(signal,sensor1,sensor2,sensor3) \
-    AFTER(sensor1) \
+    AT(sensor1) \
     RED(signal) \
-    AFTER(sensor2) \
+    AT(sensor2) \
     AMBER(signal) \
-    AFTER(sensor3) \
+    AT(sensor3) \
     GREEN(signal) 
   
 #define blockSequenceTrackChange(signal,signal2,turnoutPair,sensor1,sensor2) \
