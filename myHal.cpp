@@ -75,7 +75,7 @@ I2CManager.forceClock(50000);
   //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x60}); // Board 5
   //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_4,0x65}); // Board 6  
   //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
-  EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
+  //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
   EXIOExpander::create(796, 62, {I2CMux_0,SubBus_4,0x68}); // Board 9 
 
    //PCA9685::create(296, 16, {I2CMux_0,SubBus_2,0x45});
@@ -218,7 +218,7 @@ I2CManager.forceClock(50000);
 
 
   //I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
-  //I2CDFPlayer::create(1000, 4, {I2CMux_0,SubBus_2,0x4D}, 0);
+  I2CDFPlayer::create(1000, 4, {I2CMux_0,SubBus_3,0x4D}, 0);
   //I2CDFPlayer::create(10050, 1, 0x49, 0, 1);
 
 

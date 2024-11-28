@@ -131,19 +131,19 @@ DONE
  */  
  
 ONOVERLOAD(A)
-    SCREEN(2,0,"OVERLOAD")
-    SCREEN(2,1,"OVERLOAD District A")
-    SCREEN(2,2,"POWER OFF")
+    SCREEN(3,0,"OVERLOAD")
+    SCREEN(3,1,"OVERLOAD District A")
+    SCREEN(3,2,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
     AFTEROVERLOAD(A)
-      SCREEN(2,0,"Restored District A")
-      SCREEN(2,1,"  POWER ON")
-      SCREEN(2,2,"")
+      SCREEN(3,0,"Restored District A")
+      SCREEN(3,1,"  POWER ON")
+      SCREEN(3,2,"")
       PRINT("Overload cleared on District A - Power Restored")
       DELAY(2000)
-      SCREEN(2,0,"")
-      SCREEN(2,1,"")
+      SCREEN(3,0,"")
+      SCREEN(3,1,"")
 DONE
 
 ONOVERLOAD(B)
@@ -193,11 +193,11 @@ ONOVERLOAD(C)
 DONE
 
 ROUTE(992,"Power Reset: Reset District A")
-    SCREEN(2,1,"Reseting Power")
+    SCREEN(3,1,"Reseting Power")
     SET_TRACK(A, MAIN)
     POWERON
     DELAY(5000)
-    SCREEN(2,1,"")
+    SCREEN(3,1,"")
 DONE
 
 ROUTE(991,"Power Reset: Reset Scenic")
