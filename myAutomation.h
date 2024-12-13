@@ -39,18 +39,21 @@ HAL_IGNORE_DEFAULTS
 
 
 //JMRI_SENSOR(300,18)
-//JMRI_SENSOR(318,27) //BOARD 1
+//JMRI_SENSOR(318,16) //BOARD 1
 //JMRI_SENSOR(362,62) //BOARD 2
 //JMRI_SENSOR(424,62) //BOARD 3
 //JMRI_SENSOR(486,62) //Board 4
+//JMRI_SENSOR(548,62) //Board 5
+//JMRI_SENSOR(610,62) //Board 6
 //JMRI_SENSOR(734,62) //Board 8
 //JMRI_SENSOR(796,62) //BOARD 9
-/*
-AUTOMATION(33,"TRACK A TEST")
+
+AUTOMATION(43,"TRACK A TEST")
 RESERVE(1)
 FWD(40)
   AT(322)
   FREE(5)
+  PRINT("FREED 5")
   IFCLOSED(UGS_T2_H)
     THROW(UGS_T2_H)
   ENDIF
@@ -59,9 +62,9 @@ FWD(40)
     FON(2)
     AFTER(322)
     FOFF(2)    
-FOLLOW(34)
+FOLLOW(44)
 
-SEQUENCE(34)
+SEQUENCE(44)
   AT(308)
   DELAY(500)
   STOP 
@@ -76,96 +79,99 @@ SEQUENCE(34)
   DELAY(300)
   FOFF(3)
   FWD(40)
-FOLLOW(35)
+FOLLOW(45)
 
-SEQUENCE(35)
-PRINT("AT 35)")
+SEQUENCE(45)
+PRINT("AT 45)")
  AFTER(308)
  RED(SIG_A1)
  SPEED(70)
  PRINT("FREE 1")
  FREE(1)
-FOLLOW(36)
+FOLLOW(46)
 
-SEQUENCE(36)
+SEQUENCE(46)
 AT(525)
 AMBER(SIG_A1)
 AFTER(704)
 RESERVE(3)
 FREE(2)
 GREEN(123)
-FOLLOW(37)
+FOLLOW(47)
 
-SEQUENCE(37)
+SEQUENCE(47)
 AT(828)
 RESERVE(4)
 FREE(3)
 SPEED(40)
-FOLLOW(38)
+FOLLOW(48)
 
-SEQUENCE(38)
+SEQUENCE(48)
 AT(721)
 RESERVE(5)
 FREE(4)
-FOLLOW(39)
+FOLLOW(49)
 
-SEQUENCE(39)
+SEQUENCE(49)
+SPEED(40)
  AT(482)
  STOP
 DONE 
-*/
+
 
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,395,525,704)
+  blockSequence(SIG_A1,396,525,772)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,525,704,828)
+  blockSequence(SIG_A2,525,772,828)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,704,828,721)
+  blockSequence(SIG_A3,772,828,721)
   FOLLOW(24)
 //Track B
 AUTOSTART SEQUENCE(25)
-  blockSequence(SIG_B1,405,523,814)
+  IFCLOSED(510)
+    blockSequence(SIG_B1,395,523,764)
+  ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,523,814,832)
+  blockSequence(SIG_B2,523,764,832)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,814,832,508)
+  blockSequence(SIG_B3,764,832,508)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
   blockSequence(SIG_C2,451,319,386)
   FOLLOW(28)
 AUTOSTART SEQUENCE(29)
-  blockSequence(SIG_C3,200,451,319)
+  blockSequence(SIG_C3,770,451,319)
   FOLLOW(29)
 //Track D
 AUTOSTART SEQUENCE(30)
   blockSequence(SIG_D1,398,519,817)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,519,817,830)
+  blockSequence(SIG_D2,519,766,830)
   FOLLOW(31)
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D3,817,830,FYD_SNS2_T1_M)
+  blockSequence(SIG_D3,766,830,668)
   FOLLOW(32)
 //Track E
 AUTOSTART SEQUENCE(33)
   blockSequence(SIG_E2,476,417,526)
   FOLLOW(33)
 AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_E3,825,476,417)
+  blockSequence(SIG_E3,767,476,417)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
   blockSequence(SIG_F2,527,380,483)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_F3,818,527,380)
+  blockSequence(SIG_F3,768,527,380)
   FOLLOW(36)
 
 /*
@@ -189,33 +195,40 @@ AUTOSTART SEQUENCE(61)
 DONE
 
 */
-AUTOMATION(43,"D: Mainline")
-RESERVE(41)
+AUTOMATION(53,"D: Mainline")
+RESERVE(51)
 FWD(30)
 AT(304)
 PRINT("REACHED 304")
-RESERVE(42) //Reserve D 2&3
+RESERVE(52) //Reserve D 2&3
 SPEED(50)
 AT(398)
-FREE(46)
-RESERVE(43) //reserve D 4-7
-FREE(41)
+FREE(56)
+RESERVE(53) //reserve D 4-7
+FREE(51)
 AT(817)
-RESERVE(44) //Reserve D 9 
-FREE(42)
+RESERVE(54) //Reserve D 9 
+FREE(52)
 AT(830)
-RESERVE(45) //Reserve 8-6
+RESERVE(55) //Reserve 8-6
 FREE(43)
 PRINT("REACHED 830")
 SPEED(40)
+AT(668)
+  SPEED(1)
+DONE
+
+
+AUTOMATION(54,"D PARK")
+SPEED(30)
 IFCLOSED(UMF_T5_E__UMF_T6_A)
   AT(FYD_SNS2_T1_M)
-  FREE(44)
-  RESERVE(46)
+  FREE(54)
+  RESERVE(56)
   PRINT("FYD_SNS2_T1_M")
   SPEED(20)
   AT(FYD_SNS1_T1_F)
-  FREE(45)
+  FREE(55)
   PRINT("Y1 SENSOR")
   STOP 
 ENDIF 
@@ -236,7 +249,7 @@ DONE
 
 STEALTH_GLOBAL(char rag(int16_t sigid) {
     if(RMFT2::isSignal(sigid,SIGNAL_RED)) return 'R';
-    if(RMFT2::isSignal(sigid,SIGNAL_AMBER)) return 'A';
+    if(RMFT2::isSignal(sigid,SIGNAL_AMBER)) return 'Y';
     if(RMFT2::isSignal(sigid,SIGNAL_GREEN)) return 'G';
     return 'X';
 } 
@@ -244,29 +257,29 @@ STEALTH_GLOBAL(char rag(int16_t sigid) {
 
 SEQUENCE(77)
 IF(Latch_default)
-SCREEN(3,0,"Board  1  4  7  9")
+SCREEN(4,0,"Gantry 1  4  7  9")
 STEALTH( 
-    StringFormatter::lcd2(3,1,
+    StringFormatter::lcd2(4,1,
       F("A:     %c  %c  %c"),
-      rag(123), rag(264), rag(280));
-    StringFormatter::lcd2(3,2,
+      rag(123), rag(272), rag(280));
+    StringFormatter::lcd2(4,2,
       F("B:     %c  %c  %c"),
       rag(126), rag(268), rag(284));
-    StringFormatter::lcd2(3,3,
+    StringFormatter::lcd2(4,3,
       F("C:        %c     %c"),
       rag(272), rag(262));
-    StringFormatter::lcd2(3,4,
+    StringFormatter::lcd2(4,4,
       F("D:     %c  %c  %c"),
       rag(129), rag(276), rag(288));
-    StringFormatter::lcd2(3,5,
+    StringFormatter::lcd2(4,5,
       F("E:        %c     %c"),
       rag(188), rag(259));
-    StringFormatter::lcd2(3,6,
+    StringFormatter::lcd2(4,6,
       F("F:        %c     %c"),
       rag(192), rag(256));
-    StringFormatter::lcd2(3,7,
+    StringFormatter::lcd2(4,7,
       F("H:       %c"),
-      rag(182));
+      rag(468));
 )
 ENDIF 
 DELAY(5000)

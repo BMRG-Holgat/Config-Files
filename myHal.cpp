@@ -36,7 +36,7 @@ void updateLocoScreen() {
     if (DCC::speedTable[i].loco > 0) {
       int speed = DCC::speedTable[i].speedCode;
       char direction = (speed & 0x80) ? 'F' : 'R';
-      speed = speed & 0x7f;
+      speed = speed & 0x7e;
       if (speed > 0) speed = speed - 1;
       SCREEN(2, i, F("Loco: %4d %3d %c"), DCC::speedTable[i].loco,
       speed, direction);
@@ -65,17 +65,17 @@ I2CManager.forceClock(50000);
   //PCA9685::create(100, 16, {I2CMux_0,SubBus_7,0x45});
   //PCA9685::create(212, 16, 0x48);
  
-  PCF8574::create(318,8,{I2CMux_0,SubBus_3,0x20}); // IR Sensors
- // MCP23017::create(796,16,{I2CMux_0,SubBus_4,0x27});
+  //PCF8574::create(318,8,{I2CMux_0,SubBus_3,0x20}); // IR Sensors
+  MCP23017::create(318,16,{I2CMux_0,SubBus_3,0x26});
 
   EXIOExpander::create(300, 18, {I2CMux_0,SubBus_3,0x69}); // Board 1
   EXIOExpander::create(362, 62, {I2CMux_0,SubBus_3,0x61}); // Board 2
   EXIOExpander::create(424, 62, {I2CMux_0,SubBus_3,0x62}); // Board 3
   EXIOExpander::create(486, 62, {I2CMux_0,SubBus_3,0x63}); // Board 4 
-  //EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x60}); // Board 5
-  //EXIOExpander::create(610, 62, {I2CMux_0,SubBus_4,0x65}); // Board 6  
-  //EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
-  //EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
+  EXIOExpander::create(548, 62, {I2CMux_0,SubBus_1,0x65}); // Board 5
+  EXIOExpander::create(610, 62, {I2CMux_0,SubBus_4,0x65}); // Board 6  
+  EXIOExpander::create(672, 62, {I2CMux_0,SubBus_4,0x66}); // Board 7
+  EXIOExpander::create(734, 62, {I2CMux_0,SubBus_4,0x67}); // Board 8
   EXIOExpander::create(796, 62, {I2CMux_0,SubBus_4,0x68}); // Board 9 
 
    //PCA9685::create(296, 16, {I2CMux_0,SubBus_2,0x45});
@@ -295,10 +295,10 @@ I2CManager.forceClock(50000);
  //HALDisplay<LiquidCrystal>::create(2, { I2CMux_0,SubBus_,0x27 }, 16, 2);
 HALDisplay<OLED>::create(3,{I2CMux_0,SubBus_1,0x3C},128,64);
 HALDisplay<OLED>::create(2,{I2CMux_0,SubBus_1,0x3D},128,64);
-//HALDisplay<OLED>::create(4,{I2CMux_0,SubBus_0,0x3C},128,64);
+HALDisplay<OLED>::create(4,{I2CMux_0,SubBus_0,0x3D},128,64);
 
   // Update displays with loco numbers and direction
-//UserAddin::create(updateLocoScreen, 1000);
+UserAddin::create(updateLocoScreen, 1000);
 
 }
 

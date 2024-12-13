@@ -313,7 +313,7 @@
   RED(id) \
   DELAY(1000)\
   PRINT(#id " Amber") \
-  SCREEN(2,2,"        AMBER") \
+  SCREEN(2,2,"       YELLOW") \
   AMBER(id) \
   DELAY(1000) \
   PRINT(#id " Green") \
@@ -403,11 +403,11 @@
 //LCD information
 #define myLCDOutput(item)\
   SCREEN(2,1,"") \
-  SCREEN(3,1,"") \
-  SCREEN(4,1,"") \
+  SCREEN(2,1,"") \
+  SCREEN(2,1,"") \
   SCREEN(2,0, "Resetting " #item)\
-  SCREEN(3,0, "To default state")\
-  SCREEN(4,0,"Test Completed")
+  SCREEN(2,1, "To default state")\
+  SCREEN(2,2, "Test Completed")
 
 
 
