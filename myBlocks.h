@@ -1,14 +1,14 @@
 /* myBlocks
 *
+* Final block defintions, do not change or alter
+*
 * Define blocks Aliases
 *
 * ALIAS(block, [value])
 *
 * Block syntax
-* (track value_sequence_[description]_turnout_board_type)
-* App __ Approach
-* Hold = Wait
-* Ex __ Exit
+* (track_blockNumber)
+* 
 */
 
 //Up Goods Slow Blocks
