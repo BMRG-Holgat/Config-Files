@@ -360,12 +360,6 @@
       ENDIF 
     
 
-
-#define forwardStop(speed,sns) \
-  FWD(speed) \
-  AT(sns) \
-  STOP 
-
 //Standard signal changer
 #define blockSequence(signal,sensor1,sensor2,sensor3) \
     AT(sensor1) \
@@ -374,31 +368,6 @@
     AMBER(signal) \
     AT(sensor3) \
     GREEN(signal) 
-  
-#define blockSequenceTrackChange(signal,signal2,turnoutPair,sensor1,sensor2) \
-  IFTHROWN(turnoutPair) \
-      AFTER(sensor1) \
-      RED(signal) \
-    ENDIF \
-    AT(sensor2) \
-    CLOSE(turnoutPair) \
-    GREEN(signal) \
-  ENDIF
-
-//not yet sure if this is required
-#define signalSetTest(signal,slow,fast,seq)\
-  IFGREEN(signal) \
-    FWD(fast) \
-    RETURN \
-  ENDIF \
-  IFAMBER(signal) \
-    FWD(slow) \
-    RETURN \
-  ENDIF \
-  IFRED(signal) \
-    STOP \
-    FOLLOW(seq) \
-  ENDIF
 
 //LCD information
 #define myLCDOutput(item)\
@@ -409,22 +378,6 @@
   SCREEN(2,1, "To default state")\
   SCREEN(2,2, "Test Completed")
 
-
-
-  /* 
-
-//Fiddle Yard Ladder
-#define throwFiddleYardLadder(t1) \
-    IFCLOSED(t1) \
-      THROW(t1) \
-    ENDIF
-
-#define closeFiddleYardLadder(t1) \
-    IFTHROWN(t1) \
-      CLOSE(t1) \
-      ENDIF
-*/
-// Not needed since myTunroutPairs.
 
 
 /*

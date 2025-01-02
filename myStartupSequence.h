@@ -93,13 +93,6 @@ ROUTE(995,"System: End Session") // end Session setting
   SCREEN(4,2,"Dismantling")
 DONE
 
-// Fiddle yard auto turnout select
-/*AUTOSTART SEQUENCE(901)
-  AT(some_sensor_pin) THROW(9118) DELAY(30000)
-FOLLOW(901)
-*/
-
-
 
 AUTOSTART SEQUENCE(998)
   AFTER(BIG_RED_BUTTON)
@@ -118,17 +111,17 @@ ROUTE(993, "Power: Set Up DCC on A, B, C")
     DONE
 */
 //Enable Prog track
-/*ROUTE(888,"Power: Enable Prog")
+ROUTE(888,"Power: Enable Prog")
   PRINT("Set up Prog Track")
   SET_TRACK(D,PROG)
 DONE
-*/
+
 //Enable Prog track
-/*ROUTE(889,"Power: Disable Prog")
+ROUTE(889,"Power: Disable Prog")
   PRINT("Remove Prog Track")
   SET_TRACK(D,NONE)
 DONE
- */  
+ 
  
 ONOVERLOAD(A)
     SCREEN(3,0,"OVERLOAD")

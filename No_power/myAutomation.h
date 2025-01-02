@@ -36,11 +36,8 @@ HAL_IGNORE_DEFAULTS
 #include "myStartupSequence.h"
 #include "myRoster.h"
 #include "myRoutes.h"
-#include "myBlockReserves.h"
 
 
-//include track automations
-#include "myTrackA.h"
 
 //JMRI_SENSOR(300,18)
 //JMRI_SENSOR(318,16) //BOARD 1
@@ -52,6 +49,101 @@ HAL_IGNORE_DEFAULTS
 //JMRI_SENSOR(734,62) //Board 8
 //JMRI_SENSOR(796,62) //BOARD 9
 
+AUTOMATION(43,"A: Round A")
+RESERVE(A_B1)
+SCREEN(3,1,"A_B1 Reserved")
+IFTHROWN(9026)
+  CLOSE(9026)
+ENDIF 
+IFTHROWN(9001)
+  CLOSE(9001)
+ENDIF
+FWD(40)
+  AT(322)
+  FREE(A_B6)
+  SCREEN(3,6,"A_B6 Free")
+  IFCLOSED(UGS_T2_H)
+    THROW(UGS_T2_H)
+  ENDIF
+  RED(SIG_A1)
+ //   AT(322)
+    FON(2)
+    AFTER(322)
+    FOFF(2)    
+FOLLOW(44)
+
+SEQUENCE(44)
+  AT(308)
+  DELAY(500)
+  STOP 
+  DELAYRANDOM(10000,15000)
+  RESERVE(A_B2)
+  SCREEN(3,2,"A_B2 Reserved")
+  GREEN(SIG_A1)
+  FON(4)
+  DELAY(500)
+  FOFF(4)
+  DELAY(300)
+  FON(3)
+  DELAY(300)
+  FOFF(3)
+  FWD(40)
+FOLLOW(45)
+
+SEQUENCE(45)
+PRINT("AT 45)")
+ AFTER(308)
+ RED(SIG_A1)
+ SPEED(70)
+ SCREEN(3,1,"A_B1 Free")
+ FREE(A_B1)
+FOLLOW(46)
+
+SEQUENCE(46)
+AT(525)
+AMBER(SIG_A1)
+AT(628)
+RESERVE(A_B3)
+SCREEN(3,3,"A_B3 Reserved")
+SPEED(70)
+FREE(A_B2)
+SCREEN(3,2,"A_B2 Free")
+GREEN(SIG_A1)
+FOLLOW(47)
+
+SEQUENCE(47)
+AT(828)
+RESERVE(A_B4)
+SCREEN(3,4,"A_B4 Reserved")
+FREE(A_B3)
+SCREEN(3,3,"A_B3 Free")
+SPEED(30)
+FOLLOW(48)
+
+SEQUENCE(48)
+AT(721)
+RESERVE(A_B5)
+SCREEN(3,5,"A_B5 Reserved")
+FREE(A_B4)
+SCREEN(3,4,"A_B4 Free")
+SPEED(30)
+FOLLOW(49)
+
+SEQUENCE(49)
+AT(576)
+RESERVE(A_B6)
+SCREEN(3,6,"A_B6 Reserved")
+FREE(A_B5)
+SCREEN(3,5,"A_B5 Free")
+SPEED(30)
+FOLLOW(50)
+
+SEQUENCE(50)
+SPEED(40)
+ AT(482)
+ STOP
+ FOFF(0)
+DONE 
 
 
 //Standard Signal sequences
@@ -109,8 +201,27 @@ AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,768,527,380)
   FOLLOW(36)
 
+/*
+AUTOSTART ROUTE(60,"SIG TEST")
+   AFTER(818)
+    IFGREEN(SIG_F3)
+        RED(SIG_F3)
+    ENDIF
+    DELAY(10000)
+    AMBER(SIG_F3)
+    DELAY(10000)
+    GREEN(SIG_F3) 
+FOLLOW(60)
 
+AUTOSTART SEQUENCE(61)
+    AFTER(825)
+    IFAMBER(SIG_B3)
+        DELAY(5000)
+        GREEN(SIG_B3)
+    ENDIF
+DONE
 
+*/
 AUTOMATION(53,"D: Mainline")
 RESERVE(51)
 FWD(30)
@@ -160,7 +271,6 @@ IFTHROWN(UMF_T7_E__UMF_T8_A)
 ENDIF 
 FOFF(0)
 DONE
-
 
 #include "EXRAIL2.h"
 
@@ -220,4 +330,3 @@ FOLLOW(77)
     StringFormatter::lcd2(2,8,
       F("H: %c"),
       rag(468));*/
-

@@ -13,206 +13,166 @@
 * All basic sequences created
 *
 */
+//initsl starting positions
+AUTOMATION(40,"A: Start 2")
+RESERVE(A_B7)
+SCREEN(3,7,"A_B7 Reserved")
+FWD(15)
+ROUTE_HIDDEN(40)
+FOLLOW(51)
 
+AUTOMATION(41,"A: Start 3")
+RESERVE(A_B6)
+SCREEN(3,6,"A_B6 Reserved")
+FWD(15)
+ROUTE_HIDDEN(41)
+FOLLOW(50)
 
-//Exit track A fiddle yard
-SEQUENCE(Exit_A_Holding)
-SCREEN(2,1,"Leaving Siding")
-    RESERVE(A_Exit)
-    RESERVE(B_Exit)
-    IFTHROWN(9023)
-      CLOSE(9023)
-      FREE(B_Exit)
-    ENDIF
-    FWD(40)
-    AT(B2_IR_A)
-    FREE(A_Hold_Finish)
-    DELAY(5000) //Remove
-FOLLOW(Station__Header_App)
-
-
-
-SEQUENCE(Station__Header_App)
-    //Add BD here for station blockage
-    IF(BD_S1_AA) //If station occupied take avoiding action.
-      CLOSE(UGS_T2_H)
-    ENDIF
-    IFCLOSED(UGS_T2_H) //AB
-    DELAY(5000) //Remove
-      FOLLOW(Head_Shunt_Access)
-    ELSE 
-    DELAY(5000) //Remove
-      RED(SIG_A1)
-      FOLLOW(Station_App_Stop)
-    ENDIF
-DONE
-
-
-SEQUENCE(Head_Shunt_Access)
-  RESERVE(Stn_Head_App)
-  SPEED(15)
-  AT(300) //replace with BD value
-  STOP
-  FREE(A_Exit)
-DONE
-
-
-SEQUENCE(Station_App_Stop)
-SCREEN(2,1,"Arriving at station")
-  RESERVE(Station_A)
-  AT(BD_S1_AA) //block detector  
-  STOP
-FOLLOW(Station_Exit)
-
-SEQUENCE(Station_Exit)
-SCREEN(2,1,"Leaving Station")
-  DELAYRANDOM(10000,20000)
-  RESERVE(AC_App)
-  IFTHROWN(9004) //AC
-    CLOSE(9004)
+//Track A from yard
+//Leave yard and approach station
+AUTOMATION(43,"A: A STN Stop") 
+RESERVE(A_B1) //Reserve Station block 
+SCREEN(3,1,"A_B1      Reserved")
+IFTHROWN(9026) //close B-A turnouts
+  CLOSE(9026)
+ENDIF 
+IFTHROWN(9001) //Close A-B turnouts
+  CLOSE(9001)
+ENDIF
+IFCLOSED(UGS_T2_H) //Close Header
+    THROW(UGS_T2_H)
   ENDIF
-  GREEN(SIG_A1)
-  FWD(40)
-  FREE(Stn_Head_App)
-FOLLOW(AC_Approach)
+FWD(40)       //Move forward
+  AT(322)
+  FREE(A_B7)  //Release previous ladder
+  SCREEN(3,7,"A_B7 Free") 
+  RED(SIG_A1)
+    FON(2)
+    AFTER(322)
+    FOFF(2)    
+FOLLOW(44)
 
-SEQUENCE(AC_Approach)
-  IFNOT(BD_S2_A) //Set block detector board 2 take avoiding action
-    IFNOT(BD_S3_A) //Set block detector board 3 avoiding action  
-        SCREEN(2,1,"Approaching AC")
-        PRINT("Approaching AC")
-        RESERVE(AD_App)
-        IF(BD_S2_A)
-          RED(SIG_A1)
-        ENDIF
-        FREE(Station_A)
-        FOLLOW(AD_Approach)
-    ELSE
-      LATCH(AC_ByPass)
-      PRINT("BD_S3 activated")
-    ENDIF
-  ELSE
-   LATCH(AC_ByPass)
-   PRINT("BD_S2 activated")
-  ENDIF
-  IF(AC_ByPass)
-  SCREEN(2,1,"ByPassing AC")
-    IFCLOSED(9004)
-        RESERVE(B_Station_Pass)
-        RESERVE(BC_App)
-        RED(SIG_B1)
-        IFCLOSED(9004)
-          THROW(9004)
-        ENDIF
-        FOLLOW(ByPass_AD_Approach)
-    ENDIF
-  ENDIF
-
-//Bypass split train detector
-SEQUENCE(ByPass_AD_Approach)
-  IF(AC_ByPass)
-    RESERVE(A_Main)
-    SPEED(50)
-    IFCLOSED(9007)
-      THROW(9007)
-    ENDIF  
-  ENDIF
-FOLLOW(AE_Approach)
-
-SEQUENCE(AD_Approach)
-SCREEN(2,1,"Approaching AD")
-RESERVE(A_Main)
-  IFTHROWN(9007) //Double slip
-    CLOSE(9007)  
-  ENDIF 
-  GREEN(SIG_A2) 
-  SPEED(50) 
-FOLLOW(AE_Approach)
-
-SEQUENCE(Exit_A__Station_ByPass_UMF)
-//Move to track B to bypass station, 
-// and stay on Track B
-
-FOLLOW(B_MAIN_Run)
-
-SEQUENCE(Exit_A__Station_ByPass_UGS)
-//Move to track B to bypass station
-// then move back to track A
-
-FOLLOW(AE_Approach)
-
-SEQUENCE(AE_Approach)
-SCREEN(2,1,"Approaching AE")
-  AT(BD_S4_A)
-  IF(AC_ByPass)
-    FREE(B_Station_Pass)
-    FREE(BC_App)
-    GREEN(SIG_B1)
-    UNLATCH(AC_ByPass)
-  ENDIF
-  FREE(AC_App)
-  AMBER(SIG_A1)
-  RED(SIG_A2)
-  GREEN(SIG_A3)
-  IFTHROWN(UGS_T5_E__UFM_T6_A)
-    CLOSE(UGS_T5_E__UFM_T6_A)
-  ENDIF
-  SPEED(90)
-  DELAY(5000) //Remove
-FOLLOW(AF_Approach)
-
-SEQUENCE(AF_Approach)
-SCREEN(2,1,"Approaching AF")
-  AT(BD_S8_A)
-  RED(SIG_A3)
-  AMBER(SIG_A2)
-  GREEN(SIG_A1)
-  FREE(AD_App)
-  SPEED(40)
-  DELAY(5000) //Remove
-FOLLOW(Yard_Access)
-
-SEQUENCE(Yard_Access)
-SCREEN(2,1,"Yard Access")
-  AT(B9_IR_A)
-  IFRESERVE(A_Hold_Start)
-  DELAY(10000) //Remove
-    CLOSE(9023)
-    SPEED(20)
-    GREEN(SIG_A2)
-    AMBER(SIG_A3)
-    DELAY(5000) //Remove
-    FOLLOW(A_Pos1_Stop)
-  ELSE //Take avoiding action, move to FYard B
-    RESERVE(FB_App)
-    THROW(9023)
-    SPEED(20)
-    FREE(A_Main)
-    FOLLOW(BYard_Ladder_T1_A)
-  ENDIF
-  
-SEQUENCE(A_Pos1_Stop)
-SCREEN(2,1,"Stopping B7")
-    AT(B7_IR_A)
-    SCREEN(2,1,"Waiting @ B7")
-    GREEN(SIG_A3)
-    RESERVE(A_Hold_Mid)
-    FREE(A_Main)    
-FOLLOW(A_Pos2_Stop)
-
-SEQUENCE(A_Pos2_Stop)
-SCREEN(2,1,"Stopping B5")
-    AT(B5_IR_A_2)
-    SCREEN(2,1,"Waiting @ B5")
-    FREE(A_Hold_Start)
-    RESERVE(A_Hold_Finish)  
-    DELAY(5000) //Remove
-FOLLOW(A_Pos3_Stop)
-
-SEQUENCE(A_Pos3_Stop)
-SCREEN(2,1,"Stoped B3")
-  AT(B3_IR_A)
+SEQUENCE(44)
+//Stop at station
+  AT(308)
   STOP 
-  FREE(A_Hold_Mid)
-DONE
+  DELAYRANDOM(10000,15000)
+  RESERVE(A_B2) //reserve Block 2
+  SCREEN(3,2,"A_B2 Reserved")
+  GREEN(SIG_A1)
+  FON(4)
+  DELAY(500)
+  FOFF(4)
+  DELAY(300)
+  FON(3)
+  DELAY(300)
+  FOFF(3)
+  FWD(40)
+FOLLOW(45)
+
+SEQUENCE(45)
+//Move to gantry 1
+ AT(396)
+ RESERVE(A_B3)
+ SCREEN(3,3,"A_B3 Reserved")
+ SPEED(50) // Increase Speed
+ //Now station is clear free it
+ FREE(A_B1)
+ SCREEN(3,1,"A_B1 Free")
+FOLLOW(46)
+
+SEQUENCE(46)
+//block A_B3
+AT(628) //Board 6
+SPEED(60) // Increase speed
+FOLLOW(47)
+
+SEQUENCE(47)
+//Board 8
+AT(772)
+RESERVE(A_B4)
+SCREEN(3,4,"A_B4 Reserved")
+FREE(A_B2)
+SCREEN(3,2,"A_B2 Free")
+FOLLOW(48)
+
+SEQUENCE(48)
+AT(828)
+RESERVE(A_B5)
+SCREEN(3,5,"A_B5 Reserved")
+FREE(A_B3)
+SCREEN(3,3,"A_B3 Free")
+SPEED(20)
+FOLLOW(49)
+
+SEQUENCE(49) //Block A_B5
+AT(721)
+RESERVE(A_B6)
+SCREEN(3,6,"A_B6 Reserved")
+FREE(A_B4)
+SCREEN(3,4,"A_B4 Free")
+//SPEED(20)
+FOLLOW(50)
+
+SEQUENCE(50) //Block A_B6
+AT(576)
+RESERVE(A_B7)
+SCREEN(3,7,"A_B7 Reserved")
+FREE(A_B5)
+SCREEN(3,5,"A_B5 Free")
+//SPEED(30)
+FOLLOW(51)
+
+SEQUENCE(51) // Block A_B7
+ AT(482)
+ STOP
+ FOFF(0)
+ FREE(A_B6)
+SCREEN(3,6,"A_B6 Free")
+DONE 
+
+
+//Track A through station to track B
+
+AUTOMATION(60,"A: A STN Bypass")
+RESERVE(B_B1)
+SCREEN(3,1,"     B_B1")
+  IFTHROWN(9026)
+    CLOSE(9026)
+  ENDIF
+  IFCLOSED(9001)
+    THROW(9001)
+  ENDIF
+  FWD(40)
+FOLLOW(61)
+
+SEQUENCE(61)
+  AT(396) //TRACK B1 SENSOR
+  FREE(A_B7)  //Release previous ladder
+  SCREEN(3,7,"A_B7 Free") 
+  RESERVE(A_B2)
+  SCREEN(3,2,"A_B2 Reserved")
+  RESERVE(A_B3)
+  SCREEN(3,3,"     A_B3")
+  RESERVE(B_B2)
+  SCREEN(3,2,"     B_B2")
+  IFCLOSED(9007)
+    THROW(9007)
+  ENDIF
+FOLLOW(62)
+
+SEQUENCE(62)
+  AT(123) //SENSOR B6
+  SPEED(60)
+  IFTHROWN(9007)
+    CLOSE(9007)
+  ENDIF
+  IFRED(SIG_B1)
+    FREE(B_B2)
+    SCREEN(3,2,"B_B2 Free")
+    GREEN(SIG_B1)
+  ENDIF 
+FOLLOW(47)
+
+
 
