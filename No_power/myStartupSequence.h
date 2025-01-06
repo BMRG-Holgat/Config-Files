@@ -215,7 +215,7 @@ ROUTE(990,"Power Reset: Reset District B")
     SET_TRACK(C, MAIN)
     POWERON
     DELAY(5000)
-    SCREEN(4,4,"")
+    SCREEN(3,4,"")
 DONE
 
 /*ROUTE(989,"Power Reset: Reset Prog")
