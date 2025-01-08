@@ -15,17 +15,17 @@
 */
 //initsl starting positions
 AUTOMATION(40,"A: Start 2")
+ROUTE_HIDDEN(40)
 RESERVE(A_B7)
 SCREEN(3,7,"A_B7 Reserved")
 FWD(15)
-ROUTE_HIDDEN(40)
 FOLLOW(51)
 
 AUTOMATION(41,"A: Start 3")
+ROUTE_HIDDEN(41)
 RESERVE(A_B6)
 SCREEN(3,6,"A_B6 Reserved")
 FWD(15)
-ROUTE_HIDDEN(41)
 FOLLOW(50)
 
 //Track A from yard
@@ -43,12 +43,12 @@ IFCLOSED(UGS_T2_H) //Close Header
     THROW(UGS_T2_H)
   ENDIF
 FWD(40)       //Move forward
-  AT(322)
+  AT(B1_IR_A)
   FREE(A_B7)  //Release previous ladder
   SCREEN(3,7,"A_B7 Free") 
   RED(SIG_A1)
     FON(2)
-    AFTER(322)
+    AFTER(B1_IR_A)
     FOFF(2)    
 FOLLOW(44)
 
@@ -97,16 +97,21 @@ SCREEN(3,2,"A_B2 Free")
 FOLLOW(48)
 
 SEQUENCE(48)
-AT(828)
-RESERVE(A_B5)
-SCREEN(3,5,"A_B5 Reserved")
-FREE(A_B3)
-SCREEN(3,3,"A_B3 Free")
-SPEED(20)
-FOLLOW(49)
+AT(B9_IR_A)
+IFRESERVE(A_B5)
+  SCREEN(3,5,"A_B5 Reserved")
+  FREE(A_B3)
+  SCREEN(3,3,"A_B3 Free")
+  SPEED(20) 
+  FOLLOW(49)
+ELSE 
+  SPEED(1)
+  FOLLOW(48)
+ENDIF
+
 
 SEQUENCE(49) //Block A_B5
-AT(721)
+AT(B7_IR_A)
 RESERVE(A_B6)
 SCREEN(3,6,"A_B6 Reserved")
 FREE(A_B4)
@@ -115,7 +120,7 @@ SCREEN(3,4,"A_B4 Free")
 FOLLOW(50)
 
 SEQUENCE(50) //Block A_B6
-AT(576)
+AT(B5_IR_A)
 RESERVE(A_B7)
 SCREEN(3,7,"A_B7 Reserved")
 FREE(A_B5)
@@ -124,7 +129,7 @@ SCREEN(3,5,"A_B5 Free")
 FOLLOW(51)
 
 SEQUENCE(51) // Block A_B7
- AT(482)
+ AT(B3_IR_A)
  STOP
  FOFF(0)
  FREE(A_B6)
