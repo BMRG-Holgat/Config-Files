@@ -67,7 +67,7 @@ I2CManager.forceClock(50000);
  
   //PCF8574::create(318,8,{I2CMux_0,SubBus_3,0x20}); // IR Sensors
   MCP23017::create(318,16,{I2CMux_0,SubBus_3,0x26});
-  MCP23017::create(858,16,{I2CMux_0,SubBus_3,0x27}); // Houses on Board 3
+  MCP23017::create(858,16,{I2CMux_0,SubBus_3,0x25}); // Houses on Board 3
   
   EXIOExpander::create(300, 18, {I2CMux_0,SubBus_3,0x69}); // Board 1
   EXIOExpander::create(362, 62, {I2CMux_0,SubBus_3,0x61}); // Board 2
