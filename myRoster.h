@@ -93,9 +93,12 @@ ROSTER(2532,"HST Executive","Lights/Sound/ACTIVE BRAKE/*Horn 1/*Horn 2/*Clag//*N
 ROSTER(2533,"HST Swallow","Lights/Sound/ACTIVE BRAKE/*Horn 1/*Horn 2/*Clag//*Notch Up/*Brake Release/*Guards Whistle/*Crossing Barrier/Compressor//*Announcement/Flange Squeal 1/Flange Squeal 2/*Doors Closing/*Horn 4/*Horn 5/MUTE/SHUNT")
 ROSTER(2534,"HST Virgin","Lights/Sound/ACTIVE BRAKE/*Horn 1/*Horn 2/*Clag//*Notch Up/*Brake Release/*Guards Whistle/*Crossing Barrier/Compressor//*Announcement/Flange Squeal 1/Flange Squeal 2/*Doors Closing/*Horn 4/*Horn 5/MUTE/SHUNT")
 ROSTER(9522,"D9522 Green","//Sound/*BRAKE/*Horn 1/*Horn 2/Light Engine/Idle/SPEED LOCK/Flange Squeal/*Guard’s Whistle/*Buffer Up/*Couple Up/Compressor/Sanders/HANDBRAKE/Pump/Doors/SOUND FADE/Detonators/*Vocal 1/*Vocal 2")
-ROSTER(9901,"THOMAS","//Sounds/ACTIVE BRAKE/*Whistle 1/*Whistle 2/Chuff Select/Coal Shovelling/*Thomas Tune/*Clank and Hiss/*Guard Whistle/Injector/*It’s Thomas/*Hello Thomas/*That Wasn’t Funny/*Announcement/Coach Rattle/*Ease Away/*Coupling Up/*Cinders and Ashes/*Cab Clanks/SHUNT")
 ROSTER(9906,"PERCY","//Sounds/ACTIVE BRAKE/*Whistle 1/*Whistle 2/Chuff Select/Coal Shovelling/*Thomas Tune/*Hurry Up Slowcoach/*Guard Whistle/Injector/*Cab Clanks/*Out of my Way/*Bust my Boiler/*Cinders and Ashes/Blower/*Water Filling/*Water Hatch/*Whistle 3/*Buffer Up/SHUNT")
 ROSTER(9907,"TOBY","//Sounds/ACTIVE BRAKE/*Whistle 1/*Whistle 2/Blower/Coal Shovelling/*Thomas Tune/*Toby Tune 1/*Guard Whistle/Steam Release/*Comms Bell/*Toby Tune 2/Westinghouse Pump/Flange Squeal/Coach Rattle/*Doors Closing/Drains and Water/*Whistle 3/*Doors Slam/SHUNT")
+ROSTER(3130,"31130 Coal Sector","Lights/Sound/*BRAKE/*Single Horn/*Double Horn/Light Engine/Engine Idle/SPEED LOCK/*Cold Start/Flange Squeal/*Guards Whistle/*Buffering Up/*Coupling Up/Compressor/Spirax Valves/Cooling Fan/Primer Pump/*Auto Wagon Buffering/Drivers Door/MUTE SOUNDS/Lights Off End 1")
+ROSTER(9901,"THOMAS","//Sounds/ACTIVE BRAKE/*Whistle 1/*Whistle 2/*Thomas and Friends/Coal Shovelling/*Thomas Theme/*Clank and Hiss/*Guard Whistle/Injector/*It’s Thomas/*Hello Thomas/*That Wasn’t Funny/*Announcement/Coach Rattle/*Ease Away/*Coupling Up/*Cinders and Ashes/*Cab Clanks/SHUNT")
+
+
 
 
 
