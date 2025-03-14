@@ -54,7 +54,7 @@ FOLLOW(44)
 
 SEQUENCE(44)
 //Stop at station
-  AT(308)
+  AT(307)
   STOP 
   DELAYRANDOM(10000,15000)
   RESERVE(A_B2) //reserve Block 2
@@ -84,14 +84,24 @@ FOLLOW(46)
 SEQUENCE(46)
 //block A_B3
 AT(628) //Board 6
-SPEED(60) // Increase speed
+IFGREEN(SIG_A3)
+ RESERVE(A_B4)
+ SCREEN(3,4,"A_B4 Reserved")
+ SPEED(60) // Increase speed
+ELSE 
+IFAMBER(SIG_A3)
+  RESERVE(A_B4)
+  SPEED(40)
+ELSE 
+ STOP
+ FOLLOW(46)
+ENDIF
+ENDIF
 FOLLOW(47)
 
 SEQUENCE(47)
 //Board 8
-AT(772)
-RESERVE(A_B4)
-SCREEN(3,4,"A_B4 Reserved")
+AT(773)
 FREE(A_B2)
 SCREEN(3,2,"A_B2 Free")
 FOLLOW(48)
