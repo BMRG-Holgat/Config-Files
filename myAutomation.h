@@ -39,16 +39,18 @@ HAL_IGNORE_DEFAULTS
 #include "myBlockReserves.h"
 
 
+
 //include track automations
 #include "myTrackA.h"
 
-//JMRI_SENSOR(300,18)
-//JMRI_SENSOR(318,16) //BOARD 1
+//JMRI_SENSOR(300,18) //BOARD 1 exio
+//JMRI_SENSOR(318,16) //BOARD 1 mcp
 //JMRI_SENSOR(362,62) //BOARD 2
 //JMRI_SENSOR(424,62) //BOARD 3
 //JMRI_SENSOR(486,62) //Board 4
 //JMRI_SENSOR(548,62) //Board 5
 //JMRI_SENSOR(610,62) //Board 6
+//JMRI_SENSOR(672,62) //Board 7
 //JMRI_SENSOR(734,62) //Board 8
 //JMRI_SENSOR(796,62) //BOARD 9
 
@@ -57,18 +59,18 @@ HAL_IGNORE_DEFAULTS
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,396,525,772)
+  blockSequence(SIG_A1,402,525,773)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,525,772,828)
+  blockSequence(SIG_A2,525,773,828)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,772,828,721)
+  blockSequence(SIG_A3,773,828,721)
   FOLLOW(24)
 //Track B
 AUTOSTART SEQUENCE(25)
   IFCLOSED(510)
-    blockSequence(SIG_B1,396,523,764)
+    blockSequence(SIG_B1,403,629,764)
   ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
@@ -184,13 +186,13 @@ STEALTH(
       rag(126), rag(268), rag(284));
     StringFormatter::lcd2(4,3,
       F("C:        %c     %c"),
-      rag(272), rag(262));
+      rag(272), rag(248));
     StringFormatter::lcd2(4,4,
       F("D:     %c  %c  %c"),
       rag(129), rag(276), rag(288));
     StringFormatter::lcd2(4,5,
       F("E:        %c     %c"),
-      rag(188), rag(259));
+      rag(188), rag(252));
     StringFormatter::lcd2(4,6,
       F("F:        %c     %c"),
       rag(192), rag(256));
