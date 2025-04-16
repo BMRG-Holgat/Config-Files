@@ -5,11 +5,11 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
-ALIAS(BIG_RED_BUTTON,75)
-ALIAS(Latch_build,74)
-ALIAS(Latch_default,73)
-ALIAS(Latch_light,76)
-ALIAS(Latch_church,77)
+ALIAS(BIG_RED_BUTTON,175)
+ALIAS(Latch_build,174)
+ALIAS(Latch_default,173)
+ALIAS(Latch_light,176)
+ALIAS(Latch_church,177)
  
 
  ROUTE(997,"System: Rebuild test") //Testing system before starting
@@ -142,29 +142,29 @@ DONE
 ONOVERLOAD(B)
     LATCH(99)
     SCREEN(3,0,"OVERLOAD")
-    SCREEN(3,3, "OVERLOAD Scenic")
-    SCREEN(3,4," POWER OFF")
+    SCREEN(3,5, "OVERLOAD Scenic")
+    SCREEN(3,6," POWER OFF")
     PRINT("Overload Detected on Scenic - Turn Off Power")
     SET_TRACK(B, NONE)
     AFTEROVERLOAD(B)
-      SCREEN(3,0,"Restored Scenic")
-      SCREEN(3,4,"   POWER ON")
-      SCREEN(3,3,"")
+      SCREEN(3,5,"Restored Scenic")
+      SCREEN(3,6,"   POWER ON")
       PRINT("Overload cleared on Scenic - Power Restored")
       DELAY(2000)
       SCREEN(3,0,"")
-      SCREEN(3,4,"")
+      SCREEN(3,5,"")
+      SCREEN(3,6,"")
 DONE
 
 ONOVERLOAD(D)
-    SCREEN(3,0, "OVERLOAD Prog ")
+    SCREEN(3,0, "OVERLOAD Accessory ")
     SCREEN(3,7," POWER OFF")
-    PRINT("Overload Detected on Prog - Turn Off Power")
+    PRINT("Overload on Accessory - Turn Off Power")
     SET_TRACK(D, NONE)
     AFTEROVERLOAD(D)
-      SCREEN(3,0,"Restored Prog")
+      SCREEN(3,0,"Restored Accessory")
       SCREEN(3,7,"POWER ON")
-      PRINT("Overload cleared on Prog - Power Restored")
+      PRINT("Overload cleared Accessory - Power Restored")
       DELAY(2000)
       SCREEN(3,0,"")
       SCREEN(3,7,"")
@@ -172,53 +172,53 @@ DONE
 
 ONOVERLOAD(C)
     SCREEN(3,0,"OVERLOAD")
-    SCREEN(3,5, "OVERLOAD District B ")
-    SCREEN(3,6," POWER OFF")
+    SCREEN(3,3, "OVERLOAD District B ")
+    SCREEN(3,4," POWER OFF")
     PRINT("Overload Detected on District B - Turn Off Power")
     SET_TRACK(C, NONE)
     AFTEROVERLOAD(C)
-      SCREEN(3,0,"Restored District B")
-      SCREEN(3,5,"POWER ON")
-      SCREEN(3,6,"")
+      SCREEN(3,3,"Restored District B")
+      SCREEN(3,4,"POWER ON")
       PRINT("Overload cleared on District B - Power Restored")
       DELAY(2000)
       SCREEN(3,0,"")
+      SCREEN(3,4,"")
       SCREEN(3,5,"")
 DONE
 
 ROUTE(992,"Power Reset: Reset District A")
     SCREEN(3,1,"Reseting Power")
     SET_TRACK(A, MAIN)
-    POWERON
+    SET_POWER(A, ON)
     DELAY(5000)
     SCREEN(3,1,"")
 DONE
 
 ROUTE(991,"Power Reset: Reset Scenic")
-    SCREEN(3,3,"Reseting Power")
+    SCREEN(3,5,"Reseting Power")
     SET_TRACK(B, MAIN)
-    POWERON
+    SET_POWER(B, ON)
     DELAY(5000)
     SCREEN(3,3,"")
     UNLATCH(99)
 DONE
 
 ROUTE(990,"Power Reset: Reset District B")
-    SCREEN(3,4,"Reseting District B")
+    SCREEN(3,3,"Reseting District B")
     SET_TRACK(C, MAIN)
-    POWERON
+    SET_POWER(C, ON)
     DELAY(5000)
-    SCREEN(4,4,"")
+    SCREEN(3,3,"")
 DONE
 
-/*ROUTE(989,"Power Reset: Reset Prog")
+ROUTE(989,"Power Reset: Reset Accessory")
     SCREEN(3,1,"Reseting Power")
-    SET_TRACK(D, PROG)
-    POWERON
+    SET_TRACK(D, MAIN)
+    SET_POWER(D, ON)
     DELAY(5000)
     SCREEN(3,1,"")
 DONE
-*/
+
 
 ROUTE(987,"System: Signal Test")
   signalTest
