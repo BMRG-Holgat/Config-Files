@@ -9,8 +9,9 @@ SETUP("<D CMD 1>"); // can be set to ON for testing in the serial monitor
 SETUP("<D EXRAIL OFF>");
 SETUP("<=A MAIN>");
 SETUP("<=B MAIN>");
-//SETUP("<=C MAIN>");
-//SETUP("<=D PROG>");
+SETUP("<=C MAIN>");
+SETUP("<=D MAIN>"); // DCC Accessory
+SETUP("<1 D>");
 
 //code to test sensors 
 /*

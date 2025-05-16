@@ -99,28 +99,6 @@ AUTOSTART SEQUENCE(998)
   START(999)
   DELAY(200)
 FOLLOW(998)
-
-
-/*
-// This resets normal DCC
-ROUTE(993, "Power: Set Up DCC on A, B, C")
-        PRINT("Set up DCC on A, B, C")
-        SET_TRACK(A, MAIN)
-        SET_TRACK(B, MAIN)
-        SET_TRACK(D, MAIN)
-    DONE
-*/
-//Enable Prog track
-ROUTE(888,"Power: Enable Prog")
-  PRINT("Set up Prog Track")
-  SET_TRACK(D,PROG)
-DONE
-
-//Enable Prog track
-ROUTE(889,"Power: Disable Prog")
-  PRINT("Remove Prog Track")
-  SET_TRACK(D,NONE)
-DONE
  
  
 ONOVERLOAD(A)
@@ -129,11 +107,13 @@ ONOVERLOAD(A)
     SCREEN(3,2,"POWER OFF")
     PRINT("Overload Detected on A - Turn Off Power")
     SET_TRACK(A, NONE)
+    ROUTE_INACTIVE(992)
     AFTEROVERLOAD(A)
       SCREEN(3,0,"Restored District A")
       SCREEN(3,1,"  POWER ON")
       SCREEN(3,2,"")
       PRINT("Overload cleared on District A - Power Restored")
+      ROUTE_HIDDEN(992)
       DELAY(2000)
       SCREEN(3,0,"")
       SCREEN(3,1,"")
@@ -146,28 +126,16 @@ ONOVERLOAD(B)
     SCREEN(3,4," POWER OFF")
     PRINT("Overload Detected on Scenic - Turn Off Power")
     SET_TRACK(B, NONE)
+    ROUTE_INACTIVE(991)
     AFTEROVERLOAD(B)
       SCREEN(3,0,"Restored Scenic")
       SCREEN(3,4,"   POWER ON")
       SCREEN(3,3,"")
       PRINT("Overload cleared on Scenic - Power Restored")
+      ROUTE_HIDDEN(991)
       DELAY(2000)
       SCREEN(3,0,"")
       SCREEN(3,4,"")
-DONE
-
-ONOVERLOAD(D)
-    SCREEN(3,0, "OVERLOAD Prog ")
-    SCREEN(3,7," POWER OFF")
-    PRINT("Overload Detected on Prog - Turn Off Power")
-    SET_TRACK(D, NONE)
-    AFTEROVERLOAD(D)
-      SCREEN(3,0,"Restored Prog")
-      SCREEN(3,7,"POWER ON")
-      PRINT("Overload cleared on Prog - Power Restored")
-      DELAY(2000)
-      SCREEN(3,0,"")
-      SCREEN(3,7,"")
 DONE
 
 ONOVERLOAD(C)
@@ -176,20 +144,40 @@ ONOVERLOAD(C)
     SCREEN(3,6," POWER OFF")
     PRINT("Overload Detected on District B - Turn Off Power")
     SET_TRACK(C, NONE)
+    ROUTE_INACTIVE(990)
     AFTEROVERLOAD(C)
       SCREEN(3,0,"Restored District B")
       SCREEN(3,5,"POWER ON")
       SCREEN(3,6,"")
       PRINT("Overload cleared on District B - Power Restored")
+      ROUTE_HIDDEN(990)
       DELAY(2000)
       SCREEN(3,0,"")
       SCREEN(3,5,"")
 DONE
 
+ONOVERLOAD(D)
+    SCREEN(3,0, "OVERLOAD Accessory ")
+    SCREEN(3,7," POWER OFF")
+    PRINT("Overload Detected on Accessory - Turn Off Power")
+    SET_TRACK(D, NONE)
+    ROUTE_INACTIVE(989)
+    AFTEROVERLOAD(D)
+      SCREEN(3,0,"Restored Accessory")
+      SCREEN(3,7,"POWER ON")
+      PRINT("Overload cleared on Accessory - Power Restored")
+      ROUTE_HIDDEN(989)
+      DELAY(2000)
+      SCREEN(3,0,"")
+      SCREEN(3,7,"")
+DONE
+
+
+
 ROUTE(992,"Power Reset: Reset District A")
     SCREEN(3,1,"Reseting Power")
     SET_TRACK(A, MAIN)
-    POWERON
+    SET_POWER(A, ON)
     DELAY(5000)
     SCREEN(3,1,"")
 DONE
@@ -197,28 +185,28 @@ DONE
 ROUTE(991,"Power Reset: Reset Scenic")
     SCREEN(3,3,"Reseting Power")
     SET_TRACK(B, MAIN)
-    POWERON
+    SET_POWER(B, ON)
     DELAY(5000)
     SCREEN(3,3,"")
     UNLATCH(99)
 DONE
 
 ROUTE(990,"Power Reset: Reset District B")
-    SCREEN(3,4,"Reseting District B")
+    SCREEN(3,5,"Reseting District B")
     SET_TRACK(C, MAIN)
-    POWERON
+    SET_POWER(C, ON)
     DELAY(5000)
-    SCREEN(4,4,"")
+    SCREEN(3,5,"")
 DONE
 
-/*ROUTE(989,"Power Reset: Reset Prog")
+ROUTE(989,"Power Reset: Reset Accessory")
     SCREEN(3,1,"Reseting Power")
-    SET_TRACK(D, PROG)
-    POWERON
+    SET_TRACK(D, MAIN)
+    SET_POWER(D, ON)
     DELAY(5000)
-    SCREEN(3,1,"")
+    SCREEN(3,7,"")
 DONE
-*/
+
 
 ROUTE(987,"System: Signal Test")
   signalTest

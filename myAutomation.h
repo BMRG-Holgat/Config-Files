@@ -23,6 +23,40 @@
  *  
  */
 HAL_IGNORE_DEFAULTS
+//Hal devices and includes
+#include "IODeviceList.h"
+
+#include "DCC.h"
+
+//HAL(EXIOExpander,800,18,0x65)
+/*HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x26})
+//HAL(EXIOExpander,858,16,{I2CMux_0,SubBus_3,0x25})// Houses on Board 3
+//HAL(EXIOExpander,300, 18, {I2CMux_0,SubBus_3,0x69}) // Board 1
+HAL(EXIOExpander,362, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
+HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
+HAL(EXIOExpander,486, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
+/*
+/*
+HAL(EXIOExpander,548, 62, {I2CMux_0,SubBus_1,0x65}) // Board 5
+HAL(EXIOExpander,610, 62, {I2CMux_0,SubBus_4,0x65}) // Board 6  
+HAL(EXIOExpander,672, 62, {I2CMux_0,SubBus_4,0x66}) // Board 7
+HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
+HAL(EXIOExpander,796, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
+*/
+HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
+HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
+HAL(PCA9685,264, 16, {I2CMux_0,SubBus_3,0x45}) // Board 4 (signals?)
+HAL(PCA9685,280, 16, {I2CMux_0,SubBus_4,0x47}) // Board 7 Signals
+HAL(PCA9685,248, 16, {I2CMux_0,SubBus_4,0x42}) // Board 9
+//I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
+//HAL(I2CDFPlayer,1000, 4, {I2CMux_0,SubBus_3,0x4D}, 0)
+
+HAL(HALDisplay<OLED>,3,{I2CMux_0,SubBus_1,0x3C},128,64)
+HAL(HALDisplay<OLED>,2,{I2CMux_0,SubBus_1,0x3D},128,64)
+HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_0,0x3D},128,64)
+
+  // Update displays with loco numbers and direction
+//Shows current 8 locos running and direction on 2 screens
 
 
 #include "myDefinitions.h"
@@ -42,7 +76,12 @@ HAL_IGNORE_DEFAULTS
 
 //include track automations
 #include "myTrackA.h"
-
+AUTOSTART SEQUENCE(180)
+  ROUTE_HIDDEN(989)
+  ROUTE_HIDDEN(990)
+  ROUTE_HIDDEN(991)
+  ROUTE_HIDDEN(992)
+DONE
 //JMRI_SENSOR(300,18) //BOARD 1 exio
 //JMRI_SENSOR(318,16) //BOARD 1 mcp
 //JMRI_SENSOR(362,62) //BOARD 2
