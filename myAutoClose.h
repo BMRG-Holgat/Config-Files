@@ -1,0 +1,34 @@
+//Autoclose thurnouts based on non automations
+
+//Southbound trains
+//scenic track A
+
+//Track A -> B
+AUTOSTART SEQUENCE(140)
+    AT(573)
+    IFTHROWN(UFM_T2_A__UGS_T3_E)
+        CLOSE(9004)
+    ENDIF
+FOLLOW(140)
+
+AUTOSTART SEQUENCE(141)
+    AT(628)
+    IFTHROWN(UGS_T4_A__UMF_T3_E)
+        CLOSE(9007)
+    ENDIF
+FOLLOW(141)
+
+AUTOSTART SEQUENCE(142)
+    AT(629)
+    IFTHROWN(DMF_T3_E__UFM_T4_A)
+        CLOSE(9008)
+    ENDIF 
+FOLLOW(142)
+
+AUTOSTART SEQUENCE(143)
+    AT(629) 
+    IFTHROWN(UFM_T5_A__UMF_T3_E)
+        CLOSE(9010)
+    ENDIF
+FOLLOW(143)
+

@@ -71,6 +71,7 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_0,0x3D},128,64)
 #include "myRoster.h"
 #include "myRoutes.h"
 #include "myBlockReserves.h"
+#include "myAutoClose.h"
 
 
 
