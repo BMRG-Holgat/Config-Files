@@ -55,7 +55,6 @@ The configuration file for DCC-EX Command Station
 
 //#define DIAG_IO
 //#define I2C_USE_WIRE
-#define DISABLE_VDPY
 #define MAX_CURRENT 3000
 #define STARTUP_DELAY 2000  //delay start for 5 sec
 //#define MOTOR_SHIELD_TYPE STANDARD_MOTOR_SHIELD

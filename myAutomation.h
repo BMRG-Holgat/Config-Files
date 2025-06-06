@@ -31,17 +31,19 @@ HAL_IGNORE_DEFAULTS
 //HAL(EXIOExpander,800,18,0x65)
 /*HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x26})
 //HAL(EXIOExpander,858,16,{I2CMux_0,SubBus_3,0x25})// Houses on Board 3
-//HAL(EXIOExpander,300, 18, {I2CMux_0,SubBus_3,0x69}) // Board 1
-HAL(EXIOExpander,362, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
-HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
-HAL(EXIOExpander,486, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
-/*
-/*
+
+HAL(EXIOExpander,300, 18, {I2CMux_0,SubBus_3,0x69}) // Board 1
+
+HAL(EXIOExpander,362, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2*/
+//HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
+/*HAL(EXIOExpander,486, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
 HAL(EXIOExpander,548, 62, {I2CMux_0,SubBus_1,0x65}) // Board 5
-HAL(EXIOExpander,610, 62, {I2CMux_0,SubBus_4,0x65}) // Board 6  
-HAL(EXIOExpander,672, 62, {I2CMux_0,SubBus_4,0x66}) // Board 7
+HAL(MCP23017,628,16,{I2CMux_0,SubBus_4,0x26})
+//HAL(EXIOExpander,610, 62, {I2CMux_0,SubBus_4,0x65}) // Board 6  
+HAL(MCP23017,752,16,{I2CMux_0,SubBus_4,0x25})
+//HAL(EXIOExpander,672, 62, {I2CMux_0,SubBus_4,0x66}) // Board 7
 HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
-HAL(EXIOExpander,796, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
+//HAL(EXIOExpander,796, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
 */
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
 HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
