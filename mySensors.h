@@ -88,6 +88,8 @@ ALIAS(SNS_DFM_BYPASS_1,321)
 
 
 // Track G Holgate Sidings
+ALIAS(SNS_H1_B6,606)
+
 
 //Fiddle yard A 
 

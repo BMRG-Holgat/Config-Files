@@ -32,14 +32,14 @@ DONE
 
 ROUTE(1004,"Lights: Street")
 IFNOT(Latch_light)
-    SET(416)
+    SET(418)
     SET(421)
     SET(422)
     SET(313)
     SET(463)
     LATCH(Latch_light)
 ELSE 
-    RESET(416)
+    RESET(418)
     RESET(421)
     RESET(422)
     RESET(313)
