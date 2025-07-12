@@ -25,8 +25,11 @@
 HAL_IGNORE_DEFAULTS
 //Hal devices and includes
 #include "IODeviceList.h"
+//#include "IO_HALDisplay.h"
 
 #include "DCC.h"
+
+
 
 //HAL(EXIOExpander,800,18,0x65)
 //HAL(EXIOExpander,858,16,{I2CMux_0,SubBus_3,0x25})// Houses on Board 3
@@ -34,17 +37,19 @@ HAL_IGNORE_DEFAULTS
 
 //HAL(EXIOExpander,362, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
 //HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
-//HAL(EXIOExpander,486, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
+HAL(EXIOExpander,432, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
 //HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
-//HAL(EXIOExpander,796, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
+HAL(EXIOExpander,900, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
 
 HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x26}) //Board 1
+HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x27}) //Board 3
+HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
 HAL(MCP23017,500,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
 HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
 HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x26}) // Board 7
 HAL(MCP23017,716,16,{I2CMux_0,SubBus_4,0x25}) // Board 7
-HAL(MCP23017,800,16,{I2CMux_0,SubBus_4,0x24}) // Board 8
-HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x23}) // Board 9
+HAL(MCP23017,800,16,{I2CMux_0,SubBus_4,0x23}) // Board 8 
+HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x24}) // Board 9
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
 HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
 HAL(PCA9685,264, 16, {I2CMux_0,SubBus_3,0x45}) // Board 4 (signals?)
@@ -76,6 +81,28 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "myBlockDetectors.h"
 #include "myAutoClose.h" //need to change pins when replaced by MCP23017's
 
+/*
+//Shows current 8 locos running and direction on 2 screens
+STEALTH_GLOBAL(
+  void updateLocoScreen() {
+    for (int i=0; i<8; i++) {
+      if (DCC::speedTable[i].loco > 0) {
+      int speed = DCC::speedTable[i].speedCode;
+      char direction = (speed & 0x80) ? 'F' : 'R';
+      speed = speed & 0x7f;
+      if (speed > 0) speed = speed - 1;
+      if (!Latch_display_3) {
+      SCREEN(3, i+2, F("Loco:%4d %3d %c"), DCC::speedTable[i].loco,speed, direction);//changed screen row from i*1  to i+2
+      }
+      if (!Latch_display_4) {
+      SCREEN(4, i+2, F("Loco:%4d %3d %c"), DCC::speedTable[i].loco,speed, direction);//changed screen row from i*1  to i+2
+      }
+    }
+  }
+}
+) 
+
+HAL(UserAddin,updateLocoScreen,1000) */
 
 
 //include track automations
@@ -88,13 +115,14 @@ AUTOSTART SEQUENCE(180)
 DONE
 //JMRI_SENSOR(300,18) //BOARD 1 exio
 //JMRI_SENSOR(318,16) //BOARD 1 mcp
-//JMRI_SENSOR(362,62) //BOARD 2
-//JMRI_SENSOR(424,62) //BOARD 3
-//JMRI_SENSOR(486,62) //Board 4
+JMRI_SENSOR(362,62) //BOARD 2
+JMRI_SENSOR(400,32) //BOARD 3
+JMRI_SENSOR(416,16) //Board 3 signal
+//JMRI_SENSOR(432,62) //Board 4
 JMRI_SENSOR(500,16) //Board 5
-JMRI_SENSOR(600,16) //Board 6
-JMRI_SENSOR(700,16) //Board 7
-JMRI_SENSOR(716,16) //Board 7
+//JMRI_SENSOR(600,16) //Board 6
+//JMRI_SENSOR(700,16) //Board 7
+//JMRI_SENSOR(716,16) //Board 7
 //JMRI_SENSOR(734,62) //Board 8
 //JMRI_SENSOR(796,62) //BOARD 9
 
@@ -149,15 +177,19 @@ AUTOSTART SEQUENCE(34)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,527,380,483)
+  blockSequence(SIG_F2,429,501,501)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,768,527,380)
   FOLLOW(36)
+//Holgate exit
+AUTOSTART SEQUENCE(37)
+ // IFTHROWN(DGS_T2_A__HS_T1_E)
+    AT(429)
+    RED(SIG_H1)
+ // ENDIF
+FOLLOW(37)
 
-
-
-AUTOMATION(53,"D: Mainline")
 RESERVE(51)
 FWD(30)
 AT(304)

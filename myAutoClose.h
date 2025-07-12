@@ -42,3 +42,55 @@ AUTOSTART SEQUENCE(144)
     ENDIF
 FOLLOW(144)
 
+AUTOSTART SEQUENCE(145)
+    AT(BD_S4_HA) 
+    IFCLOSED(HS_T4_A__HS_T5_E)
+        IFCLOSED(HS_T5_A__HS_T6_E)
+            IFCLOSED(HS_T6_A__DGS_T3_E)
+                IFTHROWN(DGS_T3_A__HS_T6_A)
+                    CLOSE(DGS_T3_A__HS_T6_A)
+                 ENDIF 
+            ENDIF 
+        ENDIF
+    ENDIF 
+FOLLOW(145)
+
+AUTOSTART SEQUENCE(146)
+    AT(BD_S4_HB) 
+    IFTHROWN(HS_T4_A__HS_T5_E)
+        IFCLOSED(HS_T5_A__HS_T6_E)
+            IFCLOSED(HS_T6_A__DGS_T3_E)
+                IFTHROWN(DGS_T3_A__HS_T6_A)
+                    CLOSE(DGS_T3_A__HS_T6_A)
+                 ENDIF 
+            ENDIF 
+        ENDIF
+    ENDIF 
+FOLLOW(146)
+
+AUTOSTART SEQUENCE(147)
+    AT(BD_S4_HC) 
+        IFTHROWN(HS_T5_A__HS_T6_E)
+            IFCLOSED(HS_T6_A__DGS_T3_E)
+                IFTHROWN(DGS_T3_A__HS_T6_A)
+                    CLOSE(DGS_T3_A__HS_T6_A)
+                 ENDIF 
+            ENDIF 
+        ENDIF
+FOLLOW(147)
+
+AUTOSTART SEQUENCE(148)
+    AT(BD_S4_HD) 
+        IFTHROWN(HS_T6_A__DGS_T3_E)
+                IFTHROWN(DGS_T3_A__HS_T6_A)
+                    CLOSE(DGS_T3_A__HS_T6_A)
+                 ENDIF 
+            ENDIF
+FOLLOW(148)
+
+AUTOSTART SEQUENCE(149)
+    IFTHROWN(DGS_T2_A__HS_T1_E)
+        AT(406)
+        CLOSE(9028)
+    ENDIF
+FOLLOW(149)
