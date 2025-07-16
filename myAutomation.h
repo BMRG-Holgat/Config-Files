@@ -107,6 +107,7 @@ HAL(UserAddin,updateLocoScreen,1000) */
 
 //include track automations
 #include "myTrackA.h"
+#include "myTrackF.h"
 AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(989)
   ROUTE_HIDDEN(990)
@@ -177,18 +178,22 @@ AUTOSTART SEQUENCE(34)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,429,501,501)
+  blockSequence(SIG_F2,BD_S4_F,SNS_UGS_B5,501)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,768,527,380)
   FOLLOW(36)
-//Holgate exit
-AUTOSTART SEQUENCE(37)
+//Holgate exit signal
+//AUTOSTART SEQUENCE(37)
  // IFTHROWN(DGS_T2_A__HS_T1_E)
-    AT(429)
-    RED(SIG_H1)
+    ONBUTTON(BD_S4_F)
+      RED(SIG_H1)
+    DONE 
  // ENDIF
-FOLLOW(37)
+//FOLLOW(37)
+
+
+
 
 RESERVE(51)
 FWD(30)

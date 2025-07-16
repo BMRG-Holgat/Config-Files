@@ -91,12 +91,12 @@ ALIAS(E_B16,116)
 ALIAS(E_B17,117)
 
 // Track F
-ALIAS(F_B1,121)
-ALIAS(F_B2,122)
-ALIAS(F_B3,123)
-ALIAS(F_B4,124)
-ALIAS(F_B5,125)
-ALIAS(F_B6,126)
+ALIAS(F_B1,121) //exit storage to bridge
+ALIAS(F_B2,122) // from bridge to board 4 gantry
+ALIAS(F_B3,123) // from board 4 gantry to entry to Track F Rear storage
+ALIAS(F_B4,124) //entry to Track F Rear storage
+ALIAS(F_B5,125) // 2nd stage storage rear
+ALIAS(F_B6,126) //final stage storage rear
 
 //Holgate
 ALIAS(H_T1,131)

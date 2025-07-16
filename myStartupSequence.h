@@ -12,6 +12,7 @@ ALIAS(Latch_light,76)
 ALIAS(Latch_church,77)
 ALIAS(Latch_display_3,78)
 ALIAS(Latch_display_4,79)
+ALIAS(F_ROUNDY, 200) //Roundy for Fiddle yard
  
 
  ROUTE(997,"System: Rebuild test") //Testing system before starting
