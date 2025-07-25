@@ -351,7 +351,7 @@
     SCREEN(2,1,"Closing: ") \
     SCREEN(2,2,#id)\
     CLOSE(id) \
-    DELAY(750)
+    DELAY(200)
 
   #define defaultPosition(turnout) \
     PRINT("Setting Default: " #turnout) \

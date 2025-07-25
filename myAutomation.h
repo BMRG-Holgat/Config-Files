@@ -39,7 +39,7 @@ HAL_IGNORE_DEFAULTS
 //HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
 HAL(EXIOExpander,432, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
 //HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
-HAL(EXIOExpander,900, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
+//HAL(EXIOExpander,916, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
 
 HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x26}) //Board 1
 HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x27}) //Board 3
@@ -62,95 +62,49 @@ HAL(HALDisplay<OLED>,3,{I2CMux_0,SubBus_3,0x3C},132,64)
 HAL(HALDisplay<OLED>,2,{I2CMux_0,SubBus_1,0x3C},132,64)
 HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 
-  // Update displays with loco numbers and direction
-//Shows current 8 locos running and direction on 2 screens
+//Included files
 
-
-#include "myDefinitions.h"
-#include "myBlocks.h"
-#include "myTurnouts.h"
 #include "myTurnoutAliases.h"
+#include "myTurnouts.h"
 #include "myTurnoutPairs.h"
-#include "mySignals.h"
 #include "mySignalAliases.h"
-#include "mySensors.h"
-#include "myStartupSequence.h"
+#include "mySignals.h"
 #include "myRoster.h"
-#include "myRoutes.h"
-#include "myBlockReserves.h"
+#include "myDefinitions.h"
+#include "myStartupSequence.h"
 #include "myBlockDetectors.h"
-#include "myAutoClose.h" //need to change pins when replaced by MCP23017's
-
-/*
-//Shows current 8 locos running and direction on 2 screens
-STEALTH_GLOBAL(
-  void updateLocoScreen() {
-    for (int i=0; i<8; i++) {
-      if (DCC::speedTable[i].loco > 0) {
-      int speed = DCC::speedTable[i].speedCode;
-      char direction = (speed & 0x80) ? 'F' : 'R';
-      speed = speed & 0x7f;
-      if (speed > 0) speed = speed - 1;
-      if (!Latch_display_3) {
-      SCREEN(3, i+2, F("Loco:%4d %3d %c"), DCC::speedTable[i].loco,speed, direction);//changed screen row from i*1  to i+2
-      }
-      if (!Latch_display_4) {
-      SCREEN(4, i+2, F("Loco:%4d %3d %c"), DCC::speedTable[i].loco,speed, direction);//changed screen row from i*1  to i+2
-      }
-    }
-  }
-}
-) 
-
-HAL(UserAddin,updateLocoScreen,1000) */
-
-
-//include track automations
-#include "myTrackA.h"
-#include "myTrackF.h"
-AUTOSTART SEQUENCE(180)
-  ROUTE_HIDDEN(989)
-  ROUTE_HIDDEN(990)
-  ROUTE_HIDDEN(991)
-  ROUTE_HIDDEN(992)
-DONE
-//JMRI_SENSOR(300,18) //BOARD 1 exio
-//JMRI_SENSOR(318,16) //BOARD 1 mcp
-JMRI_SENSOR(362,62) //BOARD 2
-JMRI_SENSOR(400,32) //BOARD 3
-JMRI_SENSOR(416,16) //Board 3 signal
-//JMRI_SENSOR(432,62) //Board 4
-JMRI_SENSOR(500,16) //Board 5
-//JMRI_SENSOR(600,16) //Board 6
-//JMRI_SENSOR(700,16) //Board 7
-//JMRI_SENSOR(716,16) //Board 7
-//JMRI_SENSOR(734,62) //Board 8
-//JMRI_SENSOR(796,62) //BOARD 9
+#include "myBlocks.h"
+#include "myBlockReserves.h"
+#include "mySensors.h"
+#include "myRoutes.h"
+#include "myAutoClose.h"
 
 
 
+
+//Automations
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,402,BD_S5_A,773)
+  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_F8_A)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,BD_S5_A,503,828)
+  blockSequence(SIG_A2,BD_S4_A,BD_F8_A,828)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,773,828,721)
+  blockSequence(SIG_A3,BD_S8_A,828,721)
   FOLLOW(24)
 //Track B
 AUTOSTART SEQUENCE(25)
   IFCLOSED(510)
-    blockSequence(SIG_B1,403,629,764)
+    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,764)
   ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,523,764,832)
+  blockSequence(SIG_B2,BD_S4_B,764,832)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,764,832,508)
+  blockSequence(SIG_B3,BD_S8_B,832,508)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
@@ -161,90 +115,58 @@ AUTOSTART SEQUENCE(29)
   FOLLOW(29)
 //Track D
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_D1,398,519,817)
+  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,817)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,519,766,830)
+  blockSequence(SIG_D2,BD_S4_D,766,830)
   FOLLOW(31)
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D3,766,830,668)
+  blockSequence(SIG_D3,BD_S8_D,830,668)
   FOLLOW(32)
 //Track E
 AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_E2,476,417,526)
+  blockSequence(SIG_E2,BD_S3_E,BD_F4_E,BD_F4_E)
   FOLLOW(33)
 AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_E3,767,476,417)
+  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F4_E)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,BD_S4_F,SNS_UGS_B5,501)
+  blockSequence(SIG_F2,BD_S4_F,BD_F5_F,BD_F5_F)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_F3,768,527,380)
+  blockSequence(SIG_F3,BD_S9_F,BD_S4_F,SNS_UGS_B3)
   FOLLOW(36)
 //Holgate exit signal
 //AUTOSTART SEQUENCE(37)
  // IFTHROWN(DGS_T2_A__HS_T1_E)
-    ONBUTTON(BD_S4_F)
-      RED(SIG_H1)
-    DONE 
+ONBUTTON(BD_S4_F)
+  RED(SIG_H1)
+ DONE 
  // ENDIF
 //FOLLOW(37)
 
-
-
-
-RESERVE(51)
-FWD(30)
-AT(304)
-PRINT("REACHED 304")
-RESERVE(52) //Reserve D 2&3
-SPEED(50)
-AT(398)
-FREE(56)
-RESERVE(53) //reserve D 4-7
-FREE(51)
-AT(817)
-RESERVE(54) //Reserve D 9 
-FREE(52)
-AT(830)
-RESERVE(55) //Reserve 8-6
-FREE(43)
-PRINT("REACHED 830")
-SPEED(40)
-AT(668)
-  SPEED(1)
+//Set SIG_E3 to Red E->Holgate
+ONBUTTON(BD_S9_F)
+  IFTHROWN(9030)
+    RED(SIG_E3)
+  ENDIF
 DONE
 
-
-AUTOMATION(54,"D PARK")
-SPEED(30)
-IFCLOSED(UMF_T5_E__UMF_T6_A)
-  AT(FYD_SNS2_T1_M)
-  FREE(54)
-  RESERVE(56)
-  PRINT("FYD_SNS2_T1_M")
-  SPEED(20)
-  AT(FYD_SNS1_T1_F)
-  FREE(55)
-  PRINT("Y1 SENSOR")
-  STOP 
-ENDIF 
-IFTHROWN(UMF_T6_E__UMF_T7_A)
-  AT(FYD_SNS1_T2_F)
-  PRINT("Y2 SENSOR")
-  STOP 
-ENDIF 
-IFTHROWN(UMF_T7_E__UMF_T8_A)
-  AT(FYD_SNS1_T3_F)
-  PRINT("Y3 SENSOR")
-  STOP 
-ENDIF 
-FOFF(0)
+//Set SIG_F3 to Red F->Holgate
+ONBUTTON(BD_S9_F)
+  IFTHROWN(9031)
+    RED(SIG_F3)
+  ENDIF
 DONE
 
-
+//Set SIG_E3 to Red E->F
+ONBUTTON(BD_S9_F)
+  IFTHROWN(9022)
+    RED(SIG_E3)
+  ENDIF 
+DONE
+//Dispay signal status
 #include "EXRAIL2.h"
 
 STEALTH_GLOBAL(char rag(int16_t sigid) {
@@ -257,50 +179,58 @@ STEALTH_GLOBAL(char rag(int16_t sigid) {
 
 SEQUENCE(77)
 IF(Latch_default)
-SCREEN(4,0,"Gantry 1  4  7  9")
+SCREEN(2,0,"Gantry 1  4  7  9")
 STEALTH( 
-    StringFormatter::lcd2(4,1,
+    StringFormatter::lcd2(2,1,
       F("A:     %c  %c  %c"),
       rag(123), rag(272), rag(280));
-    StringFormatter::lcd2(4,2,
+    StringFormatter::lcd2(2,2,
       F("B:     %c  %c  %c"),
       rag(126), rag(268), rag(284));
-    StringFormatter::lcd2(4,3,
+    StringFormatter::lcd2(2,3,
       F("C:        %c     %c"),
       rag(272), rag(248));
-    StringFormatter::lcd2(4,4,
+    StringFormatter::lcd2(2,4,
       F("D:     %c  %c  %c"),
       rag(129), rag(276), rag(288));
-    StringFormatter::lcd2(4,5,
+    StringFormatter::lcd2(2,5,
       F("E:        %c     %c"),
       rag(188), rag(252));
-    StringFormatter::lcd2(4,6,
+    StringFormatter::lcd2(2,6,
       F("F:        %c     %c"),
       rag(192), rag(256));
-    StringFormatter::lcd2(4,7,
+    StringFormatter::lcd2(2,7,
       F("H:       %c"),
-      rag(468));
+      rag(416));
 )
 ENDIF 
 DELAY(5000)
 FOLLOW(77)
 
-/*StringFormatter::lcd2(2,3,
-      F("B: %c   %c   %c"),
-      rag(321), rag(507), rag(687));
-    StringFormatter::lcd2(2,4,
-      F("C:      %c   %c"),
-      rag(510), rag(834));
-    StringFormatter::lcd2(2,5,
-      F("D: %c   %c   %c"),
-      rag(324), rag(513), rag(731));
-    StringFormatter::lcd2(2,6,
-      F("E:      %c   %c"),
-      rag(516), rag(831));
-    StringFormatter::lcd2(2,7,
-      F("F:      %c   %c"),
-      rag(519), rag(828);
-    StringFormatter::lcd2(2,8,
-      F("H: %c"),
-      rag(468));*/
 
+
+AUTOSTART SEQUENCE(180)
+  ROUTE_HIDDEN(989)
+  ROUTE_HIDDEN(990)
+  ROUTE_HIDDEN(991)
+  ROUTE_HIDDEN(992)
+DONE
+
+//include track automations
+#include "myTrackA.h"
+#include "myTrackF.h"
+ 
+
+//Show Sensors
+//JMRI_SENSOR(300,18) //BOARD 1 exio
+JMRI_SENSOR(318,16) //BOARD 1 mcp
+JMRI_SENSOR(362,62) //BOARD 2
+JMRI_SENSOR(400,16) //BOARD 3
+//JMRI_SENSOR(416,16) //Board 3 signal
+//JMRI_SENSOR(432,62) //Board 4
+//JMRI_SENSOR(500,16) //Board 5
+//JMRI_SENSOR(600,16) //Board 6
+//JMRI_SENSOR(700,16) //Board 7
+//JMRI_SENSOR(716,16) //Board 7
+JMRI_SENSOR(800,16) //Board 8
+JMRI_SENSOR(900,16) //BOARD 9

@@ -2,12 +2,13 @@
 * myRoute
 * for churchbells
 */
+/*
 //Reset hidden routes
 ROUTE(1200,"System: Reset Hidden")
 ROUTE_INACTIVE(40)
 ROUTE_INACTIVE(41)
 DONE
-
+*/
 ROUTE(1000,"Main Bells")
    /* PLAYSOUND(10000,0,0,DF_RESET)
     DELAY(2000)

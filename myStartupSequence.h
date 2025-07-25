@@ -5,13 +5,13 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
-ALIAS(BIG_RED_BUTTON,75)
-ALIAS(Latch_build,74)
-ALIAS(Latch_default,73)
-ALIAS(Latch_light,76)
-ALIAS(Latch_church,77)
-ALIAS(Latch_display_3,78)
-ALIAS(Latch_display_4,79)
+ALIAS(BIG_RED_BUTTON,175)
+ALIAS(Latch_build,174)
+ALIAS(Latch_default,173)
+ALIAS(Latch_light,176)
+ALIAS(Latch_church,177)
+ALIAS(Latch_display_3,178)
+ALIAS(Latch_display_4,179)
 ALIAS(F_ROUNDY, 200) //Roundy for Fiddle yard
  
 
@@ -77,11 +77,12 @@ ROUTE(994,"System: Set Default Positions")
   
 DONE
 
-ROUTE(996,"System: Close all turnouts") // Reset all turnouts to closed position
+ROUTE(996,"System: Full reset") // Reset all turnouts to closed position
   IFNOT(Latch_default)
     PRINT("Reseting turnouts")
     turnoutReset
     PRINT("All turnouts closed")
+    FOLLOW(994)
   ELSE 
     PRINT("Cannot reset layout running")
   ENDIF 
