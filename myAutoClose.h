@@ -45,6 +45,10 @@ ONBUTTON(BD_S4_HA)
         IFCLOSED(HS_T5_A__HS_T6_E)
             IFCLOSED(HS_T6_A__DGS_T3_E)
                 IFTHROWN(DGS_T3_A__HS_T6_A)
+                    IFTHROWN(9022) 
+                        CLOSE(9022)
+                        GREEN(SIG_E3)
+                    ENDIF
                     CLOSE(DGS_T3_A__HS_T6_A)
                     GREEN(SIG_F3)
                  ENDIF 
@@ -59,6 +63,10 @@ ONBUTTON(BD_S4_HB)
         IFCLOSED(HS_T5_A__HS_T6_E)
             IFCLOSED(HS_T6_A__DGS_T3_E)
                 IFTHROWN(DGS_T3_A__HS_T6_A)
+                    IFTHROWN(9022) 
+                        CLOSE(9022)
+                        GREEN(SIG_E3)
+                    ENDIF
                     CLOSE(DGS_T3_A__HS_T6_A)
                     GREEN(SIG_F3)
                  ENDIF 
@@ -72,6 +80,10 @@ ONBUTTON(BD_S4_HC)
     IFTHROWN(HS_T5_A__HS_T6_E)
         IFCLOSED(HS_T6_A__DGS_T3_E)
             IFTHROWN(DGS_T3_A__HS_T6_A)
+                IFTHROWN(9022) 
+                    CLOSE(9022)
+                    GREEN(SIG_E3)
+                ENDIF
                 CLOSE(DGS_T3_A__HS_T6_A)
                 GREEN(SIG_F3)
             ENDIF 
@@ -83,6 +95,10 @@ DONE
 ONBUTTON(BD_S4_HD) 
     IFTHROWN(HS_T6_A__DGS_T3_E)
         IFTHROWN(DGS_T3_A__HS_T6_A)
+            IFTHROWN(9022) 
+                CLOSE(9022)
+                GREEN(SIG_E3)
+            ENDIF
             CLOSE(DGS_T3_A__HS_T6_A)
             GREEN(SIG_F3)
         ENDIF
