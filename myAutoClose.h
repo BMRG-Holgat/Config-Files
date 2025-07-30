@@ -45,11 +45,11 @@ ONBUTTON(BD_S4_HA)
         IFCLOSED(HS_T5_A__HS_T6_E)
             IFCLOSED(HS_T6_A__DGS_T3_E)
                 IFTHROWN(DGS_T3_A__HS_T6_A)
-                    IFTHROWN(9022) 
-                        CLOSE(9022)
-                        GREEN(SIG_E3)
+                    IFTHROWN(DFM_T5_E__DGS_T4_A) 
+                        CLOSE(9030)
                     ENDIF
-                    CLOSE(DGS_T3_A__HS_T6_A)
+                    CLOSE(9031)
+                    DELAY(500)
                     GREEN(SIG_F3)
                  ENDIF 
             ENDIF 
@@ -63,11 +63,11 @@ ONBUTTON(BD_S4_HB)
         IFCLOSED(HS_T5_A__HS_T6_E)
             IFCLOSED(HS_T6_A__DGS_T3_E)
                 IFTHROWN(DGS_T3_A__HS_T6_A)
-                    IFTHROWN(9022) 
-                        CLOSE(9022)
-                        GREEN(SIG_E3)
+                    IFTHROWN(DFM_T5_E__DGS_T4_A) 
+                        CLOSE(9030)
                     ENDIF
-                    CLOSE(DGS_T3_A__HS_T6_A)
+                    CLOSE(9031)
+                    DELAY(500)
                     GREEN(SIG_F3)
                  ENDIF 
             ENDIF 
@@ -80,11 +80,11 @@ ONBUTTON(BD_S4_HC)
     IFTHROWN(HS_T5_A__HS_T6_E)
         IFCLOSED(HS_T6_A__DGS_T3_E)
             IFTHROWN(DGS_T3_A__HS_T6_A)
-                IFTHROWN(9022) 
-                    CLOSE(9022)
-                    GREEN(SIG_E3)
+               IFTHROWN(DFM_T5_E__DGS_T4_A) 
+                    CLOSE(9030)
                 ENDIF
-                CLOSE(DGS_T3_A__HS_T6_A)
+                CLOSE(9031)
+                DELAY(500)
                 GREEN(SIG_F3)
             ENDIF 
         ENDIF 
@@ -95,18 +95,18 @@ DONE
 ONBUTTON(BD_S4_HD) 
     IFTHROWN(HS_T6_A__DGS_T3_E)
         IFTHROWN(DGS_T3_A__HS_T6_A)
-            IFTHROWN(9022) 
-                CLOSE(9022)
-                GREEN(SIG_E3)
+            IFTHROWN(DFM_T5_E__DGS_T4_A) 
+                CLOSE(9030)
             ENDIF
-            CLOSE(DGS_T3_A__HS_T6_A)
+            CLOSE(9031)
+            DELAY(500)
             GREEN(SIG_F3)
         ENDIF
     ENDIF
 
     
 //Holgate Exit auto close
-ONBUTTON(SNS_UGS_B3)
+ONBUTTON(BD_F5_F)
     IFTHROWN(DGS_T2_A__HS_T1_E)
         CLOSE(9028)
     ENDIF
@@ -114,6 +114,9 @@ DONE
 
 // E -> F Stay on F
 ONBUTTON(BD_S5_F)
-    CLOSE(9022)
-    GREEN(SIG_E3)
+    IFTHROWN(DFM_T5_E__DGS_T4_A)
+        CLOSE(9022)
+        DELAY(500)
+        GREEN(SIG_E3)
+    ENDIF 
 DONE

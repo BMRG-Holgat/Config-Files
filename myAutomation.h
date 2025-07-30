@@ -35,7 +35,7 @@ HAL_IGNORE_DEFAULTS
 //HAL(EXIOExpander,858,16,{I2CMux_0,SubBus_3,0x25})// Houses on Board 3
 //HAL(EXIOExpander,300, 18, {I2CMux_0,SubBus_3,0x69}) // Board 1
 
-//HAL(EXIOExpander,362, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
+//HAL(EXIOExpander,334, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
 //HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
 HAL(EXIOExpander,432, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
 //HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
@@ -108,10 +108,10 @@ AUTOSTART SEQUENCE(27)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
-  blockSequence(SIG_C2,451,319,386)
+  blockSequence(SIG_C2,BD_S3_C,BD_F3_C,BD_F4_C)
   FOLLOW(28)
 AUTOSTART SEQUENCE(29)
-  blockSequence(SIG_C3,770,451,319)
+  blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
   FOLLOW(29)
 //Track D
 AUTOSTART SEQUENCE(30)
@@ -125,14 +125,14 @@ AUTOSTART SEQUENCE(32)
   FOLLOW(32)
 //Track E
 AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_E2,BD_S3_E,BD_F4_E,BD_F4_E)
+  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
   FOLLOW(33)
 AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F4_E)
+  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
   FOLLOW(34)
 //Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,BD_S4_F,BD_F5_F,BD_F5_F)
+  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
   blockSequence(SIG_F3,BD_S9_F,BD_S4_F,SNS_UGS_B3)
@@ -223,14 +223,14 @@ DONE
 
 //Show Sensors
 //JMRI_SENSOR(300,18) //BOARD 1 exio
-JMRI_SENSOR(318,16) //BOARD 1 mcp
-JMRI_SENSOR(362,62) //BOARD 2
+//JMRI_SENSOR(318,16) //BOARD 1 mcp
+//JMRI_SENSOR(334,62) //BOARD 2
 JMRI_SENSOR(400,16) //BOARD 3
-//JMRI_SENSOR(416,16) //Board 3 signal
+JMRI_SENSOR(416,16) //Board 3 signal
 //JMRI_SENSOR(432,62) //Board 4
 //JMRI_SENSOR(500,16) //Board 5
 //JMRI_SENSOR(600,16) //Board 6
 //JMRI_SENSOR(700,16) //Board 7
 //JMRI_SENSOR(716,16) //Board 7
-JMRI_SENSOR(800,16) //Board 8
-JMRI_SENSOR(900,16) //BOARD 9
+//JMRI_SENSOR(800,16) //Board 8
+//JMRI_SENSOR(900,16) //BOARD 9
