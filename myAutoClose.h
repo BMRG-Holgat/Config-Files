@@ -49,8 +49,6 @@ ONBUTTON(BD_S4_HA)
                         CLOSE(9030)
                     ENDIF
                     CLOSE(9031)
-                    DELAY(500)
-                    GREEN(SIG_F3)
                  ENDIF 
             ENDIF 
         ENDIF
@@ -67,8 +65,6 @@ ONBUTTON(BD_S4_HB)
                         CLOSE(9030)
                     ENDIF
                     CLOSE(9031)
-                    DELAY(500)
-                    GREEN(SIG_F3)
                  ENDIF 
             ENDIF 
         ENDIF
@@ -84,8 +80,6 @@ ONBUTTON(BD_S4_HC)
                     CLOSE(9030)
                 ENDIF
                 CLOSE(9031)
-                DELAY(500)
-                GREEN(SIG_F3)
             ENDIF 
         ENDIF 
     ENDIF
@@ -99,14 +93,12 @@ ONBUTTON(BD_S4_HD)
                 CLOSE(9030)
             ENDIF
             CLOSE(9031)
-            DELAY(500)
-            GREEN(SIG_F3)
         ENDIF
     ENDIF
 
     
 //Holgate Exit auto close
-ONBUTTON(BD_F5_F)
+ONBUTTON(BD_F3_E)
     IFTHROWN(DGS_T2_A__HS_T1_E)
         CLOSE(9028)
     ENDIF
