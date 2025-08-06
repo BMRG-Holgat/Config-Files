@@ -41,9 +41,11 @@ HAL(EXIOExpander,432, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4
 //HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
 //HAL(EXIOExpander,916, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
 
-HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x26}) //Board 1
-HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x27}) //Board 3
-HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
+HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x27}) //Board 1
+HAL(MCP23017,332,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
+HAL(PCF8575,348,8,{I2CMux_0,SubBus_3,0x25}) //Board 2
+HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x24}) //Board 3
+HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x23}) //Board 3 //signals & street lights
 HAL(MCP23017,500,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
 HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
 HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x26}) // Board 7
@@ -147,11 +149,11 @@ ONBUTTON(BD_S4_F)
 //FOLLOW(37)
 
 //Set SIG_E3 to Red E->Holgate
-ONBUTTON(BD_S9_F)
-  IFTHROWN(9030)
-    RED(SIG_E3)
-  ENDIF
-DONE
+//ONBUTTON(BD_S9_F)
+//  IFTHROWN(9030)
+//    RED(SIG_E3)
+//  ENDIF
+//DONE
 
 //Set SIG_F3 to Red F->Holgate
 ONBUTTON(BD_S9_F)
