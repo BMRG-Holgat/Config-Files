@@ -98,11 +98,11 @@ ONBUTTON(BD_S4_HD)
 
     
 //Holgate Exit auto close
-ONBUTTON(BD_F3_E)
-    IFTHROWN(DGS_T2_A__HS_T1_E)
-        CLOSE(9028)
-    ENDIF
-DONE
+//ONBUTTON(BD_F3_E)
+//    IFTHROWN(DGS_T2_A__HS_T1_E)
+//        CLOSE(9028)
+//    ENDIF
+//DONE
 
 // E -> F Stay on F
 ONBUTTON(BD_S5_F)

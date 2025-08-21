@@ -25,33 +25,23 @@
 HAL_IGNORE_DEFAULTS
 //Hal devices and includes
 #include "IODeviceList.h"
-//#include "IO_HALDisplay.h"
-
 #include "DCC.h"
 
-
-
-//HAL(EXIOExpander,800,18,0x65)
-//HAL(EXIOExpander,858,16,{I2CMux_0,SubBus_3,0x25})// Houses on Board 3
-//HAL(EXIOExpander,300, 18, {I2CMux_0,SubBus_3,0x69}) // Board 1
-
-//HAL(EXIOExpander,334, 62, {I2CMux_0,SubBus_3,0x61}) // Board 2
-//HAL(EXIOExpander,424, 62, {I2CMux_0,SubBus_3,0x62}) // Board 3
-HAL(EXIOExpander,432, 62, {I2CMux_0,SubBus_3,0x63}) // Board 4 
-//HAL(EXIOExpander,734, 62, {I2CMux_0,SubBus_4,0x67}) // Board 8
-//HAL(EXIOExpander,916, 62, {I2CMux_0,SubBus_4,0x68}) // Board 9 
-
-HAL(MCP23017,318,16,{I2CMux_0,SubBus_3,0x27}) //Board 1
-HAL(MCP23017,332,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
-HAL(PCF8575,348,8,{I2CMux_0,SubBus_3,0x25}) //Board 2
-HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x24}) //Board 3
-HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x23}) //Board 3 //signals & street lights
-HAL(MCP23017,500,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
+HAL(MCP23017,300,16,{I2CMux_0,SubBus_3,0x27}) //Board 1
+HAL(MCP23017,316,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
+//HAL(PCF8575,348,8,{I2CMux_0,SubBus_3,0x25}) //Board 2
+HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x23}) //Board 3
+HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
+HAL(PCA9685,432, 16, {I2CMux_0,SubBus_3,0x42}) // Board 3 House Lights
+HAL(MCP23017,500,16,{I2CMux_0,SubBus_3,0x22}) // Board 4
+HAL(PCF8575,516,8,{I2CMux_0,SubBus_3,0x21}) //Board 4
+HAL(MCP23017,524,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
 HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
-HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x26}) // Board 7
-HAL(MCP23017,716,16,{I2CMux_0,SubBus_4,0x25}) // Board 7
+HAL(MCP23017,616,16,{I2CMux_0,SubBus_4,0x26}) //Board 6
+HAL(PCF8575,700,8,{I2CMux_0,SubBus_4,0x21}) //Board 7
 HAL(MCP23017,800,16,{I2CMux_0,SubBus_4,0x23}) // Board 8 
 HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x24}) // Board 9
+
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
 HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
 HAL(PCA9685,264, 16, {I2CMux_0,SubBus_3,0x45}) // Board 4 (signals?)
@@ -77,7 +67,7 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "myBlockDetectors.h"
 #include "myBlocks.h"
 #include "myBlockReserves.h"
-#include "mySensors.h"
+//#include "mySensors.h" //LOCATE ANY REFERENCES
 #include "myRoutes.h"
 #include "myAutoClose.h"
 
@@ -88,25 +78,25 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_F8_A)
+  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_S8_A)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,BD_S4_A,BD_F8_A,828)
+  blockSequence(SIG_A2,BD_S4_A,BD_S8_A,BD_F8_A)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,BD_S8_A,828,721)
+  blockSequence(SIG_A3,BD_S8_A,BD_F8_A,BD_F7_A)
   FOLLOW(24)
 //Track B
 AUTOSTART SEQUENCE(25)
   IFCLOSED(510)
-    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,764)
+    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_F8_B)
   ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,BD_S4_B,764,832)
+  blockSequence(SIG_B2,BD_S4_B,BD_F8_B,BD_F8_B)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,BD_S8_B,832,508)
+  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F6_B)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
@@ -117,13 +107,13 @@ AUTOSTART SEQUENCE(29)
   FOLLOW(29)
 //Track D
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,817)
+  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_S8_D)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,BD_S4_D,766,830)
+  blockSequence(SIG_D2,BD_S4_D,BD_S8_D,BD_F8_D)
   FOLLOW(31)
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D3,BD_S8_D,830,668)
+  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F6_D)
   FOLLOW(32)
 //Track E
 AUTOSTART SEQUENCE(33)
@@ -137,7 +127,7 @@ AUTOSTART SEQUENCE(35)
   blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
   FOLLOW(35)
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_F3,BD_S9_F,BD_S4_F,SNS_UGS_B3)
+  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
   FOLLOW(36)
 //Holgate exit signal
 //AUTOSTART SEQUENCE(37)
@@ -203,7 +193,7 @@ STEALTH(
       rag(192), rag(256));
     StringFormatter::lcd2(2,7,
       F("H:       %c"),
-      rag(416));
+      rag(429));
 )
 ENDIF 
 DELAY(5000)
@@ -219,20 +209,21 @@ AUTOSTART SEQUENCE(180)
 DONE
 
 //include track automations
-#include "myTrackA.h"
-#include "myTrackF.h"
+//#include "myTrackA.h"
+//#include "myTrackF.h"
  
 
 //Show Sensors
 //JMRI_SENSOR(300,18) //BOARD 1 exio
 //JMRI_SENSOR(318,16) //BOARD 1 mcp
-//JMRI_SENSOR(334,62) //BOARD 2
-JMRI_SENSOR(400,16) //BOARD 3
-JMRI_SENSOR(416,16) //Board 3 signal
-//JMRI_SENSOR(432,62) //Board 4
-//JMRI_SENSOR(500,16) //Board 5
+JMRI_SENSOR(300,32) //BOARD 2
+JMRI_SENSOR(400,32) //BOARD 3
+JMRI_SENSOR(500,16) //Board 3 signal
+JMRI_SENSOR(524,16)
+JMRI_SENSOR(600,32) //Board 4
+JMRI_SENSOR(700,8) //Board 5
 //JMRI_SENSOR(600,16) //Board 6
 //JMRI_SENSOR(700,16) //Board 7
 //JMRI_SENSOR(716,16) //Board 7
-//JMRI_SENSOR(800,16) //Board 8
-//JMRI_SENSOR(900,16) //BOARD 9
+JMRI_SENSOR(800,16) //Board 8
+JMRI_SENSOR(900,16) //BOARD 9
