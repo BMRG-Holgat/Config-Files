@@ -71,6 +71,36 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "myRoutes.h"
 #include "myAutoClose.h"
 
+#include "DCC.h"
+STEALTH_GLOBAL(
+  void updateLocoScreen() {
+    const byte loco_slots=8;
+    static byte current_slot=loco_slots-1;
+    static byte shown_speed[loco_slots]; // remember whats already shown
+    static bool first_call=true;
+    
+    if (first_call) {
+      first_call=false;
+      for (int i=0; i<loco_slots; i++) shown_speed[i]=127;
+    }
+    
+    // switch to next row
+    current_slot= (current_slot + 1) % loco_slots;
+    auto loco=DCC::speedTable[current_slot].loco;
+    if (loco<0) return; // this slot is no longetr used
+    if (loco==0) return; // we are beyond the last loco   
+    
+    auto speed = DCC::speedTable[current_slot].speedCode;
+    if (speed== shown_speed[current_slot]) return; // no change in speed
+    shown_speed[current_slot] = speed; // remember speed for next time
+
+    auto direction = (speed & 0x80) ? 'F' : 'R';
+    speed = speed & 0x7f;
+    if (speed > 0) speed = speed - 1; // make it look like JMRI
+    StringFormatter::lcd2(2, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
+  }
+)
+HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS 
 
 
 
@@ -227,3 +257,40 @@ JMRI_SENSOR(700,8) //Board 5
 //JMRI_SENSOR(716,16) //Board 7
 JMRI_SENSOR(800,16) //Board 8
 JMRI_SENSOR(900,16) //BOARD 9
+
+
+AT(BD_F6_D) 
+CALL(777)
+
+
+SEQUENCE(777)
+IFNOT(BD_F2_D1) 
+    CLOSE(9130)
+    FWD(10) 
+    AT(BD_F2_D1) ESTOP
+    RETURN
+ENDIF 
+IFNOT(BD_F2_D2) 
+    THROW(9131)
+    FWD(10) 
+    AT(BD_F2_D2) ESTOP
+    RETURN
+ENDIF 
+IFNOT(BD_F2_D3) 
+    THROW(9132)
+    FWD(10) 
+    AT(BD_F2_D3) ESTOP
+    RETURN
+ENDIF 
+IFNOT(BD_F2_D4) 
+    THROW(9133)
+    FWD(10) 
+    AT(BD_F2_D4) ESTOP
+    RETURN
+ENDIF 
+IFNOT(BD_F2_D5) 
+    CLOSE(9133)
+    FWD(10) 
+    AT(BD_F2_D5) ESTOP
+    RETURN
+ENDIF 
