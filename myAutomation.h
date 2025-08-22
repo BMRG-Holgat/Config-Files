@@ -74,7 +74,7 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "DCC.h"
 STEALTH_GLOBAL(
   void updateLocoScreen() {
-    const byte loco_slots=8;
+    const byte loco_slots=22;
     static byte current_slot=loco_slots-1;
     static byte shown_speed[loco_slots]; // remember whats already shown
     static bool first_call=true;
@@ -99,6 +99,11 @@ STEALTH_GLOBAL(
     if (speed > 0) speed = speed - 1; // make it look like JMRI
     StringFormatter::lcd2(2, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
   }
+   if (speed == 0) {
+     // Handle stopped loco
+     StringFormatter::lcd2(3, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
+     StringFormatter::lcd2(4, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
+   }
 )
 HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS 
 
