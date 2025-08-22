@@ -98,12 +98,12 @@ STEALTH_GLOBAL(
     speed = speed & 0x7f;
     if (speed > 0) speed = speed - 1; // make it look like JMRI
     StringFormatter::lcd2(2, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
-  }
-   if (speed == 0) {
+    if (speed == 0) {
      // Handle stopped loco
      StringFormatter::lcd2(3, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
      StringFormatter::lcd2(4, current_slot+2, F("Loco:%4d %3d %c"), loco, speed, direction);
    }
+  }
 )
 HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS 
 
@@ -263,10 +263,10 @@ JMRI_SENSOR(700,8) //Board 5
 JMRI_SENSOR(800,16) //Board 8
 JMRI_SENSOR(900,16) //BOARD 9
 
-
+ROUTE(778,"D: Park test")
 AT(BD_F6_D) 
 CALL(777)
-
+DONE
 
 SEQUENCE(777)
 IFNOT(BD_F2_D1) 
