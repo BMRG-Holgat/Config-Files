@@ -36,7 +36,7 @@ SEQUENCE(401)
 IFNOT(BD_F2_D1) 
     RESERVE(D_B7)
     CLOSE(9130)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D1) ESTOP
     FREE(D_B6)
     RETURN
@@ -44,7 +44,7 @@ ENDIF
 IFNOT(BD_F2_D2) 
     RESERVE(D_B8)
     THROW(9131)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D2) ESTOP
     FREE(D_B6)
     RETURN
@@ -52,7 +52,7 @@ ENDIF
 IFNOT(BD_F2_D3) 
     RESERVE(D_B9)
     THROW(9132)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D3) ESTOP
     FREE(D_B6)
     RETURN
@@ -60,7 +60,7 @@ ENDIF
 IFNOT(BD_F2_D4) 
     RESERVE(D_B10)
     THROW(9133)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D4) ESTOP
     FREE(D_B6)
     RETURN
@@ -68,7 +68,7 @@ ENDIF
 IFNOT(BD_F2_D5) 
     RESERVE(D_B11)
     CLOSE(9133)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D5) ESTOP
     FREE(D_B6)
     RETURN
@@ -76,6 +76,7 @@ ENDIF
 DONE
 
 AUTOMATION(402, "D: Around We Go") //Leave yard to Station not stopping
+    LATCH(AUTO_D)
     RESERVE(D_B1) //Reserve Station block
     CLOSE(9002) //close turnouts D-C
     FWD(30) //Move forward Speed 30
@@ -92,48 +93,72 @@ FOLLOW(403)
 
 SEQUENCE(403) //Progress to Block2
     RESERVE(D_B3) //Reserve Next block
+    RED(SIG_D1)
     FWD(50) //Increase speed
     AT(BD_S4_D)
     FREE(D_B1)
-    AT(BD_S6_D)
+    AT(BD_S5_D)
 FOLLOW(404)
 
-SEQUENCE(404) //Progress to Block3
+SEQUENCE(404)
+    RED(SIG_D2)
+    AT(BD_S6_D) 
+FOLLOW(405)
+
+SEQUENCE(405) //Progress to Block3
+ IFRED(SIG_D3)
+    STOP
+    UNLATCH(AUTO_D)
+    FOLLOW(405)
+ ENDIF
+    IFNOT(AUTO_D)
+        LATCH(AUTO_D)
+        SPEED(50)
+    ENDIF
     RESERVE(D_B4) //Reserve Next block
+    AMBER(SIG_D1)
     FREE(D_B2)
     CLOSE(9021) // prevent route A-D
     AT(BD_S8_D)
-FOLLOW(405)
-
-SEQUENCE(405) //Progress to Block4
-    RESERVE(D_B5) //Reserve Next block
-    CLOSE(9024) // prevent route E-C
-    AT(BD_F9_B)
 FOLLOW(406)
 
-SEQUENCE(406) //Progress to Block5
-    RESERVE(D_B6) //Reserve Next block
-    FREE(D_B3)
-    AT(BD_F7_D)
+SEQUENCE(406) //Progress to Block4
+    RESERVE(D_B5) //Reserve Next block
+    RED(SIG_D3)
+    CLOSE(9024) // prevent route E-C
+    AT(BD_F9_D)
 FOLLOW(407)
 
-SEQUENCE(407)
-    FREE(D_B4)
-    AT(BD_F6_D)
+SEQUENCE(407) //Progress to Block5
+    RESERVE(D_B6) //Reserve Next block
+    GREEN(SIG_D1)
+    AMBER(SIG_D2)
+    FREE(D_B3)
+    AT(BD_F7_D)
 FOLLOW(408)
 
 SEQUENCE(408)
+    AMBER(SIG_D3)
+    GREEN(SIG_D2)
+    FREE(D_B4)
+    AT(BD_F6_D)
+FOLLOW(409)
+
+SEQUENCE(409)
+    GREEN(SIG_D3)
     FREE(D_B5)
     CALL(401)
+    FOFF(0)
+    UNLATCH(AUTO_D)
 DONE
 
-AUTOMATION(410, "D: Pick'em up") //Leave yard to Station not stopping
+AUTOMATION(410, "D: Pick'em up") //Leave yard to Station and wait
     RESERVE(D_B1) //Reserve Station block
     CLOSE(9002) //close turnouts D-C
     FWD(30) //Move forward Speed 30
     AT(BD_S1_D)
     STOP 
-    RANDOMDELAY(10000,15000)
+    DELAYRANDOM(10000,15000)
     RESERVE(D_B2) //Reserve Next block
     CALL(411)
     //Ensure route is set

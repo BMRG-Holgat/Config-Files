@@ -3,10 +3,13 @@
 * for churchbells
 */
 ALIAS(Bridge,348)
-ALIAS(B2_Light1,349)
-ALIAS(B2_Light2,350)
+ALIAS(B2_Light1,348)
+ALIAS(B2_Light2,349)
 ALIAS(B2_Light3,351)
 ALIAS(B3_Light1,431)
+ALIAS(B2_Church,350)
+ALIAS(House_1_Bed,432)
+ALIAS(House_1_2_Bed,433)
 /*
 //Reset hidden routes
 ROUTE(1200,"System: Reset Hidden")
@@ -72,10 +75,112 @@ DONE
 
 ROUTE(1005,"Lights: Church")
 IFNOT(Latch_church)
-    SET(423)
+    SET(B2_Church)
     LATCH(Latch_church)
 ELSE 
-    RESET(423)
+    RESET(B2_Church)
     UNLATCH(Latch_church)
 ENDIF
+DONE
+
+ROUTE(1015,"Lights: House1_Bed")
+IFNOT(Latch_House_1_Bed)
+    SET(House_1_Bed)
+    LATCH(Latch_House_1_Bed)
+ELSE 
+    RESET(House_1_Bed)
+    UNLATCH(Latch_House_1_Bed)
+ENDIF 
+DONE
+
+ROUTE(1016,"Lights: House2_Bed")
+IFNOT(Latch_House_1_2_Bed)
+    SET(House_1_2_Bed)
+ELSE 
+    RESET(House_1_2_Bed)
+ENDIF 
+DONE
+
+ROUTE(1017,"Lights: House3")
+IFNOT(Latch_light_house)
+    SET(440)
+ELSE 
+    RESET(440)
+ENDIF 
+DONE
+
+ROUTE(1018,"Lights: House4")
+IFNOT(Latch_light_house)
+    SET(441)
+ELSE 
+    RESET(442)
+ENDIF 
+DONE
+
+ROUTE(1019,"Lights: House5")
+IFNOT(Latch_light_house)
+    SET(443)
+ELSE 
+    RESET(443)
+ENDIF 
+DONE
+
+ROUTE(1020,"Lights: House6")
+IFNOT(Latch_light_house)
+    SET(444)
+ELSE 
+    RESET(444)
+ENDIF 
+DONE
+
+ROUTE(1021,"Lights: House7")
+IFNOT(Latch_light_house)
+    SET(445)
+ELSE 
+    RESET(445)
+ENDIF 
+DONE
+
+ROUTE(1022,"Lights: House8")
+IFNOT(Latch_light_house)
+    SET(446)
+ELSE 
+    RESET(446)
+ENDIF 
+DONE
+
+ROUTE(1023,"Lights: House8")
+IFNOT(Latch_light_house)
+    SET(447)
+ELSE 
+    RESET(447)
+ENDIF 
+DONE
+
+ROUTE(1024,"Lights: House8")
+IFNOT(Latch_light_house)
+    SET(448)
+ELSE 
+    RESET(448)
+ENDIF 
+DONE
+
+
+ROUTE(1025,"Lights: Reset")
+    RESET(432)
+    RESET(433)
+    RESET(434)
+    RESET(435)
+    RESET(436)
+    RESET(437)
+    RESET(438)
+    RESET(439)
+    RESET(440)
+    RESET(441)
+    RESET(442)
+    RESET(443)
+    RESET(444)
+    RESET(445)
+    RESET(446)
+    RESET(447)
 DONE

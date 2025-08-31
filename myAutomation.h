@@ -29,7 +29,7 @@ HAL_IGNORE_DEFAULTS
 
 HAL(MCP23017,300,16,{I2CMux_0,SubBus_3,0x27}) //Board 1
 HAL(MCP23017,316,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
-//HAL(PCF8575,348,8,{I2CMux_0,SubBus_3,0x25}) //Board 2
+HAL(PCA9685,348,16,{I2CMux_0,SubBus_3,0x41}) //Board 2 //Lights & church
 HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x23}) //Board 3
 HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
 HAL(PCA9685,432, 16, {I2CMux_0,SubBus_3,0x42}) // Board 3 House Lights
@@ -38,9 +38,10 @@ HAL(PCF8575,516,8,{I2CMux_0,SubBus_3,0x21}) //Board 4
 HAL(MCP23017,524,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
 HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
 HAL(MCP23017,616,16,{I2CMux_0,SubBus_4,0x26}) //Board 6
-HAL(PCF8575,700,8,{I2CMux_0,SubBus_4,0x21}) //Board 7
+HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x25}) //Board 7
 HAL(MCP23017,800,16,{I2CMux_0,SubBus_4,0x23}) // Board 8 
 HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x24}) // Board 9
+
 
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
 HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
@@ -116,7 +117,7 @@ AUTOSTART SEQUENCE(22)
   blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_S8_A)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,BD_S4_A,BD_S8_A,BD_F8_A)
+  blockSequence(SIG_A2,BD_S5_A,BD_S8_A,BD_F8_A)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
   blockSequence(SIG_A3,BD_S8_A,BD_F8_A,BD_F7_A)
@@ -124,14 +125,14 @@ AUTOSTART SEQUENCE(24)
 //Track B
 AUTOSTART SEQUENCE(25)
   IFCLOSED(510)
-    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_F8_B)
+    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_S8_B)
   ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,BD_S4_B,BD_F8_B,BD_F8_B)
+  blockSequence(SIG_B2,BD_S5_B,BD_S9_B,BD_F8_B)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F6_B)
+  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F7_B)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
@@ -141,15 +142,17 @@ AUTOSTART SEQUENCE(29)
   blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
   FOLLOW(29)
 //Track D
+IFNOT(AUTO_D)
 AUTOSTART SEQUENCE(30)
   blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_S8_D)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,BD_S4_D,BD_S8_D,BD_F8_D)
+  blockSequence(SIG_D2,BD_S5_D,BD_S9_D,BD_F8_D)
   FOLLOW(31)
 AUTOSTART SEQUENCE(32)
   blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F6_D)
   FOLLOW(32)
+ENDIF
 //Track E
 AUTOSTART SEQUENCE(33)
   blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
@@ -246,24 +249,24 @@ DONE
 //include track automations
 //#include "myTrackA.h"
 //#include "myTrackF.h"
- 
+#include "myTrackD.h"
 
 //Show Sensors
-//JMRI_SENSOR(300,18) //BOARD 1 exio
-//JMRI_SENSOR(318,16) //BOARD 1 mcp
-JMRI_SENSOR(300,32) //BOARD 2
-JMRI_SENSOR(400,32) //BOARD 3
-JMRI_SENSOR(500,16) //Board 3 signal
-JMRI_SENSOR(524,16)
-JMRI_SENSOR(600,32) //Board 4
-JMRI_SENSOR(700,8) //Board 5
+JMRI_SENSOR(300,16) //BOARD 1 exio
+//JMRI_SENSOR(348,16) //BOARD 1 mcp
+//JMRI_SENSOR(300,32) //BOARD 2
+//JMRI_SENSOR(400,32) //BOARD 3
+//JMRI_SENSOR(500,16) //Board 3 signal
+//JMRI_SENSOR(524,16)
+//JMRI_SENSOR(600,32) //Board 4
+//JMRI_SENSOR(700,16) //Board 5
 //JMRI_SENSOR(600,16) //Board 6
 //JMRI_SENSOR(700,16) //Board 7
 //JMRI_SENSOR(716,16) //Board 7
-JMRI_SENSOR(800,16) //Board 8
+//JMRI_SENSOR(800,16) //Board 8
 JMRI_SENSOR(900,16) //BOARD 9
 
-ROUTE(778,"D: Park test")
+AUTOMATION(778,"D: Park test")
 AT(BD_F6_D) 
 CALL(777)
 DONE
@@ -271,31 +274,31 @@ DONE
 SEQUENCE(777)
 IFNOT(BD_F2_D1) 
     CLOSE(9130)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D1) ESTOP
     RETURN
 ENDIF 
 IFNOT(BD_F2_D2) 
     THROW(9131)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D2) ESTOP
     RETURN
 ENDIF 
 IFNOT(BD_F2_D3) 
     THROW(9132)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D3) ESTOP
     RETURN
 ENDIF 
 IFNOT(BD_F2_D4) 
     THROW(9133)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D4) ESTOP
     RETURN
 ENDIF 
 IFNOT(BD_F2_D5) 
     CLOSE(9133)
-    FWD(10) 
+    FWD(20) 
     AT(BD_F2_D5) ESTOP
     RETURN
 ENDIF 
