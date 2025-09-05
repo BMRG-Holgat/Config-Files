@@ -21,5 +21,8 @@ ALIAS(SIG_D3, 288) // Track C board 7
 ALIAS(SIG_C3, 248) // Track c board 9
 ALIAS(SIG_E3, 252) // Track E board 9
 ALIAS(SIG_F3, 256) // Track F board 9
+ALIAS(SIG_A4, 136) // Track A board 9
+ALIAS(SIG_B4, 140) // Track B board 9
+ALIAS(SIG_D4, 144) // Track D board 9
 
 

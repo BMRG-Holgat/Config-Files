@@ -48,6 +48,7 @@ HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
 HAL(PCA9685,264, 16, {I2CMux_0,SubBus_3,0x45}) // Board 4 (signals?)
 HAL(PCA9685,280, 16, {I2CMux_0,SubBus_4,0x47}) // Board 7 Signals
 HAL(PCA9685,248, 16, {I2CMux_0,SubBus_4,0x42}) // Board 9
+HAL(PCA9685,136, 16, {I2CMux_0,SubBus_4,0x41}) // Board 9
 //I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
 //HAL(I2CDFPlayer,1000, 4, {I2CMux_0,SubBus_3,0x4D}, 0)
 
@@ -129,10 +130,10 @@ AUTOSTART SEQUENCE(25)
   ENDIF
   FOLLOW(25)
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,BD_S5_B,BD_S9_B,BD_F8_B)
+  blockSequence(SIG_B2,BD_S5_B,BD_F9_B,BD_F8_B)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F7_B)
+  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F6_B)
   FOLLOW(27)
 //Track C
 AUTOSTART SEQUENCE(28)
@@ -144,29 +145,32 @@ AUTOSTART SEQUENCE(29)
 //Track D
 IFNOT(AUTO_D)
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_S8_D)
+  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_F9_D)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,BD_S5_D,BD_S9_D,BD_F8_D)
+  blockSequence(SIG_D2,BD_S5_D,BD_F9_D,BD_F8_D)
   FOLLOW(31)
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F6_D)
+  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F7_D)
   FOLLOW(32)
+  AUTOSTART SEQUENCE(33)
+  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+  FOLLOW(33)
 ENDIF
 //Track E
-AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
-  FOLLOW(33)
 AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
+  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
   FOLLOW(34)
-//Track F
 AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
+  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
   FOLLOW(35)
+//Track F
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
+  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
   FOLLOW(36)
+AUTOSTART SEQUENCE(37)
+  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
+  FOLLOW(37)
 //Holgate exit signal
 //AUTOSTART SEQUENCE(37)
  // IFTHROWN(DGS_T2_A__HS_T1_E)
@@ -249,10 +253,11 @@ DONE
 //include track automations
 //#include "myTrackA.h"
 //#include "myTrackF.h"
+#include "myTrackB.h"
 #include "myTrackD.h"
 
 //Show Sensors
-JMRI_SENSOR(300,16) //BOARD 1 exio
+//JMRI_SENSOR(300,16) //BOARD 1 exio
 //JMRI_SENSOR(348,16) //BOARD 1 mcp
 //JMRI_SENSOR(300,32) //BOARD 2
 //JMRI_SENSOR(400,32) //BOARD 3

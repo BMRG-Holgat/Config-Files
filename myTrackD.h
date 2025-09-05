@@ -78,100 +78,134 @@ DONE
 AUTOMATION(402, "D: Around We Go") //Leave yard to Station not stopping
     LATCH(AUTO_D)
     RESERVE(D_B1) //Reserve Station block
-    CLOSE(9002) //close turnouts D-C
+    IFTHROWN(9002)
+        CLOSE(9002) //close turnouts D-C
+    ENDIF
     FWD(30) //Move forward Speed 30
     AT(BD_S1_D)
-    RESERVE(D_B2) //Reserve Next block
-    //Ensure route is set
-    CLOSE(9005)//ensure route is set
-    CLOSE(9008)
-    CLOSE(9009)
-    CLOSE(9010)
-    CALL(400) //Release the Staging Yard Block
-    AT(BD_S2_D)
 FOLLOW(403)
 
-SEQUENCE(403) //Progress to Block2
+SEQUENCE(403)
+        IFRED(SIG_D1)
+        STOP
+        FOLLOW(403)
+    ENDIF   
+FOLLOW(404)
+
+SEQUENCE(404)   
+    RESERVE(D_B2) //Reserve Next block
+    //Ensure route is set
+    IFTHROWN(9005)
+        CLOSE(9005)//ensure route is set
+    ENDIF
+    IFTHROWN(9008)
+        CLOSE(9008)
+    ENDIF
+    IFTHROWN(9009)
+        CLOSE(9009)
+    ENDIF
+    IFTHROWN(9010)
+        CLOSE(9010)
+    ENDIF
+    SPEED(50) //Maybe too fast
+    CALL(400) //Release the Staging Yard Block
+    AT(BD_S2_D)
+FOLLOW(405)
+
+SEQUENCE(405) //Progress to Block2
     RESERVE(D_B3) //Reserve Next block
     RED(SIG_D1)
     FWD(50) //Increase speed
     AT(BD_S4_D)
     FREE(D_B1)
     AT(BD_S5_D)
-FOLLOW(404)
+FOLLOW(406)
 
-SEQUENCE(404)
+SEQUENCE(406)
     RED(SIG_D2)
     AT(BD_S6_D) 
-FOLLOW(405)
+FOLLOW(407)
 
-SEQUENCE(405) //Progress to Block3
+SEQUENCE(407) //Progress to Block3
  IFRED(SIG_D3)
+    SPEED(20)
+    AT(BD_S7_D)
     STOP
-    UNLATCH(AUTO_D)
-    FOLLOW(405)
+    FOLLOW(407)
  ENDIF
-    IFNOT(AUTO_D)
-        LATCH(AUTO_D)
-        SPEED(50)
-    ENDIF
+ IFAMBER(SIG_D3)
+    SPEED(30)
+ELSE
+    SPEED(50)
+ENDIF
     RESERVE(D_B4) //Reserve Next block
     AMBER(SIG_D1)
     FREE(D_B2)
-    CLOSE(9021) // prevent route A-D
+    IFTHROWN(9021)
+        CLOSE(9021) // prevent route A-D
+    ENDIF
     AT(BD_S8_D)
-FOLLOW(406)
+FOLLOW(408)
 
-SEQUENCE(406) //Progress to Block4
+SEQUENCE(408) //Progress to Block4
     RESERVE(D_B5) //Reserve Next block
     RED(SIG_D3)
-    CLOSE(9024) // prevent route E-C
-    AT(BD_F9_D)
-FOLLOW(407)
+    IFTHROWN(9024)
+        CLOSE(9024) // prevent route E-C
+    ENDIF
+FOLLOW(409)
 
-SEQUENCE(407) //Progress to Block5
+SEQUENCE(409)
+    IFRED(SIG_D4)
+        AT(BD_S9_D)
+        STOP
+        FOLLOW(409)
+    ENDIF
+    IFAMBER(SIG_D4)
+        SPEED(30)
+    ENDIF
+    AT(BD_F9_D)
+FOLLOW(410)
+
+SEQUENCE(410) //Progress to Block5
     RESERVE(D_B6) //Reserve Next block
+    RED(SIG_D4)
     GREEN(SIG_D1)
     AMBER(SIG_D2)
     FREE(D_B3)
     AT(BD_F7_D)
-FOLLOW(408)
+FOLLOW(411)
 
-SEQUENCE(408)
+SEQUENCE(411)
+    AMBER(SIG_D4)   
     AMBER(SIG_D3)
     GREEN(SIG_D2)
     FREE(D_B4)
     AT(BD_F6_D)
-FOLLOW(409)
+FOLLOW(412)
 
-SEQUENCE(409)
-    GREEN(SIG_D3)
+SEQUENCE(412)
+    GREEN(SIG_D4)
+    GREEN(SIG_D3)    
     FREE(D_B5)
     CALL(401)
     FOFF(0)
     UNLATCH(AUTO_D)
 DONE
 
-AUTOMATION(410, "D: Pick'em up") //Leave yard to Station and wait
+AUTOMATION(414, "D: Pick'em up") //Leave yard to Station and wait
     RESERVE(D_B1) //Reserve Station block
-    CLOSE(9002) //close turnouts D-C
+    IFTHROWN(9002)
+        CLOSE(9002) //close turnouts D-C
+    ENDIF
     FWD(30) //Move forward Speed 30
     AT(BD_S1_D)
     STOP 
     DELAYRANDOM(10000,15000)
-    RESERVE(D_B2) //Reserve Next block
-    CALL(411)
-    //Ensure route is set
-    CLOSE(9005)//ensure route is set
-    CLOSE(9008)
-    CLOSE(9009)
-    CLOSE(9010)
-    FWD(20)
-    CALL(400) //Release the Staging Yard Block
-    AT(BD_S2_D)
+    CALL(415)
 FOLLOW(403)
 
-SEQUENCE(411)
+SEQUENCE(415)
     FON(4)
     DELAY(300)
     FOFF(4)

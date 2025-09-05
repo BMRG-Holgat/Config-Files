@@ -35,7 +35,10 @@
    RED(SIG_C3) \
    RED(SIG_D3) \
    RED(SIG_E3) \
-   RED(SIG_F3)
+   RED(SIG_F3) \
+   RED(SIG_A4) \
+   RED(SIG_B4) \
+   RED(SIG_D4)
 
 //Test sequence of LED signals
  #define signalTest \
@@ -55,6 +58,9 @@
    signalLedTest(SIG_C3) \
    signalLedTest(SIG_E3) \
    signalLedTest(SIG_F3) \
+   signalLedTest(SIG_A4) \
+   signalLedTest(SIG_B4) \
+   signalLedTest(SIG_D4) \
    ledReset \
    myLCDOutput(signals)
   

@@ -22,3 +22,6 @@ SIGNALH(288, 289, 290) // Board 7
 SIGNALH(248, 249, 250) // Board 9   C
 SIGNALH(252, 253, 254) // Board 9   E
 SIGNALH(256, 257, 258) // Board 9   F
+SIGNALH(136, 137, 138) // Board 9   A
+SIGNALH(140, 141, 142) // Board 9   B
+SIGNALH(144, 145, 146) // Board 9   D
