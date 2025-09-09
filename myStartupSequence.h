@@ -18,7 +18,12 @@ ALIAS(Latch_House_1_2_Bed,181)
 ALIAS(F_ROUNDY, 200) //Roundy for Fiddle yard
 
 //Route latches to prevent Signals changing
+ALIAS(AUTO_A,210)
+ALIAS(AUTO_B,211)
+ALIAS(AUTO_C,212)
 ALIAS(AUTO_D,213)
+ALIAS(AUTO_E,214)
+ALIAS(AUTO_F,215)
 
  ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(Latch_build)

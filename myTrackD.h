@@ -6,6 +6,44 @@
 * AroundWeGo
 *
 */
+//Release Block when loco is removed from track
+ROUTE(490,"D: Track 1 Clear")
+    FREE(D_B7)
+DONE
+ROUTE(491,"D: Track 2 Clear")
+    FREE(D_B8)
+DONE
+ROUTE(492,"D: Track 3 Clear")
+    FREE(D_B9)
+DONE
+ROUTE(493,"D: Track 4 Clear")
+    FREE(D_B10)
+DONE
+ROUTE(494,"D: Track 5 Clear")
+    FREE(D_B11)
+DONE
+
+//Set reserves for locos in yard to prevent other locos entering
+ROUTE(495,"D: Track 1 Loaded") //Auto park the train in the yard
+    RESERVE(D_B7)
+DONE
+ROUTE(496,"D: Track 2 Loaded") //Auto park the train in the yard
+    RESERVE(D_B8)
+DONE
+ROUTE(497,"D: Track 3 Loaded") //Auto park the train in the yard
+    RESERVE(D_B9)
+DONE
+ROUTE(498,"D: Track 4 Loaded") //Auto park the train in the yard
+    RESERVE(D_B10)
+DONE
+ROUTE(499,"D: Track 5 Loaded") //Auto park the train in the yard
+    RESERVE(D_B11)
+DONE 
+
+//Manually activate the auto park sequence
+AUTOMATION(489,"D: Manual Auto Park")   
+    CALL(401)
+DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
 SEQUENCE(400) //Release Parked Block dependant on turnout thrown

@@ -115,62 +115,68 @@ HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_S8_A)
+  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_F9_A)
   FOLLOW(22)
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,BD_S5_A,BD_S8_A,BD_F8_A)
+  blockSequence(SIG_A2,BD_S5_A,BD_F9_A,BD_F8_A)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
   blockSequence(SIG_A3,BD_S8_A,BD_F8_A,BD_F7_A)
   FOLLOW(24)
-//Track B
 AUTOSTART SEQUENCE(25)
-  IFCLOSED(510)
-    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_S8_B)
-  ENDIF
-  FOLLOW(25)
+  blockSequence(SIG_A4,BD_F9_A,BD_F7_A,BD_F6_A)
+FOLLOW(25)
+//Track B
 AUTOSTART SEQUENCE(26)
-  blockSequence(SIG_B2,BD_S5_B,BD_F9_B,BD_F8_B)
+  IFCLOSED(510)
+    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_F9_B)
+  ENDIF
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F6_B)
+  blockSequence(SIG_B2,BD_S5_B,BD_F9_B,BD_F8_B)
   FOLLOW(27)
-//Track C
 AUTOSTART SEQUENCE(28)
-  blockSequence(SIG_C2,BD_S3_C,BD_F3_C,BD_F4_C)
+  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F7_B)
   FOLLOW(28)
 AUTOSTART SEQUENCE(29)
-  blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
-  FOLLOW(29)
-//Track D
-IFNOT(AUTO_D)
+  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+FOLLOW(29)
+//Track C
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_F9_D)
+  blockSequence(SIG_C2,BD_S3_C,BD_F3_C,BD_F4_C)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_D2,BD_S5_D,BD_F9_D,BD_F8_D)
+  blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
   FOLLOW(31)
+//Track D
+IFNOT(AUTO_D)
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F7_D)
+  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_F9_D)
   FOLLOW(32)
-  AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+AUTOSTART SEQUENCE(33)
+  blockSequence(SIG_D2,BD_S5_D,BD_F9_D,BD_F8_D)
   FOLLOW(33)
+AUTOSTART SEQUENCE(34)
+  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F7_D)
+  FOLLOW(34)
+  AUTOSTART SEQUENCE(35)
+  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+  FOLLOW(35)
 ENDIF
 //Track E
-AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
-  FOLLOW(34)
-AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
-  FOLLOW(35)
-//Track F
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
+  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
   FOLLOW(36)
 AUTOSTART SEQUENCE(37)
-  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
+  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
   FOLLOW(37)
+//Track F
+AUTOSTART SEQUENCE(38)
+  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
+  FOLLOW(38)
+AUTOSTART SEQUENCE(39)
+  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
+  FOLLOW(39)
 //Holgate exit signal
 //AUTOSTART SEQUENCE(37)
  // IFTHROWN(DGS_T2_A__HS_T1_E)
@@ -271,39 +277,19 @@ DONE
 //JMRI_SENSOR(800,16) //Board 8
 JMRI_SENSOR(900,16) //BOARD 9
 
-AUTOMATION(778,"D: Park test")
-AT(BD_F6_D) 
-CALL(777)
-DONE
-
-SEQUENCE(777)
-IFNOT(BD_F2_D1) 
-    CLOSE(9130)
-    FWD(20) 
-    AT(BD_F2_D1) ESTOP
-    RETURN
-ENDIF 
-IFNOT(BD_F2_D2) 
-    THROW(9131)
-    FWD(20) 
-    AT(BD_F2_D2) ESTOP
-    RETURN
-ENDIF 
-IFNOT(BD_F2_D3) 
-    THROW(9132)
-    FWD(20) 
-    AT(BD_F2_D3) ESTOP
-    RETURN
-ENDIF 
-IFNOT(BD_F2_D4) 
-    THROW(9133)
-    FWD(20) 
-    AT(BD_F2_D4) ESTOP
-    RETURN
-ENDIF 
-IFNOT(BD_F2_D5) 
-    CLOSE(9133)
-    FWD(20) 
-    AT(BD_F2_D5) ESTOP
-    RETURN
-ENDIF 
+/*
+It's going yo be something like this: ( for loco 777) 
+```cpp
+STEALTH(
+ auto task=loopTask;
+  while(task) {
+        if (task->loco==777) {
+            task->kill(F("KILL"));
+            break;
+          }
+        task=task->next;
+        if (task==loopTask) break;
+   }
+)
+   
+*/
