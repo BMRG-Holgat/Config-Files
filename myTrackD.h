@@ -251,4 +251,64 @@ SEQUENCE(415)
     RETURN 
 DONE
 
+
+//Change route to track B
+AUTOMATION(416, "D: Change to Track B") //Leave yard to Station not stopping
+    LATCH(AUTO_D)
+    RESERVE(D_B1) //Reserve Station block
+    IFTHROWN(9002)
+        CLOSE(9002) //close turnouts D-C
+    ENDIF
+    FWD(30) //Move forward Speed 30
+    AT(BD_S1_D)
+FOLLOW(417)
+
+SEQUENCE(417)
+        IFRED(SIG_D1)
+        STOP
+        FOLLOW(417)
+    ENDIF
+FOLLOW(418) 
+
+SEQUENCE(418)   
+    RESERVE(D_B2) //Reserve Next block
+    RESERVE(B_B2) //Reserve block on track B
+    RESERVE(C_B3) //Reserve block on track C Subject to change...
+    //Ensure route is set
+    IFTHROWN(9005)
+        CLOSE(9005)//ensure route is set
+    ENDIF
+    IFTHROWN(9008)
+        CLOSE(9008)
+    ENDIF
+    IFTHROWN(9009)
+        CLOSE(9009)
+    ENDIF
+    IFCLOSED(9010)
+        THROW(9010)
+    ENDIF
+    SPEED(50) //Maybe too fast
+    CALL(400) //Release the Staging Yard Block
+    AT(BD_S2_D)
+FOLLOW(419)
+
+SEQUENCE(419) //Progress to Block2
+    RESERVE(D_B3) //Reserve Next block
+    RED(SIG_D1)
+    FWD(40) //Increase speed
+    AT(BD_S4_B)
+    FREE(D_B1)
+    AT(BD_S5_B)
+FOLLOW(420)
+
+SEQUENCE(420)
+    RED(SIG_B2)
+    AT(BD_S6_B)
+    CLOSE(9010)
+    FREE(D_B2)
+    FREE(C_B3)
+FOLLOW(206)
+
+
+
 //ALMOST THERE
