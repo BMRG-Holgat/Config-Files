@@ -127,6 +127,22 @@ FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
     RESERVE(B_B2) //Reserve Next block
+    IFTHROWN(9004)
+        CLOSE(9004) //close turnouts A->B
+    ENDIF
+    RESERVE(B_B3) //Reserve Next block
+    IFTHROWN(9007)
+        CLOSE(9007) //close turnouts B->A   
+    ENDIF
+    IFTHROWN(9008)
+        CLOSE(9008) //close turnouts D->B
+    ENDIF
+    IFTHROWN(9009)
+        CLOSE(9009) //close turnouts D->A
+    ENDIF
+    IFTHROWN(9010)
+        CLOSE(9010) //close turnouts D->B
+    ENDIF
     IFRED(SIG_B1)
         STOP
         FOLLOW(203)
@@ -141,9 +157,88 @@ SEQUENCE(203) //Progress to Block2
 FOLLOW(204)
 
 SEQUENCE(204) //Progress to Block3
-    RESERVE(B_B3) //Reserve Next block
     RED(SIG_B1)
+    AT(BD_S4_B)
+    FREE(B_B1) //Free previous block
+    AT(BD_S5_B)
+FOLLOW(205)
 
-    DONE //TEMP ENDING POINT
+SEQUENCE(205)
+    RED(SIG_B2)
+    AT(BD_S6_B) 
+FOLLOW(206)
+
+SEQUENCE(206) //Progress to Block4
+    IFRED(SIG_B3)
+        SPEED(20)
+        AT(BD_S7_B)
+        STOP
+        FOLLOW(206)
+    ENDIF
+    IFAMBER(SIG_B3)
+        SPEED(30)
+    ENDIF
+    IFGREEN(SIG_B3)
+        SPEED(60)
+    ENDIF   
+    RESERVE(B_B4) //Reserve Next block
+    AMBER(SIG_B1)
+    FREE(B_B2)  
+    IFTHROWN(9020)
+        CLOSE(9020) // prevent route A-B
+    ENDIF
+    IFTHROWN(9021)
+        CLOSE(9021) // prevent route A-D
+    ENDIF
+    AT(BD_S8_B)
+FOLLOW(207)
+
+SEQUENCE(207) //Progress to Block5
+    RESERVE(B_B5) //Reserve Next block  
+    RED(SIG_B3)
+    IFTHROWN(9023)
+        CLOSE(9023) // prevent route A->B
+    ENDIF 
+FOLLOW(208)
+
+
+SEQUENCE(208) //Progress to Block6
+    IFRED(SIG_B4)
+        AT(BD_S9_B)
+        STOP
+        FOLLOW(208)
+    ENDIF
+    IFAMBER(SIG_B4)
+        SPEED(30)
+    ENDIF
+    IFGREEN(SIG_B4)
+        SPEED(60)
+    ENDIF
+    AT(BD_F9_B)
+FOLLOW(209) 
+
+SEQUENCE(209) //Progress to Block7
+    RESERVE(B_B6) //Reserve Next block  
+    RED(SIG_B4)
+    AMBER(SIG_B2)   
+    FREE(B_B3)
+    AT(BD_F7_B)
+FOLLOW(210)
+
+SEQUENCE(210)
+    AMBER(SIG_B4)   
+    AMBER(SIG_B3)
+    GREEN(SIG_B2)
+    FREE(B_B4)
+    AT(BD_F6_B)
+FOLLOW(211)
+
+SEQUENCE(211)
+    GREEN(SIG_B4)   
+    GREEN(SIG_B3)
+    FREE(B_B5)
+    CALL(201)
+    FOFF(0)
+DONE
 
     
