@@ -271,11 +271,11 @@ DONE
 //JMRI_SENSOR(524,16)
 //JMRI_SENSOR(600,32) //Board 4
 //JMRI_SENSOR(700,16) //Board 5
-//JMRI_SENSOR(600,16) //Board 6
+//JMRI_SENSOR(600,32) //Board 6
 //JMRI_SENSOR(700,16) //Board 7
 //JMRI_SENSOR(716,16) //Board 7
 //JMRI_SENSOR(800,16) //Board 8
-JMRI_SENSOR(900,16) //BOARD 9
+//JMRI_SENSOR(900,16) //BOARD 9
 
 /*
 It's going yo be something like this: ( for loco 777) 

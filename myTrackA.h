@@ -32,7 +32,6 @@ FOLLOW(50)
 //Leave yard and approach station
 AUTOMATION(43,"A: A STN Stop") 
 RESERVE(A_B1) //Reserve Station block 
-SCREEN(3,1,"A_B1      Reserved")
 IFTHROWN(9026) //close B-A turnouts
   CLOSE(9026)
 ENDIF 
@@ -43,22 +42,21 @@ IFCLOSED(UGS_T2_H) //Close Header
     THROW(UGS_T2_H)
   ENDIF
 FWD(40)       //Move forward
-  AT(B1_IR_A)
-  FREE(A_B7)  //Release previous ladder
-  SCREEN(3,7,"A_B7 Free") 
-  RED(SIG_A1)
-    FON(2)
-    AFTER(B1_IR_A)
-    FOFF(2)    
+  AT(BD_S1_A)   
 FOLLOW(44)
 
 SEQUENCE(44)
 //Stop at station
-  AT(307)
+  FREE(A_B7)  //Release previous ladder
   STOP 
   DELAYRANDOM(10000,15000)
   RESERVE(A_B2) //reserve Block 2
-  SCREEN(3,2,"A_B2 Reserved")
+  IFTHROWN(9004)
+    CLOSE(9004)
+  ENDIF 
+  IFTHROWN(9007)
+    CLOSE(9007)
+  ENDIF 
   GREEN(SIG_A1)
   FON(4)
   DELAY(500)
@@ -68,22 +66,17 @@ SEQUENCE(44)
   DELAY(300)
   FOFF(3)
   FWD(40)
+  AT(BD_S2_A)
 FOLLOW(45)
 
 SEQUENCE(45)
-//Move to gantry 1
- AT(396)
  RESERVE(A_B3)
- SCREEN(3,3,"A_B3 Reserved")
- SPEED(50) // Increase Speed
- //Now station is clear free it
- FREE(A_B1)
- SCREEN(3,1,"A_B1 Free")
+ RED(SIG_A1)
+ AT(BD_S5_A)
 FOLLOW(46)
 
 SEQUENCE(46)
-//block A_B3
-AT(628) //Board 6
+FREE(A_B1)
 IFGREEN(SIG_A3)
  RESERVE(A_B4)
  SCREEN(3,4,"A_B4 Reserved")

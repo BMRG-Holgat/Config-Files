@@ -9,7 +9,7 @@
 *  (S)enic | (F)iddleyard
 */
 
-ALIAS(BD_S1_A,301)
+ALIAS(BD_S1_A,316)
 ALIAS(BD_S1_AA,307) // STN
 ALIAS(BD_S1_HE,303)
 ALIAS(BD_S1_B,302)

@@ -2,8 +2,15 @@
 * myTrackD.h
 * Add in the routes for trackD only
 *
+* V 0.2.0
+*           490 - 494 Free yard tracks
+*           495 - 499 Reserve yard tracks
+*           416 Change to Track B
+*
 * V 0.1.0
-* AroundWeGo
+*           402 AroundWeGo
+*           414 Pick'em up
+*           489 Auto Park
 *
 */
 //Release Block when loco is removed from track
@@ -63,7 +70,7 @@ SEQUENCE(400) //Release Parked Block dependant on turnout thrown
         FREE(D_B10)
         RETURN
     ENDIF
-    IFCLOSED(9139) //Track FD5
+    IFCLOSED(9138) //Track FD5
         FREE(D_B11)
         RETURN
     ENDIF
@@ -119,12 +126,12 @@ AUTOMATION(402, "D: Around We Go") //Leave yard to Station not stopping
     IFTHROWN(9002)
         CLOSE(9002) //close turnouts D-C
     ENDIF
-    FWD(30) //Move forward Speed 30
+    FWD(20) //Move forward Speed 30
     AT(BD_S1_D)
 FOLLOW(403)
 
 SEQUENCE(403)
-        IFRED(SIG_D1)
+    IFRED(SIG_D1)
         STOP
         FOLLOW(403)
     ENDIF   
@@ -145,15 +152,18 @@ SEQUENCE(404)
     IFTHROWN(9010)
         CLOSE(9010)
     ENDIF
-    SPEED(50) //Maybe too fast
+//    SPEED(50) //Maybe too fast
     CALL(400) //Release the Staging Yard Block
     AT(BD_S2_D)
 FOLLOW(405)
 
 SEQUENCE(405) //Progress to Block2
     RESERVE(D_B3) //Reserve Next block
+    IFAMBER(SIG_B2) 
+        SPEED(10)
+    ENDIF 
     RED(SIG_D1)
-    FWD(50) //Increase speed
+//    FWD(50) //Increase speed
     AT(BD_S4_D)
     FREE(D_B1)
     AT(BD_S5_D)
@@ -166,15 +176,13 @@ FOLLOW(407)
 
 SEQUENCE(407) //Progress to Block3
  IFRED(SIG_D3)
-    SPEED(20)
+//    SPEED(20)
     AT(BD_S7_D)
     STOP
     FOLLOW(407)
  ENDIF
  IFAMBER(SIG_D3)
-    SPEED(30)
-ELSE
-    SPEED(50)
+    SPEED(10)
 ENDIF
     RESERVE(D_B4) //Reserve Next block
     AMBER(SIG_D1)
@@ -200,7 +208,7 @@ SEQUENCE(409)
         FOLLOW(409)
     ENDIF
     IFAMBER(SIG_D4)
-        SPEED(30)
+        SPEED(10)
     ENDIF
     AT(BD_F9_D)
 FOLLOW(410)
@@ -219,13 +227,14 @@ SEQUENCE(411)
     AMBER(SIG_D3)
     GREEN(SIG_D2)
     FREE(D_B4)
+    FREE(D_B5)
     AT(BD_F6_D)
 FOLLOW(412)
 
 SEQUENCE(412)
     GREEN(SIG_D4)
     GREEN(SIG_D3)    
-    FREE(D_B5)
+//    FREE(D_B5)
     CALL(401)
     FOFF(0)
     UNLATCH(AUTO_D)
@@ -272,7 +281,8 @@ FOLLOW(418)
 
 SEQUENCE(418)   
     RESERVE(D_B2) //Reserve Next block
-    RESERVE(B_B2) //Reserve block on track B
+    RESERVE(B_B2) //Reserve block 2 on track B
+    RESERVE(B_B3) //Reserve block 3 on track B
     RESERVE(C_B3) //Reserve block on track C Subject to change...
     //Ensure route is set
     IFTHROWN(9005)
@@ -293,7 +303,7 @@ SEQUENCE(418)
 FOLLOW(419)
 
 SEQUENCE(419) //Progress to Block2
-    RESERVE(D_B3) //Reserve Next block
+//    RESERVE(D_B3) //Reserve Next block
     RED(SIG_D1)
     FWD(40) //Increase speed
     AT(BD_S4_B)
@@ -305,6 +315,7 @@ SEQUENCE(420)
     RED(SIG_B2)
     AT(BD_S6_B)
     CLOSE(9010)
+//    FREE(D_B3)
     FREE(D_B2)
     FREE(C_B3)
 FOLLOW(206)

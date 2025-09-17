@@ -3,41 +3,44 @@
 * Add in the routes for trackD only
 *
 * V 0.1.0
-* AroundWeGo
+*           290 - 294 Free yard tracks
+*           295 - 299 Reserve yard tracks
+*           202 Around We Go
+*           289 Auto Park
 *
 */
 //Release Block when loco is removed from track
 ROUTE(290,"B: Track 1 Clear")
-    FREE(D_B7)
+    FREE(B_B7)
 DONE
 ROUTE(291,"B: Track 2 Clear")
-    FREE(D_B8)
+    FREE(B_B8)
 DONE
 ROUTE(292,"B: Track 3 Clear")
-    FREE(D_B9)
+    FREE(B_B9)
 DONE
 ROUTE(293,"B: Track 4 Clear")
-    FREE(D_B10)
+    FREE(B_B10)
 DONE
 ROUTE(294,"B: Track 5 Clear")
-    FREE(D_B11)
+    FREE(B_B11)
 DONE
 
 //Set reserves for locos in yard to prevent other locos entering
 ROUTE(295,"B: Track 1 Loaded") //Auto park the train in the yard
-    RESERVE(D_B7)
+    RESERVE(B_B7)
 DONE
 ROUTE(296,"B: Track 2 Loaded") //Auto park the train in the yard
-    RESERVE(D_B8)
+    RESERVE(B_B8)
 DONE
 ROUTE(297,"B: Track 3 Loaded") //Auto park the train in the yard
-    RESERVE(D_B9)
+    RESERVE(B_B9)
 DONE
 ROUTE(298,"B: Track 4 Loaded") //Auto park the train in the yard
-    RESERVE(D_B10)
+    RESERVE(B_B10)
 DONE
 ROUTE(299,"B: Track 5 Loaded") //Auto park the train in the yard
-    RESERVE(D_B11)
+    RESERVE(B_B11)
 DONE 
 
 //Manually activate the auto park sequence
@@ -100,15 +103,15 @@ IFNOT(BD_F3_B4)
     THROW(9113)
     FWD(20) 
     AT(BD_F3_B4) ESTOP
-    FREE(D_B6)
+    FREE(B_B6)
     RETURN
 ENDIF 
 IFNOT(BD_F3_B5) 
-    RESERVE(D_B11)
+    RESERVE(B_B11)
     CLOSE(9113)
     FWD(20) 
     AT(BD_F3_B5) ESTOP
-    FREE(D_B6)
+    FREE(B_B6)
     RETURN
 ENDIF 
 DONE
@@ -118,11 +121,12 @@ DONE
 AUTOMATION(202, "B: Around We Go") //Leave yard 
     LATCH(AUTO_B)
     RESERVE(B_B1) //Reserve Station block
+    SPEED(20)
     IFTHROWN(9001)
         CLOSE(9001) //close turnouts B-A
     ENDIF
-    FWD(30) //Move forward Speed 30
-    AT(BD_S1_B) //At Block 1
+//    FWD(30) //Move forward Speed 30
+    AT(BD_S1_B1) //At Block 1
 FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
@@ -148,17 +152,21 @@ SEQUENCE(203) //Progress to Block2
         FOLLOW(203)
     ENDIF
     IFAMBER(SIG_B1)
-        SPEED(30)
+        SPEED(20)
     ENDIF
-    IFGREEN(SIG_B1)
-        SPEED(60)
-    ENDIF
+//    IFGREEN(SIG_B1)
+//        SPEED(60)
+//    ENDIF
+    CALL(200)
     AT(BD_S2_B)
 FOLLOW(204)
 
 SEQUENCE(204) //Progress to Block3
     RED(SIG_B1)
     AT(BD_S4_B)
+    IFAMBER(SIG_B2)
+        SPEED(20) 
+    ENDIF
     FREE(B_B1) //Free previous block
     AT(BD_S5_B)
 FOLLOW(205)
@@ -170,17 +178,17 @@ FOLLOW(206)
 
 SEQUENCE(206) //Progress to Block4
     IFRED(SIG_B3)
-        SPEED(20)
         AT(BD_S7_B)
         STOP
         FOLLOW(206)
     ENDIF
     IFAMBER(SIG_B3)
-        SPEED(30)
+        SPEED(20)
     ENDIF
-    IFGREEN(SIG_B3)
-        SPEED(60)
-    ENDIF   
+//    IFGREEN(SIG_B3)
+//        SPEED(60)
+//    ENDIF 
+AT(BD_S7_B)  
     RESERVE(B_B4) //Reserve Next block
     AMBER(SIG_B1)
     FREE(B_B2)  
@@ -209,16 +217,17 @@ SEQUENCE(208) //Progress to Block6
         FOLLOW(208)
     ENDIF
     IFAMBER(SIG_B4)
-        SPEED(30)
+        SPEED(20)
     ENDIF
-    IFGREEN(SIG_B4)
-        SPEED(60)
-    ENDIF
-    AT(BD_F9_B)
+//    IFGREEN(SIG_B4)
+//        SPEED(60)
+//    ENDIF
+    AT(BD_F7_B)
 FOLLOW(209) 
 
 SEQUENCE(209) //Progress to Block7
     RESERVE(B_B6) //Reserve Next block  
+//    SPEED(30)
     RED(SIG_B4)
     AMBER(SIG_B2)   
     FREE(B_B3)

@@ -18,8 +18,8 @@ ONBUTTON(BD_S6_A)
 DONE
 
 //Track D->A
-ONBUTTON(BD_S6_A)
-    IFTHROWN(UGS_T4_A__UMF_T3_E)
+ONBUTTON(BD_S7_A)
+    IFTHROWN(DMF_T3_E__UFM_T4_A)
         CLOSE(9009)
     ENDIF
 DONE
@@ -38,6 +38,19 @@ ONBUTTON(BD_S6_B)
     ENDIF
 DONE 
 
+//Track A -> B BOARD 8 
+ONBUTTON(BD_F8_B) 
+    IFTHROWN(UGS_T5_E__UFM_T6_A)
+        CLOSE(9020)
+    ENDIF
+DONE 
+
+//Track A -> D 
+ONBUTTON(BD_F8_D) 
+    IFTHROWN(UGS_T5_E__UFM_T6_A)
+        CLOSE(9021)
+    ENDIF
+DONE 
 
 //Holgate Track 1 close access
 ONBUTTON(BD_S4_HA) 
