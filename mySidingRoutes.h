@@ -1,4 +1,78 @@
-/* new iding routing to prevent double taps
+/* 
+* Holgate sidings
 */
 
-ROUTE(100,"Yard B: Track 1")
+SEQUENCE(701)
+IFNOT(BD_S4_HA)
+    RESERVE(H_T1)
+    CLOSE(9019)
+    FWD(20)
+    AT(BD_S4_HA) ESTOP
+    IFTHROWN(9030)
+        CLOSE(9030)
+        FREE(E_B1)
+        GREEN(SIG_E3)
+    ENDIF
+    IFTHROWN(9031)
+        CLOSE(9031)
+        GREEN(SIG_F3)
+        FREE(F_B1)
+        FREE(F_B2)
+    ENDIF
+    RETURN
+ENDIF 
+IFNOT(BD_S4_HB) 
+    RESERVE(H_T2)
+    THROW(9019)
+    FWD(20) 
+    AT(BD_S4_HB) ESTOP
+    IFTHROWN(9030)
+        CLOSE(9030)
+        FREE(E_B1)
+        GREEN(SIG_E3)
+    ENDIF
+    IFTHROWN(9031)
+        CLOSE(9031)
+        GREEN(SIG_F3)
+        FREE(F_B1)
+        FREE(F_B2)
+    ENDIF
+    RETURN
+ENDIF 
+IFNOT(BD_S4_HC) 
+    RESERVE(H_T3)
+    THROW(9017)
+    FWD(20) 
+    AT(BD_S4_HC) ESTOP
+    IFTHROWN(9030)
+        CLOSE(9030)
+        FREE(E_B1)
+        GREEN(SIG_E3)
+    ENDIF
+    IFTHROWN(9031)
+        CLOSE(9031)
+        GREEN(SIG_F3)
+        FREE(F_B1)
+        FREE(F_B2)
+    ENDIF
+    RETURN
+ENDIF 
+IFNOT(BD_S4_HD) 
+    RESERVE(H_T4)
+    THROW(9016)
+    FWD(20) 
+    AT(BD_S4_HD) ESTOP
+    IFTHROWN(9030)
+        CLOSE(9030)
+        FREE(E_B1)
+        GREEN(SIG_E3)
+    ENDIF
+    IFTHROWN(9031)
+        CLOSE(9031)
+        GREEN(SIG_F3)
+        FREE(F_B1)
+        FREE(F_B2)
+    ENDIF
+    RETURN
+ENDIF
+DONE

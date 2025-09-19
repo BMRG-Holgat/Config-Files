@@ -11,35 +11,55 @@
 */
 //Release Block when loco is removed from track
 ROUTE(290,"B: Track 1 Clear")
+    ROUTE_HIDDEN(290)
+    ROUTE_ACTIVE(295)
     FREE(B_B7)
 DONE
 ROUTE(291,"B: Track 2 Clear")
+    ROUTE_HIDDEN(291)
+    ROUTE_ACTIVE(296)
     FREE(B_B8)
 DONE
 ROUTE(292,"B: Track 3 Clear")
+    ROUTE_HIDDEN(292)
+    ROUTE_ACTIVE(297)
     FREE(B_B9)
 DONE
 ROUTE(293,"B: Track 4 Clear")
+    ROUTE_HIDDEN(293)
+    ROUTE_ACTIVE(298)
     FREE(B_B10)
 DONE
 ROUTE(294,"B: Track 5 Clear")
+    ROUTE_HIDDEN(294)
+    ROUTE_ACTIVE(299)
     FREE(B_B11)
 DONE
 
 //Set reserves for locos in yard to prevent other locos entering
 ROUTE(295,"B: Track 1 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(295)
+    ROUTE_ACTIVE(290)
     RESERVE(B_B7)
 DONE
 ROUTE(296,"B: Track 2 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(296)
+    ROUTE_ACTIVE(291)
     RESERVE(B_B8)
 DONE
 ROUTE(297,"B: Track 3 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(297)
+    ROUTE_ACTIVE(292)
     RESERVE(B_B9)
 DONE
 ROUTE(298,"B: Track 4 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(298)
+    ROUTE_ACTIVE(293)
     RESERVE(B_B10)
 DONE
 ROUTE(299,"B: Track 5 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(299)
+    ROUTE_ACTIVE(294)
     RESERVE(B_B11)
 DONE 
 
@@ -119,6 +139,7 @@ DONE
 
 // Start of main AUTOMATIONS for track B
 AUTOMATION(202, "B: Around We Go") //Leave yard 
+   ROUTE_DISABLED(202)
     LATCH(AUTO_B)
     RESERVE(B_B1) //Reserve Station block
     SPEED(20)
@@ -130,6 +151,7 @@ AUTOMATION(202, "B: Around We Go") //Leave yard
 FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
+ROUTE_ACTIVE(202 )
     RESERVE(B_B2) //Reserve Next block
     IFTHROWN(9004)
         CLOSE(9004) //close turnouts A->B

@@ -6,28 +6,19 @@
 //Leave staging yard and proceed to bridge
 //AUTOSTART SEQUENCE(201)
 // ALLOW 2 TRAINS TO CIRCULATE
-AUTOMATION(200,"F: Roundy" ) //Leave staging yard and proceed to bridge
-    IF(F_ROUNDY)
-        UNLATCH(F_ROUNDY)
-        ROUTE_ACTIVE(200)
-        FOLLOW(201)
-    ELSE 
-        LATCH(F_ROUNDY)
-        ROUTE_HIDDEN(200)
-        PRINT("F: Roundy not active")
-        FOLLOW(201)
-    ENDIF 
+ //Leave staging yard and proceed to bridge
+  
 
 //Leave staging yard and proceed to bridge 
-SEQUENCE(201)
+AUTOMATION(600,"F: Roundy" )
+    ROUTE_HIDDEN(600)
     RESERVE(F_B1) //exit storage to bridge
         IFTHROWN(9025)
             CLOSE(9025)
             DELAY(1000)
         ENDIF
     FWD(30)
-    AT(304) //current detector board 9 under bridge?
-    PRINT("REACHED 304")
+    AT(BD_S9_F) 
 FOLLOW(202)
 
 //Proceed to holgate access
@@ -36,22 +27,22 @@ SEQUENCE(202)
     IFTHROWN(9022) //Close E-> F turnout
         CLOSE(9022)
     ENDIF
+    IFTHROWN(DGS_T3_A__HS_T6_A) //Close turnout Holgate access
+        CLOSE(DGS_T3_A__HS_T6_A)
+    ENDIF
     FREE(F_B6) // Free last storage block    
-    AT(BD_S8_F) // current detector board 8 before holgate access
+    AT(BD_S5_F) // current detector board 5 
 FOLLOW(203)
 
 //Proceed to board 4 gantry
 SEQUENCE(203)
     RESERVE(F_B3)
     FREE(F_B1) 
-    IFTHROWN(DGS_T3_A__HS_T6_A) //Close turnout Holgate access
-        CLOSE(DGS_T3_A__HS_T6_A)
-    ENDIF
     SPEED(50)
     IFAMBER(SIG_F2)
         SPEED(40) // reduce speed to 40
     ENDIF
-    AT(BD_S5_F) // current detector board 4 before board 4 gantry
+    AT(BD_S3_F) // current detector board 4 before board 4 gantry
 FOLLOW(204)
 
 //Proceed to board 4 gantry

@@ -69,7 +69,6 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "myBlockDetectors.h"
 #include "myBlocks.h"
 #include "myBlockReserves.h"
-//#include "mySensors.h" //LOCATE ANY REFERENCES
 #include "myRoutes.h"
 #include "myAutoClose.h"
 
@@ -254,6 +253,20 @@ AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(990)
   ROUTE_HIDDEN(991)
   ROUTE_HIDDEN(992)
+  //hide all yard clear buttons on boot
+  //YARD B
+  ROUTE_HIDDEN(290)
+  ROUTE_HIDDEN(291)
+  ROUTE_HIDDEN(292)
+  ROUTE_HIDDEN(293)
+  ROUTE_HIDDEN(294)
+  //YARD D
+  ROUTE_HIDDEN(490)
+  ROUTE_HIDDEN(491)
+  ROUTE_HIDDEN(492)
+  ROUTE_HIDDEN(493)
+  ROUTE_HIDDEN(494)
+
 DONE
 
 //include track automations
@@ -261,6 +274,8 @@ DONE
 //#include "myTrackF.h"
 #include "myTrackB.h"
 #include "myTrackD.h"
+//#include "myTrackE.h"
+#include "mySidingRoutes.h"
 
 //Show Sensors
 //JMRI_SENSOR(300,16) //BOARD 1 exio

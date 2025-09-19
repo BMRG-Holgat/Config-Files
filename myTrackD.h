@@ -15,35 +15,55 @@
 */
 //Release Block when loco is removed from track
 ROUTE(490,"D: Track 1 Clear")
+    ROUTE_HIDDEN(490)
+    ROUTE_ACTIVE(495)
     FREE(D_B7)
 DONE
 ROUTE(491,"D: Track 2 Clear")
+    ROUTE_HIDDEN(491)
+    ROUTE_ACTIVE(496)
     FREE(D_B8)
 DONE
 ROUTE(492,"D: Track 3 Clear")
+    ROUTE_HIDDEN(492)
+    ROUTE_ACTIVE(497)
     FREE(D_B9)
 DONE
 ROUTE(493,"D: Track 4 Clear")
+    ROUTE_HIDDEN(493)
+    ROUTE_ACTIVE(498)
     FREE(D_B10)
 DONE
 ROUTE(494,"D: Track 5 Clear")
+    ROUTE_HIDDEN(494)
+    ROUTE_ACTIVE(499)
     FREE(D_B11)
 DONE
 
 //Set reserves for locos in yard to prevent other locos entering
 ROUTE(495,"D: Track 1 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(495)
+    ROUTE_ACTIVE(490)
     RESERVE(D_B7)
 DONE
 ROUTE(496,"D: Track 2 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(496)
+    ROUTE_ACTIVE(491)
     RESERVE(D_B8)
 DONE
 ROUTE(497,"D: Track 3 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(497)
+    ROUTE_ACTIVE(492)
     RESERVE(D_B9)
 DONE
 ROUTE(498,"D: Track 4 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(498)
+    ROUTE_ACTIVE(493)
     RESERVE(D_B10)
 DONE
 ROUTE(499,"D: Track 5 Loaded") //Auto park the train in the yard
+    ROUTE_HIDDEN(499)
+    ROUTE_ACTIVE(494)
     RESERVE(D_B11)
 DONE 
 

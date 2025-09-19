@@ -4,17 +4,32 @@
 //scenic track A
 
 //Track A -> B
+ONBUTTON(BD_S3_B)
+    IFTHROWN(UFM_T17_E__UGS_T7_A)
+        CLOSE(9001)
+    ENDIF
+DONE
+//Track B -> A Rear
+ONBUTTON(BD_S2_A)
+    IFTHROWN(UFM_T17_E__UGS_T7_A)
+        CLOSE(9026)
+    ENDIF
+DONE
+
+//Track A -> B Scenic
 ONBUTTON(BD_S5_B)
     IFTHROWN(UFM_T2_A__UGS_T3_E)
         CLOSE(9004)
     ENDIF
 DONE
 
-// Track B->A
-ONBUTTON(BD_S6_A)
+// Track B->A scenic
+ONBUTTON(BD_S7_A)
+  IFCLOSED(DMF_T3_E__UFM_T4_A)
     IFTHROWN(UGS_T4_A__UMF_T3_E)
         CLOSE(9007)
     ENDIF
+  ENDIF
 DONE
 
 //Track D->A
@@ -25,7 +40,7 @@ ONBUTTON(BD_S7_A)
 DONE
 
 //Track D->B 1st Set
-ONBUTTON(BD_S6_B)
+ONBUTTON(BD_S7_B)
     IFTHROWN(DMF_T3_E__UFM_T4_A)
         CLOSE(9008)
     ENDIF
@@ -45,7 +60,7 @@ ONBUTTON(BD_F8_B)
     ENDIF
 DONE 
 
-//Track A -> D 
+//Track A -> D Board 8
 ONBUTTON(BD_F8_D) 
     IFTHROWN(UGS_T5_E__UFM_T6_A)
         CLOSE(9021)
