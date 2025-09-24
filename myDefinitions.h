@@ -17,6 +17,8 @@
 * V 0.1.0
 * endSession
 *
+* V 0.2.0
+* stopres(blockid)
 */
 
 //Startup led sequence
@@ -384,7 +386,18 @@
   SCREEN(2,1, "To default state")\
   SCREEN(2,2, "Test Completed")
 
-
+//Stop and Reserve macro
+#define STOPRES(block_id,seq_id) \
+IFRESERVE(block_id) \
+  UNLATCH(block_id) \
+  SPEED(30) \
+ELSE  \
+  IFNOT(block_id) \
+   STOP \
+   LATCH(block_id) \
+  ENDIF \
+  FOLLOW(seq_id) \
+ENDIF
 
 /*
 #define ladder(id,entryThrows,exitThrows) \

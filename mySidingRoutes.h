@@ -8,17 +8,6 @@ IFNOT(BD_S4_HA)
     CLOSE(9019)
     FWD(20)
     AT(BD_S4_HA) ESTOP
-    IFTHROWN(9030)
-        CLOSE(9030)
-        FREE(E_B1)
-        GREEN(SIG_E3)
-    ENDIF
-    IFTHROWN(9031)
-        CLOSE(9031)
-        GREEN(SIG_F3)
-        FREE(F_B1)
-        FREE(F_B2)
-    ENDIF
     RETURN
 ENDIF 
 IFNOT(BD_S4_HB) 
@@ -30,12 +19,6 @@ IFNOT(BD_S4_HB)
         CLOSE(9030)
         FREE(E_B1)
         GREEN(SIG_E3)
-    ENDIF
-    IFTHROWN(9031)
-        CLOSE(9031)
-        GREEN(SIG_F3)
-        FREE(F_B1)
-        FREE(F_B2)
     ENDIF
     RETURN
 ENDIF 
@@ -49,12 +32,6 @@ IFNOT(BD_S4_HC)
         FREE(E_B1)
         GREEN(SIG_E3)
     ENDIF
-    IFTHROWN(9031)
-        CLOSE(9031)
-        GREEN(SIG_F3)
-        FREE(F_B1)
-        FREE(F_B2)
-    ENDIF
     RETURN
 ENDIF 
 IFNOT(BD_S4_HD) 
@@ -66,12 +43,6 @@ IFNOT(BD_S4_HD)
         CLOSE(9030)
         FREE(E_B1)
         GREEN(SIG_E3)
-    ENDIF
-    IFTHROWN(9031)
-        CLOSE(9031)
-        GREEN(SIG_F3)
-        FREE(F_B1)
-        FREE(F_B2)
     ENDIF
     RETURN
 ENDIF

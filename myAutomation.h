@@ -56,6 +56,9 @@ HAL(HALDisplay<OLED>,3,{I2CMux_0,SubBus_3,0x3C},132,64)
 HAL(HALDisplay<OLED>,2,{I2CMux_0,SubBus_1,0x3C},132,64)
 HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 
+//Testing BITMAPs
+HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
+
 //Included files
 
 #include "myTurnoutAliases.h"
@@ -125,11 +128,10 @@ AUTOSTART SEQUENCE(24)
 AUTOSTART SEQUENCE(25)
   blockSequence(SIG_A4,BD_F9_A,BD_F7_A,BD_F6_A)
 FOLLOW(25)
+
 //Track B
 AUTOSTART SEQUENCE(26)
-  IFCLOSED(510)
     blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_F9_B)
-  ENDIF
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
   blockSequence(SIG_B2,BD_S5_B,BD_F9_B,BD_F8_B)
@@ -140,6 +142,7 @@ AUTOSTART SEQUENCE(28)
 AUTOSTART SEQUENCE(29)
   blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
 FOLLOW(29)
+
 //Track C
 AUTOSTART SEQUENCE(30)
   blockSequence(SIG_C2,BD_S3_C,BD_F3_C,BD_F4_C)
@@ -147,8 +150,8 @@ AUTOSTART SEQUENCE(30)
 AUTOSTART SEQUENCE(31)
   blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
   FOLLOW(31)
+
 //Track D
-IFNOT(AUTO_D)
 AUTOSTART SEQUENCE(32)
   blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_F9_D)
   FOLLOW(32)
@@ -161,7 +164,7 @@ AUTOSTART SEQUENCE(34)
   AUTOSTART SEQUENCE(35)
   blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
   FOLLOW(35)
-ENDIF
+
 //Track E
 AUTOSTART SEQUENCE(36)
   blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
@@ -169,6 +172,7 @@ AUTOSTART SEQUENCE(36)
 AUTOSTART SEQUENCE(37)
   blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
   FOLLOW(37)
+
 //Track F
 AUTOSTART SEQUENCE(38)
   blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
@@ -176,14 +180,13 @@ AUTOSTART SEQUENCE(38)
 AUTOSTART SEQUENCE(39)
   blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
   FOLLOW(39)
+
 //Holgate exit signal
-//AUTOSTART SEQUENCE(37)
- // IFTHROWN(DGS_T2_A__HS_T1_E)
+
 ONBUTTON(BD_S4_F)
   RED(SIG_H1)
  DONE 
- // ENDIF
-//FOLLOW(37)
+ 
 
 //Set SIG_E3 to Red E->Holgate
 //ONBUTTON(BD_S9_F)
@@ -260,12 +263,24 @@ AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(292)
   ROUTE_HIDDEN(293)
   ROUTE_HIDDEN(294)
+  //YARD C
+  ROUTE_HIDDEN(390)
+  ROUTE_HIDDEN(391)
+  ROUTE_HIDDEN(392)
+  ROUTE_HIDDEN(393)
+  ROUTE_HIDDEN(394)
   //YARD D
   ROUTE_HIDDEN(490)
   ROUTE_HIDDEN(491)
   ROUTE_HIDDEN(492)
   ROUTE_HIDDEN(493)
   ROUTE_HIDDEN(494)
+  //YARD E
+  ROUTE_HIDDEN(590)
+  ROUTE_HIDDEN(591)
+  ROUTE_HIDDEN(592)
+  ROUTE_HIDDEN(593)
+  ROUTE_HIDDEN(594)
 
 DONE
 
@@ -273,8 +288,10 @@ DONE
 //#include "myTrackA.h"
 //#include "myTrackF.h"
 #include "myTrackB.h"
+#include "myTrackC.h"
 #include "myTrackD.h"
-//#include "myTrackE.h"
+#include "myTrackE.h"
+#include "myTrackF.h"
 #include "mySidingRoutes.h"
 
 //Show Sensors
@@ -308,3 +325,13 @@ STEALTH(
 )
    
 */
+
+/*
+#define STOPRES(x) \
+IFRESERVE(x) \
+ELSE  \
+   STOP \
+    DELAY(2000)  \
+    RESERVE(x) \
+  ENDIF
+  */
