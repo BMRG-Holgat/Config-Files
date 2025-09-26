@@ -67,6 +67,38 @@ ONBUTTON(BD_F8_D)
     ENDIF
 DONE 
 
+
+//Track F -> E Board 2
+ONBUTTON(BD_F3_E) 
+    IFTHROWN(DFM_T3_A__DGS_T1_E)
+        CLOSE(9006)
+    ENDIF
+    IFTHROWN(DGS_T3_A__HS_T6_A)
+        CLOSE(DGS_T3_A__HS_T6_A)
+    ENDIF
+DONE
+
+//Track c -> E Board 2
+ONBUTTON(BD_F3_E) 
+    IFTHROWN(DMF_T4_E__DFM_T4_A)
+        CLOSE(9011)
+    ENDIF
+DONE
+
+// Holgate Exit Board 3
+ONBUTTON(BD_F3_F) 
+    IFTHROWN(DGS_T3_A__HS_T6_A)
+        CLOSE(9031)
+    ENDIF
+DONE
+
+//Track E -> F Board 9
+ONBUTTON(BD_F5_F) 
+    IFTHROWN(DFM_T5_E__DGS_T4_A)
+        CLOSE(9022)
+    ENDIF
+DONE 
+
 //Holgate Track 1 close access
 ONBUTTON(BD_S4_HA) 
     IFCLOSED(HS_T4_A__HS_T5_E)

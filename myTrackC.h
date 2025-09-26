@@ -81,7 +81,7 @@ DONE
 SEQUENCE(312)
 IFNOT(BD_F8_C1) 
     RESERVE(C_B7)
-    CLOSE(9110)
+    CLOSE(9123)
     FWD(30) 
     AT(BD_F8_C1) ESTOP
     FREE(C_B6)
@@ -89,7 +89,7 @@ IFNOT(BD_F8_C1)
 ENDIF 
 IFNOT(BD_F8_C2) 
     RESERVE(C_B8)
-    THROW(9111)
+    THROW(9123)
     FWD(30) 
     AT(BD_F8_C2) ESTOP
     FREE(C_B6)
@@ -97,7 +97,7 @@ IFNOT(BD_F8_C2)
 ENDIF 
 IFNOT(BD_F8_C3) 
     RESERVE(C_B9)
-    THROW(9112)
+    THROW(9122)
     FWD(30) 
     AT(BD_F8_C3) ESTOP
     FREE(C_B6)
@@ -105,7 +105,7 @@ IFNOT(BD_F8_C3)
 ENDIF 
 IFNOT(BD_F7_C4) 
     RESERVE(C_B10)
-    THROW(9113)
+    THROW(9121)
     FWD(30) 
     AT(BD_F7_C4) ESTOP
     FREE(C_B6)
@@ -113,7 +113,7 @@ IFNOT(BD_F7_C4)
 ENDIF 
 IFNOT(BD_F7_C5) 
     RESERVE(C_B11)
-    CLOSE(9113)
+    CLOSE(9120)
     FWD(30) 
     AT(BD_F7_C5) ESTOP
     FREE(C_B6)
@@ -123,23 +123,23 @@ DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
 SEQUENCE(313) //Release Parked Block dependant on turnout thrown
-    IFCLOSED(9115) //Track FD1
+    IFCLOSED(9126) //Track FD1
         FREE(C_B7)
         RETURN
     ENDIF
-    IFTHROWN(9116) //Track FD2
+    IFTHROWN(9127) //Track FD2
         FREE(C_B8)
         RETURN
     ENDIF
-    IFTHROWN(9117) //Track FD3
+    IFTHROWN(9128) //Track FD3
         FREE(C_B9)
         RETURN
     ENDIF
-    IFTHROWN(9118) //Track FD4
+    IFTHROWN(9129) //Track FD4
         FREE(C_B10)
         RETURN
     ENDIF
-    IFCLOSED(9118) //Track FD5
+    IFCLOSED(9129) //Track FD5
         FREE(C_B11)
         RETURN
     ENDIF

@@ -34,8 +34,8 @@ HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x23}) //Board 3
 HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
 HAL(PCA9685,432, 16, {I2CMux_0,SubBus_3,0x42}) // Board 3 House Lights
 HAL(MCP23017,500,16,{I2CMux_0,SubBus_3,0x22}) // Board 4
-HAL(PCF8575,516,8,{I2CMux_0,SubBus_3,0x21}) //Board 4
-HAL(MCP23017,524,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
+HAL(MCP23017,516,16,{I2CMux_0,SubBus_3,0x21}) //Board 4
+HAL(MCP23017,532,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
 HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
 HAL(MCP23017,616,16,{I2CMux_0,SubBus_4,0x26}) //Board 6
 HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x25}) //Board 7
@@ -175,10 +175,10 @@ AUTOSTART SEQUENCE(37)
 
 //Track F
 AUTOSTART SEQUENCE(38)
-  blockSequence(SIG_F2,BD_S4_F,BD_F3_F,BD_F5_F)
+  blockSequence(SIG_F2,BD_S3_F,BD_F3_F,BD_F4_F)
   FOLLOW(38)
 AUTOSTART SEQUENCE(39)
-  blockSequence(SIG_F3,BD_S9_F1,BD_S4_F,BD_F3_F)
+  blockSequence(SIG_F3,BD_S9_F1,BD_S3_F,BD_F3_F)
   FOLLOW(39)
 
 //Holgate exit signal
@@ -295,11 +295,11 @@ DONE
 #include "mySidingRoutes.h"
 
 //Show Sensors
-//JMRI_SENSOR(300,16) //BOARD 1 exio
+//JMRI_SENSOR(316,16) //
 //JMRI_SENSOR(348,16) //BOARD 1 mcp
 //JMRI_SENSOR(300,32) //BOARD 2
 //JMRI_SENSOR(400,32) //BOARD 3
-//JMRI_SENSOR(500,16) //Board 3 signal
+//JMRI_SENSOR(516,32) //Board 3 signal
 //JMRI_SENSOR(524,16)
 //JMRI_SENSOR(600,32) //Board 4
 //JMRI_SENSOR(700,16) //Board 5
