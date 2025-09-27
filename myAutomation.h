@@ -69,7 +69,7 @@ HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
 #include "myRoster.h"
 #include "myDefinitions.h"
 #include "myStartupSequence.h"
-#include "myBlockDetectors.h"
+#include "myCurrentDetectors.h"
 #include "myBlocks.h"
 #include "myBlockReserves.h"
 #include "myRoutes.h"
@@ -117,93 +117,139 @@ HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS
 //Standard Signal sequences
 //Track A
 AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,BD_S2_A,BD_S6_A,BD_F9_A)
+  blockSequence(SIG_A1,CD_S2_A,CD_S6_A,CD_F9_A)
   FOLLOW(22)
+
+//Alternative signal sequences for Track A WORK IN PROGRESS!!!
+ONSENSOR(CD_S2_A)
+  RED(SIG_A1)
+DONE
+
+ONSENSOR(CD_S6_A)
+  IFRED(SIG_A1)
+    IFCLOSED(9007)
+      AMBER(SIG_A1)
+    ENDIF
+  RED(SIG_A2)
+  ENDIF
+DONE
+
+ONSENSOR(CD_S8_A)
+  RED(SIG_A3)
+DONE
+
+ONSENSOR(CD_F9_A)
+  AMBER(SIG_A2)
+  GREEN(SIG_A1)
+  RED(SIG_A4)
+DONE
+
+ONSENSOR(CD_F8_A)
+  GREEN(SIG_A2)
+  AMBER(SIG_A3)
+DONE
+
+ONSENSOR(CD_F7_A)
+  GREEN(SIG_A3)
+  AMBER(SIG_A4)
+DONE
+
+ONSENSOR(CD_F6_A)
+  GREEN(SIG_A4)
+DONE
+
 AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,BD_S5_A,BD_F9_A,BD_F8_A)
+  blockSequence(SIG_A2,CD_S5_A,CD_F9_A,CD_F8_A)
   FOLLOW(23)
 AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,BD_S8_A,BD_F8_A,BD_F7_A)
+  blockSequence(SIG_A3,CD_S8_A,CD_F8_A,CD_F7_A)
   FOLLOW(24)
 AUTOSTART SEQUENCE(25)
-  blockSequence(SIG_A4,BD_F9_A,BD_F7_A,BD_F6_A)
+  blockSequence(SIG_A4,CD_F9_A,CD_F7_A,CD_F6_A)
 FOLLOW(25)
 
 //Track B
 AUTOSTART SEQUENCE(26)
-    blockSequence(SIG_B1,BD_S2_B,BD_S6_B,BD_F9_B)
+    blockSequence(SIG_B1,CD_S2_B,CD_S6_B,CD_F9_B)
   FOLLOW(26)
 AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B2,BD_S5_B,BD_F9_B,BD_F8_B)
+  blockSequence(SIG_B2,CD_S5_B,CD_F9_B,CD_F8_B)
   FOLLOW(27)
 AUTOSTART SEQUENCE(28)
-  blockSequence(SIG_B3,BD_S8_B,BD_F8_B,BD_F7_B)
+  blockSequence(SIG_B3,CD_S8_B,CD_F8_B,CD_F7_B)
   FOLLOW(28)
 AUTOSTART SEQUENCE(29)
-  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+  blockSequence(SIG_D4,CD_F9_D,CD_F7_D,CD_F6_D)
 FOLLOW(29)
 
 //Track C
 AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_C2,BD_S3_C,BD_F3_C,BD_F4_C)
+  blockSequence(SIG_C2,CD_S3_C,CD_F3_C,CD_F4_C)
   FOLLOW(30)
 AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_C3,BD_S8_C,BD_S3_C,BD_F3_C)
+  blockSequence(SIG_C3,CD_S8_C,CD_S3_C,CD_F3_C)
   FOLLOW(31)
 
 //Track D
 AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D1,BD_S2_D,BD_S6_D,BD_F9_D)
+  blockSequence(SIG_D1,CD_S2_D,CD_S6_D,CD_F9_D)
   FOLLOW(32)
 AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_D2,BD_S5_D,BD_F9_D,BD_F8_D)
+  blockSequence(SIG_D2,CD_S5_D,CD_F9_D,CD_F8_D)
   FOLLOW(33)
 AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_D3,BD_S8_D,BD_F8_D,BD_F7_D)
+  blockSequence(SIG_D3,CD_S8_D,CD_F8_D,CD_F7_D)
   FOLLOW(34)
   AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_D4,BD_F9_D,BD_F7_D,BD_F6_D)
+  blockSequence(SIG_D4,CD_F9_D,CD_F7_D,CD_F6_D)
   FOLLOW(35)
 
 //Track E
 AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_E2,BD_S3_E,BD_F3_E,BD_F4_E)
+  blockSequence(SIG_E2,CD_S3_E,CD_F3_E,CD_F4_E)
   FOLLOW(36)
 AUTOSTART SEQUENCE(37)
-  blockSequence(SIG_E3,BD_S9_E,BD_S3_E,BD_F3_E)
+  blockSequence(SIG_E3,CD_S9_E,CD_S3_E,CD_F3_E)
   FOLLOW(37)
 
 //Track F
 AUTOSTART SEQUENCE(38)
+<<<<<<< Updated upstream
   blockSequence(SIG_F2,BD_S3_F,BD_F3_F,BD_F4_F)
   FOLLOW(38)
 AUTOSTART SEQUENCE(39)
   blockSequence(SIG_F3,BD_S9_F1,BD_S3_F,BD_F3_F)
+=======
+  blockSequence(SIG_F2,CD_S4_F,CD_F3_F,CD_F5_F)
+  FOLLOW(38)
+AUTOSTART SEQUENCE(39)
+  blockSequence(SIG_F3,CD_S9_F1,CD_S4_F,CD_F3_F)
+>>>>>>> Stashed changes
   FOLLOW(39)
 
 //Holgate exit signal
 
-ONBUTTON(BD_S4_F)
+ONBUTTON(CD_S4_F)
   RED(SIG_H1)
  DONE 
  
 
 //Set SIG_E3 to Red E->Holgate
-//ONBUTTON(BD_S9_F)
+//ONBUTTON(CD_S9_F)
 //  IFTHROWN(9030)
 //    RED(SIG_E3)
 //  ENDIF
 //DONE
 
 //Set SIG_F3 to Red F->Holgate
-ONBUTTON(BD_S9_F)
+ONBUTTON(CD_S9_F)
   IFTHROWN(9031)
     RED(SIG_F3)
   ENDIF
 DONE
 
 //Set SIG_E3 to Red E->F
-ONBUTTON(BD_S9_F)
+ONBUTTON(CD_S9_F)
   IFTHROWN(9022)
     RED(SIG_E3)
   ENDIF 
