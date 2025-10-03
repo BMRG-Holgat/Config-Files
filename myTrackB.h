@@ -64,8 +64,10 @@ ROUTE(299,"B: Track 5 Loaded") //Auto park the train in the yard
 DONE 
 
 //Manually activate the auto park sequence
-AUTOMATION(289,"B: Manual Auto Park")   
+AUTOMATION(289,"B: Manual Auto Park")  
+    ROUTE_HIDDEN(289) 
     CALL(201)
+    ROUTE_ACTIVE(289)   
 DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
@@ -94,43 +96,43 @@ DONE
 
 //Auto Park Sequence
 AUTOMATION(201,"B: Auto Park")
-IFNOT(BD_F2_B1) 
+IFNOT(CD_F2_B1) 
     RESERVE(B_B7)
     CLOSE(9110)
     FWD(20) 
-    AT(BD_F2_B1) ESTOP
+    AT(CD_F2_B1) ESTOP
     FREE(B_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_B2) 
+IFNOT(CD_F2_B2) 
     RESERVE(B_B8)
     THROW(9111)
     FWD(20) 
-    AT(BD_F2_B2) ESTOP
+    AT(CD_F2_B2) ESTOP
     FREE(B_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_B3) 
+IFNOT(CD_F2_B3) 
     RESERVE(B_B9)
     THROW(9112)
     FWD(20) 
-    AT(BD_F2_B3) ESTOP
+    AT(CD_F2_B3) ESTOP
     FREE(B_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F3_B4) 
+IFNOT(CD_F3_B4) 
     RESERVE(B_B10)
     THROW(9113)
     FWD(20) 
-    AT(BD_F3_B4) ESTOP
+    AT(CD_F3_B4) ESTOP
     FREE(B_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F3_B5) 
+IFNOT(CD_F3_B5) 
     RESERVE(B_B11)
     CLOSE(9113)
     FWD(20) 
-    AT(BD_F3_B5) ESTOP
+    AT(CD_F3_B5) ESTOP
     FREE(B_B6)
     RETURN
 ENDIF 
@@ -147,11 +149,12 @@ AUTOMATION(202, "B: Around We Go") //Leave yard
         CLOSE(9001) //close turnouts B-A
     ENDIF
 //    FWD(30) //Move forward Speed 30
-    AT(BD_S1_B1) //At Block 1
+    AT(CD_S1_B1) //At Block 1
 FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
-ROUTE_ACTIVE(202 )
+    ROUTE_ACTIVE(202 )
+    CALL(200)
     RESERVE(B_B2) //Reserve Next block
     IFTHROWN(9004)
         CLOSE(9004) //close turnouts A->B
@@ -180,27 +183,27 @@ ROUTE_ACTIVE(202 )
 //        SPEED(60)
 //    ENDIF
     CALL(200)
-    AT(BD_S2_B)
+    AT(CD_S2_B)
 FOLLOW(204)
 
 SEQUENCE(204) //Progress to Block3
     RED(SIG_B1)
-    AT(BD_S4_B)
+    AT(CD_S4_B)
     IFAMBER(SIG_B2)
         SPEED(20) 
     ENDIF
     FREE(B_B1) //Free previous block
-    AT(BD_S5_B)
+    AT(CD_S5_B)
 FOLLOW(205)
 
 SEQUENCE(205)
     RED(SIG_B2)
-    AT(BD_S6_B) 
+    AT(CD_S6_B) 
 FOLLOW(206)
 
 SEQUENCE(206) //Progress to Block4
     IFRED(SIG_B3)
-        AT(BD_S7_B)
+        AT(CD_S7_B)
         STOP
         FOLLOW(206)
     ENDIF
@@ -210,7 +213,7 @@ SEQUENCE(206) //Progress to Block4
 //    IFGREEN(SIG_B3)
 //        SPEED(60)
 //    ENDIF 
-AT(BD_S7_B)  
+AT(CD_S7_B)  
     RESERVE(B_B4) //Reserve Next block
     AMBER(SIG_B1)
     FREE(B_B2)  
@@ -220,7 +223,7 @@ AT(BD_S7_B)
     IFTHROWN(9021)
         CLOSE(9021) // prevent route A-D
     ENDIF
-    AT(BD_S8_B)
+    AT(CD_S8_B)
 FOLLOW(207)
 
 SEQUENCE(207) //Progress to Block5
@@ -234,7 +237,7 @@ FOLLOW(208)
 
 SEQUENCE(208) //Progress to Block6
     IFRED(SIG_B4)
-        AT(BD_S9_B)
+        AT(CD_S9_B)
         STOP
         FOLLOW(208)
     ENDIF
@@ -244,7 +247,7 @@ SEQUENCE(208) //Progress to Block6
 //    IFGREEN(SIG_B4)
 //        SPEED(60)
 //    ENDIF
-    AT(BD_F7_B)
+    AT(CD_F7_B)
 FOLLOW(209) 
 
 SEQUENCE(209) //Progress to Block7
@@ -253,7 +256,7 @@ SEQUENCE(209) //Progress to Block7
     RED(SIG_B4)
     AMBER(SIG_B2)   
     FREE(B_B3)
-    AT(BD_F7_B)
+    AT(CD_F7_B)
 FOLLOW(210)
 
 SEQUENCE(210)
@@ -261,7 +264,7 @@ SEQUENCE(210)
     AMBER(SIG_B3)
     GREEN(SIG_B2)
     FREE(B_B4)
-    AT(BD_F6_B)
+    AT(CD_F6_B)
 FOLLOW(211)
 
 SEQUENCE(211)

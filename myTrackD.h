@@ -68,8 +68,10 @@ ROUTE(499,"D: Track 5 Loaded") //Auto park the train in the yard
 DONE 
 
 //Manually activate the auto park sequence
-AUTOMATION(489,"D: Manual Auto Park")   
+AUTOMATION(489,"D: Manual Auto Park") 
+    ROUTE_HIDDEN(489)
     CALL(401)
+    ROUTE_ACTIVE(489)
 DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
@@ -98,59 +100,60 @@ DONE
 
 //Auto Park Sequence
 SEQUENCE(401)
-IFNOT(BD_F2_D1) 
+IFNOT(CD_F2_D1) 
     RESERVE(D_B7)
     CLOSE(9130)
     FWD(20) 
-    AT(BD_F2_D1) ESTOP
+    AT(CD_F2_D1) ESTOP
     FREE(D_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_D2) 
+IFNOT(CD_F2_D2) 
     RESERVE(D_B8)
     THROW(9131)
     FWD(20) 
-    AT(BD_F2_D2) ESTOP
+    AT(CD_F2_D2) ESTOP
     FREE(D_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_D3) 
+IFNOT(CD_F2_D3) 
     RESERVE(D_B9)
     THROW(9132)
     FWD(20) 
-    AT(BD_F2_D3) ESTOP
+    AT(CD_F2_D3) ESTOP
     FREE(D_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_D4) 
+IFNOT(CD_F2_D4) 
     RESERVE(D_B10)
     THROW(9133)
     FWD(20) 
-    AT(BD_F2_D4) ESTOP
+    AT(CD_F2_D4) ESTOP
     FREE(D_B6)
     RETURN
 ENDIF 
-IFNOT(BD_F2_D5) 
+IFNOT(CD_F2_D5) 
     RESERVE(D_B11)
     CLOSE(9133)
     FWD(20) 
-    AT(BD_F2_D5) ESTOP
+    AT(CD_F2_D5) ESTOP
     FREE(D_B6)
     RETURN
 ENDIF 
 DONE
 
 AUTOMATION(402, "D: Around We Go") //Leave yard to Station not stopping
-    LATCH(AUTO_D)
+    ROUTE_HIDDEN(402)
     RESERVE(D_B1) //Reserve Station block
     IFTHROWN(9002)
         CLOSE(9002) //close turnouts D-C
     ENDIF
     FWD(20) //Move forward Speed 30
-    AT(BD_S1_D)
+    AT(CD_S1_D)
 FOLLOW(403)
 
 SEQUENCE(403)
+    ROUTE_ACTIVE(402)
     IFRED(SIG_D1)
         STOP
         FOLLOW(403)
@@ -174,7 +177,7 @@ SEQUENCE(404)
     ENDIF
 //    SPEED(50) //Maybe too fast
     CALL(400) //Release the Staging Yard Block
-    AT(BD_S2_D)
+    AT(CD_S2_D)
 FOLLOW(405)
 
 SEQUENCE(405) //Progress to Block2
@@ -184,20 +187,20 @@ SEQUENCE(405) //Progress to Block2
     ENDIF 
     RED(SIG_D1)
 //    FWD(50) //Increase speed
-    AT(BD_S4_D)
+    AT(CD_S4_D)
     FREE(D_B1)
-    AT(BD_S5_D)
+    AT(CD_S5_D)
 FOLLOW(406)
 
 SEQUENCE(406)
     RED(SIG_D2)
-    AT(BD_S6_D) 
+    AT(CD_S6_D) 
 FOLLOW(407)
 
 SEQUENCE(407) //Progress to Block3
  IFRED(SIG_D3)
 //    SPEED(20)
-    AT(BD_S7_D)
+    AT(CD_S7_D)
     STOP
     FOLLOW(407)
  ENDIF
@@ -210,7 +213,7 @@ ENDIF
     IFTHROWN(9021)
         CLOSE(9021) // prevent route A-D
     ENDIF
-    AT(BD_S8_D)
+    AT(CD_S8_D)
 FOLLOW(408)
 
 SEQUENCE(408) //Progress to Block4
@@ -223,14 +226,14 @@ FOLLOW(409)
 
 SEQUENCE(409)
     IFRED(SIG_D4)
-        AT(BD_S9_D)
+        AT(CD_S9_D)
         STOP
         FOLLOW(409)
     ENDIF
     IFAMBER(SIG_D4)
         SPEED(10)
     ENDIF
-    AT(BD_F9_D)
+    AT(CD_F9_D)
 FOLLOW(410)
 
 SEQUENCE(410) //Progress to Block5
@@ -239,7 +242,7 @@ SEQUENCE(410) //Progress to Block5
     GREEN(SIG_D1)
     AMBER(SIG_D2)
     FREE(D_B3)
-    AT(BD_F7_D)
+    AT(CD_F7_D)
 FOLLOW(411)
 
 SEQUENCE(411)
@@ -248,7 +251,7 @@ SEQUENCE(411)
     GREEN(SIG_D2)
     FREE(D_B4)
     FREE(D_B5)
-    AT(BD_F6_D)
+    AT(CD_F6_D)
 FOLLOW(412)
 
 SEQUENCE(412)
@@ -266,7 +269,7 @@ AUTOMATION(414, "D: Pick'em up") //Leave yard to Station and wait
         CLOSE(9002) //close turnouts D-C
     ENDIF
     FWD(30) //Move forward Speed 30
-    AT(BD_S1_D)
+    AT(CD_S1_D)
     STOP 
     DELAYRANDOM(10000,15000)
     CALL(415)
@@ -289,7 +292,7 @@ AUTOMATION(416, "D: Change to Track B") //Leave yard to Station not stopping
         CLOSE(9002) //close turnouts D-C
     ENDIF
     FWD(30) //Move forward Speed 30
-    AT(BD_S1_D)
+    AT(CD_S1_D)
 FOLLOW(417)
 
 SEQUENCE(417)
@@ -319,21 +322,21 @@ SEQUENCE(418)
     ENDIF
     SPEED(50) //Maybe too fast
     CALL(400) //Release the Staging Yard Block
-    AT(BD_S2_D)
+    AT(CD_S2_D)
 FOLLOW(419)
 
 SEQUENCE(419) //Progress to Block2
 //    RESERVE(D_B3) //Reserve Next block
     RED(SIG_D1)
     FWD(40) //Increase speed
-    AT(BD_S4_B)
+    AT(CD_S4_B)
     FREE(D_B1)
-    AT(BD_S5_B)
+    AT(CD_S5_B)
 FOLLOW(420)
 
 SEQUENCE(420)
     RED(SIG_B2)
-    AT(BD_S6_B)
+    AT(CD_S6_B)
     CLOSE(9010)
 //    FREE(D_B3)
     FREE(D_B2)

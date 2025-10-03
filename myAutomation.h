@@ -74,6 +74,8 @@ HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
 #include "myBlockReserves.h"
 #include "myRoutes.h"
 #include "myAutoClose.h"
+#include "myAutoSignals.h"
+
 
 #include "DCC.h"
 STEALTH_GLOBAL(
@@ -116,48 +118,9 @@ HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS
 //Automations
 //Standard Signal sequences
 //Track A
-AUTOSTART SEQUENCE(22)
+/*AUTOSTART SEQUENCE(22)
   blockSequence(SIG_A1,CD_S2_A,CD_S6_A,CD_F9_A)
   FOLLOW(22)
-
-//Alternative signal sequences for Track A WORK IN PROGRESS!!!
-ONSENSOR(CD_S2_A)
-  RED(SIG_A1)
-DONE
-
-ONSENSOR(CD_S6_A)
-  IFRED(SIG_A1)
-    IFCLOSED(9007)
-      AMBER(SIG_A1)
-    ENDIF
-  RED(SIG_A2)
-  ENDIF
-DONE
-
-ONSENSOR(CD_S8_A)
-  RED(SIG_A3)
-DONE
-
-ONSENSOR(CD_F9_A)
-  AMBER(SIG_A2)
-  GREEN(SIG_A1)
-  RED(SIG_A4)
-DONE
-
-ONSENSOR(CD_F8_A)
-  GREEN(SIG_A2)
-  AMBER(SIG_A3)
-DONE
-
-ONSENSOR(CD_F7_A)
-  GREEN(SIG_A3)
-  AMBER(SIG_A4)
-DONE
-
-ONSENSOR(CD_F6_A)
-  GREEN(SIG_A4)
-DONE
-
 AUTOSTART SEQUENCE(23)
   blockSequence(SIG_A2,CD_S5_A,CD_F9_A,CD_F8_A)
   FOLLOW(23)
@@ -181,6 +144,7 @@ AUTOSTART SEQUENCE(28)
 AUTOSTART SEQUENCE(29)
   blockSequence(SIG_D4,CD_F9_D,CD_F7_D,CD_F6_D)
 FOLLOW(29)
+
 
 //Track C
 AUTOSTART SEQUENCE(30)
@@ -209,24 +173,17 @@ AUTOSTART SEQUENCE(36)
   blockSequence(SIG_E2,CD_S3_E,CD_F3_E,CD_F4_E)
   FOLLOW(36)
 AUTOSTART SEQUENCE(37)
-  blockSequence(SIG_E3,CD_S9_E,CD_S3_E,CD_F3_E)
+  blockSequence(SIG_E3,CD_S9_E1,CD_S3_E,CD_F3_E)
   FOLLOW(37)
 
 //Track F
 AUTOSTART SEQUENCE(38)
-<<<<<<< Updated upstream
-  blockSequence(SIG_F2,BD_S3_F,BD_F3_F,BD_F4_F)
+  blockSequence(SIG_F2,CD_S3_F,CD_F3_F,CD_F4_F)
   FOLLOW(38)
 AUTOSTART SEQUENCE(39)
-  blockSequence(SIG_F3,BD_S9_F1,BD_S3_F,BD_F3_F)
-=======
-  blockSequence(SIG_F2,CD_S4_F,CD_F3_F,CD_F5_F)
-  FOLLOW(38)
-AUTOSTART SEQUENCE(39)
-  blockSequence(SIG_F3,CD_S9_F1,CD_S4_F,CD_F3_F)
->>>>>>> Stashed changes
+  blockSequence(SIG_F3,CD_S9_F1,CD_S3_F,CD_F3_F)
   FOLLOW(39)
-
+*/
 //Holgate exit signal
 
 ONBUTTON(CD_S4_F)

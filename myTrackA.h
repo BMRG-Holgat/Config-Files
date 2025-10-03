@@ -42,7 +42,7 @@ IFCLOSED(UGS_T2_H) //Close Header
     THROW(UGS_T2_H)
   ENDIF
 FWD(40)       //Move forward
-  AT(BD_S1_A)   
+  AT(CD_S1_A)   
 FOLLOW(44)
 
 SEQUENCE(44)
@@ -66,13 +66,13 @@ SEQUENCE(44)
   DELAY(300)
   FOFF(3)
   FWD(40)
-  AT(BD_S2_A)
+  AT(CD_S2_A)
 FOLLOW(45)
 
 SEQUENCE(45)
  RESERVE(A_B3)
  RED(SIG_A1)
- AT(BD_S5_A)
+ AT(CD_S5_A)
 FOLLOW(46)
 
 SEQUENCE(46)
