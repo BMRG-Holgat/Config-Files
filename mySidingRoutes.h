@@ -2,12 +2,20 @@
 * Holgate sidings
 */
 
-SEQUENCE(701)
+SEQUENCE(700)
 IFNOT(CD_S4_HA)
     RESERVE(H_T1)
     CLOSE(9019)
     FWD(20)
     AT(CD_S4_HA) ESTOP
+    STASH(CD_S4_HA)
+    IFTHROWN(9030)
+        CLOSE(9030)
+        FREE(E_B1)
+        GREEN(SIG_E3)
+    ENDIF
+    CLOSE(9031)
+    GREEN(SIG_F3)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HB) 
@@ -15,11 +23,14 @@ IFNOT(CD_S4_HB)
     THROW(9019)
     FWD(20) 
     AT(CD_S4_HB) ESTOP
+    STASH(CD_S4_HB)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
         GREEN(SIG_E3)
     ENDIF
+    CLOSE(9031)
+    GREEN(SIG_F3)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HC) 
@@ -27,11 +38,14 @@ IFNOT(CD_S4_HC)
     THROW(9017)
     FWD(20) 
     AT(CD_S4_HC) ESTOP
+    STASH(CD_S4_HC)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
         GREEN(SIG_E3)
     ENDIF
+    CLOSE(9031)
+    GREEN(SIG_F3)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HD) 
@@ -39,11 +53,14 @@ IFNOT(CD_S4_HD)
     THROW(9016)
     FWD(20) 
     AT(CD_S4_HD) ESTOP
+    STASH(CD_S4_HD)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
         GREEN(SIG_E3)
     ENDIF
+    CLOSE(9031)
+    GREEN(SIG_F3)
     RETURN
 ENDIF
 DONE

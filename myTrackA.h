@@ -31,6 +31,7 @@ FOLLOW(50)
 //Track A from yard
 //Leave yard and approach station
 AUTOMATION(43,"A: A STN Stop") 
+ROUTE_DISABLED(43)
 RESERVE(A_B1) //Reserve Station block 
 IFTHROWN(9026) //close B-A turnouts
   CLOSE(9026)
@@ -46,6 +47,7 @@ FWD(40)       //Move forward
 FOLLOW(44)
 
 SEQUENCE(44)
+ROUTE_ACTIVE(43)
 //Stop at station
   FREE(A_B7)  //Release previous ladder
   STOP 
@@ -94,13 +96,13 @@ FOLLOW(47)
 
 SEQUENCE(47)
 //Board 8
-AT(773)
+AT(CD_S8_A)
 FREE(A_B2)
 SCREEN(3,2,"A_B2 Free")
 FOLLOW(48)
 
 SEQUENCE(48)
-AT(B9_IR_A)
+AT(CD_F9_A)
 IFRESERVE(A_B5)
   SCREEN(3,5,"A_B5 Reserved")
   FREE(A_B3)
@@ -114,25 +116,25 @@ ENDIF
 
 
 SEQUENCE(49) //Block A_B5
-AT(B7_IR_A)
+AT(CD_F7_A)
 RESERVE(A_B6)
 SCREEN(3,6,"A_B6 Reserved")
 FREE(A_B4)
 SCREEN(3,4,"A_B4 Free")
-//SPEED(20)
+SPEED(20)
 FOLLOW(50)
 
 SEQUENCE(50) //Block A_B6
-AT(B5_IR_A)
+AT(CD_F5_A)
 RESERVE(A_B7)
 SCREEN(3,7,"A_B7 Reserved")
 FREE(A_B5)
 SCREEN(3,5,"A_B5 Free")
-//SPEED(30)
+SPEED(30)
 FOLLOW(51)
 
 SEQUENCE(51) // Block A_B7
- AT(B3_IR_A)
+ AT(CD_F3_A)
  STOP
  FOFF(0)
  FREE(A_B6)
@@ -155,7 +157,7 @@ SCREEN(3,1,"     B_B1")
 FOLLOW(61)
 
 SEQUENCE(61)
-  AT(396) //TRACK B1 SENSOR
+  AT(CD_S1_A) //TRACK B1 SENSOR
   FREE(A_B7)  //Release previous ladder
   SCREEN(3,7,"A_B7 Free") 
   RESERVE(A_B2)
@@ -170,7 +172,7 @@ SEQUENCE(61)
 FOLLOW(62)
 
 SEQUENCE(62)
-  AT(123) //SENSOR B6
+  AT(CD_S6_A) //SENSOR B6
   SPEED(60)
   IFTHROWN(9007)
     CLOSE(9007)
@@ -181,6 +183,3 @@ SEQUENCE(62)
     GREEN(SIG_B1)
   ENDIF 
 FOLLOW(47)
-
-
-

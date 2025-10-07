@@ -76,7 +76,7 @@ HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
 #include "myAutoClose.h"
 #include "myAutoSignals.h"
 
-
+/*
 #include "DCC.h"
 STEALTH_GLOBAL(
   void updateLocoScreen() {
@@ -112,7 +112,7 @@ STEALTH_GLOBAL(
   }
 )
 HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS 
-
+*/
 
 
 //Automations
@@ -288,8 +288,7 @@ AUTOSTART SEQUENCE(180)
 DONE
 
 //include track automations
-//#include "myTrackA.h"
-//#include "myTrackF.h"
+#include "myTrackA.h"
 #include "myTrackB.h"
 #include "myTrackC.h"
 #include "myTrackD.h"

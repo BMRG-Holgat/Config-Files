@@ -45,7 +45,7 @@ FOLLOW(603)
 SEQUENCE(603)
 IF(61) //If Holgate access route set
     THROW(DGS_T3_A__HS_T6_A)
-    CALL(701)
+    CALL(700)
     ROUTE_ACTIVE(601)
     RESET(61)
     IFTHROWN(9031)
