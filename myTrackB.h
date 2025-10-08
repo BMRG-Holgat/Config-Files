@@ -273,7 +273,7 @@ SEQUENCE(213) //Release turnout block and set turnouts for return to A
             CLOSE(9007) //close turnouts B->A
         ENDIF
     ELSE
-        RED(SIG_B1) //Set signal to red if block 2 not free
+        RED(SIG_A1) //Set signal to red if block 2 not free
         STOP
         FOLLOW(213)
     ENDIF
