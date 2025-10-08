@@ -273,6 +273,7 @@ SEQUENCE(213) //Release turnout block and set turnouts for return to A
             CLOSE(9007) //close turnouts B->A
         ENDIF
     ELSE
+        RED(SIG_B1) //Set signal to red if block 2 not free
         STOP
         FOLLOW(213)
     ENDIF
@@ -287,3 +288,30 @@ SEQUENCE(214)
 FOLLOW(205)
     
 
+/*
+//Suggested improvements for track selection
+//select different route depending on reserve status of blocks
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+DELAY(.....) 
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+/// had two goes .. no banana
+DONE
+SEQUENCE1213)
+.... carry on with block reserved
+
+
+HAL(Bitmap,777,1)
+
+RESET(777)
+BITMAP_OR(777,5)  // start counter at 5
+
+SEQUENCE(xxxx)
+  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
+  DELAY(1000)
+  BITMAP_DEC(777)
+  IF(777) FOLLOW(xxxx)
+  // no banana
+  DONE
+SEQUENCE(zzzz)
+  // Have banana 
+*/

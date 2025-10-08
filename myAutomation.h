@@ -112,6 +112,31 @@ STEALTH_GLOBAL(
   }
 )
 HAL(UserAddin,updateLocoScreen,500) //Run loco status check every 500mS 
+
+//Need to work out how this modification works
+ ATTENTION PLEASE- 
+devel version 5.5.45 is going to be the last version where the locoTable is stored as an array.
+This will affect you if you have STEALTH or STEALTH_GLOBAL code which examines the loco table and cause compilation errors in your myAutomation.h, and dont say you were not warned when STEALTH was invented!
+
+
+From 5.5.46 onwards, each loco table entry is a separate object and they are chained together in memory. This allows me to hold much more information per slot (for sniffer, momentum, railcom and a few extras I have in mind for speed limits, tuning etc)  without having to reserve RAM in advance for a specific number of locos. This means that on a Mega, the balance between turnouts and locotable is more flexible and automatic  but the overall limit is slightly lower (unless I later add more RAM saving tricks to turnout definitions). The MAX_LOCOS definition no longer does anything because RAM is not allocated in advance, although there is the potential to force the limit if need be. 
+
+STEALTH code that runs through the loco table must use the following type of construct..
+
+ for (auto slot=LocoSlot::getFirst() ;  slot; slot=slot->getNext()) {
+    auto locoid=slot->getLoco();
+    auto speedCode=slot->getSpeedCode();
+     and so on.
+ }
+
+Note: as locos are first used, they are added to the start of the list.
+Forgetting locos are removed from the list, you don't need to check for zero id etc.
+
+To obtain the slot for a given loco use 
+  auto slot=LocoSLot::getSlot(locoid, false);
+  if (!slot) ... loco not found. 
+
+Many other LocoSlot fields are available through public getters and setters, please see LocoSlot.h for details.
 */
 
 
