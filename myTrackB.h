@@ -102,6 +102,7 @@ IFNOT(CD_F2_B1)
     FWD(20) 
     AT(CD_F2_B1) ESTOP
     FREE(B_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 IFNOT(CD_F2_B2) 
@@ -145,6 +146,7 @@ AUTOMATION(202, "B: Around We Go") //Leave yard
    ROUTE_DISABLED(211)
    ROUTE_DISABLED(1202)
     RESERVE(B_B1) //Reserve Station block
+    SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
         CLOSE(9001) //close turnouts A - B
@@ -165,7 +167,7 @@ FOLLOW(204)
 
 SEQUENCE(204) //Progress to Block2
     IFRESERVE(B_B2) //Reserve Next block
-        PRINT("Block B2 Reserved")
+        SCREEN(4,2,"Block B2 Reserved")
         IFTHROWN(9004)
             CLOSE(9004) //close turnouts A->B
         ENDIF
@@ -190,23 +192,28 @@ FOLLOW(205)
 
 SEQUENCE(205) //Progress to Block3
     RESERVE(B_B3) //Reserve Next block
+     SCREEN(4,3,"Block B3 Reserved")
     AT(CD_S4_B)
     FREE(B_B1) //Free previous block
+     SCREEN(4,1,"")
     AT(CD_S5_B)
 FOLLOW(206)
 
 SEQUENCE(206)
     FREE(B_B2) //Free previous block
+    SCREEN(4,2,"")
     AT(CD_S6_B) 
 FOLLOW(207)
 
 SEQUENCE(207) //Progress to Block4
     IFRESERVE(B_B4) //Reserve Next block
+    SCREEN(4,4,"Block B4 Reserved")
         IFTHROWN(9020)
             CLOSE(9020) // prevent route A-B
             CLOSE(9021) // prevent route A-D
         ENDIF
     ELSE
+    PRINT("WAITING FOR RESERVE")
         AT(CD_S7_B)
         STOP
         FOLLOW(207)
@@ -216,7 +223,9 @@ FOLLOW(208)
 
 SEQUENCE(208) //Progress to Block5
     IFRESERVE(B_B5) //Reserve Next block
+    SCREEN(4,5,"Block B5 Reserved")
         FREE(B_B3)
+        SCREEN(4,3,"")
         IFTHROWN(9023)
             CLOSE(9023) // prevent route A->B   
         ENDIF
@@ -229,13 +238,16 @@ SEQUENCE(208) //Progress to Block5
 FOLLOW(209)
 
 SEQUENCE(209) //Progress to Block6 
-    RESERVE(B_B6) //Reserve Next block  
+    RESERVE(B_B6) //Reserve Next block 
+    SCREEN(4,6,"Block B6 Reserved") 
     FREE(B_B4) //Free previous block
+    SCREEN(4,4,"")
     AT(CD_F6_B)
 FOLLOW(210)
 
 SEQUENCE(210)
     FREE(B_B5)
+    SCREEN(4,5,"")
     CALL(201)
     FOFF(0)
 DONE
@@ -303,6 +315,7 @@ AUTOMATION(1202, "B: Around We Go Full") //Leave yard
    ROUTE_DISABLED(211)
    ROUTE_DISABLED(1202)
     RESERVE(B_B1) //Reserve Station block
+    SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
         CLOSE(9001) //close turnouts A - B
@@ -324,7 +337,7 @@ FOLLOW(1204)
 
 SEQUENCE(1204) //Progress to Block2
     IFRESERVE(B_B2) //Reserve Next block
-        PRINT("Block B2 Reserved")
+        SCREEN(4,2,"Block B2 Reserved")
         IFTHROWN(9004)
             CLOSE(9004) //close turnouts A->B
         ENDIF
@@ -350,56 +363,68 @@ FOLLOW(1205)
 
 SEQUENCE(1205) //Progress to Block3
     RESERVE(B_B3) //Reserve Next block
-    SPEED(50)
+    SCREEN(4,3,"Block B3 Reserved")
+    SPEED(40)
     AT(CD_S4_B)
     FREE(B_B1) //Free previous block
+    SCREEN(4,1,"")
     AT(CD_S5_B)
 FOLLOW(1206)
 
 SEQUENCE(1206)
     FREE(B_B2) //Free previous block
-    AT(CD_S6_B) 
+    SCREEN(4,2,"")
+    AT(CD_S5_B) 
+    IFRED(SIG_B3)
+        SPEED(11) 
+    ENDIF
 FOLLOW(1207)
 
 SEQUENCE(1207) //Progress to Block4
     IFRESERVE(B_B4) //Reserve Next block
+    SCREEN(4,4,"Block B4 Reserved")
         IFTHROWN(9020)
             CLOSE(9020) // prevent route A-B
             CLOSE(9021) // prevent route A-D
         ENDIF
     ELSE
-        SPEED(30)
         AT(CD_S7_B)
         STOP
         FOLLOW(1207)
     ENDIF
-    SPEED(50)
+    SPEED(40)
     AT(CD_S8_B)  
 FOLLOW(1208)
 
 SEQUENCE(1208) //Progress to Block5
     IFRESERVE(B_B5) //Reserve Next block
+    SCREEN(4,5,"Block B5 Reserved")
         FREE(B_B3)
+        SCREEN(4,3,"")
         IFTHROWN(9023)
             CLOSE(9023) // prevent route A->B   
         ENDIF
     ELSE
-        SPEED(30)
+        SPEED(11)
         AT(CD_S9_B)
         STOP
         FOLLOW(208)
     ENDIF
+    SPEED(40)
     AT(CD_F7_B)
 FOLLOW(1209)
 
 SEQUENCE(1209) //Progress to Block6
     RESERVE(B_B6) //Reserve Next block
+    SCREEN(4,6,"Block B6 Reserved")
     FREE(B_B4) //Free previous block
+    SCREEN(4,4,"")
     AT(CD_F6_B)
 FOLLOW(1210)
 
 SEQUENCE(1210)
     FREE(B_B5)
+    SCREEN(4,5,"")
     CALL(201)
     FOFF(0)
 DONE
