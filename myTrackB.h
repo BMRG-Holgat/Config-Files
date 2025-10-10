@@ -142,6 +142,8 @@ DONE
 // Start of main AUTOMATIONS for track B
 AUTOMATION(202, "B: Around We Go") //Leave yard 
    ROUTE_DISABLED(202)
+   ROUTE_DISABLED(211)
+   ROUTE_DISABLED(1202)
     RESERVE(B_B1) //Reserve Station block
     SPEED(20)
     IFTHROWN(9001)
@@ -154,7 +156,9 @@ AUTOMATION(202, "B: Around We Go") //Leave yard
 FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
-    ROUTE_ACTIVE(202 )
+    ROUTE_ACTIVE(202)
+    ROUTE_ACTIVE(211)
+    ROUTE_ACTIVE(1202)
     CALL(200)
     AT(CD_S1_B1)
 FOLLOW(204)
@@ -207,7 +211,7 @@ SEQUENCE(207) //Progress to Block4
         STOP
         FOLLOW(207)
     ENDIF
-    AT(CD_S9_B)  
+    AT(CD_S8_B)  
 FOLLOW(208)
 
 SEQUENCE(208) //Progress to Block5
@@ -217,6 +221,7 @@ SEQUENCE(208) //Progress to Block5
             CLOSE(9023) // prevent route A->B   
         ENDIF
     ELSE
+        AT(CD_S9_B)
         STOP
         FOLLOW(208)
     ENDIF
@@ -237,7 +242,9 @@ DONE
 
 
 AUTOMATION(211,"B: Station Stop") //Station Stop
-    ROUTE_DISABLED(211)
+    ROUTE_DISABLED(202)
+   ROUTE_DISABLED(211)
+   ROUTE_DISABLED(1202)
     IFRESERVE(A_B1)
         RESERVE(B_B1) //Reserve Station block  
         IFTHROWN(9001)
@@ -257,6 +264,9 @@ AUTOMATION(211,"B: Station Stop") //Station Stop
 FOLLOW(212)
 
 SEQUENCE(212) //Stop at station
+    ROUTE_ACTIVE(202)
+    ROUTE_ACTIVE(211)
+    ROUTE_ACTIVE(1202)
     STOP
     CALL(200)
     DELAYRANDOM(10000,15000)
@@ -287,7 +297,112 @@ SEQUENCE(214)
     ENDIF
 FOLLOW(205)
     
+// Start of main FULL AUTOMATIONS for track B
+AUTOMATION(1202, "B: Around We Go Full") //Leave yard 
+   ROUTE_DISABLED(202)
+   ROUTE_DISABLED(211)
+   ROUTE_DISABLED(1202)
+    RESERVE(B_B1) //Reserve Station block
+    SPEED(20)
+    IFTHROWN(9001)
+        CLOSE(9001) //close turnouts A - B
+    ENDIF
+    IFTHROWN(9026)
+        CLOSE(9026) //close turnouts B - A
+    ENDIF   
+    AT(CD_S1_B) //At Block 1
+FOLLOW(1203)
 
+SEQUENCE(1203) //Progress to Block2    
+    ROUTE_ACTIVE(202)
+    ROUTE_ACTIVE(211)
+    ROUTE_ACTIVE(1202)
+    CALL(200)
+    SPEED(30)
+    AT(CD_S1_B1)
+FOLLOW(1204)
+
+SEQUENCE(1204) //Progress to Block2
+    IFRESERVE(B_B2) //Reserve Next block
+        PRINT("Block B2 Reserved")
+        IFTHROWN(9004)
+            CLOSE(9004) //close turnouts A->B
+        ENDIF
+        IFTHROWN(9007)
+            CLOSE(9007) //close turnouts B->A   
+        ENDIF
+        IFTHROWN(9008)
+            CLOSE(9008) //close turnouts D->B
+        ENDIF
+        IFTHROWN(9009)
+            CLOSE(9009) //close turnouts D->A
+        ENDIF
+        IFTHROWN(9010)
+            CLOSE(9010) //close turnouts D->B
+        ENDIF
+    ELSE
+        STOP
+        FOLLOW(1204)
+    ENDIF
+    SPEED(40)
+    AT(CD_S2_B)
+FOLLOW(1205)
+
+SEQUENCE(1205) //Progress to Block3
+    RESERVE(B_B3) //Reserve Next block
+    SPEED(50)
+    AT(CD_S4_B)
+    FREE(B_B1) //Free previous block
+    AT(CD_S5_B)
+FOLLOW(1206)
+
+SEQUENCE(1206)
+    FREE(B_B2) //Free previous block
+    AT(CD_S6_B) 
+FOLLOW(1207)
+
+SEQUENCE(1207) //Progress to Block4
+    IFRESERVE(B_B4) //Reserve Next block
+        IFTHROWN(9020)
+            CLOSE(9020) // prevent route A-B
+            CLOSE(9021) // prevent route A-D
+        ENDIF
+    ELSE
+        SPEED(30)
+        AT(CD_S7_B)
+        STOP
+        FOLLOW(1207)
+    ENDIF
+    SPEED(50)
+    AT(CD_S8_B)  
+FOLLOW(1208)
+
+SEQUENCE(1208) //Progress to Block5
+    IFRESERVE(B_B5) //Reserve Next block
+        FREE(B_B3)
+        IFTHROWN(9023)
+            CLOSE(9023) // prevent route A->B   
+        ENDIF
+    ELSE
+        SPEED(30)
+        AT(CD_S9_B)
+        STOP
+        FOLLOW(208)
+    ENDIF
+    AT(CD_F7_B)
+FOLLOW(1209)
+
+SEQUENCE(1209) //Progress to Block6
+    RESERVE(B_B6) //Reserve Next block
+    FREE(B_B4) //Free previous block
+    AT(CD_F6_B)
+FOLLOW(1210)
+
+SEQUENCE(1210)
+    FREE(B_B5)
+    CALL(201)
+    FOFF(0)
+DONE
 /*
 //Suggested improvements for track selection
 //select different route depending on reserve status of blocks
