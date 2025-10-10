@@ -26,7 +26,7 @@ HAL_IGNORE_DEFAULTS
 //Hal devices and includes
 #include "IODeviceList.h"
 #include "DCC.h"
-/*
+
 HAL(MCP23017,300,16,{I2CMux_0,SubBus_3,0x27}) //Board 1
 HAL(MCP23017,316,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
 HAL(PCA9685,348,16,{I2CMux_0,SubBus_3,0x41}) //Board 2 //Lights & church
@@ -58,7 +58,7 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 
 //Testing BITMAPs
 //HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
-*/
+
 //Included files
 
 #include "myTurnoutAliases.h"
