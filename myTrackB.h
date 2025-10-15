@@ -14,26 +14,31 @@ ROUTE(290,"B: Track 1 Clear")
     ROUTE_HIDDEN(290)
     ROUTE_ACTIVE(295)
     FREE(B_B7)
+    CLEAR_STASH(TB1) 
 DONE
 ROUTE(291,"B: Track 2 Clear")
     ROUTE_HIDDEN(291)
     ROUTE_ACTIVE(296)
     FREE(B_B8)
+    CLEAR_STASH(TB2)
 DONE
 ROUTE(292,"B: Track 3 Clear")
     ROUTE_HIDDEN(292)
     ROUTE_ACTIVE(297)
     FREE(B_B9)
+    CLEAR_STASH(TB3)
 DONE
 ROUTE(293,"B: Track 4 Clear")
     ROUTE_HIDDEN(293)
     ROUTE_ACTIVE(298)
     FREE(B_B10)
+    CLEAR_STASH(TB4)
 DONE
 ROUTE(294,"B: Track 5 Clear")
     ROUTE_HIDDEN(294)
     ROUTE_ACTIVE(299)
     FREE(B_B11)
+    CLEAR_STASH(TB5)
 DONE
 
 //Set reserves for locos in yard to prevent other locos entering
@@ -74,22 +79,27 @@ DONE
 SEQUENCE(200) //Release Parked Block dependant on turnout thrown
     IFCLOSED(9115) //Track FD1
         FREE(B_B7)
+        CLEAR_STASH(TB1)
         RETURN
     ENDIF
     IFTHROWN(9116) //Track FD2
         FREE(B_B8)
+        CLEAR_STASH(TB2)
         RETURN
     ENDIF
     IFTHROWN(9117) //Track FD3
         FREE(B_B9)
+        CLEAR_STASH(TB3)
         RETURN
     ENDIF
     IFTHROWN(9118) //Track FD4
         FREE(B_B10)
+        CLEAR_STASH(TB4)
         RETURN
     ENDIF
     IFCLOSED(9118) //Track FD5
         FREE(B_B11)
+        CLEAR_STASH(TB5)
         RETURN
     ENDIF
 DONE
@@ -103,6 +113,7 @@ IFNOT(CD_F2_B1)
     AT(CD_F2_B1) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
+    STASH(TB1)
     RETURN
 ENDIF 
 IFNOT(CD_F2_B2) 
@@ -111,6 +122,7 @@ IFNOT(CD_F2_B2)
     FWD(20) 
     AT(CD_F2_B2) ESTOP
     FREE(B_B6)
+    STASH(TB2)
     RETURN
 ENDIF 
 IFNOT(CD_F2_B3) 
@@ -119,6 +131,7 @@ IFNOT(CD_F2_B3)
     FWD(20) 
     AT(CD_F2_B3) ESTOP
     FREE(B_B6)
+    STASH(TB3)
     RETURN
 ENDIF 
 IFNOT(CD_F3_B4) 
@@ -127,6 +140,7 @@ IFNOT(CD_F3_B4)
     FWD(20) 
     AT(CD_F3_B4) ESTOP
     FREE(B_B6)
+    STASH(TB4)
     RETURN
 ENDIF 
 IFNOT(CD_F3_B5) 
@@ -135,6 +149,7 @@ IFNOT(CD_F3_B5)
     FWD(20) 
     AT(CD_F3_B5) ESTOP
     FREE(B_B6)
+    STASH(TB5)
     RETURN
 ENDIF 
 DONE
@@ -318,10 +333,10 @@ AUTOMATION(1202, "B: Around We Go Full") //Leave yard
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
-        CLOSE(9001) //close turnouts A - B
+        CLOSE(9001) //close turnouts A - B rear
     ENDIF
     IFTHROWN(9026)
-        CLOSE(9026) //close turnouts B - A
+        CLOSE(9026) //close turnouts B - A rear
     ENDIF   
     AT(CD_S1_B) //At Block 1
 FOLLOW(1203)
@@ -428,6 +443,17 @@ SEQUENCE(1210)
     CALL(201)
     FOFF(0)
 DONE
+
+
+AUTOMATION(1211,"B: Track one roundy") //Station Stop
+    ROUTE_DISABLED(202)
+   ROUTE_DISABLED(1211)
+   ROUTE_DISABLED(1202)
+    IFTHROWN(9115)
+        CLOSE(9115) //Close exit to allow roundy
+    ENDIF
+    PICKUP_STASH(TB1)
+FOLLOW(1202)
 /*
 //Suggested improvements for track selection
 //select different route depending on reserve status of blocks

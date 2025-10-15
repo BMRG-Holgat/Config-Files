@@ -75,6 +75,7 @@ HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
 #include "myRoutes.h"
 #include "myAutoClose.h"
 #include "myAutoSignals.h"
+#include "myStashAlias.h"
 
 /*
 #include "DCC.h"
