@@ -10,6 +10,31 @@
 *
 */
 //Release Block when loco is removed from track
+SEQUENCE(250) //Disable routes
+   ROUTE_DISABLED(202)
+   ROUTE_DISABLED(1202)
+   ROUTE_DISABLED(1211)
+   ROUTE_DISABLED(1222)
+   ROUTE_DISABLED(1223)
+   ROUTE_DISABLED(1224)
+   ROUTE_DISABLED(1225)
+
+   RETURN
+DONE
+
+SEQUENCE(251) //Enable routes
+    ROUTE_ACTIVE(202)
+    ROUTE_ACTIVE(211)
+    ROUTE_ACTIVE(1202)
+    ROUTE_ACTIVE(1211)
+    ROUTE_ACTIVE(1222)
+    ROUTE_ACTIVE(1223)
+    ROUTE_ACTIVE(1224)
+    ROUTE_ACTIVE(1225)
+RETURN
+DONE
+
+
 ROUTE(290,"B: Track 1 Clear")
     ROUTE_HIDDEN(290)
     ROUTE_ACTIVE(295)
@@ -92,12 +117,12 @@ SEQUENCE(200) //Release Parked Block dependant on turnout thrown
         CLEAR_STASH(TB3)
         RETURN
     ENDIF
-    IFTHROWN(9118) //Track FD4
+    IFCLOSED(9118) //Track FD4
         FREE(B_B10)
         CLEAR_STASH(TB4)
         RETURN
     ENDIF
-    IFCLOSED(9118) //Track FD5
+    IFTHROWN(9118) //Track FD5
         FREE(B_B11)
         CLEAR_STASH(TB5)
         RETURN
@@ -122,6 +147,7 @@ IFNOT(CD_F2_B2)
     FWD(20) 
     AT(CD_F2_B2) ESTOP
     FREE(B_B6)
+    SCREEN(4,6,"")
     STASH(TB2)
     RETURN
 ENDIF 
@@ -131,6 +157,7 @@ IFNOT(CD_F2_B3)
     FWD(20) 
     AT(CD_F2_B3) ESTOP
     FREE(B_B6)
+    SCREEN(4,6,"")
     STASH(TB3)
     RETURN
 ENDIF 
@@ -140,6 +167,7 @@ IFNOT(CD_F3_B4)
     FWD(20) 
     AT(CD_F3_B4) ESTOP
     FREE(B_B6)
+    SCREEN(4,6,"")
     STASH(TB4)
     RETURN
 ENDIF 
@@ -149,6 +177,7 @@ IFNOT(CD_F3_B5)
     FWD(20) 
     AT(CD_F3_B5) ESTOP
     FREE(B_B6)
+    SCREEN(4,6,"")
     STASH(TB5)
     RETURN
 ENDIF 
@@ -157,9 +186,7 @@ DONE
 
 // Start of main AUTOMATIONS for track B
 AUTOMATION(202, "B: Around We Go") //Leave yard 
-   ROUTE_DISABLED(202)
-   ROUTE_DISABLED(211)
-   ROUTE_DISABLED(1202)
+   CALL(250)
     RESERVE(B_B1) //Reserve Station block
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
@@ -173,10 +200,8 @@ AUTOMATION(202, "B: Around We Go") //Leave yard
 FOLLOW(203)
 
 SEQUENCE(203) //Progress to Block2    
-    ROUTE_ACTIVE(202)
-    ROUTE_ACTIVE(211)
-    ROUTE_ACTIVE(1202)
     CALL(200)
+    CALL(251)
     AT(CD_S1_B1)
 FOLLOW(204)
 
@@ -206,11 +231,16 @@ SEQUENCE(204) //Progress to Block2
 FOLLOW(205)
 
 SEQUENCE(205) //Progress to Block3
-    RESERVE(B_B3) //Reserve Next block
-     SCREEN(4,3,"Block B3 Reserved")
-    AT(CD_S4_B)
-    FREE(B_B1) //Free previous block
-     SCREEN(4,1,"")
+    IFRESERVE(B_B3) //Reserve Next block
+        SCREEN(4,3,"Block B3 Reserved")
+        AT(CD_S4_B)
+        FREE(B_B1) //Free previous block
+        SCREEN(4,1,"")
+    ELSE
+        AT(CD_S3_B)
+        STOP
+        FOLLOW(205) 
+    ENDIF 
     AT(CD_S5_B)
 FOLLOW(206)
 
@@ -269,9 +299,7 @@ DONE
 
 
 AUTOMATION(211,"B: Station Stop") //Station Stop
-    ROUTE_DISABLED(202)
-   ROUTE_DISABLED(211)
-   ROUTE_DISABLED(1202)
+    CALL(250)
     IFRESERVE(A_B1)
         RESERVE(B_B1) //Reserve Station block  
         IFTHROWN(9001)
@@ -291,9 +319,7 @@ AUTOMATION(211,"B: Station Stop") //Station Stop
 FOLLOW(212)
 
 SEQUENCE(212) //Stop at station
-    ROUTE_ACTIVE(202)
-    ROUTE_ACTIVE(211)
-    ROUTE_ACTIVE(1202)
+    CALL(251)
     STOP
     CALL(200)
     DELAYRANDOM(10000,15000)
@@ -325,10 +351,8 @@ SEQUENCE(214)
 FOLLOW(205)
     
 // Start of main FULL AUTOMATIONS for track B
-AUTOMATION(1202, "B: Around We Go Full") //Leave yard 
-   ROUTE_DISABLED(202)
-   ROUTE_DISABLED(211)
-   ROUTE_DISABLED(1202)
+AUTOMATION(1202, "B:t Around We Go Full") //Leave yard 
+   CALL(250)
     RESERVE(B_B1) //Reserve Station block
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
@@ -342,9 +366,7 @@ AUTOMATION(1202, "B: Around We Go Full") //Leave yard
 FOLLOW(1203)
 
 SEQUENCE(1203) //Progress to Block2    
-    ROUTE_ACTIVE(202)
-    ROUTE_ACTIVE(211)
-    ROUTE_ACTIVE(1202)
+    CALL(251)
     CALL(200)
     SPEED(30)
     AT(CD_S1_B1)
@@ -377,22 +399,29 @@ SEQUENCE(1204) //Progress to Block2
 FOLLOW(1205)
 
 SEQUENCE(1205) //Progress to Block3
-    RESERVE(B_B3) //Reserve Next block
-    SCREEN(4,3,"Block B3 Reserved")
-    SPEED(40)
-    AT(CD_S4_B)
-    FREE(B_B1) //Free previous block
-    SCREEN(4,1,"")
+    IFRESERVE(B_B3) //Reserve Next block
+      SCREEN(4,3,"Block B3 Reserved")
+      SPEED(40)
+      AT(CD_S4_B)
+      FREE(B_B1) //Free previous block
+      SCREEN(4,1,"")
+    ELSE
+        SPEED(20)
+        AT(CD_S3_B)
+        STOP
+        FOLLOW(1205)
+    ENDIF
     AT(CD_S5_B)
 FOLLOW(1206)
 
-SEQUENCE(1206)
-    FREE(B_B2) //Free previous block
-    SCREEN(4,2,"")
-    AT(CD_S5_B) 
+SEQUENCE(1206) 
     IFRED(SIG_B3)
         SPEED(11) 
     ENDIF
+    IFAMBER(SIG_B3)
+        SPEED(25)
+    ENDIF
+    AT(CD_S6_B)
 FOLLOW(1207)
 
 SEQUENCE(1207) //Progress to Block4
@@ -402,10 +431,16 @@ SEQUENCE(1207) //Progress to Block4
             CLOSE(9020) // prevent route A-B
             CLOSE(9021) // prevent route A-D
         ENDIF
+        FREE(B_B2) //Free previous block
+        SCREEN(4,2,"")
     ELSE
-        AT(CD_S7_B)
-        STOP
+        IFAMBER(SIG_B3)
+            SPEED(25)
+        ELSE
+            AT(CD_S7_B)
+            STOP
         FOLLOW(1207)
+        ENDIF
     ENDIF
     SPEED(40)
     AT(CD_S8_B)  
@@ -423,36 +458,80 @@ SEQUENCE(1208) //Progress to Block5
         SPEED(11)
         AT(CD_S9_B)
         STOP
-        FOLLOW(208)
+        FOLLOW(1208)
     ENDIF
     SPEED(40)
-    AT(CD_F7_B)
+    AT(CD_F8_B)
 FOLLOW(1209)
 
 SEQUENCE(1209) //Progress to Block6
-    RESERVE(B_B6) //Reserve Next block
-    SCREEN(4,6,"Block B6 Reserved")
     FREE(B_B4) //Free previous block
     SCREEN(4,4,"")
-    AT(CD_F6_B)
+    AT(CD_F7_B)
 FOLLOW(1210)
 
 SEQUENCE(1210)
-    FREE(B_B5)
-    SCREEN(4,5,"")
+    IFRESERVE(B_B6) //Reserve Next block
+        SPEED(30)
+        SCREEN(4,6,"Block B6 Reserved")
+        FREE(B_B5)
+        SCREEN(4,5,"")
+    ELSE 
+        STOP
+        FOLLOW(1210)
+    ENDIF
+    AT(CD_F6_B)
+FOLLOW(1211)
+
+SEQUENCE(1211)
     CALL(201)
-    FOFF(0)
+    FOFF(0) 
 DONE
 
 
-AUTOMATION(1211,"B: Track one roundy") //Station Stop
-    ROUTE_DISABLED(202)
-   ROUTE_DISABLED(1211)
-   ROUTE_DISABLED(1202)
-    IFTHROWN(9115)
-        CLOSE(9115) //Close exit to allow roundy
-    ENDIF
+AUTOMATION(1221,"B: Track 1 roundy") //Auto Track 1
+   CALL(250)
+   IFSTASH(TB1)
+    CLOSE(9115) //Close exit to allow roundy
     PICKUP_STASH(TB1)
+    FON(0)
+   ENDIF
+FOLLOW(1202)
+
+AUTOMATION(1222,"B: Track 2 roundy") //Auto Track 2
+   CALL(250)
+   IFSTASH(TB2)
+     THROW(9116) 
+     PICKUP_STASH(TB2)
+     FON(0)
+   ENDIF
+FOLLOW(1202)
+
+AUTOMATION(1223,"B: Track 3 roundy") //Auto Track 3
+   CALL(250)
+   IFSTASH(TB3)
+     THROW(9117) 
+     PICKUP_STASH(TB3)
+     FON(0)
+   ENDIF
+FOLLOW(1202)
+
+AUTOMATION(1224,"B: Track 4 roundy") //Auto Track 4
+   CALL(250)
+   IFSTASH(TB4)
+     CLOSE(9118) 
+     PICKUP_STASH(TB4)
+     FON(0)
+   ENDIF
+FOLLOW(1202)
+
+AUTOMATION(1225,"B: Track 5 roundy") //Auto Track 5
+   CALL(250)
+   IFSTASH(TB5)
+     THROW(9118) 
+     PICKUP_STASH(TB5)
+     FON(0)
+   ENDIF
 FOLLOW(1202)
 /*
 //Suggested improvements for track selection

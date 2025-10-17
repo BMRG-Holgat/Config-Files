@@ -32,7 +32,7 @@ HAL(MCP23017,316,16,{I2CMux_0,SubBus_3,0x26}) //Board 2
 HAL(PCA9685,348,16,{I2CMux_0,SubBus_3,0x41}) //Board 2 //Lights & church
 HAL(MCP23017,400,16,{I2CMux_0,SubBus_3,0x23}) //Board 3
 HAL(MCP23017,416,16,{I2CMux_0,SubBus_3,0x24}) //Board 3 //signals & street lights
-HAL(PCA9685,432, 16, {I2CMux_0,SubBus_3,0x42}) // Board 3 House Lights
+HAL(PCA9685,432, 16,{I2CMux_0,SubBus_3,0x42}) // Board 3 House Lights
 HAL(MCP23017,500,16,{I2CMux_0,SubBus_3,0x22}) // Board 4
 HAL(MCP23017,516,16,{I2CMux_0,SubBus_3,0x21}) //Board 4
 HAL(MCP23017,532,16,{I2CMux_0,SubBus_1,0x27}) //Board 5
