@@ -231,6 +231,7 @@ SEQUENCE(204) //Progress to Block2
 FOLLOW(205)
 
 SEQUENCE(205) //Progress to Block3
+    RED(SIG_A1)
     IFRESERVE(B_B3) //Reserve Next block
         SCREEN(4,3,"Block B3 Reserved")
         AT(CD_S4_B)
