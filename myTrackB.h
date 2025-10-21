@@ -185,9 +185,9 @@ DONE
 
 
 // Start of main AUTOMATIONS for track B
-AUTOMATION(202, "B: Around We Go") //Leave yard 
-   CALL(250)
-    RESERVE(B_B1) //Reserve Station block
+AUTOMATION(202, "B: Around We Go") //Leave yard and proceed to block 1
+   CALL(250) 
+    RESERVE(B_B1) //Reserve Block 1
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
@@ -224,6 +224,7 @@ SEQUENCE(204) //Progress to Block2
             CLOSE(9010) //close turnouts D->B
         ENDIF
     ELSE
+        RED(SIG_B1) //Set signal to red if block 2 not free
         STOP
         FOLLOW(204)
     ENDIF
@@ -231,7 +232,7 @@ SEQUENCE(204) //Progress to Block2
 FOLLOW(205)
 
 SEQUENCE(205) //Progress to Block3
-    RED(SIG_A1)
+    RED(SIG_B1)
     IFRESERVE(B_B3) //Reserve Next block
         SCREEN(4,3,"Block B3 Reserved")
         AT(CD_S4_B)
@@ -246,6 +247,10 @@ SEQUENCE(205) //Progress to Block3
 FOLLOW(206)
 
 SEQUENCE(206)
+    IFTHROWN(9004)
+        CLOSE(9004) // close turnouts A->B
+    ENDIF
+    RED(SIG_B2)
     FREE(B_B2) //Free previous block
     SCREEN(4,2,"")
     AT(CD_S6_B) 
@@ -268,6 +273,8 @@ SEQUENCE(207) //Progress to Block4
 FOLLOW(208)
 
 SEQUENCE(208) //Progress to Block5
+    AMBER(SIG_B1)
+    RED(SIG_B3)
     IFRESERVE(B_B5) //Reserve Next block
     SCREEN(4,5,"Block B5 Reserved")
         FREE(B_B3)
@@ -280,18 +287,34 @@ SEQUENCE(208) //Progress to Block5
         STOP
         FOLLOW(208)
     ENDIF
-    AT(CD_F7_B)
+    AT(CD_F9_B)
 FOLLOW(209)
 
-SEQUENCE(209) //Progress to Block6 
-    RESERVE(B_B6) //Reserve Next block 
-    SCREEN(4,6,"Block B6 Reserved") 
-    FREE(B_B4) //Free previous block
-    SCREEN(4,4,"")
-    AT(CD_F6_B)
+SEQUENCE(209) //Progress to Block6
+    RED(SIG_B4)
+    AMBER(SIG_B2)
+    GREEN(SIG_B1)
+    AT(CD_F8_B)
 FOLLOW(210)
 
-SEQUENCE(210)
+SEQUENCE(210) //Progress to Block6
+    GREEN(SIG_B2)
+    AMBER(SIG_B3)
+    AT(CD_F7_B)
+FOLLOW(211)
+
+SEQUENCE(211) //Progress to Block6
+    RESERVE(B_B6) //Reserve Next block
+    SCREEN(4,6,"Block B6 Reserved")
+    FREE(B_B4) //Free previous block
+    SCREEN(4,4,"")
+    GREEN(SIG_B3)
+    AMBER(SIG_B4)
+    AT(CD_F6_B)
+FOLLOW(212)
+
+SEQUENCE(212)
+    GREEN(SIG_B4)
     FREE(B_B5)
     SCREEN(4,5,"")
     CALL(201)
@@ -299,7 +322,7 @@ SEQUENCE(210)
 DONE
 
 
-AUTOMATION(211,"B: Station Stop") //Station Stop
+AUTOMATION(213,"B: Station Stop") //Station Stop
     CALL(250)
     IFRESERVE(A_B1)
         RESERVE(B_B1) //Reserve Station block  
@@ -314,19 +337,19 @@ AUTOMATION(211,"B: Station Stop") //Station Stop
         ENDIF  
         SPEED(20)
     ELSE
-        FOLLOW(211) 
+        FOLLOW(213)
     ENDIF
     AT(CD_S1_A)
-FOLLOW(212)
+FOLLOW(214)
 
-SEQUENCE(212) //Stop at station
+SEQUENCE(214) //Stop at station
     CALL(251)
     STOP
     CALL(200)
     DELAYRANDOM(10000,15000)
-FOLLOW(213)
+FOLLOW(215)
 
-SEQUENCE(213) //Release turnout block and set turnouts for return to A
+SEQUENCE(215) //Release turnout block and set turnouts for return to A
     IFRESERVE(B_B2)
         IFRESERVE(A_B2) //reserve Block 2
             IFCLOSED(9004)
@@ -336,15 +359,17 @@ SEQUENCE(213) //Release turnout block and set turnouts for return to A
         IFTHROWN(9007)
             CLOSE(9007) //close turnouts B->A
         ENDIF
+        GREEN(SIG_B1)
     ELSE
         RED(SIG_A1) //Set signal to red if block 2 not free
         STOP
-        FOLLOW(213)
+        FOLLOW(215)
     ENDIF
     AT(CD_S2_A)
-FOLLOW(214)
+FOLLOW(216)
 
-SEQUENCE(214)
+SEQUENCE(216)
+    RED(SIG_A1)
     FREE(A_B1)
     IFTHROWN(9026)
         CLOSE(9026) //close turnouts B->A 
@@ -352,24 +377,23 @@ SEQUENCE(214)
 FOLLOW(205)
     
 // Start of main FULL AUTOMATIONS for track B
-AUTOMATION(1202, "B:t Around We Go Full") //Leave yard 
-   CALL(250)
-    RESERVE(B_B1) //Reserve Station block
+AUTOMATION(1202, "B: Around We Go") //Leave yard and proceed to block 1
+   CALL(250) 
+    RESERVE(B_B1) //Reserve Block 1
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
-        CLOSE(9001) //close turnouts A - B rear
+        CLOSE(9001) //close turnouts A - B
     ENDIF
     IFTHROWN(9026)
-        CLOSE(9026) //close turnouts B - A rear
+        CLOSE(9026) //close turnouts B - A
     ENDIF   
     AT(CD_S1_B) //At Block 1
 FOLLOW(1203)
 
 SEQUENCE(1203) //Progress to Block2    
-    CALL(251)
     CALL(200)
-    SPEED(30)
+    CALL(251)
     AT(CD_S1_B1)
 FOLLOW(1204)
 
@@ -391,38 +415,45 @@ SEQUENCE(1204) //Progress to Block2
         IFTHROWN(9010)
             CLOSE(9010) //close turnouts D->B
         ENDIF
+        SPEED(35)
     ELSE
+        RED(SIG_B1) //Set signal to red if block 2 not free
         STOP
         FOLLOW(1204)
     ENDIF
-    SPEED(40)
     AT(CD_S2_B)
 FOLLOW(1205)
 
 SEQUENCE(1205) //Progress to Block3
+    RED(SIG_B1)
     IFRESERVE(B_B3) //Reserve Next block
-      SCREEN(4,3,"Block B3 Reserved")
-      SPEED(40)
-      AT(CD_S4_B)
-      FREE(B_B1) //Free previous block
-      SCREEN(4,1,"")
+        SCREEN(4,3,"Block B3 Reserved")
+        AT(CD_S4_B)
+        FREE(B_B1) //Free previous block
+        SCREEN(4,1,"")
+        IFAMBER(SIG_B2)
+            SPEED(25)
+        ELSE
+            SPEED(35)
+        ENDIF
     ELSE
-        SPEED(20)
         AT(CD_S3_B)
-        STOP
-        FOLLOW(1205)
-    ENDIF
+        IFRED(SIG_B2)
+            STOP
+        ENDIF
+        FOLLOW(1205) 
+    ENDIF 
     AT(CD_S5_B)
 FOLLOW(1206)
 
-SEQUENCE(1206) 
-    IFRED(SIG_B3)
-        SPEED(11) 
+SEQUENCE(1206)
+    IFTHROWN(9004)
+        CLOSE(9004) // close turnouts A->B
     ENDIF
-    IFAMBER(SIG_B3)
-        SPEED(25)
-    ENDIF
-    AT(CD_S6_B)
+    RED(SIG_B2)
+    FREE(B_B2) //Free previous block
+    SCREEN(4,2,"")
+    AT(CD_S6_B) 
 FOLLOW(1207)
 
 SEQUENCE(1207) //Progress to Block4
@@ -432,22 +463,25 @@ SEQUENCE(1207) //Progress to Block4
             CLOSE(9020) // prevent route A-B
             CLOSE(9021) // prevent route A-D
         ENDIF
-        FREE(B_B2) //Free previous block
-        SCREEN(4,2,"")
     ELSE
-        IFAMBER(SIG_B3)
-            SPEED(25)
-        ELSE
-            AT(CD_S7_B)
+    PRINT("WAITING FOR RESERVE")
+        IFRED(SIG_B3)
+            AT(CD_S7_B)       
             STOP
-        FOLLOW(1207)
         ENDIF
+        FOLLOW(1207)
     ENDIF
-    SPEED(40)
+    IFAMBER(SIG_B3)
+        SPEED(25)
+    ELSE
+        SPEED(35)
+    ENDIF
     AT(CD_S8_B)  
 FOLLOW(1208)
 
 SEQUENCE(1208) //Progress to Block5
+    AMBER(SIG_B1)
+    RED(SIG_B3)
     IFRESERVE(B_B5) //Reserve Next block
     SCREEN(4,5,"Block B5 Reserved")
         FREE(B_B3)
@@ -456,38 +490,106 @@ SEQUENCE(1208) //Progress to Block5
             CLOSE(9023) // prevent route A->B   
         ENDIF
     ELSE
-        SPEED(11)
-        AT(CD_S9_B)
-        STOP
+        IFRED(SIG_B4)
+            AT(CD_S9_B)
+            STOP
+        ENDIF
         FOLLOW(1208)
     ENDIF
-    SPEED(40)
-    AT(CD_F8_B)
+    IFAMBER(SIG_B4)
+        SPEED(25)
+    ELSE
+        SPEED(30)
+    ENDIF
+    AT(CD_F9_B)
 FOLLOW(1209)
 
 SEQUENCE(1209) //Progress to Block6
-    FREE(B_B4) //Free previous block
-    SCREEN(4,4,"")
-    AT(CD_F7_B)
+    RED(SIG_B4)
+    AMBER(SIG_B2)
+    GREEN(SIG_B1)
+    AT(CD_F8_B)
 FOLLOW(1210)
 
-SEQUENCE(1210)
-    IFRESERVE(B_B6) //Reserve Next block
-        SPEED(30)
-        SCREEN(4,6,"Block B6 Reserved")
-        FREE(B_B5)
-        SCREEN(4,5,"")
-    ELSE 
-        STOP
-        FOLLOW(1210)
-    ENDIF
-    AT(CD_F6_B)
+SEQUENCE(1210) //Progress to Block6
+    GREEN(SIG_B2)
+    AMBER(SIG_B3)
+    AT(CD_F7_B)
 FOLLOW(1211)
 
-SEQUENCE(1211)
+SEQUENCE(1211) //Progress to Block6
+    RESERVE(B_B6) //Reserve Next block
+    SCREEN(4,6,"Block B6 Reserved")
+    FREE(B_B4) //Free previous block
+    SCREEN(4,4,"")
+    GREEN(SIG_B3)
+    AMBER(SIG_B4)
+    SPEED(20)
+    AT(CD_F6_B)
+FOLLOW(1212)
+
+SEQUENCE(1212)
+    GREEN(SIG_B4)
+    FREE(B_B5)
+    SCREEN(4,5,"")
     CALL(201)
-    FOFF(0) 
+    FOFF(0)
 DONE
+
+
+AUTOMATION(1213,"B: Station Stop") //Station Stop
+    CALL(250)
+    IFRESERVE(A_B1)
+        RESERVE(B_B1) //Reserve Station block  
+        IFTHROWN(9001)
+            CLOSE(9001) //close turnouts A - B
+        ENDIF
+        IFCLOSED(9026)
+            THROW(9026) //close turnouts B - A
+        ENDIF 
+        IFCLOSED(UGS_T2_H) //Close Header
+            THROW(UGS_T2_H) 
+        ENDIF  
+        SPEED(20)
+    ELSE
+        FOLLOW(1213)
+    ENDIF
+    AT(CD_S1_A)
+FOLLOW(1214)
+
+SEQUENCE(1214) //Stop at station
+    CALL(251)
+    STOP
+    CALL(200)
+    DELAYRANDOM(10000,15000)
+FOLLOW(1215)
+
+SEQUENCE(1215) //Release turnout block and set turnouts for return to A
+    IFRESERVE(B_B2)
+        IFRESERVE(A_B2) //reserve Block 2
+            IFCLOSED(9004)
+                THROW(9004) //close turnouts A->B
+            ENDIF
+        ENDIF
+        IFTHROWN(9007)
+            CLOSE(9007) //close turnouts B->A
+        ENDIF
+        GREEN(SIG_B1)
+    ELSE
+        RED(SIG_A1) //Set signal to red if block 2 not free
+        STOP
+        FOLLOW(1215)
+    ENDIF
+    AT(CD_S2_A)
+FOLLOW(1216)
+
+SEQUENCE(1216)
+    RED(SIG_A1)
+    FREE(A_B1)
+    IFTHROWN(9026)
+        CLOSE(9026) //close turnouts B->A 
+    ENDIF
+FOLLOW(1205)
 
 
 AUTOMATION(1221,"B: Track 1 roundy") //Auto Track 1
@@ -561,3 +663,53 @@ SEQUENCE(xxxx)
 SEQUENCE(zzzz)
   // Have banana 
 */
+
+
+ROUTE(1100,"B: Select Auto") //Select whether to run auto or not
+    IF(autoSelected_B)
+        UNLATCH(autoSelected_B)
+    ELSE
+        LATCH(autoSelected_B)
+    ENDIF
+DONE
+
+/*AUTOMATION(1230,"SELECT A TRACK")
+IF(autoSelected)
+    IFRANDOM(50)
+        IFRANDOM(50)
+            IFSTASH(TB1)
+                FOLLOW(1221) //Track 1
+            ELSE
+                FOLLOW(1230) //Try again
+            ENDIF
+        ELSE
+            FOLLOW(1222) //Track 2
+        ENDIF
+    ELSE
+        IFRANDOM(50)
+            FOLLOW(1223) //Track 3
+        ELSE
+            FOLLOW(1224) //Track 4   
+        ENDIF
+    ELSE
+        FOLLOW(1225) //Go round the loop
+    ENDIF
+ENDIF
+FOLLOW(1230) */
+
+AUTOMATION(1231,"B: Alternate auto")
+PRINT("At start of auto selection for B")
+IF(autoSelected_B)
+    ROUTE_DISABLED(1231)
+    PRINT("Inside random auto selection")
+    IFRANDOM(20) IFSTASH(TB1) FOLLOW(1221) ENDIF ENDIF
+    IFRANDOM(25) IFSTASH(TB2) FOLLOW(1222) ENDIF ENDIF
+    IFRANDOM(33) IFSTASH(TB3) FOLLOW(1223) ENDIF ENDIF
+    IFRANDOM(50) IFSTASH(TB4) FOLLOW(1224) ENDIF ENDIF
+    IFRANDOM(100) IFSTASH(TB5) FOLLOW(1225) ENDIF ENDIF
+ELSE
+    PRINT("Auto not selected for B")
+    ROUTE_ACTIVE(1231)
+ENDIF
+PRINT("Looping back to auto selection for B")
+FOLLOW(1231)
