@@ -39,6 +39,7 @@ ONBUTTON(CD_F6_A)
   GREEN(SIG_A4)
 DONE
 
+/* Removal due to signals being included in other automations
 //Track B
 ONBUTTON(CD_S2_B)
   RED(SIG_B1)
@@ -80,7 +81,7 @@ DONE
 ONBUTTON(CD_F6_B)
   GREEN(SIG_B4)
 DONE
-
+*/
 
 //Track C
 ONBUTTON(CD_S8_C)
