@@ -15,7 +15,10 @@ ALIAS(Latch_display_3,178)
 ALIAS(Latch_display_4,179)
 ALIAS(Latch_House_1_Bed,180)
 ALIAS(Latch_House_1_2_Bed,181)
-ALIAS(F_ROUNDY, 200) //Roundy for Fiddle yard
+ALIAS(autoSelected_B, 200) //Full auto Track B
+ALIAS(autoRunning_B, 201) //Full auto Track B
+ALIAS(autoSelected_C, 202) //Full auto Track C
+ALIAS(autoRunning_C, 203) //Full auto Track B
 
 //Route latches to prevent Signals changing
 ALIAS(AUTO_A,210)

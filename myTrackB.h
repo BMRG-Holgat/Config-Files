@@ -35,31 +35,31 @@ RETURN
 DONE
 
 
-ROUTE(290,"B: Track 1 Clear")
+ROUTE(290,"B: Clear Track 1")
     ROUTE_HIDDEN(290)
     ROUTE_ACTIVE(295)
     FREE(B_B7)
     CLEAR_STASH(TB1) 
 DONE
-ROUTE(291,"B: Track 2 Clear")
+ROUTE(291,"B: Clear Track 2")
     ROUTE_HIDDEN(291)
     ROUTE_ACTIVE(296)
     FREE(B_B8)
     CLEAR_STASH(TB2)
 DONE
-ROUTE(292,"B: Track 3 Clear")
+ROUTE(292,"B: Clear Track 3 ")
     ROUTE_HIDDEN(292)
     ROUTE_ACTIVE(297)
     FREE(B_B9)
     CLEAR_STASH(TB3)
 DONE
-ROUTE(293,"B: Track 4 Clear")
+ROUTE(293,"B: Clear Track 4")
     ROUTE_HIDDEN(293)
     ROUTE_ACTIVE(298)
     FREE(B_B10)
     CLEAR_STASH(TB4)
 DONE
-ROUTE(294,"B: Track 5 Clear")
+ROUTE(294,"B: Clear Track 5")
     ROUTE_HIDDEN(294)
     ROUTE_ACTIVE(299)
     FREE(B_B11)
@@ -67,34 +67,34 @@ ROUTE(294,"B: Track 5 Clear")
 DONE
 
 //Set reserves for locos in yard to prevent other locos entering
-ROUTE(295,"B: Track 1 Loaded") //Auto park the train in the yard
+ROUTE(295,"B: Load Track 1") //Auto park the train in the yard
     ROUTE_HIDDEN(295)
     ROUTE_ACTIVE(290)
     RESERVE(B_B7)
 DONE
-ROUTE(296,"B: Track 2 Loaded") //Auto park the train in the yard
+ROUTE(296,"B: Load Track 2") //Auto park the train in the yard
     ROUTE_HIDDEN(296)
     ROUTE_ACTIVE(291)
     RESERVE(B_B8)
 DONE
-ROUTE(297,"B: Track 3 Loaded") //Auto park the train in the yard
+ROUTE(297,"B: Load Track 3") //Auto park the train in the yard
     ROUTE_HIDDEN(297)
     ROUTE_ACTIVE(292)
     RESERVE(B_B9)
 DONE
-ROUTE(298,"B: Track 4 Loaded") //Auto park the train in the yard
+ROUTE(298,"B: Load Track 4") //Auto park the train in the yard
     ROUTE_HIDDEN(298)
     ROUTE_ACTIVE(293)
     RESERVE(B_B10)
 DONE
-ROUTE(299,"B: Track 5 Loaded") //Auto park the train in the yard
+ROUTE(299,"B: Load Track 5") //Auto park the train in the yard
     ROUTE_HIDDEN(299)
     ROUTE_ACTIVE(294)
     RESERVE(B_B11)
 DONE 
 
 //Manually activate the auto park sequence
-AUTOMATION(289,"B: Auto Park")  
+AUTOMATION(289,"B: Manual Auto Park")  
     ROUTE_HIDDEN(289) 
     CALL(201)
     ROUTE_ACTIVE(289)   
@@ -104,26 +104,31 @@ DONE
 SEQUENCE(200) //Release Parked Block dependant on turnout thrown
     IFCLOSED(9115) //Track FD1
         FREE(B_B7)
+        SCREEN(2,1,"")
         CLEAR_STASH(TB1)
         RETURN
     ENDIF
     IFTHROWN(9116) //Track FD2
         FREE(B_B8)
+        SCREEN(2,2,"")
         CLEAR_STASH(TB2)
         RETURN
     ENDIF
     IFTHROWN(9117) //Track FD3
         FREE(B_B9)
+        SCREEN(2,3,"")
         CLEAR_STASH(TB3)
         RETURN
     ENDIF
     IFCLOSED(9118) //Track FD4
         FREE(B_B10)
+        SCREEN(2,4,"")
         CLEAR_STASH(TB4)
         RETURN
     ENDIF
     IFTHROWN(9118) //Track FD5
         FREE(B_B11)
+        SCREEN(2,5,"")
         CLEAR_STASH(TB5)
         RETURN
     ENDIF
@@ -133,6 +138,7 @@ DONE
 SEQUENCE(201)
 IFNOT(CD_F2_B1) 
     RESERVE(B_B7)
+    SCREEN(2,1,"Block B7 Reserved")
     CLOSE(9110)
     FWD(20) 
     AT(CD_F2_B1) ESTOP
@@ -143,6 +149,7 @@ IFNOT(CD_F2_B1)
 ENDIF 
 IFNOT(CD_F2_B2) 
     RESERVE(B_B8)
+    SCREEN(2,2,"Block B8 Reserved")
     THROW(9111)
     FWD(20) 
     AT(CD_F2_B2) ESTOP
@@ -153,6 +160,7 @@ IFNOT(CD_F2_B2)
 ENDIF 
 IFNOT(CD_F2_B3) 
     RESERVE(B_B9)
+    SCREEN(2,3,"Block B9 Reserved")
     THROW(9112)
     FWD(20) 
     AT(CD_F2_B3) ESTOP
@@ -163,6 +171,7 @@ IFNOT(CD_F2_B3)
 ENDIF 
 IFNOT(CD_F3_B4) 
     RESERVE(B_B10)
+    SCREEN(2,4,"Block B10 Reserved")
     THROW(9113)
     FWD(20) 
     AT(CD_F3_B4) ESTOP
@@ -173,6 +182,7 @@ IFNOT(CD_F3_B4)
 ENDIF 
 IFNOT(CD_F3_B5) 
     RESERVE(B_B11)
+    SCREEN(2,5,"Block B11 Reserved")
     CLOSE(9113)
     FWD(20) 
     AT(CD_F3_B5) ESTOP
@@ -185,7 +195,7 @@ DONE
 
 
 // Start of main AUTOMATIONS for track B
-AUTOMATION(202, "B: Around We Go") //Leave yard and proceed to block 1
+AUTOMATION(202, "B: Around We Go Manual") //Leave yard and proceed to block 1
    CALL(250) 
     RESERVE(B_B1) //Reserve Block 1
     SCREEN(4,1,"Block B1 Reserved")
@@ -322,7 +332,7 @@ SEQUENCE(212)
 DONE
 
 
-AUTOMATION(213,"B: Station Stop") //Station Stop
+AUTOMATION(213,"B: Station Stop Manual") //Station Stop
     CALL(250)
     IFRESERVE(A_B1)
         RESERVE(B_B1) //Reserve Station block  
@@ -377,7 +387,7 @@ SEQUENCE(216)
 FOLLOW(205)
     
 // Start of main FULL AUTOMATIONS for track B
-AUTOMATION(1202, "B: Around We Go") //Leave yard and proceed to block 1
+AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
    CALL(250) 
     RESERVE(B_B1) //Reserve Block 1
     SCREEN(4,1,"Block B1 Reserved")
@@ -534,10 +544,13 @@ SEQUENCE(1212)
     SCREEN(4,5,"")
     CALL(201)
     FOFF(0)
+    IF(autoSelected_B)
+        RETURN
+    ENDIF
 DONE
 
 
-AUTOMATION(1213,"B: Station Stop") //Station Stop
+AUTOMATION(1213,"B: Station Stop Auto") //Station Stop
     CALL(250)
     IFRESERVE(A_B1)
         RESERVE(B_B1) //Reserve Station block  
@@ -592,7 +605,7 @@ SEQUENCE(1216)
 FOLLOW(1205)
 
 
-AUTOMATION(1221,"B: Track 1 roundy") //Auto Track 1
+AUTOMATION(1221,"B: Run Track 1") //Auto Track 1
    CALL(250)
    IFSTASH(TB1)
     CLOSE(9115) //Close exit to allow roundy
@@ -601,7 +614,7 @@ AUTOMATION(1221,"B: Track 1 roundy") //Auto Track 1
    ENDIF
 FOLLOW(1202)
 
-AUTOMATION(1222,"B: Track 2 roundy") //Auto Track 2
+AUTOMATION(1222,"B: Run Track 2") //Auto Track 2
    CALL(250)
    IFSTASH(TB2)
      THROW(9116) 
@@ -610,7 +623,7 @@ AUTOMATION(1222,"B: Track 2 roundy") //Auto Track 2
    ENDIF
 FOLLOW(1202)
 
-AUTOMATION(1223,"B: Track 3 roundy") //Auto Track 3
+AUTOMATION(1223,"B: Run Track 3") //Auto Track 3
    CALL(250)
    IFSTASH(TB3)
      THROW(9117) 
@@ -619,7 +632,7 @@ AUTOMATION(1223,"B: Track 3 roundy") //Auto Track 3
    ENDIF
 FOLLOW(1202)
 
-AUTOMATION(1224,"B: Track 4 roundy") //Auto Track 4
+AUTOMATION(1224,"B: Run Track 4") //Auto Track 4
    CALL(250)
    IFSTASH(TB4)
      CLOSE(9118) 
@@ -628,7 +641,7 @@ AUTOMATION(1224,"B: Track 4 roundy") //Auto Track 4
    ENDIF
 FOLLOW(1202)
 
-AUTOMATION(1225,"B: Track 5 roundy") //Auto Track 5
+AUTOMATION(1225,"B: Run Track 5") //Auto Track 5
    CALL(250)
    IFSTASH(TB5)
      THROW(9118) 
@@ -665,11 +678,13 @@ SEQUENCE(zzzz)
 */
 
 
-ROUTE(1100,"B: Select Auto") //Select whether to run auto or not
+ROUTE(1100,"B: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_B)
         UNLATCH(autoSelected_B)
+        ROUTE_HIDDEN(1231)
     ELSE
         LATCH(autoSelected_B)
+        ROUTE_ACTIVE(1231)
     ENDIF
 DONE
 
@@ -697,19 +712,24 @@ IF(autoSelected)
 ENDIF
 FOLLOW(1230) */
 
-AUTOMATION(1231,"B: Alternate auto")
+AUTOMATION(1231,"B: Break time Run")
 PRINT("At start of auto selection for B")
 IF(autoSelected_B)
+    LATCH(autoRunning_B) //Full auto Track B
     ROUTE_DISABLED(1231)
+    ROUTE_CAPTION(1231,"RUNNING")
     PRINT("Inside random auto selection")
-    IFRANDOM(20) IFSTASH(TB1) FOLLOW(1221) ENDIF ENDIF
-    IFRANDOM(25) IFSTASH(TB2) FOLLOW(1222) ENDIF ENDIF
-    IFRANDOM(33) IFSTASH(TB3) FOLLOW(1223) ENDIF ENDIF
-    IFRANDOM(50) IFSTASH(TB4) FOLLOW(1224) ENDIF ENDIF
-    IFRANDOM(100) IFSTASH(TB5) FOLLOW(1225) ENDIF ENDIF
+    IFRANDOM(20) IFSTASH(TB1) CALL(1221) ENDIF ENDIF
+    IFRANDOM(25) IFSTASH(TB2) CALL(1222) ENDIF ENDIF
+    IFRANDOM(33) IFSTASH(TB3) CALL(1223) ENDIF ENDIF
+    IFRANDOM(50) IFSTASH(TB4) CALL(1224) ENDIF ENDIF
+    IFRANDOM(100) IFSTASH(TB5) CALL(1225) ENDIF ENDIF
 ELSE
     PRINT("Auto not selected for B")
     ROUTE_ACTIVE(1231)
+    UNLATCH(autoRunning_B) //Full auto Track B
 ENDIF
 PRINT("Looping back to auto selection for B")
 FOLLOW(1231)
+
+
