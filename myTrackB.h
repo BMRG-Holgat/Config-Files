@@ -544,7 +544,7 @@ SEQUENCE(1212)
     SCREEN(4,5,"")
     CALL(201)
     FOFF(0)
-    IF(autoSelected_B)
+    IF(autoRunning_B)
         RETURN
     ENDIF
 DONE
@@ -713,23 +713,20 @@ ENDIF
 FOLLOW(1230) */
 
 AUTOMATION(1231,"B: Break time Run")
-PRINT("At start of auto selection for B")
 IF(autoSelected_B)
     LATCH(autoRunning_B) //Full auto Track B
     ROUTE_DISABLED(1231)
     ROUTE_CAPTION(1231,"RUNNING")
-    PRINT("Inside random auto selection")
     IFRANDOM(20) IFSTASH(TB1) CALL(1221) ENDIF ENDIF
     IFRANDOM(25) IFSTASH(TB2) CALL(1222) ENDIF ENDIF
     IFRANDOM(33) IFSTASH(TB3) CALL(1223) ENDIF ENDIF
     IFRANDOM(50) IFSTASH(TB4) CALL(1224) ENDIF ENDIF
     IFRANDOM(100) IFSTASH(TB5) CALL(1225) ENDIF ENDIF
 ELSE
-    PRINT("Auto not selected for B")
     ROUTE_ACTIVE(1231)
-    UNLATCH(autoRunning_B) //Full auto Track B
+    UNLATCH(autoRunning_B) //Stop Full auto Track B
+    DONE
 ENDIF
-PRINT("Looping back to auto selection for B")
 FOLLOW(1231)
 
 

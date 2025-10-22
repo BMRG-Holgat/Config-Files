@@ -393,6 +393,15 @@ AUTOMATION(1325,"C: Run Track 5") //Auto Track 5
    ENDIF
 FOLLOW(302)
 
+ROUTE(1300,"C: Breaktime Select") //Select whether to run auto or not
+    IF(autoSelected_C)
+        UNLATCH(autoSelected_C)
+        ROUTE_HIDDEN(1331)
+    ELSE
+        LATCH(autoSelected_C)
+        ROUTE_ACTIVE(1331)
+    ENDIF
+DONE
 
 
 //Automatic Running
@@ -402,15 +411,13 @@ IF(autoSelected_C)
     LATCH(autoRunning_C) //Full auto Track B
     ROUTE_DISABLED(1231)
     PRINT("Inside random auto selection")
-    IFRANDOM(20) IFSTASH(TB1) CALL(1321) ENDIF ENDIF
-    IFRANDOM(25) IFSTASH(TB2) CALL(1322) ENDIF ENDIF
-    IFRANDOM(33) IFSTASH(TB3) CALL(1323) ENDIF ENDIF
-    IFRANDOM(50) IFSTASH(TB4) CALL(1324) ENDIF ENDIF
-    IFRANDOM(100) IFSTASH(TB5) CALL(1325) ENDIF ENDIF
+    IFRANDOM(20) IFSTASH(TC1) CALL(1321) ENDIF ENDIF
+    IFRANDOM(25) IFSTASH(TC2) CALL(1322) ENDIF ENDIF
+    IFRANDOM(33) IFSTASH(TC3) CALL(1323) ENDIF ENDIF
+    IFRANDOM(50) IFSTASH(TC4) CALL(1324) ENDIF ENDIF
+    IFRANDOM(100) IFSTASH(TC5) CALL(1325) ENDIF ENDIF
 ELSE
-    PRINT("Auto not selected for C")
     ROUTE_ACTIVE(1331)
     UNLATCH(autoRunning_C) //Full auto Track B
 ENDIF
-PRINT("Looping back to auto selection for C")
 FOLLOW(1331)
