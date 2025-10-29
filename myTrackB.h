@@ -140,7 +140,7 @@ IFNOT(CD_F2_B1)
     RESERVE(B_B7)
     SCREEN(2,1,"Block B7 Reserved")
     CLOSE(9110)
-    FWD(20) 
+    FWD(30) 
     AT(CD_F2_B1) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
@@ -151,7 +151,7 @@ IFNOT(CD_F2_B2)
     RESERVE(B_B8)
     SCREEN(2,2,"Block B8 Reserved")
     THROW(9111)
-    FWD(20) 
+    FWD(30) 
     AT(CD_F2_B2) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
@@ -162,7 +162,7 @@ IFNOT(CD_F2_B3)
     RESERVE(B_B9)
     SCREEN(2,3,"Block B9 Reserved")
     THROW(9112)
-    FWD(20) 
+    FWD(30) 
     AT(CD_F2_B3) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
@@ -173,7 +173,7 @@ IFNOT(CD_F3_B4)
     RESERVE(B_B10)
     SCREEN(2,4,"Block B10 Reserved")
     THROW(9113)
-    FWD(20) 
+    FWD(30) 
     AT(CD_F3_B4) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
@@ -184,7 +184,7 @@ IFNOT(CD_F3_B5)
     RESERVE(B_B11)
     SCREEN(2,5,"Block B11 Reserved")
     CLOSE(9113)
-    FWD(20) 
+    FWD(30) 
     AT(CD_F3_B5) ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
@@ -567,7 +567,8 @@ AUTOMATION(1213,"B: Station Stop Auto") //Station Stop
     ELSE
         FOLLOW(1213)
     ENDIF
-    AT(CD_S1_A)
+    RED(SIG_STN)
+    AT(CD_S1_AA)
 FOLLOW(1214)
 
 SEQUENCE(1214) //Stop at station
@@ -575,6 +576,8 @@ SEQUENCE(1214) //Stop at station
     STOP
     CALL(200)
     DELAYRANDOM(10000,15000)
+    GREEN(SIG_STN)
+    SPEED(30)
 FOLLOW(1215)
 
 SEQUENCE(1215) //Release turnout block and set turnouts for return to A
@@ -597,8 +600,10 @@ SEQUENCE(1215) //Release turnout block and set turnouts for return to A
 FOLLOW(1216)
 
 SEQUENCE(1216)
+    SPEED(40)
     RED(SIG_A1)
     FREE(A_B1)
+    FREE(A_B2)
     IFTHROWN(9026)
         CLOSE(9026) //close turnouts B->A 
     ENDIF
@@ -711,7 +716,7 @@ IF(autoSelected)
     ENDIF
 ENDIF
 FOLLOW(1230) */
-
+/*
 AUTOMATION(1231,"B: Break time Run")
 IF(autoSelected_B)
     LATCH(autoRunning_B) //Full auto Track B
@@ -727,6 +732,23 @@ ELSE
     UNLATCH(autoRunning_B) //Stop Full auto Track B
     DONE
 ENDIF
-FOLLOW(1231)
+FOLLOW(1231)*/
+
+AUTOMATION(1231,"B: Break time Run")
+IF(autoSelected_B)
+    LATCH(autoRunning_B) //Full auto Track B
+    ROUTE_DISABLED(1231)
+    ROUTE_CAPTION(1231,"RUNNING")
+    IFRANDOM(23)  CALL(1221) FOLLOW(1231) ENDIF
+    IFRANDOM(43)  CALL(1222) FOLLOW(1231) ENDIF
+    IFRANDOM(53)  CALL(1223) FOLLOW(1231) ENDIF
+    IFRANDOM(73)  CALL(1224) FOLLOW(1231) ENDIF
+                  CALL(1225) FOLLOW(1231) 
+ELSE
+    ROUTE_ACTIVE(1231)
+    UNLATCH(autoRunning_B) //Stop Full auto Track B
+    DONE
+ENDIF
+DONE
 
 

@@ -55,17 +55,6 @@ HAL(PCA9685,136, 16, {I2CMux_0,SubBus_4,0x41}) // Board 9
 HAL(HALDisplay<OLED>,3,{I2CMux_0,SubBus_3,0x3C},132,64)
 HAL(HALDisplay<OLED>,2,{I2CMux_0,SubBus_1,0x3C},132,64)
 HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
-HAL(NeoPixel,700,20,NEO_RGB,{I2CMux_0,SubBus_3,0x60})
-HAL(NeoPixel,720,20,NEO_RGB,{I2CMux_0,SubBus_4,0x61})
-
-
-#define REDLAMP_A NeoRGB(0,20,0)
-#define AMBERLAMP_A NeoRGB(10,20,0)
-#define GREENLAMP_A NeoRGB(20,0,0)
-
-#define REDLAMP NeoRGB(0,0,20)
-#define AMBERLAMP NeoRGB(0,10,20)
-#define GREENLAMP NeoRGB(0,20,0)
 
 //Testing BITMAPs
 //HAL(Bitmap,10,64) //64x32 bitmap at vPin 100
@@ -259,73 +248,37 @@ STEALTH_GLOBAL(char rag(int16_t sigid) {
 } 
 )
 
-STEALTH_GLOBAL(void ragSignal(int16_t sigid, int16_t vPin) {
-    if(rag(sigid)=='R') {IODevice::writeAnalogue(vPin,REDLAMP,true); } 
-      else if(rag(sigid)=='Y') {IODevice::writeAnalogue(vPin,AMBERLAMP,true); } 
-      else if(rag(sigid)=='G') {IODevice::writeAnalogue(vPin,GREENLAMP,true); } 
-           
-} 
-)
-
 SEQUENCE(77)
+IF(Latch_default)
+SCREEN(2,0,"Gantry 1  4  7  9")
 STEALTH( 
-      ragSignal(123,721);
-      ragSignal(272,730);
-      ragSignal(280,731);
-      ragSignal(136,739);
-      
-    
-      ragSignal(126,722);
-      ragSignal(268,729);
-      ragSignal(284,732);
-      ragSignal(140,738);
-     
-    
-      ragSignal(264,728);
-      ragSignal(248,737);
-
-    
-      ragSignal(129,723);
-      ragSignal(276,727);
-      ragSignal(288,733);
-      ragSignal(144,736);
-    
-      ragSignal(188,726);
-      ragSignal(252,735);
-    
-    
-      ragSignal(192,725);
-      ragSignal(256,734);
-
-    
-      ragSignal(429,724);     
+    StringFormatter::lcd2(2,1,
+      F("A:     %c  %c  %c"),
+      rag(123), rag(272), rag(280));
+    StringFormatter::lcd2(2,2,
+      F("B:     %c  %c  %c"),
+      rag(126), rag(268), rag(284));
+    StringFormatter::lcd2(2,3,
+      F("C:        %c     %c"),
+      rag(272), rag(248));
+    StringFormatter::lcd2(2,4,
+      F("D:     %c  %c  %c"),
+      rag(129), rag(276), rag(288));
+    StringFormatter::lcd2(2,5,
+      F("E:        %c     %c"),
+      rag(188), rag(252));
+    StringFormatter::lcd2(2,6,
+      F("F:        %c     %c"),
+      rag(192), rag(256));
+    StringFormatter::lcd2(2,7,
+      F("H:       %c"),
+      rag(429));
 )
 ENDIF 
 DELAY(5000)
 FOLLOW(77)
 
-/*if(rag(123)=='R') {IODevice::writeAnalogue(1521,REDLAMP,true); } 
-      else if(rag(123)=='Y') {IODevice::writeAnalogue(1521,AMBERLAMP,true); } 
-      else if(rag(123)=='G') {IODevice::writeAnalogue(1521,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1521,NeoRGB(0,0,0),true);
-      }
-      if(rag(272)=='R') {IODevice::writeAnalogue(1530,REDLAMP,true); } 
-      else if(rag(272)=='Y') {IODevice::writeAnalogue(1530,AMBERLAMP,true); } 
-      else if(rag(272)=='G') {IODevice::writeAnalogue(1530,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1530,NeoRGB(0,0,0),true);
-      }
-      if(rag(280)=='R') {IODevice::writeAnalogue(1531,REDLAMP,true); } 
-      else if(rag(280)=='Y') {IODevice::writeAnalogue(1531,AMBERLAMP,true); } 
-      else if(rag(280)=='G') {IODevice::writeAnalogue(1531,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1531,NeoRGB(0,0,0),true);
-      }
-      if(rag(136)=='R') {IODevice::writeAnalogue(1539,REDLAMP,true); } 
-      else if(rag(136)=='Y') {IODevice::writeAnalogue(1539,AMBERLAMP,true); } 
-      else if(rag(136)=='G') {IODevice::writeAnalogue(1539,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1539,NeoRGB(0,0,0),true);
 
-
-      }*/
 
 AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(989)
@@ -410,34 +363,3 @@ ELSE  \
     RESERVE(x) \
   ENDIF
   */
-
-
-SEQUENCE(771)
-IF(Latch_default)
-SCREEN(2,0,"Gantry 1  4  7  9")
-STEALTH( 
-    StringFormatter::lcd2(2,1,
-      F("A:     %c  %c  %c  %c"),
-      rag(123), rag(272), rag(280), rag(136));
-      StringFormatter::lcd2(2,2,
-      F("B:     %c  %c  %c  %c"),
-      rag(126), rag(268), rag(284), rag(140));
-      StringFormatter::lcd2(2,3,
-      F("C:        %c     %c"),
-      rag(264), rag(248));
-      StringFormatter::lcd2(2,4,
-      F("D:     %c  %c  %c  %c"),
-      rag(129), rag(276), rag(288), rag(144));
-      StringFormatter::lcd2(2,5,
-      F("E:        %c     %c"),
-      rag(188), rag(252));
-      StringFormatter::lcd2(2,6,
-      F("F:        %c     %c"),
-      rag(192), rag(256));
-      StringFormatter::lcd2(2,7,
-      F("H:       %c"),
-      rag(429));
-)
-ENDIF 
-DELAY(5000)
-FOLLOW(771)
