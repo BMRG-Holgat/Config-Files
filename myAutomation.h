@@ -281,14 +281,14 @@ STEALTH(
       ragSignal(140,738);
      
     
-      ragSignal(272,728);
-      ragSignal(248,736);
+      ragSignal(264,728);
+      ragSignal(248,737);
 
     
       ragSignal(129,723);
       ragSignal(276,727);
       ragSignal(288,733);
-      ragSignal(144,737);
+      ragSignal(144,736);
     
       ragSignal(188,726);
       ragSignal(252,735);
@@ -424,7 +424,7 @@ STEALTH(
       rag(126), rag(268), rag(284), rag(140));
       StringFormatter::lcd2(2,3,
       F("C:        %c     %c"),
-      rag(272), rag(248));
+      rag(264), rag(248));
       StringFormatter::lcd2(2,4,
       F("D:     %c  %c  %c  %c"),
       rag(129), rag(276), rag(288), rag(144));
