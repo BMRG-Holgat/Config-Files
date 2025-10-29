@@ -25,4 +25,7 @@ ALIAS(SIG_A4, 136) // Track A board 9
 ALIAS(SIG_B4, 140) // Track B board 9
 ALIAS(SIG_D4, 144) // Track D board 9
 
+//NeoPixel Signal Aliases
+
+
 
