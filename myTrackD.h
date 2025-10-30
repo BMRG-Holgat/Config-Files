@@ -13,6 +13,33 @@
 *           489 Auto Park
 *
 */
+SEQUENCE(450) //Disable routes
+ /*  ROUTE_DISABLED(202)
+   ROUTE_DISABLED(1202)
+   ROUTE_DISABLED(1211)
+   ROUTE_DISABLED(1222)
+   ROUTE_DISABLED(1223)
+   ROUTE_DISABLED(1224)
+   ROUTE_DISABLED(1225)
+*/
+   RETURN
+DONE
+
+SEQUENCE(451) //Enable routes
+/*
+    ROUTE_ACTIVE(202)
+    ROUTE_ACTIVE(211)
+    ROUTE_ACTIVE(1202)
+    ROUTE_ACTIVE(1211)
+    ROUTE_ACTIVE(1222)
+    ROUTE_ACTIVE(1223)
+    ROUTE_ACTIVE(1224)
+    ROUTE_ACTIVE(1225)
+*/
+RETURN
+DONE
+
+
 //Release Block when loco is removed from track
 ROUTE(490,"D: Track 1 Clear")
     ROUTE_HIDDEN(490)
@@ -78,22 +105,32 @@ DONE
 SEQUENCE(400) //Release Parked Block dependant on turnout thrown
     IFCLOSED(9135) //Track FD1
         FREE(D_B7)
+        SCREEN(2,1,"")
+        CLEAR_STASH(TD1)
         RETURN
     ENDIF
     IFTHROWN(9136) //Track FD2
         FREE(D_B8)
+        SCREEN(2,2,"")
+        CLEAR_STASH(TD2)
         RETURN
     ENDIF
     IFTHROWN(9137) //Track FD3
         FREE(D_B9)
+        SCREEN(2,3,"")
+        CLEAR_STASH(TD3)
         RETURN
     ENDIF
     IFTHROWN(9138) //Track FD4
         FREE(D_B10)
+        SCREEN(2,4,"")
+        CLEAR_STASH(TD4)
         RETURN
     ENDIF
     IFCLOSED(9138) //Track FD5
         FREE(D_B11)
+        SCREEN(2,5,"")
+        CLEAR_STASH(TB5)
         RETURN
     ENDIF
 DONE
@@ -102,47 +139,57 @@ DONE
 SEQUENCE(401)
 IFNOT(CD_F2_D1) 
     RESERVE(D_B7)
+    SCREEN(2,1,"Block D7 Reserved")
     CLOSE(9130)
     FWD(20) 
     AT(CD_F2_D1) ESTOP
     FREE(D_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 IFNOT(CD_F2_D2) 
     RESERVE(D_B8)
+    SCREEN(2,2,"Block D8 Reserved")
     THROW(9131)
     FWD(20) 
     AT(CD_F2_D2) ESTOP
     FREE(D_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 IFNOT(CD_F2_D3) 
     RESERVE(D_B9)
+    SCREEN(2,3,"Block D9 Reserved")
     THROW(9132)
     FWD(20) 
     AT(CD_F2_D3) ESTOP
     FREE(D_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 IFNOT(CD_F2_D4) 
     RESERVE(D_B10)
+    SCREEN(2,4,"Block D10 Reserved")
     THROW(9133)
     FWD(20) 
     AT(CD_F2_D4) ESTOP
     FREE(D_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 IFNOT(CD_F2_D5) 
     RESERVE(D_B11)
+    SCREEN(2,5,"Block D11 Reserved")
     CLOSE(9133)
     FWD(20) 
     AT(CD_F2_D5) ESTOP
     FREE(D_B6)
+    SCREEN(4,6,"")
     RETURN
 ENDIF 
 DONE
 
-AUTOMATION(402, "D: Around We Go") //Leave yard to Station not stopping
+AUTOMATION(402, "D: Around We Go Manual") //Leave yard to Station not stopping
     ROUTE_HIDDEN(402)
     RESERVE(D_B1) //Reserve Station block
     IFTHROWN(9002)
@@ -260,10 +307,10 @@ SEQUENCE(412)
 //    FREE(D_B5)
     CALL(401)
     FOFF(0)
-    UNLATCH(AUTO_D)
+   
 DONE
 
-AUTOMATION(414, "D: Pick'em up") //Leave yard to Station and wait
+AUTOMATION(414, "D: Station Stop Manual") //Leave yard to Station and wait
     RESERVE(D_B1) //Reserve Station block
     IFTHROWN(9002)
         CLOSE(9002) //close turnouts D-C
@@ -286,7 +333,7 @@ DONE
 
 //Change route to track B
 AUTOMATION(416, "D: Change to Track B") //Leave yard to Station not stopping
-    LATCH(AUTO_D)
+   
     RESERVE(D_B1) //Reserve Station block
     IFTHROWN(9002)
         CLOSE(9002) //close turnouts D-C
@@ -320,7 +367,7 @@ SEQUENCE(418)
     IFCLOSED(9010)
         THROW(9010)
     ENDIF
-    SPEED(50) //Maybe too fast
+    SPEED(30) //Maybe too fast
     CALL(400) //Release the Staging Yard Block
     AT(CD_S2_D)
 FOLLOW(419)
@@ -338,7 +385,6 @@ SEQUENCE(420)
     RED(SIG_B2)
     AT(CD_S6_B)
     CLOSE(9010)
-//    FREE(D_B3)
     FREE(D_B2)
     FREE(C_B3)
 FOLLOW(206)
@@ -346,3 +392,75 @@ FOLLOW(206)
 
 
 //ALMOST THERE
+AUTOMATION(1421,"D: Run Track 1") //Auto Track 1
+   CALL(450)
+   IFSTASH(TC1)
+    CLOSE(9126) //Close exit to allow roundy
+    PICKUP_STASH(TC1)
+    FON(0)
+   ENDIF
+FOLLOW(402)
+
+AUTOMATION(1422,"D: Run Track 2") //Auto Track 2
+   CALL(450)
+   IFSTASH(TC2)
+     THROW(9127) 
+     PICKUP_STASH(TC2)
+     FON(0)
+   ENDIF
+FOLLOW(402)
+
+AUTOMATION(1423,"D: Run Track 3") //Auto Track 3
+   CALL(450)
+   IFSTASH(TC3)
+     THROW(9128) 
+     PICKUP_STASH(TC3)
+     FON(0)
+   ENDIF
+FOLLOW(402)
+
+AUTOMATION(1424,"D: Run Track 4") //Auto Track 4
+   CALL(450)
+   IFSTASH(TC4)
+     THROW(9129) 
+     PICKUP_STASH(TC4)
+     FON(0)
+   ENDIF
+FOLLOW(402)
+
+AUTOMATION(1425,"D: Run Track 5") //Auto Track 5
+   CALL(450)
+   IFSTASH(TC5)
+     CLOSE(9129) 
+     PICKUP_STASH(TC5)
+     FON(0)
+   ENDIF
+FOLLOW(402)
+
+ROUTE(1400,"D: Breaktime Select") //Select whether to run auto or not
+    IF(autoSelected_D)
+        UNLATCH(autoSelected_D)
+        ROUTE_HIDDEN(1431)
+    ELSE
+        LATCH(autoSelected_D)
+        ROUTE_ACTIVE(1431)
+    ENDIF
+DONE
+
+
+//Automatic Running
+AUTOMATION(1431,"D: Break time Run")
+IF(autoSelected_D)
+    LATCH(autoRunning_D) //Full auto Track D
+    ROUTE_DISABLED(1431)
+    ROUTE_CAPTION(1431,"RUNNING")
+    IFRANDOM(20) CALL(1421) ENDIF FOLLOW(1431) ENDIF
+    IFRANDOM(25) CALL(1422) ENDIF FOLLOW(1431) ENDIF
+    IFRANDOM(33) CALL(1423) ENDIF FOLLOW(1431) ENDIF
+    IFRANDOM(50) CALL(1424) ENDIF FOLLOW(1431) ENDIF
+    IFRANDOM(100) CALL(1425) ENDIF FOLLOW(1431) ENDIF
+ELSE
+    ROUTE_ACTIVE(1431)
+    UNLATCH(autoRunning_D) //Full auto Track D
+ENDIF
+DONE

@@ -154,73 +154,7 @@ Many other LocoSlot fields are available through public getters and setters, ple
 
 //Automations
 //Standard Signal sequences
-//Track A
-/*AUTOSTART SEQUENCE(22)
-  blockSequence(SIG_A1,CD_S2_A,CD_S6_A,CD_F9_A)
-  FOLLOW(22)
-AUTOSTART SEQUENCE(23)
-  blockSequence(SIG_A2,CD_S5_A,CD_F9_A,CD_F8_A)
-  FOLLOW(23)
-AUTOSTART SEQUENCE(24)
-  blockSequence(SIG_A3,CD_S8_A,CD_F8_A,CD_F7_A)
-  FOLLOW(24)
-AUTOSTART SEQUENCE(25)
-  blockSequence(SIG_A4,CD_F9_A,CD_F7_A,CD_F6_A)
-FOLLOW(25)
 
-//Track B
-AUTOSTART SEQUENCE(26)
-    blockSequence(SIG_B1,CD_S2_B,CD_S6_B,CD_F9_B)
-  FOLLOW(26)
-AUTOSTART SEQUENCE(27)
-  blockSequence(SIG_B2,CD_S5_B,CD_F9_B,CD_F8_B)
-  FOLLOW(27)
-AUTOSTART SEQUENCE(28)
-  blockSequence(SIG_B3,CD_S8_B,CD_F8_B,CD_F7_B)
-  FOLLOW(28)
-AUTOSTART SEQUENCE(29)
-  blockSequence(SIG_D4,CD_F9_D,CD_F7_D,CD_F6_D)
-FOLLOW(29)
-
-
-//Track C
-AUTOSTART SEQUENCE(30)
-  blockSequence(SIG_C2,CD_S3_C,CD_F3_C,CD_F4_C)
-  FOLLOW(30)
-AUTOSTART SEQUENCE(31)
-  blockSequence(SIG_C3,CD_S8_C,CD_S3_C,CD_F3_C)
-  FOLLOW(31)
-
-//Track D
-AUTOSTART SEQUENCE(32)
-  blockSequence(SIG_D1,CD_S2_D,CD_S6_D,CD_F9_D)
-  FOLLOW(32)
-AUTOSTART SEQUENCE(33)
-  blockSequence(SIG_D2,CD_S5_D,CD_F9_D,CD_F8_D)
-  FOLLOW(33)
-AUTOSTART SEQUENCE(34)
-  blockSequence(SIG_D3,CD_S8_D,CD_F8_D,CD_F7_D)
-  FOLLOW(34)
-  AUTOSTART SEQUENCE(35)
-  blockSequence(SIG_D4,CD_F9_D,CD_F7_D,CD_F6_D)
-  FOLLOW(35)
-
-//Track E
-AUTOSTART SEQUENCE(36)
-  blockSequence(SIG_E2,CD_S3_E,CD_F3_E,CD_F4_E)
-  FOLLOW(36)
-AUTOSTART SEQUENCE(37)
-  blockSequence(SIG_E3,CD_S9_E1,CD_S3_E,CD_F3_E)
-  FOLLOW(37)
-
-//Track F
-AUTOSTART SEQUENCE(38)
-  blockSequence(SIG_F2,CD_S3_F,CD_F3_F,CD_F4_F)
-  FOLLOW(38)
-AUTOSTART SEQUENCE(39)
-  blockSequence(SIG_F3,CD_S9_F1,CD_S3_F,CD_F3_F)
-  FOLLOW(39)
-*/
 //Holgate exit signal
 
 ONBUTTON(CD_S4_F)
@@ -303,29 +237,6 @@ STEALTH(
 ENDIF 
 DELAY(5000)
 FOLLOW(77)
-
-/*if(rag(123)=='R') {IODevice::writeAnalogue(1521,REDLAMP,true); } 
-      else if(rag(123)=='Y') {IODevice::writeAnalogue(1521,AMBERLAMP,true); } 
-      else if(rag(123)=='G') {IODevice::writeAnalogue(1521,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1521,NeoRGB(0,0,0),true);
-      }
-      if(rag(272)=='R') {IODevice::writeAnalogue(1530,REDLAMP,true); } 
-      else if(rag(272)=='Y') {IODevice::writeAnalogue(1530,AMBERLAMP,true); } 
-      else if(rag(272)=='G') {IODevice::writeAnalogue(1530,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1530,NeoRGB(0,0,0),true);
-      }
-      if(rag(280)=='R') {IODevice::writeAnalogue(1531,REDLAMP,true); } 
-      else if(rag(280)=='Y') {IODevice::writeAnalogue(1531,AMBERLAMP,true); } 
-      else if(rag(280)=='G') {IODevice::writeAnalogue(1531,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1531,NeoRGB(0,0,0),true);
-      }
-      if(rag(136)=='R') {IODevice::writeAnalogue(1539,REDLAMP,true); } 
-      else if(rag(136)=='Y') {IODevice::writeAnalogue(1539,AMBERLAMP,true); } 
-      else if(rag(136)=='G') {IODevice::writeAnalogue(1539,GREENLAMP,true); } 
-      else {IODevice::writeAnalogue(1539,NeoRGB(0,0,0),true);
-
-
-      }*/
 
 AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(989)

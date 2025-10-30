@@ -226,7 +226,7 @@ SEQUENCE(304) //Progress to Block3
             FOLLOW(304)
         ENDIF
     ENDIF
-    AFTER(CD_S4_C)
+    AT(CD_S3_C)
     RED(SIG_C2)
     AT(CD_S1_C)
 FOLLOW(305)
