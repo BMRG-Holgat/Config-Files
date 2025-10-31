@@ -18,7 +18,9 @@ ALIAS(Latch_House_1_2_Bed,181)
 ALIAS(autoSelected_B, 200) //Full auto Track B
 ALIAS(autoRunning_B, 201) //Full auto Track B
 ALIAS(autoSelected_C, 202) //Full auto Track C
-ALIAS(autoRunning_C, 203) //Full auto Track B
+ALIAS(autoRunning_C, 203) //Full auto Track C
+ALIAS(autoSelected_D, 204) //Full auto Track D
+ALIAS(autoRunning_D, 205) //Full auto Track D
 
 //Route latches to prevent Signals changing
 ALIAS(AUTO_A,210)
@@ -82,7 +84,7 @@ ROUTE(994,"System: Set Default Positions")
     GREEN(SIG_STN)
     LATCH(Latch_default)
     START(77)
-    START(771)
+    //START(771)
     SCREEN(2,0,"System Ready")
     SCREEN(2,1,"")
     SCREEN(2,2,"") 

@@ -462,8 +462,14 @@ SEQUENCE(1206)
     ENDIF
     RED(SIG_B2)
     FREE(B_B2) //Free previous block
-    SCREEN(4,2,"")
-    AT(CD_S6_B) 
+    SCREEN(4,2,"") 
+    IFRED(SIG_B3)
+        SPEED(15)
+    ENDIF
+    IFAMBER(SIG_B3)
+        SPEED(25)
+    ENDIF
+    AT(CD_S6_B)
 FOLLOW(1207)
 
 SEQUENCE(1207) //Progress to Block4
