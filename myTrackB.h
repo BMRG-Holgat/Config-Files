@@ -573,7 +573,8 @@ AUTOMATION(1213,"B: Station Stop Auto") //Station Stop
     ELSE
         FOLLOW(1213)
     ENDIF
-    RED(SIG_STN)
+    RED(SIG_STN_1)
+    RED(SIG_STN_2)
     AT(CD_S1_AA)
 FOLLOW(1214)
 
@@ -582,7 +583,8 @@ SEQUENCE(1214) //Stop at station
     STOP
     CALL(200)
     DELAYRANDOM(10000,15000)
-    GREEN(SIG_STN)
+    GREEN(SIG_STN_1)
+    GREEN(SIG_STN_2)
     SPEED(30)
 FOLLOW(1215)
 

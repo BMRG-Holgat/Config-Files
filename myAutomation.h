@@ -55,8 +55,9 @@ HAL(PCA9685,136, 16, {I2CMux_0,SubBus_4,0x41}) // Board 9
 HAL(HALDisplay<OLED>,3,{I2CMux_0,SubBus_3,0x3C},132,64)
 HAL(HALDisplay<OLED>,2,{I2CMux_0,SubBus_1,0x3C},132,64)
 HAL(HALDisplay<OLED>,4,{I2CMux_0,SubBus_4,0x3C},132,64)
-HAL(NeoPixel,700,20,NEO_RGB,{I2CMux_0,SubBus_3,0x60})
+HAL(NeoPixel,740,20,NEO_RGB,{I2CMux_0,SubBus_3,0x60})
 HAL(NeoPixel,720,20,NEO_RGB,{I2CMux_0,SubBus_4,0x61})
+//HAL(NeoPixel,740,20,NEO_RGB,0x60)
 
 
 #define REDLAMP_A NeoRGB(0,20,0)
@@ -203,36 +204,50 @@ STEALTH_GLOBAL(void ragSignal(int16_t sigid, int16_t vPin) {
 
 SEQUENCE(77)
 STEALTH( 
-      ragSignal(123,721);
-      ragSignal(272,730);
-      ragSignal(280,731);
-      ragSignal(136,739);
-      
-    
-      ragSignal(126,722);
-      ragSignal(268,729);
-      ragSignal(284,732);
-      ragSignal(140,738);
-     
-    
-      ragSignal(264,728);
-      ragSignal(248,737);
+  ragSignal(123,741);
+  ragSignal(123,721);
+  ragSignal(272,750);
+  ragSignal(272,730);
+  ragSignal(280,751);
+  ragSignal(280,731);
+  ragSignal(136,759);
+  ragSignal(136,739);
 
-    
-      ragSignal(129,723);
-      ragSignal(276,727);
-      ragSignal(288,733);
-      ragSignal(144,736);
-    
-      ragSignal(188,726);
-      ragSignal(252,735);
-    
-    
-      ragSignal(192,725);
-      ragSignal(256,734);
+  ragSignal(126,742);
+  ragSignal(126,722);
+  ragSignal(268,749);
+  ragSignal(268,729);
+  ragSignal(284,752);
+  ragSignal(284,732);
+  ragSignal(140,758);
+  ragSignal(140,738);
 
+  ragSignal(264,748);
+  ragSignal(264,728);
+  ragSignal(248,757);
+  ragSignal(248,737);
+
+  ragSignal(129,743);
+  ragSignal(129,723);
+  ragSignal(276,747);
+  ragSignal(276,727);
+  ragSignal(288,753);
+  ragSignal(288,733);
+  ragSignal(144,756);
+  ragSignal(144,736);
     
-      ragSignal(429,724);     
+  ragSignal(188,746);
+  ragSignal(188,726);
+  ragSignal(252,755);
+  ragSignal(252,735);
+
+  ragSignal(192,745);
+  ragSignal(192,725);
+  ragSignal(256,754);
+  ragSignal(256,734);
+
+  ragSignal(429,744);
+  ragSignal(429,724);
 )
 ENDIF 
 DELAY(5000)
