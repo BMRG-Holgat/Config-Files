@@ -1,4 +1,5 @@
 //Alternative signal sequences for Track A
+/*
 ONBUTTON(CD_S2_A)
   RED(SIG_A1)
 DONE
@@ -38,7 +39,7 @@ DONE
 ONBUTTON(CD_F6_A)
   GREEN(SIG_A4)
 DONE
-
+*/
 /* Removal due to signals being included in other automations
 //Track B
 ONBUTTON(CD_S2_B)
@@ -102,7 +103,7 @@ ONBUTTON(CD_F4_C)
     GREEN(SIG_C2)
 DONE
 */
-
+/*
 //Track D
 ONBUTTON(CD_S2_D)
   RED(SIG_D1)
@@ -148,7 +149,7 @@ DONE
 ONBUTTON(CD_F6_D)
   GREEN(SIG_D4)
 DONE
-
+*/
 //Track E
 ONBUTTON(CD_S9_E1)
     RED(SIG_E3)
