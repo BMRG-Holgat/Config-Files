@@ -389,8 +389,13 @@ FOLLOW(205)
 // Start of main FULL AUTOMATIONS for track B
 AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
    CALL(250) 
+   IFNOT(autoRunning_B)
     IFRESERVE(B_B1) //Reserve Block 1
+        PRINT("Waiting for BLOCK B1")
+    ELSE
+        FOLLOW(1202)
     ENDIF
+   ENDIF
     SCREEN(4,1,"Block B1 Reserved")
     SPEED(20)
     IFTHROWN(9001)
@@ -403,14 +408,12 @@ AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
 FOLLOW(1203)
 
 SEQUENCE(1203) //Progress to Block2    
-PRINT("2nd Sequence 1203")
     CALL(200)
     CALL(251)
     AT(CD_S1_B1)
 FOLLOW(1204)
 
 SEQUENCE(1204) //Progress to Block2
-PRINT("3rd Sequence")
     IFRESERVE(B_B2) //Reserve Next block
         SCREEN(4,2,"Block B2 Reserved")
         IFTHROWN(9004)
@@ -448,7 +451,6 @@ SEQUENCE(1205) //Progress to Block 3
     SCREEN(4,3,"Block B3 Reserved")
     SPEED(30)
     ELSE
-    PRINT("Not reserved")
        IF(CD_S3_B)
         WAIT_WHILE_RED(SIG_B2)
        ENDIF
@@ -463,39 +465,12 @@ SEQUENCE(1205) //Progress to Block 3
     FREE(B_B1)
     AT(CD_S5_B)  
 FOLLOW(1206)
-/*
-SEQUENCE(1205) //Progress to Block3
-PRINT("LOOPING")
-    RED(SIG_B1)
-    IFRESERVE(B_B3) //Reserve Next block
-        SCREEN(4,3,"Block B3 Reserved")
-        IFAMBER(SIG_B2)
-            SPEED(25)
-        ENDIF
-        IFGREEN(SIG_B2)
-            SPEED(35)
-        ENDIF
-        AT(CD_S4_B)
-        FREE(B_B1) //Free previous block
-        SCREEN(4,1,"")       
-    ELSE
-    PRINT("Waiting for Block 3")
-        IFRED(SIG_B2)
-            ONBUTTON(CD_S3_B)
-            STOP
-            FOLLOW(1205) 
-        ENDIF
-    ENDIF 
-    PRINT("MOVING ON TO B5")
-    AT(CD_S5_B)
-FOLLOW(1206)
-*/
+
 SEQUENCE(1206)
     IFTHROWN(9004)
         CLOSE(9004) // close turnouts A->B
     ENDIF
-    RED(SIG_B2)
-    
+    RED(SIG_B2)   
     SCREEN(4,2,"") 
     IFRED(SIG_B3)
         SPEED(15)
@@ -514,7 +489,6 @@ SEQUENCE(1207) //Progress to Block4
             CLOSE(9021) // prevent route A-D
         ENDIF
     ELSE
-    PRINT("WAITING FOR RESERVE")
         AT(CD_S7_B)
         WAIT_WHILE_RED(SIG_B3)       
         FOLLOW(1207)
@@ -819,11 +793,7 @@ IF(autoSelected_B)
     LATCH(autoRunning_B) //Full auto Track B
     ROUTE_DISABLED(1231)
     ROUTE_CAPTION(1231,"RUNNING")
-    IFRANDOM(10)  CALL(1221) FOLLOW(1231) ENDIF
-    IFRANDOM(20)  CALL(1222) FOLLOW(1231) ENDIF
-    IFRANDOM(30)  CALL(1223) FOLLOW(1231) ENDIF
-    IFRANDOM(40)  CALL(1224) FOLLOW(1231) ENDIF
-    IFRANDOM(50)  CALL(1225) FOLLOW(1231) ENDIF
+    RANDOM_CALL(1221,1222,1223,1224,1225)
     PRINT("B: NO TRAIN")
     FOLLOW(1231)
 ELSE

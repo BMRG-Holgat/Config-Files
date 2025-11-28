@@ -304,25 +304,24 @@ DONE
 
 AUTOMATION(1402, "D: Around We Go Auto") //Leave yard to Station not stopping
     CALL(450)
-    RESERVE(D_B1) //Reserve Station block
-    IFTHROWN(9002)
+    IFRESERVE(D_B1) //Reserve Station block
+    SCREEN(4,1,"D1 RESERVED")
         CLOSE(9002) //close turnouts D-C
+        FWD(20) //Move forward Speed 30
+    ELSE
+        FOLLOW(1402)
     ENDIF
-    FWD(20) //Move forward Speed 30
     AT(CD_S1_D)
 FOLLOW(1403)
 
 SEQUENCE(1403)
     CALL(451)
-    CALL(400)
-    IFRED(SIG_D1)
-        STOP
-        FOLLOW(1403)
-    ENDIF   
+    CALL(400)   
 FOLLOW(1404)
 
 SEQUENCE(1404)   
-    RESERVE(D_B2) //Reserve Next block
+    IFRESERVE(D_B2) // Reserve Block 2
+    SCREEN(4,2,"D2 RESERVED")
     //Ensure route is set
     IFTHROWN(9005)
         CLOSE(9005)//ensure route is set
@@ -336,74 +335,107 @@ SEQUENCE(1404)
     IFTHROWN(9010)
         CLOSE(9010)
     ENDIF
-    SPEED(30) //Maybe too fast
+        SPEED(35)
+        SAVE_SPEED
+    ELSE
+        SAVE_SPEED
+        WAIT_WHILE_RED(SIG_D1)
+        FOLLOW(1404)
+    ENDIF
+    IFAMBER(SIG_D1)
+        SPEED(23)
+    ELSE
+        SPEED(35) //Maybe too fast
+    ENDIF
     AT(CD_S2_D)
 FOLLOW(1405)
 
-SEQUENCE(1405) //Progress to Block2
-    RESERVE(D_B3) //Reserve Next block
-    IFAMBER(SIG_B2) 
-        SPEED(15)
-    ENDIF 
+SEQUENCE(1405) //Reserve Block 3
     RED(SIG_D1)
-    FWD(35) //Increase speed
+    IFRESERVE(D_B3) //Reserve Next block
+    SCREEN(4,3,"D3 RESERVED")
+        RESTORE_SPEED
+    ELSE 
+        AT(CD_S3_D)
+        SAVE_SPEED
+        WAIT_WHILE_RED(SIG_D2)
+        FOLLOW(1405)
+    ENDIF
     AT(CD_S4_D)
     FREE(D_B1)
+    SCREEN(4,1,"")
     AT(CD_S5_D)
 FOLLOW(1406)
 
 SEQUENCE(1406)
     RED(SIG_D2)
     AT(CD_S6_D) 
+    SAVE_SPEED
     IFRED(SIG_D3)
         SPEED(20)
+    ENDIF
+    IFAMBER(SIG_D3)
+        SPEED(23)
+    ELSE
+        SPEED(35) 
+        SAVE_SPEED
     ENDIF
 FOLLOW(1407)
 
 SEQUENCE(1407) //Progress to Block3
- IFRED(SIG_D3)
-    AT(CD_S7_D)
-    STOP
-    FOLLOW(1407)
- ENDIF
- IFAMBER(SIG_D3)
-    SPEED(15)
-ENDIF
-    RESERVE(D_B4) //Reserve Next block
-    AMBER(SIG_D1)
-    FREE(D_B2)
+    IFRESERVE(D_B4)
+    SCREEN(4,4,"D4 RESERVED")
     IFTHROWN(9021)
-        CLOSE(9021) // prevent route A-D
+        CLOSE(9021)
+    ENDIF 
+    ELSE 
+        AT(CD_S7_D)
+        WAIT_WHILE_RED(SIG_D3)
+        FOLLOW(1407)
+    ENDIF 
+    IFAMBER(SIG_D3)
+        SPEED(23)
+    ELSE
+        RESTORE_SPEED
     ENDIF
     AT(CD_S8_D)
 FOLLOW(1408)
 
-SEQUENCE(1408) //Progress to Block4
-    RESERVE(D_B5) //Reserve Next block
-    RED(SIG_D3)
-    IFTHROWN(9024)
-        CLOSE(9024) // prevent route E-C
+SEQUENCE(1408) //Progress to Block 5
+    IFRESERVE(D_B5)
+    SCREEN(4,5,"D5 RESERVED")
+        AMBER(SIG_D1)
+        FREE(D_B2)
+        SCREEN(4,2,"")
+        RED(SIG_D3)
     ENDIF
+    AT(CD_S8_D)
 FOLLOW(1409)
 
 SEQUENCE(1409)
+    SAVE_SPEED
     IFRED(SIG_D4)
-        AT(CD_S9_D)
-        STOP
-        FOLLOW(1409)
-    ENDIF
-    IFAMBER(SIG_D4)
         SPEED(15)
     ENDIF
-    AT(CD_F9_D)
+    AT(CD_S9_D)
 FOLLOW(1410)
 
 SEQUENCE(1410) //Progress to Block5
-    RESERVE(D_B6) //Reserve Next block
+    WAIT_WHILE_RED(SIG_D4)
+    RESTORE_SPEED
+    AT(CD_S9_D1)
+    IFTHROWN(2024)
+        CLOSE(2024)
+    ENDIF
     RED(SIG_D4)
     GREEN(SIG_D1)
     AMBER(SIG_D2)
-    FREE(D_B3)
+    AT(CD_F8_D)
+    RESERVE(D_B6) //Reserve Next block
+        SCREEN(4,6,"D6 RESERVED")  
+        RESTORE_SPEED  
+        FREE(D_B3)
+        SCREEN(4,3,"")
     AT(CD_F7_D)
 FOLLOW(1411)
 
@@ -412,14 +444,15 @@ SEQUENCE(1411)
     AMBER(SIG_D3)
     GREEN(SIG_D2)
     FREE(D_B4)
-    FREE(D_B5)
+    SCREEN(4,4,"")
     AT(CD_F6_D)
 FOLLOW(1412)
 
 SEQUENCE(1412)
     GREEN(SIG_D4)
     GREEN(SIG_D3)    
-//    FREE(D_B5)
+    FREE(D_B5)
+    SCREEN(4,5,"")
     CALL(401)
     FOFF(0)
 DONE
@@ -448,20 +481,19 @@ DONE
 
 //Change route to track B
 AUTOMATION(416, "D: Change to Track B") //Leave yard to Station not stopping
-   
-    RESERVE(D_B1) //Reserve Station block
+    IFRESERVE(D_B1) //Reserve Station block
     IFTHROWN(9002)
         CLOSE(9002) //close turnouts D-C
     ENDIF
-    FWD(30) //Move forward Speed 30
+        FWD(30) //Move forward Speed 30
+    ELSE
+        FOLLOW(416)
+    ENDIF
     AT(CD_S1_D)
 FOLLOW(417)
 
 SEQUENCE(417)
-        IFRED(SIG_D1)
-        STOP
-        FOLLOW(417)
-    ENDIF
+        WAIT_WHILE_RED(SIG_D1)
 FOLLOW(418) 
 
 SEQUENCE(418)   
@@ -510,47 +542,87 @@ FOLLOW(206)
 AUTOMATION(1421,"D: Run Track 1") //Auto Track 1
    CALL(450)
    IFSTASH(TD1)
-    CLOSE(9126) //Close exit to allow roundy
-    PICKUP_STASH(TD1)
-    FON(0)
-   ENDIF
-FOLLOW(1402)
+        IFRESERVE(D_B1)
+            CLOSE(9135) //Close exit to allow roundy
+            PICKUP_STASH(TD1)
+            FON(0)
+        ELSE
+            FOLLOW(1421)
+        ENDIF
+        FOLLOW(1402)
+    IF(autoRunning_D)
+        RETURN
+    ENDIF
+    ENDIF
+DONE
 
 AUTOMATION(1422,"D: Run Track 2") //Auto Track 2
    CALL(450)
    IFSTASH(TD2)
-     THROW(9127) 
+    IFRESERVE(D_B1)
+     THROW(9136) 
      PICKUP_STASH(TD2)
      FON(0)
-   ENDIF
-FOLLOW(1402)
+    ELSE
+        FOLLOW(1422)
+    ENDIF
+        FOLLOW(1402)
+    IF(autoRunning_D)
+        RETURN
+    ENDIF
+    ENDIF
+DONE
 
 AUTOMATION(1423,"D: Run Track 3") //Auto Track 3
    CALL(450)
    IFSTASH(TD3)
-     THROW(9128) 
+    IFRESERVE(D_B1)
+     THROW(9137) 
      PICKUP_STASH(TD3)
      FON(0)
-   ENDIF
-FOLLOW(1402)
+    ELSE
+        FOLLOW(1423)
+    ENDIF
+        FOLLOW(1402)
+    IF(autoRunning_D)
+        RETURN
+    ENDIF
+    ENDIF
+DONE
 
 AUTOMATION(1424,"D: Run Track 4") //Auto Track 4
    CALL(450)
    IFSTASH(TD4)
-     THROW(9129) 
+    IFRESERVE(D_B1)
+     THROW(9138) 
      PICKUP_STASH(TD4)
      FON(0)
-   ENDIF
-FOLLOW(1402)
+    ELSE
+        FOLLOW(1424)
+    ENDIF
+        FOLLOW(1402)
+    IF(autoRunning_D)
+        RETURN
+    ENDIF
+    ENDIF
+DONE
 
 AUTOMATION(1425,"D: Run Track 5") //Auto Track 5
    CALL(450)
    IFSTASH(TD5)
-     CLOSE(9129) 
+    IFRESERVE(D_B1)
+     CLOSE(9138) 
      PICKUP_STASH(TD5)
      FON(0)
-   ENDIF
-FOLLOW(1402)
+    ELSE
+        FOLLOW(1425)
+    ENDIF
+    FOLLOW(1402)
+    IF(autoRunning_D)
+        RETURN
+    ENDIF
+    ENDIF
+DONE
 
 ROUTE(1400,"D: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_D)
@@ -569,11 +641,7 @@ IF(autoSelected_D)
     LATCH(autoRunning_D) //Full auto Track D
     ROUTE_DISABLED(1431)
     ROUTE_CAPTION(1431,"RUNNING")
-    IFRANDOM(10) CALL(1421) ENDIF FOLLOW(1431) ENDIF
-    IFRANDOM(20) CALL(1422) ENDIF FOLLOW(1431) ENDIF
-    IFRANDOM(30) CALL(1423) ENDIF FOLLOW(1431) ENDIF
-    IFRANDOM(40) CALL(1424) ENDIF FOLLOW(1431) ENDIF
-    IFRANDOM(50) CALL(1425) ENDIF FOLLOW(1431) ENDIF
+    RANDOM_FOLLOW(1421,1422,1423,1424,1425)
     PRINT("D: NO TRAIN")
     FOLLOW(1431)
 ELSE
