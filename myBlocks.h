@@ -87,6 +87,7 @@ ALIAS(E_B14,114)
 ALIAS(E_B15,115)
 ALIAS(E_B16,116)
 ALIAS(E_B17,117)
+ALIAS(E_S_B4,118) //Station by Pass
 
 // Track F
 ALIAS(F_B1,121) //exit storage to bridge

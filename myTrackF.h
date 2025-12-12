@@ -33,11 +33,15 @@ DONE
 
 //Proceed to holgate access
 SEQUENCE(602)
-    STOPRES(F_B2,202) //exit storage to bridge
-    IFTHROWN(9022) //Close E-> F turnout
-        CLOSE(9022)
-    ENDIF
-    FREE(F_B6) // Free last storage block    
+    IFRESERVE(F_B2)
+        IFTHROWN(9022) //Close E-> F turnout
+            CLOSE(9022)
+        ENDIF
+        FREE(F_B6) // Free last storage block 
+    ELSE
+        WAIT_WHILE_RED(SIG_F3)
+        FOLLOW(602)
+    ENDIF   
     AT(CD_S9_F1) // current detector board 9 before Holgate
 FOLLOW(603)
 

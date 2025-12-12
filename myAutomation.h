@@ -204,50 +204,50 @@ STEALTH_GLOBAL(void ragSignal(int16_t sigid, int16_t vPin) {
 
 SEQUENCE(77)
 STEALTH( 
-  ragSignal(123,741);
-  ragSignal(123,721);
-  ragSignal(272,750);
-  ragSignal(272,730);
-  ragSignal(280,751);
-  ragSignal(280,731);
-  ragSignal(136,759);
-  ragSignal(136,739);
+  ragSignal(SIG_A1,741);
+  ragSignal(SIG_A1,721);
+  ragSignal(SIG_A2,750);
+  ragSignal(SIG_A2,730);
+  ragSignal(SIG_A3,751);
+  ragSignal(SIG_A3,731);
+  ragSignal(SIG_A4,759);
+  ragSignal(SIG_A4,739);
 
-  ragSignal(126,742);
-  ragSignal(126,722);
-  ragSignal(268,749);
-  ragSignal(268,729);
-  ragSignal(284,752);
-  ragSignal(284,732);
-  ragSignal(140,758);
-  ragSignal(140,738);
+  ragSignal(SIG_B1,742);
+  ragSignal(SIG_B1,722);
+  ragSignal(SIG_B2,749);
+  ragSignal(SIG_B2,729);
+  ragSignal(SIG_B3,752);
+  ragSignal(SIG_B3,732);
+  ragSignal(SIG_B4,758);
+  ragSignal(SIG_B4,738);
 
-  ragSignal(264,748);
-  ragSignal(264,728);
-  ragSignal(248,757);
-  ragSignal(248,737);
+  ragSignal(SIG_C2,748);
+  ragSignal(SIG_C2,728);
+  ragSignal(SIG_C3,757);
+  ragSignal(SIG_C3,737);
 
-  ragSignal(129,743);
-  ragSignal(129,723);
-  ragSignal(276,747);
-  ragSignal(276,727);
-  ragSignal(288,753);
-  ragSignal(288,733);
-  ragSignal(144,756);
-  ragSignal(144,736);
+  ragSignal(SIG_D1,743);
+  ragSignal(SIG_D1,723);
+  ragSignal(SIG_D2,747);
+  ragSignal(SIG_D2,727);
+  ragSignal(SIG_D3,753);
+  ragSignal(SIG_D3,733);
+  ragSignal(SIG_D4,756);
+  ragSignal(SIG_D4,736);
     
-  ragSignal(188,746);
-  ragSignal(188,726);
-  ragSignal(252,755);
-  ragSignal(252,735);
+  ragSignal(SIG_E2,746);
+  ragSignal(SIG_E2,726);
+  ragSignal(SIG_E3,755);
+  ragSignal(SIG_E3,735);
 
-  ragSignal(192,745);
-  ragSignal(192,725);
-  ragSignal(256,754);
-  ragSignal(256,734);
+  ragSignal(SIG_F2,745);
+  ragSignal(SIG_F2,725);
+  ragSignal(SIG_F3,754);
+  ragSignal(SIG_F3,734);
 
-  ragSignal(429,744);
-  ragSignal(429,724);
+  ragSignal(SIG_H1,744);
+  ragSignal(SIG_H1,724);
 )
 ENDIF 
 DELAY(5000)

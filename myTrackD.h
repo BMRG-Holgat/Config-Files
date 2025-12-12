@@ -182,24 +182,24 @@ DONE
 
 AUTOMATION(402, "D: Around We Go Manual") //Leave yard to Station not stopping
     ROUTE_HIDDEN(402)
-    RESERVE(D_B1) //Reserve Station block
-    IFTHROWN(9002)
-        CLOSE(9002) //close turnouts D-C
+    IFRESERVE(D_B1) //Reserve Station block
+        IFTHROWN(9002)
+            CLOSE(9002) //close turnouts D-C
+        ENDIF
+        FWD(20) //Move forward Speed 30
+    ELSE
+        FOLLOW(402)
     ENDIF
-    FWD(20) //Move forward Speed 30
     AT(CD_S1_D)
 FOLLOW(403)
 
 SEQUENCE(403)
     ROUTE_ACTIVE(402)
-    IFRED(SIG_D1)
-        STOP
-        FOLLOW(403)
-    ENDIF   
+    DELAY(3000)
 FOLLOW(404)
 
 SEQUENCE(404)   
-    RESERVE(D_B2) //Reserve Next block
+    IFRESERVE(D_B2) //Reserve Next block
     //Ensure route is set
     IFTHROWN(9005)
         CLOSE(9005)//ensure route is set
@@ -215,52 +215,72 @@ SEQUENCE(404)
     ENDIF
 //    SPEED(50) //Maybe too fast
     CALL(400) //Release the Staging Yard Block
+    ELSE
+        WAIT_WHILE_RED(SIG_D1)
+        FOLLOW(404)
+    ENDIF
     AT(CD_S2_D)
 FOLLOW(405)
 
 SEQUENCE(405) //Progress to Block2
-    RESERVE(D_B3) //Reserve Next block
-    IFAMBER(SIG_B2) 
-        SPEED(10)
-    ENDIF 
-    RED(SIG_D1)
-//    FWD(50) //Increase speed
-    AT(CD_S4_D)
+    SAVE_SPEED
+    IFRESERVE(D_B3) //Reserve Next block
+        IFAMBER(SIG_D2) 
+            SPEED(10)
+            SAVE_SPEED
+        ENDIF 
+        RED(SIG_D1)
+    ELSE
+        AT(CD_S4_D)
+        WAIT_WHILE_RED(SIG_D2)
+        FOLLOW(405)
+    ENDIF
+    RESTORE_SPEED
     FREE(D_B1)
     AT(CD_S5_D)
 FOLLOW(406)
 
 SEQUENCE(406)
+    SAVE_SPEED
     RED(SIG_D2)
     AT(CD_S6_D) 
 FOLLOW(407)
 
 SEQUENCE(407) //Progress to Block3
- IFRED(SIG_D3)
-//    SPEED(20)
-    AT(CD_S7_D)
-    STOP
-    FOLLOW(407)
- ENDIF
- IFAMBER(SIG_D3)
-    SPEED(10)
-ENDIF
-    RESERVE(D_B4) //Reserve Next block
-    AMBER(SIG_D1)
-    FREE(D_B2)
+    IFRESERVE(D_B4) //Reserve Next block
+        AMBER(SIG_D1)
+        FREE(D_B2)
     IFTHROWN(9021)
         CLOSE(9021) // prevent route A-D
     ENDIF
+    ELSE
+        AT(CD_S7_D)
+        SAVE_SPEED
+        WAIT_WHILE_RED(SIG_D3)
+        FOLLOW(407)
+    RESTORE_SPEED
     AT(CD_S8_D)
 FOLLOW(408)
 
 SEQUENCE(408) //Progress to Block4
-    RESERVE(D_B5) //Reserve Next block
     RED(SIG_D3)
-    IFTHROWN(9024)
-        CLOSE(9024) // prevent route E-C
+    IFRESERVE(D_B5) //Reserve Next block
+        IFTHROWN(9024)
+            CLOSE(9024) // prevent route E-C
+        ENDIF
+    ELSE
+        AT(CD_S9_D1)
+        SAVE_SPEED
+        WAIT_WHILE_RED(SIG_D4)
+        FOLLOW(408)
     ENDIF
-FOLLOW(409)
+     IFAMBER(SIG_D4)
+        SPEED(20)
+    ELSE
+        SPEED(30)
+    ENDIF
+    AT(CD_S9_D)
+FOLLOW(410)
 
 SEQUENCE(409)
     IFRED(SIG_D4)
@@ -268,9 +288,7 @@ SEQUENCE(409)
         STOP
         FOLLOW(409)
     ENDIF
-    IFAMBER(SIG_D4)
-        SPEED(10)
-    ENDIF
+   
     AT(CD_F9_D)
 FOLLOW(410)
 
@@ -402,35 +420,36 @@ SEQUENCE(1407) //Progress to Block3
 FOLLOW(1408)
 
 SEQUENCE(1408) //Progress to Block 5
+    RED(SIG_D3)
     IFRESERVE(D_B5)
     SCREEN(4,5,"D5 RESERVED")
         AMBER(SIG_D1)
         FREE(D_B2)
         SCREEN(4,2,"")
-        RED(SIG_D3)
+        IFTHROWN(2024)
+            CLOSE(2024)
+        ENDIF
+    ELSE 
+        AT(CD_S9_D1)
+        PRINT("At Bridge")
+        SCREEN(4,8,"At Bridge")
+        SAVE_SPEED
+        WAIT_WHILE_RED(SIG_D4)
+        FOLLOW(1408)
     ENDIF
-    AT(CD_S8_D)
+    RESTORE_SPEED
+    AT(CD_S9_D)
 FOLLOW(1409)
 
 SEQUENCE(1409)
-    SAVE_SPEED
-    IFRED(SIG_D4)
-        SPEED(15)
-    ENDIF
-    AT(CD_S9_D)
-FOLLOW(1410)
-
-SEQUENCE(1410) //Progress to Block5
-    WAIT_WHILE_RED(SIG_D4)
-    RESTORE_SPEED
-    AT(CD_S9_D1)
-    IFTHROWN(2024)
-        CLOSE(2024)
-    ENDIF
     RED(SIG_D4)
     GREEN(SIG_D1)
     AMBER(SIG_D2)
     AT(CD_F8_D)
+FOLLOW(1410)
+
+SEQUENCE(1410) //Progress to Block5   
+    SCREEN(4,8,"")
     RESERVE(D_B6) //Reserve Next block
         SCREEN(4,6,"D6 RESERVED")  
         RESTORE_SPEED  

@@ -5,8 +5,9 @@
 * V 0.1.0
 *           390 - 394 Free yard tracks
 *           395 - 399 Reserve yard tracks
+*           301 - Auto Park
 *           302 Around We Go
-*           389 Auto Park
+*           389 - Manual Auto Park
 *
 */
 
@@ -86,7 +87,7 @@ DONE
 //Manually activate the auto park sequence
 AUTOMATION(389,"C: Manual Auto Park")   
     ROUTE_HIDDEN(389)
-    CALL(300)
+    CALL(301)
     ROUTE_ACTIVE(389)
 DONE
 
@@ -301,9 +302,6 @@ SEQUENCE(1303) //Progress to Block2
         CALL(300)
         CALL(351)
         SCREEN(4,2,"Block C2 Reserved")
-        IFTHROWN(9021)  
-            CLOSE(9021) //close turnouts A->D
-        ENDIF
         RESTORE_SPEED
     ELSE
         AT(CD_S9_C)
@@ -316,6 +314,15 @@ SEQUENCE(1303) //Progress to Block2
 FOLLOW(1304)
 
 SEQUENCE(1304)
+    IFTHROWN(9021)  
+        CLOSE(9021) //close turnouts A->D
+        GREEN(SIG_D4)
+    ENDIF
+    IFTHROWN(9024)
+        CLOSE(9024)
+        GREEN(SIG_D4)
+        FREE(D_B5)
+    ENDIF
     RED(SIG_C3)
     AT(CD_S6_C)
     SAVE_SPEED
