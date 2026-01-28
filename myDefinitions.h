@@ -34,10 +34,10 @@
    RED(SIG_F2) \
    RED(SIG_A3) \
    RED(SIG_B3) \
-   RED(SIG_C3) \
+   RED(SIG_C4) \
    RED(SIG_D3) \
-   RED(SIG_E3) \
-   RED(SIG_F3) \
+   RED(SIG_E4) \
+   RED(SIG_F4) \
    RED(SIG_A4) \
    RED(SIG_B4) \
    RED(SIG_D4) 
@@ -57,9 +57,9 @@
    signalLedTest(SIG_A3) \
    signalLedTest(SIG_B3) \
    signalLedTest(SIG_D3) \
-   signalLedTest(SIG_C3) \
-   signalLedTest(SIG_E3) \
-   signalLedTest(SIG_F3) \
+   signalLedTest(SIG_C4) \
+   signalLedTest(SIG_E4) \
+   signalLedTest(SIG_F4) \
    signalLedTest(SIG_A4) \
    signalLedTest(SIG_B4) \
    signalLedTest(SIG_D4) \

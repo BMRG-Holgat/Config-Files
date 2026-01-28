@@ -12,10 +12,10 @@ IFNOT(CD_S4_HA)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
-        GREEN(SIG_E3)
+        GREEN(SIG_E4)
     ENDIF
     CLOSE(9031)
-    GREEN(SIG_F3)
+    GREEN(SIG_F4)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HB) 
@@ -27,10 +27,10 @@ IFNOT(CD_S4_HB)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
-        GREEN(SIG_E3)
+        GREEN(SIG_E4)
     ENDIF
     CLOSE(9031)
-    GREEN(SIG_F3)
+    GREEN(SIG_F4)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HC) 
@@ -42,10 +42,10 @@ IFNOT(CD_S4_HC)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
-        GREEN(SIG_E3)
+        GREEN(SIG_E4)
     ENDIF
     CLOSE(9031)
-    GREEN(SIG_F3)
+    GREEN(SIG_F4)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HD) 
@@ -57,10 +57,10 @@ IFNOT(CD_S4_HD)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
-        GREEN(SIG_E3)
+        GREEN(SIG_E4)
     ENDIF
     CLOSE(9031)
-    GREEN(SIG_F3)
+    GREEN(SIG_F4)
     RETURN
 ENDIF
 DONE

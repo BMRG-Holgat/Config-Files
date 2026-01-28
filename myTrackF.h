@@ -15,31 +15,37 @@
   
 
 //Leave staging yard and proceed to bridge 
-AUTOMATION(600,"F: Roundy" )
-    ROUTE_HIDDEN(600)
+AUTOMATION(1600,"F: Roundy" )
+ //   ROUTE_HIDDEN(1600)
     RESERVE(F_B1) //exit storage to bridge
         IFTHROWN(9025)
             CLOSE(9025)
         ENDIF
     FWD(30)
-    AT(CD_S9_F)
+    AT(CD_F9_F)
 FOLLOW(602)
 
-AUTOMATION(601,"F: Holgate" )
-    ROUTE_HIDDEN(601)
-    SET(61)
-    FOLLOW(600)
+AUTOMATION(1601,"F: Holgate" )
+//    ROUTE_HIDDEN(1601)
+    LATCH(F_H)
+    FOLLOW(1600)
 DONE 
 
 //Proceed to holgate access
 SEQUENCE(602)
     IFRESERVE(F_B2)
+        IF(F_H) //If Holgate access route set
+ //           ROUTE_ACTIVE(601)
+            THROW(9031)
+            FOLLOW(701)
+        DONE
+    ENDIF   
         IFTHROWN(9022) //Close E-> F turnout
             CLOSE(9022)
         ENDIF
         FREE(F_B6) // Free last storage block 
     ELSE
-        WAIT_WHILE_RED(SIG_F3)
+        WAIT_WHILE_RED(SIG_F4)
         FOLLOW(602)
     ENDIF   
     AT(CD_S9_F1) // current detector board 9 before Holgate
@@ -47,18 +53,6 @@ FOLLOW(603)
 
 //Proceed to board 4 gantry
 SEQUENCE(603)
-IF(61) //If Holgate access route set
-    THROW(DGS_T3_A__HS_T6_A)
-    CALL(700)
-    ROUTE_ACTIVE(601)
-    RESET(61)
-    IFTHROWN(9031)
-        CLOSE(9031)
-        FREE(F_B1)
-        FREE(F_B2)
-    ENDIF
-    DONE
-ENDIF
     IFTHROWN(DGS_T3_A__HS_T6_A) //Close turnout Holgate access
         CLOSE(DGS_T3_A__HS_T6_A)
     ENDIF
@@ -105,3 +99,5 @@ SEQUENCE(607)
     STOP 
 DONE
 
+
+//F -> Holgate

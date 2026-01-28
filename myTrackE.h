@@ -230,7 +230,7 @@ SEQUENCE(504)
             CLOSE(9022)
         ENDIF
     ELSE
-        WAIT_WHILE_RED(SIG_E3)
+        WAIT_WHILE_RED(SIG_E4)
         FOLLOW(504)
     ENDIF
     AT(CD_S9_E1)
@@ -238,7 +238,7 @@ SEQUENCE(504)
 FOLLOW(505)
 
 SEQUENCE(505)
-    RED(SIG_E3)
+    RED(SIG_E4)
     AT(CD_S6_E)
     SAVE_SPEED
     IFNOT(E_STN)
@@ -287,7 +287,7 @@ SEQUENCE(509)
         SCREEN(2,4,"")
     ENDIF
     SCREEN(4,5,"Block E5 Reserved")
-    AMBER(SIG_E3)
+    AMBER(SIG_E4)
     FREE(E_B2)
     SCREEN(4,2,"")
     AT(CD_F4_E)
@@ -295,7 +295,7 @@ FOLLOW(510)
 
 SEQUENCE(510)
     AMBER(SIG_E2)
-    GREEN(SIG_E3)
+    GREEN(SIG_E4)
     FREE(E_B3)
     IFTHROWN(9003)
         CLOSE(9003)
@@ -343,7 +343,7 @@ FOLLOW(1503)
 SEQUENCE(1503)
     CALL(500)
     CALL(551)
-    IFRED(SIG_E3) 
+    IFRED(SIG_E4) 
         SPEED(20)
     ENDIF
     AT(CD_S9_E)
@@ -356,13 +356,13 @@ SEQUENCE(1504)
         IFTHROWN(9022)
             CLOSE(9022)
         ENDIF
-        IFAMBER(SIG_E3)
+        IFAMBER(SIG_E4)
             SPEED(35)
         ELSE
             SPEED(45)
         ENDIF
     ELSE
-        WAIT_WHILE_RED(SIG_E3)
+        WAIT_WHILE_RED(SIG_E4)
         FOLLOW(1504)
     ENDIF
     AT(CD_S9_E1)
@@ -370,7 +370,7 @@ SEQUENCE(1504)
 FOLLOW(1505)
 
 SEQUENCE(1505)
-    RED(SIG_E3)
+    RED(SIG_E4)
     AT(CD_S6_E)
     SAVE_SPEED
     IFNOT(E_STN)
@@ -431,7 +431,7 @@ SEQUENCE(1509)
         SCREEN(2,4,"")
     ENDIF
     SCREEN(4,5,"Block E5 Reserved")
-    AMBER(SIG_E3)
+    AMBER(SIG_E4)
     FREE(E_B2)
     SCREEN(4,2,"")
     AT(CD_F4_E)
@@ -439,7 +439,7 @@ FOLLOW(1510)
 
 SEQUENCE(1510)
     AMBER(SIG_E2)
-    GREEN(SIG_E3)
+    GREEN(SIG_E4)
     FREE(E_B3)
     IFTHROWN(9003)
         CLOSE(9003)
@@ -483,10 +483,10 @@ AUTOMATION(1512,"E: Move to C")
 FOLLOW(1303)
 
 //Automatic train choice
-AUTOMATION(1521,"C: Run Track 1") //Auto Track 1
+AUTOMATION(1521,"E: Run Track 1") //Auto Track 1
    CALL(550)
    IFSTASH(TE1)
-    IFRESERVE(C_B1)
+    IFRESERVE(E_B1)
         CLOSE(9145) //Close exit to allow roundy
         PICKUP_STASH(TE1)
         FON(0)
@@ -494,16 +494,16 @@ AUTOMATION(1521,"C: Run Track 1") //Auto Track 1
         FOLLOW(1521)
     ENDIF 
     FOLLOW(1502)
-   IF(autoRunning_C)
+   IF(autoRunning_E)
     RETURN
    ENDIF 
    ENDIF
 DONE
 
-AUTOMATION(1522,"C: Run Track 2") //Auto Track 2
+AUTOMATION(1522,"E: Run Track 2") //Auto Track 2
    CALL(550)
    IFSTASH(TE2)
-    IFRESERVE(C_B1)
+    IFRESERVE(E_B1)
         THROW(9146) 
         PICKUP_STASH(TE2)
       FON(0)
@@ -511,16 +511,16 @@ AUTOMATION(1522,"C: Run Track 2") //Auto Track 2
         FOLLOW(1522)
     ENDIF
     FOLLOW(1502)
-   IF(autoRunning_C)
+   IF(autoRunning_E)
     RETURN
    ENDIF 
    ENDIF
 DONE
 
-AUTOMATION(1523,"C: Run Track 3") //Auto Track 3
+AUTOMATION(1523,"E: Run Track 3") //Auto Track 3
    CALL(550)
    IFSTASH(TE3)
-    IFRESERVE(C_B1)
+    IFRESERVE(E_B1)
      THROW(9147) 
      PICKUP_STASH(TE3)
      FON(0)
@@ -528,16 +528,16 @@ AUTOMATION(1523,"C: Run Track 3") //Auto Track 3
      FOLLOW(1523)
     ENDIF
     FOLLOW(1502)
-   IF(autoRunning_C)
+   IF(autoRunning_E)
     RETURN
    ENDIF 
    ENDIF
 DONE
 
-AUTOMATION(1524,"C: Run Track 4") //Auto Track 4
+AUTOMATION(1524,"E: Run Track 4") //Auto Track 4
    CALL(550)
    IFSTASH(TE4)
-     IFRESERVE(C_B1)
+     IFRESERVE(E_B1)
       THROW(9148) 
       PICKUP_STASH(TE4)
       FON(0)
@@ -545,16 +545,16 @@ AUTOMATION(1524,"C: Run Track 4") //Auto Track 4
       FOLLOW(1524)
     ENDIF
     FOLLOW(1502)
-   IF(autoRunning_C)
+   IF(autoRunning_E)
     RETURN
    ENDIF 
    ENDIF
 DONE
 
-AUTOMATION(1525,"C: Run Track 5") //Auto Track 5
+AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
    CALL(550)
    IFSTASH(TE5)
-    IFRESERVE(C_B1)
+    IFRESERVE(E_B1)
      CLOSE(9148) 
      PICKUP_STASH(TE5)
      FON(0)
@@ -562,7 +562,7 @@ AUTOMATION(1525,"C: Run Track 5") //Auto Track 5
      FOLLOW(1525)
     ENDIF
     FOLLOW(1502)
-   IF(autoRunning_C)
+   IF(autoRunning_E)
     RETURN
    ENDIF 
    ENDIF
@@ -593,8 +593,46 @@ ELSE
     UNLATCH(autoRunning_C) //Full auto Track B
     DONE
 ENDIF
-DONE    
+DONE   
 
+
+AUTOMATION(1532,"E: Holgate")
+    CALL(550)
+    IFNOT(autoRunning_E)
+        IFRESERVE(E_B1)
+            PRINT("Waiting for Block E1")
+        ELSE
+            FOLLOW(1532)
+        ENDIF
+    ENDIF
+    SCREEN(4,1,"Block E1 Reserved")
+    IFTHROWN(9024)
+        CLOSE(9024)
+    ENDIF
+    SPEED(20)
+    AT(CD_F9_E)
+    SAVE_SPEED
+    FOLLOW(1533)
+
+SEQUENCE(1533)
+    IFRESERVE(F_B2)
+        THROW(9030)
+        SPEED(30) 
+    ELSE
+        AT(CD_S9_E)
+        STOP
+        FOLLOW(1533)
+    ENDIF
+    AT(CD_S9_F1)
+    RED(SIG_E4)
+FOLLOW(701)
+
+
+
+
+
+
+    FOLLOW(701)
 
 
 

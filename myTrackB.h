@@ -585,6 +585,7 @@ FOLLOW(1214)
 
 SEQUENCE(1214) //Stop at station
     CALL(251)
+    DELAY(1500)
     STOP
     CALL(200)
     FREE(B_B1)

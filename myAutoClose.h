@@ -169,6 +169,6 @@ ONBUTTON(CD_S5_F)
     IFTHROWN(DFM_T5_E__DGS_T4_A)
         CLOSE(9022)
         DELAY(500)
-        GREEN(SIG_E3)
+        GREEN(SIG_E4)
     ENDIF 
 DONE

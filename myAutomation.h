@@ -46,7 +46,8 @@ HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x24}) // Board 9
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
 HAL(PCA9685,184, 16, {I2CMux_0,SubBus_3,0x43}) // Board 4 turnout and signals
 HAL(PCA9685,264, 16, {I2CMux_0,SubBus_3,0x45}) // Board 4 (signals?)
-HAL(PCA9685,280, 16, {I2CMux_0,SubBus_4,0x47}) // Board 7 Signals
+HAL(PCA9685,280, 16, {I2CMux_0,SubBus_4,0x47}) // Board 7 
+//HAL(PCA9685,364, 16, {I2CMux_0,SubBus_4,0x46}) // Board 7 a
 HAL(PCA9685,248, 16, {I2CMux_0,SubBus_4,0x42}) // Board 9
 HAL(PCA9685,136, 16, {I2CMux_0,SubBus_4,0x41}) // Board 9
 //I2CDFPlayer::create(1st vPin,vPins,I2C address,UART{0|1},AM{0|1});
@@ -163,24 +164,24 @@ ONBUTTON(CD_S4_F)
  DONE 
  
 
-//Set SIG_E3 to Red E->Holgate
+//Set SIG_E4 to Red E->Holgate
 //ONBUTTON(CD_S9_F)
 //  IFTHROWN(9030)
-//    RED(SIG_E3)
+//    RED(SIG_E4)
 //  ENDIF
 //DONE
 
-//Set SIG_F3 to Red F->Holgate
+//Set SIG_F4 to Red F->Holgate
 ONBUTTON(CD_S9_F)
   IFTHROWN(9031)
-    RED(SIG_F3)
+    RED(SIG_F4)
   ENDIF
 DONE
 
-//Set SIG_E3 to Red E->F
+//Set SIG_E4 to Red E->F
 ONBUTTON(CD_S9_F)
   IFTHROWN(9022)
-    RED(SIG_E3)
+    RED(SIG_E4)
   ENDIF 
 DONE
 //Dispay signal status
@@ -224,8 +225,8 @@ STEALTH(
 
   ragSignal(SIG_C2,748);
   ragSignal(SIG_C2,728);
-  ragSignal(SIG_C3,757);
-  ragSignal(SIG_C3,737);
+  ragSignal(SIG_C4,757);
+  ragSignal(SIG_C4,737);
 
   ragSignal(SIG_D1,743);
   ragSignal(SIG_D1,723);
@@ -238,13 +239,13 @@ STEALTH(
     
   ragSignal(SIG_E2,746);
   ragSignal(SIG_E2,726);
-  ragSignal(SIG_E3,755);
-  ragSignal(SIG_E3,735);
+  ragSignal(SIG_E4,755);
+  ragSignal(SIG_E4,735);
 
   ragSignal(SIG_F2,745);
   ragSignal(SIG_F2,725);
-  ragSignal(SIG_F3,754);
-  ragSignal(SIG_F3,734);
+  ragSignal(SIG_F4,754);
+  ragSignal(SIG_F4,734);
 
   ragSignal(SIG_H1,744);
   ragSignal(SIG_H1,724);
@@ -293,6 +294,7 @@ DONE
 #include "myTrackD.h"
 #include "myTrackE.h"
 #include "myTrackF.h"
+#include "myHolgate.h"
 #include "mySidingRoutes.h"
 
 //Show Sensors

@@ -26,6 +26,7 @@ ALIAS(autoRunning_E, 207) //Full auto Track D
 ALIAS(autoSelected_F, 208) //Full auto Track D
 ALIAS(autoRunning_F, 209) //Full auto Track D
 ALIAS(E_STN,210) // Track E Station 
+ALIAS(F_H,181)
 
 //Route latches to prevent Signals changing
 ALIAS(AUTO_A,210)
@@ -79,10 +80,10 @@ ROUTE(994,"System: Set Default Positions")
     GREEN(SIG_F2) 
     GREEN(SIG_A3) 
     GREEN(SIG_B3) 
-    GREEN(SIG_C3) 
+    GREEN(SIG_C4) 
     GREEN(SIG_D3) 
-    GREEN(SIG_E3) 
-    GREEN(SIG_F3)
+    GREEN(SIG_E4) 
+    GREEN(SIG_F4)
     GREEN(SIG_A4)
     GREEN(SIG_B4)
     GREEN(SIG_D4)

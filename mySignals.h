@@ -16,9 +16,12 @@ SIGNALH(272, 273, 274) // Board 4 track C
 SIGNALH(276, 277, 278) // Board 4 track D
 SIGNALH(184, 185, 186) // Board 4 track E
 SIGNALH(192, 193, 194) // Board 4 track F
-SIGNALH(280, 281, 282) // Board 7 -- change when added
-SIGNALH(284, 285, 286) // Board 7
-SIGNALH(288, 289, 290) // Board 7 
+SIGNALH(280, 281, 282) // Board 7 track A-- change when added
+SIGNALH(284, 285, 286) // Board 7 track B
+SIGNALH(288, 289, 290) // Board 7 track D
+//SIGNALH(364, 365, 366) // Board 7 track C
+//SIGNALH(368, 369, 370) // Board 7 track E
+//SIGNALH(372, 373, 374) // Board 7 track C
 SIGNALH(248, 249, 250) // Board 9   C
 SIGNALH(252, 253, 254) // Board 9   E
 SIGNALH(256, 257, 258) // Board 9   F
