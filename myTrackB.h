@@ -397,7 +397,7 @@ AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
     ENDIF
    ENDIF
     SCREEN(4,1,"Block B1 Reserved")
-    SPEED(20)
+    SPEED(30)
     IFTHROWN(9001)
         CLOSE(9001) //close turnouts A - B
     ENDIF
@@ -405,12 +405,14 @@ AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
         CLOSE(9026) //close turnouts B - A
     ENDIF   
     AT(CD_S1_B) //At Block 1
+    SAVE_SPEED
 FOLLOW(1203)
 
 SEQUENCE(1203) //Progress to Block2    
     CALL(200)
     CALL(251)
     AT(CD_S1_B1)
+    SAVE_SPEED
 FOLLOW(1204)
 
 SEQUENCE(1204) //Progress to Block2
@@ -431,16 +433,18 @@ SEQUENCE(1204) //Progress to Block2
         IFTHROWN(9010)
             CLOSE(9010) //close turnouts D->B
         ENDIF
-        SPEED(35)
+        RESTORE_SPEED
+        SAVE_SPEED
     ELSE
         PRINT("Not Reserved")
         WAIT_WHILE_RED(SIG_B1)
         FOLLOW(1204)
     ENDIF
     IFAMBER(SIG_B1)
-        SPEED(20)
+        SPEED(35)
     ELSE 
-        SPEED(30)
+        RESTORE_SPEED
+        SAVE_SPEED
     ENDIF
     AT(CD_S2_B)
     RED(SIG_B1)
@@ -449,7 +453,6 @@ FOLLOW(1205)
 SEQUENCE(1205) //Progress to Block 3
     IFRESERVE(B_B3) //Reserve Next block
     SCREEN(4,3,"Block B3 Reserved")
-    SPEED(30)
     ELSE
        IF(CD_S3_B)
         WAIT_WHILE_RED(SIG_B2)
@@ -457,9 +460,10 @@ SEQUENCE(1205) //Progress to Block 3
       FOLLOW(1205)
     ENDIF
     IFAMBER(SIG_B2)
-        SPEED(25)
-    ELSE
         SPEED(35)
+    ELSE
+        RESTORE_SPEED
+        SAVE_SPEED
     ENDIF
     AT(CD_S4_B)
     FREE(B_B1)
@@ -483,6 +487,9 @@ FOLLOW(1207)
 
 SEQUENCE(1207) //Progress to Block4
     IFRESERVE(B_B4) //Reserve Next block
+    IFGREEN(SIG_B3)
+        RESTORE_SPEED
+    ENDIF
     SCREEN(4,4,"Block B4 Reserved")
         IFTHROWN(9020)
             CLOSE(9020) // prevent route A-B
@@ -494,9 +501,9 @@ SEQUENCE(1207) //Progress to Block4
         FOLLOW(1207)
     ENDIF
     IFAMBER(SIG_B3)
-        SPEED(25)
-    ELSE
         SPEED(35)
+    ELSE
+        RESTORE_SPEED
     ENDIF
     AT(CD_S8_B)  
 FOLLOW(1208)
@@ -517,9 +524,9 @@ SEQUENCE(1208) //Progress to Block5
         FOLLOW(1208)
     ENDIF
     IFAMBER(SIG_B4)
-        SPEED(25)
+        SPEED(35)
     ELSE
-        SPEED(30)
+        RESTORE_SPEED
     ENDIF
     AT(CD_F9_B)
 FOLLOW(1209)
@@ -545,7 +552,7 @@ SEQUENCE(1211) //Progress to Block6
     SCREEN(4,4,"")
     GREEN(SIG_B3)
     AMBER(SIG_B4)
-    SPEED(30)
+    SPEED(35)
     AT(CD_F6_B)
 FOLLOW(1212)
 
