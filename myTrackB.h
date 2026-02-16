@@ -635,86 +635,91 @@ FOLLOW(1205)
 AUTOMATION(1221,"B: Run Track 1") //Auto Track 1
    CALL(250)
    IFSTASH(TB1)
-    IFRESERVE(B_B1)
+//    IFRESERVE(B_B1)
       CLOSE(9115) //Close exit to allow roundy
       PICKUP_STASH(TB1)
       FON(0)
     ELSE
-      FOLLOW(1221)
+        PRINT("No Train")
+        RETURN
    ENDIF
    FOLLOW(1202)
    IF(autoRunning_B)
     RETURN
    ENDIF
-   ENDIF
+//   ENDIF
 DONE
 
 AUTOMATION(1222,"B: Run Track 2") //Auto Track 2
    CALL(250)
    IFSTASH(TB2)
-   IFRESERVE(B_B1)
+//   IFRESERVE(B_B1)
      THROW(9116) 
      PICKUP_STASH(TB2)
      FON(0)
     ELSE
-     FOLLOW(1222)
+        PRINT("No Train")
+        RETURN
    ENDIF
    FOLLOW(1202)
    IF(autoRunning_B)
     RETURN
    ENDIF
-   ENDIF
+ //  ENDIF
 DONE
 
 AUTOMATION(1223,"B: Run Track 3") //Auto Track 3
    CALL(250)
    IFSTASH(TB3)
-   IFRESERVE(B_B1)
+//   IFRESERVE(B_B1)
      THROW(9117) 
      PICKUP_STASH(TB3)
      FON(0)
     ELSE 
-     FOLLOW(1223)
+        PRINT("No Train")
+        RETURN
     ENDIF
     FOLLOW(1202)
     IF(autoRunning_B)
         RETURN
     ENDIF
-    ENDIF
+//    ENDIF
 DONE
 
 AUTOMATION(1224,"B: Run Track 4") //Auto Track 4
    CALL(250)
    IFSTASH(TB4)
-    IFRESERVE(B_B1)
+//    IFRESERVE(B_B1)
      CLOSE(9118) 
      PICKUP_STASH(TB4)
      FON(0)
     ELSE 
-     FOLLOW(1224) 
+        PRINT("No Train")
+        RETURN 
     ENDIF
      FOLLOW(1202)
      IF(autoRunning_B)
         RETURN
      ENDIF
-    ENDIF
+//    ENDIF
 DONE
 
 AUTOMATION(1225,"B: Run Track 5") //Auto Track 5
    CALL(250)
    IFSTASH(TB5) 
-   IFRESERVE(B_B1)
+//   IFRESERVE(B_B1)
      THROW(9118) 
      PICKUP_STASH(TB5)
      FON(0)
    ELSE
-    FOLLOW(1225)
+        PRINT("No Train")
+        RETURN
    ENDIF
     FOLLOW(1202)
     IF(autoRunning_B)
         RETURN
      ENDIF
-    ENDIF
+ //   ENDIF
 DONE
 /*
 //Suggested improvements for track selection
@@ -749,63 +754,30 @@ ROUTE(1200,"B: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_B)
         UNLATCH(autoSelected_B)
         ROUTE_HIDDEN(1231)
+        ROUTE_CAPTION(1300,"Enable")
     ELSE
         LATCH(autoSelected_B)
         ROUTE_ACTIVE(1231)
+        ROUTE_CAPTION(1300,"Disable")
     ENDIF
 DONE
 
-/*AUTOMATION(1230,"SELECT A TRACK")
-IF(autoSelected)
-    IFRANDOM(50)
-        IFRANDOM(50)
-            IFSTASH(TB1)
-                FOLLOW(1221) //Track 1
-            ELSE
-                FOLLOW(1230) //Try again
-            ENDIF
-        ELSE
-            FOLLOW(1222) //Track 2
-        ENDIF
-    ELSE
-        IFRANDOM(50)
-            FOLLOW(1223) //Track 3
-        ELSE
-            FOLLOW(1224) //Track 4   
-        ENDIF
-    ELSE
-        FOLLOW(1225) //Go round the loop
-    ENDIF
-ENDIF
-FOLLOW(1230) */
-/*
-AUTOMATION(1231,"B: Break time Run")
-IF(autoSelected_B)
-    LATCH(autoRunning_B) //Full auto Track B
-    ROUTE_DISABLED(1231)
-    ROUTE_CAPTION(1231,"RUNNING")
-    IFRANDOM(20) IFSTASH(TB1) CALL(1221) ENDIF ENDIF
-    IFRANDOM(25) IFSTASH(TB2) CALL(1222) ENDIF ENDIF
-    IFRANDOM(33) IFSTASH(TB3) CALL(1223) ENDIF ENDIF
-    IFRANDOM(50) IFSTASH(TB4) CALL(1224) ENDIF ENDIF
-    IFRANDOM(100) IFSTASH(TB5) CALL(1225) ENDIF ENDIF
-ELSE
-    ROUTE_ACTIVE(1231)
-    UNLATCH(autoRunning_B) //Stop Full auto Track B
-    DONE
-ENDIF
-FOLLOW(1231)*/
 
 AUTOMATION(1231,"B: Break time Run")
 IF(autoSelected_B)
     LATCH(autoRunning_B) //Full auto Track B
     ROUTE_DISABLED(1231)
     ROUTE_CAPTION(1231,"RUNNING")
+    SCREEN(2,4,"Yard B Automatic")
+    SCREEN(3,4,"Yard B Automatic")
+    SCREEN(4,4,"Yard B Automatic")
     RANDOM_CALL(1221,1222,1223,1224,1225)
-    PRINT("B: NO TRAIN")
     FOLLOW(1231)
 ELSE
     ROUTE_ACTIVE(1231)
+    SCREEN(2,4,"")
+    SCREEN(3,4,"")
+    SCREEN(4,4,"")
     UNLATCH(autoRunning_B) //Stop Full auto Track B
     DONE
 ENDIF

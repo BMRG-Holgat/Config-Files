@@ -17,10 +17,11 @@ ROUTE_INACTIVE(40)
 ROUTE_INACTIVE(41)
 DONE
 */
+/*
 ROUTE(1000,"Main Bells")
-   /* PLAYSOUND(10000,0,0,DF_RESET)
+    PLAYSOUND(10000,0,0,DF_RESET)
     DELAY(2000)
-    PLAYSOUND(10000,0,0,DF_FOLDER) // Set folder to 01 player 1 */
+    PLAYSOUND(10000,0,0,DF_FOLDER) // Set folder to 01 player 1 
     PLAYSOUND(10000,1,30,DF_PLAY)
 DONE
 
@@ -38,6 +39,8 @@ DONE
 ROUTE(1003,"More bells")
     SET(10003)
 DONE
+
+*/
 
 ROUTE(1004,"Lights: Street")
 IFNOT(Latch_light)

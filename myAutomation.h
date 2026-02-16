@@ -40,7 +40,7 @@ HAL(MCP23017,600,16,{I2CMux_0,SubBus_4,0x27}) // Board 6
 HAL(MCP23017,616,16,{I2CMux_0,SubBus_4,0x26}) //Board 6
 HAL(MCP23017,700,16,{I2CMux_0,SubBus_4,0x25}) //Board 7
 HAL(MCP23017,800,16,{I2CMux_0,SubBus_4,0x23}) // Board 8 
-HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x24}) // Board 9
+HAL(MCP23017,900,16,{I2CMux_0,SubBus_4,0x21}) // Board 9
 
 
 HAL(PCA9685,120, 16, {I2CMux_0,SubBus_3,0x40}) // Board 1
@@ -254,11 +254,13 @@ ENDIF
 DELAY(5000)
 FOLLOW(77)
 
+
 AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(989)
   ROUTE_HIDDEN(990)
   ROUTE_HIDDEN(991)
   ROUTE_HIDDEN(992)
+/*
   //hide all yard clear buttons on boot
   //YARD B
   ROUTE_HIDDEN(290)
@@ -285,6 +287,7 @@ AUTOSTART SEQUENCE(180)
   ROUTE_HIDDEN(593)
   ROUTE_HIDDEN(594)
   ROUTE_HIDDEN(1231)
+  */
 DONE
 
 //include track automations
