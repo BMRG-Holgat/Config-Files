@@ -17,11 +17,14 @@
 //Leave staging yard and proceed to bridge 
 AUTOMATION(1600,"F: Roundy" )
  //   ROUTE_HIDDEN(1600)
-    RESERVE(F_B1) //exit storage to bridge
+    IFRESERVE(F_B1) //exit storage to bridge
         IFTHROWN(9025)
             CLOSE(9025)
         ENDIF
     FWD(30)
+    ELSE
+        FOLLOW(1600)
+    ENDIF
     AT(CD_F9_F)
 FOLLOW(602)
 
