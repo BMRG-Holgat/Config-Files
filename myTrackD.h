@@ -25,7 +25,7 @@ SEQUENCE(451) //Enable routes
 RETURN
 DONE
 
-
+/*
 //Release Block when loco is removed from track
 ROUTE(490,"D: Track 1 Clear")
     ROUTE_HIDDEN(490)
@@ -79,9 +79,9 @@ ROUTE(499,"D: Track 5 Loaded") //Auto park the train in the yard
     ROUTE_ACTIVE(494)
     RESERVE(D_B11)
 DONE 
-
+*/
 //Manually activate the auto park sequence
-AUTOMATION(489,"D: Manual Auto Park") 
+AUTOMATION(489,"D: Auto Park") 
     ROUTE_HIDDEN(489)
     CALL(401)
     ROUTE_ACTIVE(489)
@@ -128,7 +128,9 @@ IFNOT(CD_F2_D1)
     SCREEN(2,1,"Block D7 Reserved")
     CLOSE(9130)
     FWD(20) 
-    AT(CD_F2_D1) ESTOP
+    AT(CD_F2_D1) 
+    DELAY(3000)
+    ESTOP
     FREE(D_B6)
     STASH(TD1)
     SCREEN(4,6,"")
@@ -139,7 +141,9 @@ IFNOT(CD_F2_D2)
     SCREEN(2,2,"Block D8 Reserved")
     THROW(9131)
     FWD(20) 
-    AT(CD_F2_D2) ESTOP
+    AT(CD_F2_D2) 
+    DELAY(2000)
+    ESTOP
     FREE(D_B6)
     STASH(TD2)
     SCREEN(4,6,"")
@@ -150,7 +154,9 @@ IFNOT(CD_F2_D3)
     SCREEN(2,3,"Block D9 Reserved")
     THROW(9132)
     FWD(20) 
-    AT(CD_F2_D3) ESTOP
+    AT(CD_F2_D3) 
+    DELAY(1000)
+    ESTOP
     FREE(D_B6)
     STASH(TD3)
     SCREEN(4,6,"")
@@ -161,7 +167,9 @@ IFNOT(CD_F2_D4)
     SCREEN(2,4,"Block D10 Reserved")
     THROW(9133)
     FWD(20) 
-    AT(CD_F2_D4) ESTOP
+    AT(CD_F2_D4) 
+    DELAY(750)
+    ESTOP
     FREE(D_B6)
     STASH(TD4)
     SCREEN(4,6,"")
@@ -172,7 +180,9 @@ IFNOT(CD_F2_D5)
     SCREEN(2,5,"Block D11 Reserved")
     CLOSE(9133)
     FWD(20) 
-    AT(CD_F2_D5) ESTOP
+    AT(CD_F2_D5) 
+    DELAY(750)
+    ESTOP
     FREE(D_B6)
     STASH(TD5)
     SCREEN(4,6,"")
@@ -335,6 +345,7 @@ FOLLOW(1403)
 SEQUENCE(1403)
     CALL(451)
     CALL(400)   
+    FON(1)
 FOLLOW(1404)
 
 SEQUENCE(1404)   
@@ -448,7 +459,8 @@ SEQUENCE(1409)
     AT(CD_F8_D)
 FOLLOW(1410)
 
-SEQUENCE(1410) //Progress to Block5   
+SEQUENCE(1410) //Progress to Block5  
+    FOFF(1)
     SCREEN(4,8,"")
     RESERVE(D_B6) //Reserve Next block
         SCREEN(4,6,"D6 RESERVED")  
@@ -561,86 +573,91 @@ FOLLOW(206)
 AUTOMATION(1421,"D: Run Track 1") //Auto Track 1
    CALL(450)
    IFSTASH(TD1)
-        IFRESERVE(D_B1)
+//        IFRESERVE(D_B1)
             CLOSE(9135) //Close exit to allow roundy
             PICKUP_STASH(TD1)
             FON(0)
         ELSE
-            FOLLOW(1421)
+            PRINT("No Train")
+            RETURN
         ENDIF
         FOLLOW(1402)
     IF(autoRunning_D)
         RETURN
     ENDIF
-    ENDIF
+ //   ENDIF
 DONE
 
 AUTOMATION(1422,"D: Run Track 2") //Auto Track 2
    CALL(450)
    IFSTASH(TD2)
-    IFRESERVE(D_B1)
+//   IFRESERVE(D_B1)
      THROW(9136) 
      PICKUP_STASH(TD2)
      FON(0)
     ELSE
-        FOLLOW(1422)
+        PRINT("No Train")
+        RETURN
     ENDIF
         FOLLOW(1402)
     IF(autoRunning_D)
         RETURN
     ENDIF
-    ENDIF
+ //   ENDIF
 DONE
 
 AUTOMATION(1423,"D: Run Track 3") //Auto Track 3
    CALL(450)
    IFSTASH(TD3)
-    IFRESERVE(D_B1)
+//    IFRESERVE(D_B1)
      THROW(9137) 
      PICKUP_STASH(TD3)
      FON(0)
     ELSE
-        FOLLOW(1423)
+        PRINT("No Train")
+        RETURN
     ENDIF
         FOLLOW(1402)
     IF(autoRunning_D)
         RETURN
     ENDIF
-    ENDIF
+ //   ENDIF
 DONE
 
 AUTOMATION(1424,"D: Run Track 4") //Auto Track 4
    CALL(450)
    IFSTASH(TD4)
-    IFRESERVE(D_B1)
+//    IFRESERVE(D_B1)
      THROW(9138) 
      PICKUP_STASH(TD4)
      FON(0)
     ELSE
-        FOLLOW(1424)
+        PRINT("No Train")
+        RETURN
     ENDIF
         FOLLOW(1402)
     IF(autoRunning_D)
         RETURN
     ENDIF
-    ENDIF
+ //   ENDIF
 DONE
 
 AUTOMATION(1425,"D: Run Track 5") //Auto Track 5
    CALL(450)
    IFSTASH(TD5)
-    IFRESERVE(D_B1)
+//    IFRESERVE(D_B1)
      CLOSE(9138) 
      PICKUP_STASH(TD5)
      FON(0)
     ELSE
-        FOLLOW(1425)
+        PRINT("No Train")
+        RETURN
     ENDIF
     FOLLOW(1402)
     IF(autoRunning_D)
         RETURN
     ENDIF
-    ENDIF
+//    ENDIF
 DONE
 
 ROUTE(1400,"D: Breaktime Select") //Select whether to run auto or not
@@ -660,11 +677,17 @@ IF(autoSelected_D)
     LATCH(autoRunning_D) //Full auto Track D
     ROUTE_DISABLED(1431)
     ROUTE_CAPTION(1431,"RUNNING")
+    SCREEN(2,6,"Yard D Automatic")
+    SCREEN(3,6,"Yard D Automatic")
+    SCREEN(4,6,"Yard D Automatic")
     RANDOM_FOLLOW(1421,1422,1423,1424,1425)
     PRINT("D: NO TRAIN")
     FOLLOW(1431)
 ELSE
     ROUTE_ACTIVE(1431)
+    SCREEN(2,6,"")
+    SCREEN(3,6,"")
+    SCREEN(4,6,"")
     UNLATCH(autoRunning_D) //Full auto Track D
     DONE
 ENDIF

@@ -36,7 +36,7 @@ ALIAS(AUTO_C,212)
 ALIAS(AUTO_D,213)
 ALIAS(AUTO_E,214)
 ALIAS(AUTO_F,215)
-
+/*
  ROUTE(997,"System: Rebuild test") //Testing system before starting
  IFNOT(Latch_build)
   IFNOT(Latch_default)
@@ -54,6 +54,7 @@ ALIAS(AUTO_F,215)
   ENDIF
 ENDIF
 DONE
+*/
 
 ROUTE(994,"System: Set Default Positions")
   IFNOT(Latch_default)
@@ -105,7 +106,7 @@ ROUTE(994,"System: Set Default Positions")
   ENDIF 
   
 DONE
-
+/*
 ROUTE(996,"System: Full reset") // Reset all turnouts to closed position
   IFNOT(Latch_default)
     PRINT("Reseting turnouts")
@@ -116,6 +117,7 @@ ROUTE(996,"System: Full reset") // Reset all turnouts to closed position
     PRINT("Cannot reset layout running")
   ENDIF 
 DONE
+*/
 /*
 ROUTE(995,"System: End Session") // end Session setting
   PRINT("Ending Session")

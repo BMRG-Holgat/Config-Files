@@ -85,7 +85,7 @@ ROUTE(399,"C: Load Track 5") //Auto park the train in the yard
 DONE 
 */
 //Manually activate the auto park sequence
-AUTOMATION(389,"C: Manual Auto Park")   
+AUTOMATION(389,"C: Auto Park")   
     ROUTE_HIDDEN(389)
     CALL(301)
     ROUTE_ACTIVE(389)

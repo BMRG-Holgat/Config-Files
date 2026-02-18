@@ -98,7 +98,7 @@ DONE
 */
 
 //Manually activate the auto park sequence
-AUTOMATION(589,"E: Manual Auto Park")   
+AUTOMATION(589,"E: Auto Park")   
     ROUTE_HIDDEN(589)
     CALL(501)
     ROUTE_ACTIVE(589)
@@ -452,7 +452,7 @@ SEQUENCE(1509)
     AMBER(SIG_E4)
     FREE(E_B2)
     SCREEN(4,2,"")
-    AT(CD_F4_E)
+    AT(CD_F3_E)
 FOLLOW(1510)
 
 SEQUENCE(1510)
@@ -466,7 +466,7 @@ SEQUENCE(1510)
         CLOSE(9003)
     ENDIF
     SCREEN(4,3,"")
-    DELAY(2000)
+    AT(CD_F4_E)
     GREEN(SIG_E2)
     FREE(E_B4)
     SCREEN(4,4,"")

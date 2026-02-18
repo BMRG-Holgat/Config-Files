@@ -34,7 +34,7 @@ SEQUENCE(251) //Enable routes
 RETURN
 DONE
 
-
+/*
 ROUTE(290,"B: Clear Track 1")
     ROUTE_HIDDEN(290)
     ROUTE_ACTIVE(295)
@@ -92,9 +92,9 @@ ROUTE(299,"B: Load Track 5") //Auto park the train in the yard
     ROUTE_ACTIVE(294)
     RESERVE(B_B11)
 DONE 
-
+*/
 //Manually activate the auto park sequence
-AUTOMATION(289,"B: Manual Auto Park")  
+AUTOMATION(289,"B: Auto Park")  
     ROUTE_HIDDEN(289) 
     CALL(201)
     ROUTE_ACTIVE(289)   
@@ -405,6 +405,7 @@ AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
         CLOSE(9026) //close turnouts B - A
     ENDIF   
     AT(CD_S1_B) //At Block 1
+    FON(1)
     SAVE_SPEED
 FOLLOW(1203)
 
@@ -433,7 +434,7 @@ SEQUENCE(1204) //Progress to Block2
         IFTHROWN(9010)
             CLOSE(9010) //close turnouts D->B
         ENDIF
-        RESTORE_SPEED
+        SPEED(40)
         SAVE_SPEED
     ELSE
         PRINT("Not Reserved")
@@ -540,6 +541,7 @@ SEQUENCE(1209) //Progress to Block6
 FOLLOW(1210)
 
 SEQUENCE(1210) //Progress to Block6
+    FOFF(1)
     GREEN(SIG_B2)
     AMBER(SIG_B3)
     AT(CD_F7_B)

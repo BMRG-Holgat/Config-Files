@@ -13,22 +13,22 @@
 * All basic sequences created
 *
 */
-/*
-//initsl starting positions
+
+//inital starting positions
 AUTOMATION(140,"A: Start Pos 2")
 ROUTE_HIDDEN(140)
 RESERVE(A_B7)
 SCREEN(3,7,"A_B7 Reserved")
 FWD(15)
-FOLLOW(51)
+FOLLOW(1109)
 
 AUTOMATION(141,"A: Start Pos 3")
 ROUTE_HIDDEN(141)
 RESERVE(A_B6)
 SCREEN(3,6,"A_B6 Reserved")
 FWD(15)
-FOLLOW(50)
-*/
+FOLLOW(1107)
+
 
 //Track A from yard
 
