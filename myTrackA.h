@@ -36,7 +36,7 @@ AUTOMATION(100,"A: Run Track A")
     IFSTASH(TA)
             PICKUP_STASH(TA)
             FON(0)
-            FON(1)
+//            FON(1)
         ELSE    
             FOLLOW(100)
         ENDIF

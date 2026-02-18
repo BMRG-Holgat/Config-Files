@@ -234,8 +234,7 @@ SEQUENCE(204) //Progress to Block2
             CLOSE(9010) //close turnouts D->B
         ENDIF
     ELSE
-        RED(SIG_B1) //Set signal to red if block 2 not free
-        STOP
+        WAIT_WHILE_RED(SIG_B1) //Set signal to red if block 2 not free
         FOLLOW(204)
     ENDIF
     AT(CD_S2_B)
@@ -616,8 +615,7 @@ SEQUENCE(1215) //Release turnout block and set turnouts for return to A
         ENDIF
         GREEN(SIG_B1)
     ELSE
-        RED(SIG_A1) //Set signal to red if block 2 not free
-        STOP
+        WAIT_WHILE_RED(SIG_A1) //Set signal to red if block 2 not free
         FOLLOW(1215)
     ENDIF
     AT(CD_S2_A)
@@ -723,34 +721,6 @@ AUTOMATION(1225,"B: Run Track 5") //Auto Track 5
      ENDIF
  //   ENDIF
 DONE
-/*
-//Suggested improvements for track selection
-//select different route depending on reserve status of blocks
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-DELAY(.....) 
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-/// had two goes .. no banana
-DONE
-SEQUENCE1213)
-.... carry on with block reserved
-
-
-HAL(Bitmap,777,1)
-
-RESET(777)
-BITMAP_OR(777,5)  // start counter at 5
-
-SEQUENCE(xxxx)
-  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
-  DELAY(1000)
-  BITMAP_DEC(777)
-  IF(777) FOLLOW(xxxx)
-  // no banana
-  DONE
-SEQUENCE(zzzz)
-  // Have banana 
-*/
-
 
 ROUTE(1200,"B: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_B)
@@ -786,3 +756,30 @@ ENDIF
 DONE
 
 
+/*
+//Suggested improvements for track selection
+//select different route depending on reserve status of blocks
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+DELAY(.....) 
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+/// had two goes .. no banana
+DONE
+SEQUENCE1213)
+.... carry on with block reserved
+
+
+HAL(Bitmap,777,1)
+
+RESET(777)
+BITMAP_OR(777,5)  // start counter at 5
+
+SEQUENCE(xxxx)
+  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
+  DELAY(1000)
+  BITMAP_DEC(777)
+  IF(777) FOLLOW(xxxx)
+  // no banana
+  DONE
+SEQUENCE(zzzz)
+  // Have banana 
+*/
