@@ -21,6 +21,9 @@
 * stopres(blockid)
 */
 
+//Sound Locos
+#define SoundLoco 89,90,6643,5359
+
 //Startup led sequence
 #define ledReset \
    RED(SIG_A1) \

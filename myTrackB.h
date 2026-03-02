@@ -5,8 +5,15 @@
 * V 0.1.0
 *           290 - 294 Free yard tracks
 *           295 - 299 Reserve yard tracks
-*           202 Around We Go
 *           289 Auto Park
+*           1200 - Breaktime Select
+*           1231 - Break time
+*           1202 - Around we go
+*           1221 - Track 1
+*           1222 - Track 2
+*           1223 - Track 3
+*           1224 - Track 4
+*           1225 - Track 5
 *
 */
 //Release Block when loco is removed from track
@@ -140,8 +147,10 @@ IFNOT(CD_F2_B1)
     RESERVE(B_B7)
     SCREEN(2,1,"Block B7 Reserved")
     CLOSE(9110)
-    FWD(20) 
-    AT(CD_F2_B1) ESTOP
+    FWD(30) 
+    AT(CD_F2_B1)
+    DELAY(2000)
+    ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
     STASH(TB1)
@@ -151,8 +160,10 @@ IFNOT(CD_F2_B2)
     RESERVE(B_B8)
     SCREEN(2,2,"Block B8 Reserved")
     THROW(9111)
-    FWD(20) 
-    AT(CD_F2_B2) ESTOP
+    FWD(30) 
+    AT(CD_F2_B2) 
+    DELAY(1500)
+    ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
     STASH(TB2)
@@ -162,8 +173,10 @@ IFNOT(CD_F2_B3)
     RESERVE(B_B9)
     SCREEN(2,3,"Block B9 Reserved")
     THROW(9112)
-    FWD(20) 
-    AT(CD_F2_B3) ESTOP
+    FWD(30) 
+    AT(CD_F2_B3) 
+    DELAY(500)
+    ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
     STASH(TB3)
@@ -173,8 +186,10 @@ IFNOT(CD_F3_B4)
     RESERVE(B_B10)
     SCREEN(2,4,"Block B10 Reserved")
     THROW(9113)
-    FWD(20) 
-    AT(CD_F3_B4) ESTOP
+    FWD(30) 
+    AT(CD_F3_B4) 
+    DELAY(500)
+    ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
     STASH(TB4)
@@ -184,8 +199,10 @@ IFNOT(CD_F3_B5)
     RESERVE(B_B11)
     SCREEN(2,5,"Block B11 Reserved")
     CLOSE(9113)
-    FWD(20) 
-    AT(CD_F3_B5) ESTOP
+    FWD(30) 
+    AT(CD_F3_B5) 
+    DELAY(500)
+    ESTOP
     FREE(B_B6)
     SCREEN(4,6,"")
     STASH(TB5)
@@ -234,7 +251,8 @@ SEQUENCE(204) //Progress to Block2
             CLOSE(9010) //close turnouts D->B
         ENDIF
     ELSE
-        WAIT_WHILE_RED(SIG_B1) //Set signal to red if block 2 not free
+        RED(SIG_B1) //Set signal to red if block 2 not free
+        STOP
         FOLLOW(204)
     ENDIF
     AT(CD_S2_B)
@@ -404,7 +422,9 @@ AUTOMATION(1202, "B: Around We Go Auto") //Leave yard and proceed to block 1
         CLOSE(9026) //close turnouts B - A
     ENDIF   
     AT(CD_S1_B) //At Block 1
-    FON(1)
+    IFLOCO(SoundLoco)
+        FON(1)
+    ENDIF
     SAVE_SPEED
 FOLLOW(1203)
 
@@ -437,6 +457,7 @@ SEQUENCE(1204) //Progress to Block2
         SAVE_SPEED
     ELSE
         PRINT("Not Reserved")
+        DELAY(4000)
         WAIT_WHILE_RED(SIG_B1)
         FOLLOW(1204)
     ENDIF
@@ -582,25 +603,37 @@ AUTOMATION(1213,"B: Station Stop Auto") //Station Stop
         IFCLOSED(UGS_T2_H) //Close Header
             THROW(UGS_T2_H) 
         ENDIF  
-        SPEED(20)
+        FWD(20)
     ELSE
         FOLLOW(1213)
     ENDIF
-    RED(SIG_STN_1)
-    RED(SIG_STN_2)
     AT(CD_S1_AA)
+    SAVE_SPEED
 FOLLOW(1214)
 
 SEQUENCE(1214) //Stop at station
     CALL(251)
-    DELAY(1500)
+    IFLOCO(89,90)
+        FON(1)
+    ENDIF
+    DELAY(3000)
     STOP
     CALL(200)
     FREE(B_B1)
+    IFLOCO(89,90)
+        FON(8)
+    ENDIF
     DELAYRANDOM(10000,15000)
-    GREEN(SIG_STN_1)
-    GREEN(SIG_STN_2)
-    SPEED(30)
+    IFLOCO(89,90)
+        DELAY(500)
+        FON(4)
+        DELAY(19000)
+        FOFF(4)
+        DELAY(500)
+        FON(10)
+        DELAY(500)
+        FOFF(10)
+    RESTORE_SPEED
 FOLLOW(1215)
 
 SEQUENCE(1215) //Release turnout block and set turnouts for return to A
@@ -615,20 +648,22 @@ SEQUENCE(1215) //Release turnout block and set turnouts for return to A
         ENDIF
         GREEN(SIG_B1)
     ELSE
-        WAIT_WHILE_RED(SIG_A1) //Set signal to red if block 2 not free
+        RED(SIG_A1) //Set signal to red if block 2 not free
+        WAIT_WHILE_RED(SIG_A1)
         FOLLOW(1215)
     ENDIF
     AT(CD_S2_A)
 FOLLOW(1216)
 
 SEQUENCE(1216)
-    SPEED(40)
+    SPEED(45)
     RED(SIG_A1)
     FREE(A_B1)
     FREE(A_B2)
     IFTHROWN(9026)
         CLOSE(9026) //close turnouts B->A 
     ENDIF
+    SAVE_SPEED
 FOLLOW(1205)
 
 
@@ -721,6 +756,34 @@ AUTOMATION(1225,"B: Run Track 5") //Auto Track 5
      ENDIF
  //   ENDIF
 DONE
+/*
+//Suggested improvements for track selection
+//select different route depending on reserve status of blocks
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+DELAY(.....) 
+IFRESERVEB_B2) FOLLOW(1213) ENDIF
+/// had two goes .. no banana
+DONE
+SEQUENCE1213)
+.... carry on with block reserved
+
+
+HAL(Bitmap,777,1)
+
+RESET(777)
+BITMAP_OR(777,5)  // start counter at 5
+
+SEQUENCE(xxxx)
+  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
+  DELAY(1000)
+  BITMAP_DEC(777)
+  IF(777) FOLLOW(xxxx)
+  // no banana
+  DONE
+SEQUENCE(zzzz)
+  // Have banana 
+*/
+
 
 ROUTE(1200,"B: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_B)
@@ -756,30 +819,3 @@ ENDIF
 DONE
 
 
-/*
-//Suggested improvements for track selection
-//select different route depending on reserve status of blocks
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-DELAY(.....) 
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-/// had two goes .. no banana
-DONE
-SEQUENCE1213)
-.... carry on with block reserved
-
-
-HAL(Bitmap,777,1)
-
-RESET(777)
-BITMAP_OR(777,5)  // start counter at 5
-
-SEQUENCE(xxxx)
-  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
-  DELAY(1000)
-  BITMAP_DEC(777)
-  IF(777) FOLLOW(xxxx)
-  // no banana
-  DONE
-SEQUENCE(zzzz)
-  // Have banana 
-*/
