@@ -86,7 +86,7 @@ AUTOMATION(489,"D: Auto Park")
     CALL(401)
     ROUTE_ACTIVE(489)
 DONE
-*/
+
 //parkRelease Release the block the train has come from dependant on turnout position
 SEQUENCE(400) //Release Parked Block dependant on turnout thrown
     IFCLOSED(9135) //Track FD1

@@ -15,6 +15,7 @@
 
 SEQUENCE(550) //Disable routes
     ROUTE_DISABLED(1502)
+    ROUTE_DISABLED(1503)
     ROUTE_DISABLED(1521)
     ROUTE_DISABLED(1522)
     ROUTE_DISABLED(1523)
@@ -25,6 +26,7 @@ DONE
 
 SEQUENCE(551) //Enable routes
     ROUTE_ACTIVE(1502)
+    ROUTE_ACTIVE(1503)
     ROUTE_ACTIVE(1521)
     ROUTE_ACTIVE(1522)
     ROUTE_ACTIVE(1523)
@@ -33,7 +35,7 @@ SEQUENCE(551) //Enable routes
     RETURN
 DONE
 
-AUTOMATION(1501,"E: Park train")
+AUTOMATION(1501,"E: Park Train")
     ROUTE_HIDDEN(1501)
     CALL(552)
     ROUTE_ACTIVE(1501)
@@ -44,7 +46,6 @@ AUTOMATION(1502,"E: Around we go")
     FON(0)
     PRINT("Calling 500")
     CALL(500) //Leave yard
-    FON(1)
     PRINT("Calling 501")
     CALL(501) // Approach bridge
     PRINT("Calling 502")
@@ -57,6 +58,80 @@ AUTOMATION(1502,"E: Around we go")
     CALL(505) //Approach gantry 2
     PRINT("Calling 506")
     CALL(506) //Bypass station
+    FOFF(1)
+    PRINT("Calling 507")
+    CALL(507)
+    PRINT("Calling 508")
+    CALL(508)
+    PRINT("Calling 509")
+    CALL(509)
+    PRINT("Calling 552 Autopark")
+    CALL(552)
+    FOFF(0)
+    PRINT("Ended")
+    IF(autoRunning_E)
+        RETURN 
+    ENDIF
+DONE
+
+AUTOMATION(1503,"E: To the Station")
+    CALL(550)
+    FON(0)
+    PRINT("Calling 500")
+    CALL(500) //Leave yard
+    PRINT("Calling 501")
+    CALL(501) // Approach bridge
+    PRINT("Calling 502")
+    CALL(502) //Reserve Block 2 and wait for signal
+    PRINT("Calling 510")
+    CALL(510) //Reserved block 2
+    PRINT("Calling 504")
+    CALL(504) //Check signal
+    PRINT("Calling 505")
+    CALL(505) //Approach gantry 2
+    PRINT("Calling 511")
+    CALL(511) //Station route 
+    PRINT("Calling 512")
+    CALL(512) //Station Stop   
+    FOFF(1)
+    PRINT("Calling 507")
+    CALL(507)
+    PRINT("Calling 508")
+    CALL(508)
+    PRINT("Calling 509")
+    CALL(509)
+    PRINT("Calling 552 Autopark")
+    CALL(552)
+    FOFF(0)
+    PRINT("Ended")
+    IF(autoRunning_E)
+        RETURN 
+    ENDIF
+DONE
+
+SEQUENCE(1504)  //Around we go station  switching
+    CALL(550)
+    FON(0)
+    PRINT("Calling 500")
+    CALL(500) //Leave yard
+    PRINT("Calling 501")
+    CALL(501) // Approach bridge
+    PRINT("Calling 502")
+    CALL(502) //Reserve Block 2 and wait for signal
+    PRINT("Calling 503")
+    CALL(503) //Reserved block 2
+    PRINT("Calling 504")
+    CALL(504) //Check signal
+    PRINT("Calling 505")
+    CALL(505) //Approach gantry 2
+    PRINT("Calling 506")
+  IF(CHOOSE_STN)
+    UNLATCH(CHOOSE_STN)
+    CALL(506) //Bypass station
+  ELSE
+    LATCH(CHOOSE_STN)
+    CALL(511)
+  ENDIF
     FOFF(1)
     PRINT("Calling 507")
     CALL(507)
@@ -89,6 +164,9 @@ DONE
 SEQUENCE(501)
     CALL(553)
     CALL(551)
+    IFLOCO(SoundLoco) 
+        FON(1)
+    ENDIF
     IFRED(SIG_E4)
         SPEED(20)
     ENDIF
@@ -208,75 +286,96 @@ SEQUENCE(509)
     RETURN 
 DONE
 
-    
-
+SEQUENCE(510) //Station route
+    RED(SIG_E4)
+    AT(CD_S6_E)
+    RESTORE_SPEED
+    IFRED(SIG_E2)
+        SPEED(30)
+        PRINT("speed 30")
+    ENDIF
+    AT(CD_S5_E)
+    SAVE_SPEED
+    RETURN 
+DONE
         
+SEQUENCE(511)
+    RED(SIG_E2)
+    IFRESERVE(E_B4)
+    RESTORE_SPEED
+    ELSE 
+        FOLLOW(511)
+    ENDIF
+    AT(CD_F2_E)
+    RETURN 
+DONE
+
+SEQUENCE(512)
+    AT(CD_S1_E)
+    SAVE_SPEED
+    FREE(E_B2)
+    STOP
+    DELAYRANDOM(10000,20000)
+    RETURN
+DONE
+
+
 
 
     //Auto Park Sequence
 SEQUENCE(552)
 IFNOT(CD_F8_E1) 
     RESERVE(E_B6)
-    SCREEN(2,1,"Block E6 Reserved")
     CLOSE(9141)
     FWD(30) 
     AT(CD_F8_E1) 
     DELAY(1500)
     ESTOP
     FREE(E_B5)
-    SCREEN(4,5,"")
     STASH(TE1)
     RETURN
 ENDIF 
 IFNOT(CD_F8_E2) 
     RESERVE(E_B7)
-    SCREEN(2,2,"Block E7 Reserved")
     THROW(9141)
     FWD(30) 
     AT(CD_F8_E2)
     DELAY(1000)
     ESTOP
     FREE(E_B5)
-    SCREEN(4,5,"")
     STASH(TE2)
     RETURN
 ENDIF 
 IFNOT(CD_F8_E3) 
     RESERVE(E_B8)
-    SCREEN(2,3,"Block E8 Reserved")
     THROW(9142)
     FWD(30) 
     AT(CD_F8_E3) 
     DELAY(500)
     ESTOP
     FREE(E_B5)
-    SCREEN(4,5,"")
     STASH(TE3)
     RETURN
 ENDIF 
 IFNOT(CD_F7_E4) 
     RESERVE(E_B9)
-    SCREEN(2,4,"Block E9 Reserved")
     THROW(9143)
     FWD(30) 
     AT(CD_F7_E4) 
     DELAY(250)
     ESTOP
     FREE(E_B5)
-    SCREEN(4,5,"")
     STASH(TE4)
     RETURN
 ENDIF 
 IFNOT(CD_F7_E5) 
     RESERVE(E_B10)
-    SCREEN(2,5,"Block E10 Reserved")
     CLOSE(9144)
     FWD(30) 
     AT(CD_F7_E5)
     DELAY(250)
     ESTOP
     FREE(E_B5)
-    SCREEN(4,5,"")
     STASH(TE5)
     RETURN
 ENDIF 
@@ -327,7 +426,7 @@ AUTOMATION(1521,"E: Run Track 1") //Auto Track 1
         PRINT("No Train")
         RETURN
     ENDIF 
-    FOLLOW(1502)
+    FOLLOW(1504)
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -343,7 +442,7 @@ AUTOMATION(1522,"E: Run Track 2") //Auto Track 2
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1502)
+    FOLLOW(1504)
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -359,7 +458,7 @@ AUTOMATION(1523,"E: Run Track 3") //Auto Track 3
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1502)
+    FOLLOW(1504)
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -375,7 +474,7 @@ AUTOMATION(1524,"E: Run Track 4") //Auto Track 4
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1502)
+    FOLLOW(1504)
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -391,7 +490,7 @@ AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1502)
+    FOLLOW(1504)
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -412,17 +511,18 @@ DONE
 //Automatic Running
 AUTOMATION(1531,"E: Break time")
 PRINT("At start of auto selection for E")
-IF(autoSelected_E)
-    LATCH(autoRunning_E) //Full auto Track E
-    ROUTE_DISABLED(1531)
-    ROUTE_CAPTION(1531,"RUNNING")
     SCREEN(2,7,"Yard E Automatic")
     SCREEN(3,7,"Yard E Automatic")
     SCREEN(4,7,"Yard E Automatic")
+IF(autoSelected_E)
+    LATCH(autoRunning_E) //Full auto Track E
+    ROUTE_DISABLED(1531)
+    ROUTE_CAPTION(1531,"RUNNING") 
     RANDOM_CALL(1521,1522,1523,1524,1525)
     FOLLOW(1531)
 ELSE
     ROUTE_ACTIVE(1531)
+    ROUTE_CAPTION(1531,"STOPPED")
     SCREEN(2,7,"")
     SCREEN(3,7,"")
     SCREEN(4,7,"")
