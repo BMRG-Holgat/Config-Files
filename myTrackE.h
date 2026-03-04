@@ -58,13 +58,15 @@ AUTOMATION(1502,"E: Around we go")
     CALL(505) //Approach gantry 2
     PRINT("Calling 506")
     CALL(506) //Bypass station
-    FOFF(1)
     PRINT("Calling 507")
     CALL(507)
+    FOFF(1)
     PRINT("Calling 508")
     CALL(508)
     PRINT("Calling 509")
     CALL(509)
+    PRINT("Calling 510")
+    CALL(510)
     PRINT("Calling 552 Autopark")
     CALL(552)
     FOFF(0)
@@ -83,23 +85,27 @@ AUTOMATION(1503,"E: To the Station")
     CALL(501) // Approach bridge
     PRINT("Calling 502")
     CALL(502) //Reserve Block 2 and wait for signal
-    PRINT("Calling 510")
-    CALL(510) //Reserved block 2
-    PRINT("Calling 504")
-    CALL(504) //Check signal
+    PRINT("Calling 503")
+    CALL(503)
+    PRINT("Calling 511")
+    CALL(511) //Reserved block 2
     PRINT("Calling 505")
     CALL(505) //Approach gantry 2
-    PRINT("Calling 511")
-    CALL(511) //Station route 
+    PRINT("Calling 506")
+    CALL(506)
     PRINT("Calling 512")
-    CALL(512) //Station Stop   
+    CALL(512) //Station route 
+    PRINT("Calling 513")
+    CALL(513) //Station Stop   
+    PRINT("Calling 514")
+    CALL(514)
     FOFF(1)
-    PRINT("Calling 507")
-    CALL(507)
     PRINT("Calling 508")
     CALL(508)
     PRINT("Calling 509")
     CALL(509)
+    PRINT("Calling 510")
+    CALL(510)
     PRINT("Calling 552 Autopark")
     CALL(552)
     FOFF(0)
@@ -120,21 +126,27 @@ SEQUENCE(1504)  //Around we go station  switching
     CALL(502) //Reserve Block 2 and wait for signal
     PRINT("Calling 503")
     CALL(503) //Reserved block 2
-    PRINT("Calling 504")
-    CALL(504) //Check signal
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        PRINT("Calling 504")
+        CALL(504) //Check signal
+    ELSE
+        LATCH(CHOOSE_STN)
+        PRINT("Calling 510")
+        CALL(510)
+    ENDIF
     PRINT("Calling 505")
-    CALL(505) //Approach gantry 2
-    PRINT("Calling 506")
+    CALL(505) //Approach gantry 2  
   IF(CHOOSE_STN)
-    UNLATCH(CHOOSE_STN)
+    PRINT("Calling 506")
     CALL(506) //Bypass station
+    PRINT("Calling 507")
+    CALL(507)
   ELSE
-    LATCH(CHOOSE_STN)
+    PRINT("Calling 511")
     CALL(511)
   ENDIF
     FOFF(1)
-    PRINT("Calling 507")
-    CALL(507)
     PRINT("Calling 508")
     CALL(508)
     PRINT("Calling 509")
@@ -181,7 +193,7 @@ SEQUENCE(502)
             CLOSE(9022)
         ENDIF
         IFAMBER(SIG_E4)
-            SPEED(35)
+            SPEED(38)
         ENDIF
         IFGREEN(SIG_E4)
             SPEED(45)
@@ -197,28 +209,30 @@ DONE
 
 SEQUENCE(503) //Bypass station
     RED(SIG_E4)
-    AT(CD_S6_E)
-    RESTORE_SPEED
-    THROW(9003)
-    DELAY(2000)
-    IFRED(SIG_E2)
-        SPEED(30)
-        PRINT("speed 30")
-    ENDIF
-    AT(CD_S5_E)
-    SAVE_SPEED
+    AT(CD_S6_E)    
     RETURN 
 DONE
 
 SEQUENCE(504)
+    THROW(9003)
+    RESTORE_SPEED
     IFRED(SIG_E2)
-        SPEED(20)
+        SPEED(35)
+        PRINT("speed 30")
+    ENDIF
+    AT(CD_S5_E)
+    RETURN
+DONE
+
+SEQUENCE(505)
+    IFRED(SIG_E2)
+        SPEED(30)
         PRINT("speed 20")
     ENDIF
     RETURN 
 DONE
 
-SEQUENCE(505)
+SEQUENCE(506)
     IFRESERVE(E_B3)
         FREE(E_B1)
         IFTHROWN(9011)
@@ -229,12 +243,13 @@ SEQUENCE(505)
         ENDIF
         RESTORE_SPEED
     ELSE 
+    PRINT("B3 Reserved, should be waiting")
         AT(CD_S4_E)
         WAIT_WHILE_RED(SIG_E2)
-        FOLLOW(505)
+        FOLLOW(506)
     ENDIF
     IFAMBER(SIG_E2)
-        SPEED(30)
+        SPEED(38)
         PRINT("speed 30")
     ENDIF
     AT(CD_S3_E)
@@ -242,7 +257,7 @@ SEQUENCE(505)
     RETURN 
 DONE
 
-SEQUENCE(506)
+SEQUENCE(507)
     RED(SIG_E2)
     IFRESERVE(E_S_B4)
     RESTORE_SPEED
@@ -253,7 +268,7 @@ SEQUENCE(506)
     RETURN 
 DONE
 
-SEQUENCE(507)
+SEQUENCE(508)
     IFRESERVE(E_B5)
         AMBER(SIG_E4)
         FREE(E_B2)
@@ -266,7 +281,7 @@ SEQUENCE(507)
     RETURN 
 DONE
 
-SEQUENCE(508)
+SEQUENCE(509)
     AMBER(SIG_E2)
     IFRED(SIG_E4)
     ELSE
@@ -276,46 +291,80 @@ SEQUENCE(508)
     IFTHROWN(9003)
         FREE(E_S_B4)
         CLOSE(9003)
+    ELSE 
+        FREE(E_B4)
     ENDIF 
     AT(CD_F4_E)
     RETURN 
 DONE
 
-SEQUENCE(509)
+SEQUENCE(510)
     GREEN(SIG_E2)
     RETURN 
 DONE
 
-SEQUENCE(510) //Station route
+SEQUENCE(511) //Station route
     RED(SIG_E4)
-    AT(CD_S6_E)
     RESTORE_SPEED
     IFRED(SIG_E2)
         SPEED(30)
         PRINT("speed 30")
     ENDIF
-    AT(CD_S5_E)
+    AT(CD_S4_E)
     SAVE_SPEED
     RETURN 
 DONE
         
-SEQUENCE(511)
+SEQUENCE(512)
     RED(SIG_E2)
     IFRESERVE(E_B4)
     RESTORE_SPEED
+    SPEED(28)
     ELSE 
-        FOLLOW(511)
+        FOLLOW(512)
     ENDIF
-    AT(CD_F2_E)
+    AT(CD_S1_E)
     RETURN 
 DONE
 
-SEQUENCE(512)
-    AT(CD_S1_E)
+SEQUENCE(513)
     SAVE_SPEED
     FREE(E_B2)
+    AMBER(SIG_E4)
+    FREE(E_B3)
+    GREEN(SIG_E2)
+    DELAY(4500)
     STOP
+    FREE(E_B3)
     DELAYRANDOM(10000,20000)
+    IFLOCO(SoundLoco)
+        FON(6)
+        DELAY(750)
+        FOFF(6)
+        FON(4)
+        DELAY(750)
+        FOFF(4)
+        DELAY(13000)
+        FON(10)
+        DELAY(750)
+        FOFF(10)
+    ENDIF
+    RETURN
+DONE 
+
+SEQUENCE(514)
+    IFRESERVE(E_B3)
+    PRINT("I got B3")
+    RED(SIG_E2)
+        IFTHROWN(9003)
+            CLOSE(9003)
+        ENDIF
+        RESTORE_SPEED
+    ELSE
+        STOP
+        FOLLOW(513)
+    ENDIF
+    AT(CD_F2_E)
     RETURN
 DONE
 
@@ -426,7 +475,13 @@ AUTOMATION(1521,"E: Run Track 1") //Auto Track 1
         PRINT("No Train")
         RETURN
     ENDIF 
-    FOLLOW(1504)
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        FOLLOW(1502)
+    ELSE
+        LATCH(CHOOSE_STN)
+        FOLLOW(1503)
+    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -442,7 +497,13 @@ AUTOMATION(1522,"E: Run Track 2") //Auto Track 2
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1504)
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        FOLLOW(1502)
+    ELSE
+        LATCH(CHOOSE_STN)
+        FOLLOW(1503)
+    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -458,7 +519,13 @@ AUTOMATION(1523,"E: Run Track 3") //Auto Track 3
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1504)
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        FOLLOW(1502)
+    ELSE
+        LATCH(CHOOSE_STN)
+        FOLLOW(1503)
+    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -474,7 +541,13 @@ AUTOMATION(1524,"E: Run Track 4") //Auto Track 4
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1504)
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        FOLLOW(1502)
+    ELSE
+        LATCH(CHOOSE_STN)
+        FOLLOW(1503)
+    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -490,7 +563,13 @@ AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
         PRINT("No Train")
         RETURN
     ENDIF
-    FOLLOW(1504)
+    IF(CHOOSE_STN)
+        UNLATCH(CHOOSE_STN)
+        FOLLOW(1502)
+    ELSE
+        LATCH(CHOOSE_STN)
+        FOLLOW(1503)
+    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
