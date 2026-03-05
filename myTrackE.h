@@ -214,7 +214,9 @@ SEQUENCE(503) //Bypass station
 DONE
 
 SEQUENCE(504)
-    THROW(9003)
+    IFCLOSED(9003)
+        THROW(9003)
+    ENDIF
     RESTORE_SPEED
     IFRED(SIG_E2)
         SPEED(35)
@@ -234,6 +236,7 @@ DONE
 
 SEQUENCE(506)
     IFRESERVE(E_B3)
+    PRINT("On Main line res 3")
         FREE(E_B1)
         IFTHROWN(9011)
             CLOSE(9011)
@@ -243,7 +246,7 @@ SEQUENCE(506)
         ENDIF
         RESTORE_SPEED
     ELSE 
-    PRINT("B3 Reserved, should be waiting")
+    PRINT("B3 Reserved, BY STN should be waiting")
         AT(CD_S4_E)
         WAIT_WHILE_RED(SIG_E2)
         FOLLOW(506)
@@ -304,6 +307,9 @@ SEQUENCE(510)
 DONE
 
 SEQUENCE(511) //Station route
+    IFTHROWN(9003)
+        CLOSE(9003)
+    ENDIF
     RED(SIG_E4)
     RESTORE_SPEED
     IFRED(SIG_E2)
@@ -354,15 +360,16 @@ DONE
 
 SEQUENCE(514)
     IFRESERVE(E_B3)
-    PRINT("I got B3")
+    PRINT("STN I got B3")
     RED(SIG_E2)
+    AMBER(SIG_E4)
         IFTHROWN(9003)
             CLOSE(9003)
         ENDIF
         RESTORE_SPEED
     ELSE
         STOP
-        FOLLOW(513)
+        FOLLOW(514)
     ENDIF
     AT(CD_F2_E)
     RETURN
@@ -475,13 +482,7 @@ AUTOMATION(1521,"E: Run Track 1") //Auto Track 1
         PRINT("No Train")
         RETURN
     ENDIF 
-    IF(CHOOSE_STN)
-        UNLATCH(CHOOSE_STN)
         FOLLOW(1502)
-    ELSE
-        LATCH(CHOOSE_STN)
-        FOLLOW(1503)
-    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -497,13 +498,7 @@ AUTOMATION(1522,"E: Run Track 2") //Auto Track 2
         PRINT("No Train")
         RETURN
     ENDIF
-    IF(CHOOSE_STN)
-        UNLATCH(CHOOSE_STN)
         FOLLOW(1502)
-    ELSE
-        LATCH(CHOOSE_STN)
-        FOLLOW(1503)
-    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -519,13 +514,7 @@ AUTOMATION(1523,"E: Run Track 3") //Auto Track 3
         PRINT("No Train")
         RETURN
     ENDIF
-    IF(CHOOSE_STN)
-        UNLATCH(CHOOSE_STN)
         FOLLOW(1502)
-    ELSE
-        LATCH(CHOOSE_STN)
-        FOLLOW(1503)
-    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -541,13 +530,7 @@ AUTOMATION(1524,"E: Run Track 4") //Auto Track 4
         PRINT("No Train")
         RETURN
     ENDIF
-    IF(CHOOSE_STN)
-        UNLATCH(CHOOSE_STN)
         FOLLOW(1502)
-    ELSE
-        LATCH(CHOOSE_STN)
-        FOLLOW(1503)
-    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
@@ -563,13 +546,7 @@ AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
         PRINT("No Train")
         RETURN
     ENDIF
-    IF(CHOOSE_STN)
-        UNLATCH(CHOOSE_STN)
         FOLLOW(1502)
-    ELSE
-        LATCH(CHOOSE_STN)
-        FOLLOW(1503)
-    ENDIF
    IF(autoRunning_E)
     RETURN
    ENDIF 
