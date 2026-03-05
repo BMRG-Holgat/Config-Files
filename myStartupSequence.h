@@ -27,7 +27,8 @@ ALIAS(autoRunning_E, 207) //Full auto Track D
 ALIAS(autoSelected_F, 208) //Full auto Track D
 ALIAS(autoRunning_F, 209) //Full auto Track D
 ALIAS(E_STN,210) // Track E Station 
-ALIAS(F_H,181)
+ALIAS(F_H,211)
+ALIAS(CHOOSE_STN,212)
 
 //Route latches to prevent Signals changing
 ALIAS(AUTO_A,210)
