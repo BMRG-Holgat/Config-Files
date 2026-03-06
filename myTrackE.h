@@ -160,6 +160,16 @@ SEQUENCE(1504)  //Around we go station  switching
     ENDIF
 DONE
 
+
+//Exit from holgate to track E
+SEQUENCE(1505)
+    CALL(751)
+    CALL(512)
+
+    RETURN
+DONE
+
+
 SEQUENCE(500)
     IFRESERVE(E_B1)
         IFTHROWN(9024)
