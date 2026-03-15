@@ -84,14 +84,14 @@ ONBUTTON(CD_F3_E)
         CLOSE(9011)
     ENDIF
 DONE
-
+/*
 // Holgate Exit Board 3
 ONBUTTON(CD_F3_F) 
     IFTHROWN(DGS_T3_A__HS_T6_A)
         CLOSE(9031)
     ENDIF
 DONE
-
+*/
 //Track E -> F Board 9
 ONBUTTON(CD_F5_F) 
     IFTHROWN(DFM_T5_E__DGS_T4_A)

@@ -8,6 +8,7 @@
 *           416 Change to Track B
 *
 * V 0.1.0
+*           1401 - park train
 *           1402 - Around we go
 *           1403 - Station Stop
 *           1404 - Change to Track B
@@ -311,7 +312,7 @@ SEQUENCE(405) //Progress to Block3
     IFTHROWN(9021)
         CLOSE(9021)
     ENDIF 
-    ELSE 
+    ELSE CALL(551)
         AT(CD_S7_D)
         WAIT_WHILE_RED(SIG_D3)
         FOLLOW(405)
@@ -436,6 +437,7 @@ PRINT("CALLED 1421")
             FON(0)
         ELSE
             PRINT("No Train")
+            CALL(451)
             RETURN
         ENDIF
         FOLLOW(1402)
@@ -453,6 +455,7 @@ PRINT("CALLED 1422")
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(451)
         RETURN
     ENDIF
         FOLLOW(1402)
@@ -470,6 +473,7 @@ PRINT("CALLED 1423")
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(451)
         RETURN
     ENDIF
         FOLLOW(1402)
@@ -487,6 +491,7 @@ PRINT("CALLED 1424")
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(451)
         RETURN
     ENDIF
         FOLLOW(1402)
@@ -504,6 +509,7 @@ PRINT("CALLED 1425")
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(451)
         RETURN
     ENDIF
     FOLLOW(1402)

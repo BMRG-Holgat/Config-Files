@@ -36,4 +36,4 @@ ALIAS(THA,921) //Holgate Yard Track A
 ALIAS(THB,922) //Holgate Yard Track B
 ALIAS(THC,923) //Holgate Yard Track C
 ALIAS(THD,924) //Holgate Yard Track D
-ALIAS(THET,925) //Holgate Exit Track
+ALIAS(THET,925) //Holgate exit<JM>

@@ -138,12 +138,13 @@
   #define DISABLE_EEPROM
   #endif
   #if ENABLE_WIFI
+   #undef ENABLE_SERIAL_LOG
    #define ENABLE_SERIAL_LOG
    #endif
 
 #elif defined(ARDUINO_ARCH_SAMD)
   #define ARDUINO_TYPE "SAMD21"
-  #undef USB_SERIAL
+ // #undef USB_SERIAL
   #define USB_SERIAL SerialUSB
   // SAMD no EEPROM by default 
   #ifndef DISABLE_EEPROM

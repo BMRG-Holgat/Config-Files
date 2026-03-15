@@ -87,7 +87,7 @@ HAL(NeoPixel,720,20,NEO_RGB,{I2CMux_0,SubBus_4,0x61})
 #include "myBlockReserves.h"
 #include "myRoutes.h"
 #include "myAutoClose.h"
-#include "myAutoSignals.h"
+//#include "myAutoSignals.h"
 #include "myStashAlias.h"
 
 /*
@@ -372,3 +372,6 @@ STEALTH(
 ENDIF 
 DELAY(5000)
 FOLLOW(771)
+
+
+

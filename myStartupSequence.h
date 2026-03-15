@@ -22,10 +22,10 @@ ALIAS(autoSelected_C, 202) //Full auto Track C
 ALIAS(autoRunning_C, 203) //Full auto Track C
 ALIAS(autoSelected_D, 204) //Full auto Track D
 ALIAS(autoRunning_D, 205) //Full auto Track D
-ALIAS(autoSelected_E, 206) //Full auto Track D
-ALIAS(autoRunning_E, 207) //Full auto Track D
-ALIAS(autoSelected_F, 208) //Full auto Track D
-ALIAS(autoRunning_F, 209) //Full auto Track D
+ALIAS(autoSelected_E, 206) //Full auto Track E
+ALIAS(autoRunning_E, 207) //Full auto Track E
+ALIAS(autoSelected_F, 208) //Full auto Track F
+ALIAS(autoRunning_F, 209) //Full auto Track F
 ALIAS(E_STN,210) // Track E Station 
 ALIAS(F_H,211)
 ALIAS(CHOOSE_STN,212)

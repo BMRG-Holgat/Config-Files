@@ -1,6 +1,9 @@
 /*
 * routes for Holgate sidings
 */
+
+//Holgate exit to track F
+//AUTOMATION(702,"H:  Holgate -> E")
 SEQUENCE(750)
     ROUTE_DISABLED(1700)
     ROUTE_DISABLED(1701)    
@@ -21,6 +24,7 @@ SEQUENCE(751)
     RETURN
 DONE
 
+
 AUTOMATION(1700,"H: Exit to F")
     CALL(750)
     IFSTASH(THET)
@@ -38,7 +42,10 @@ AUTOMATION(1700,"H: Exit to F")
     ELSE
         PRINT("No Train")
         RETURN
-    ENDIF   
+    ENDIF  
+    CALL(608)
+    CALL(609)
+    CALL(610) 
 DONE
 
 AUTOMATION(1701,"H: Exit to E")
@@ -89,7 +96,6 @@ AUTOMATION(1721,"H:  Exit Track 1")
     AT(CD_S3_H_ext)
     STOP
     STASH(THET)
-    CALL(702)
     CALL(751)
     RETURN
 DONE
@@ -111,7 +117,6 @@ AUTOMATION(1722,"H:  Exit Track 2")
     AT(CD_S3_H_ext)
     STOP
     STASH(THET)
-    CALL(702)
     CALL(751)
     RETURN
 DONE
@@ -133,7 +138,6 @@ AUTOMATION(1723,"H:  Exit Track 3")
     AT(CD_S3_H_ext)
     STOP
     STASH(THET)
-    CALL(702)
     CALL(751)
     RETURN
 DONE
@@ -155,7 +159,6 @@ AUTOMATION(1724,"H:  Exit Track 4")
     AT(CD_S3_H_ext)
     STOP
     STASH(THET)
-    CALL(702)
     CALL(751)
     RETURN
 DONE
@@ -164,13 +167,15 @@ DONE
 //Auto park Holgate sidings
 SEQUENCE(701)
 IFNOT(CD_S4_HA) 
+PRINT("Trying to get into HA")
     RESERVE(H_T1)
-    SCREEN(4,1,"H1 Occupied")
     CLOSE(9019)
     FWD(20) 
     AT(CD_S4_HA) 
-    DELAY(1000)
+    DELAY(1100)
+    PRINT("STOP")
     ESTOP
+    SCREEN(4,1,"H1 Occupied")
     STASH(THA)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -178,22 +183,23 @@ IFNOT(CD_S4_HA)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
-        IF(F_H)
-            FREE(F_B1)
-            UNLATCH(F_H)
-        ENDIF
+        FREE(F_B1)
         FREE(F_B2)
+        PRINT("FREED b1 & b2")
     ENDIF
+    PRINT("HA Complete")
     RETURN
+    PRINT("DID NOT RETURN")
 ENDIF 
 IFNOT(CD_S4_HB) 
+PRINT("trying to get into HB")
     RESERVE(H_T2)
-    SCREEN(4,2,"H2 Occupied")
     THROW(9019)
     FWD(20) 
     AT(CD_S4_HB) 
     DELAY(1000)
     ESTOP
+    SCREEN(4,2,"H2 Occupied")
     STASH(THB)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -201,22 +207,19 @@ IFNOT(CD_S4_HB)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
-        IF(F_H)
-            FREE(F_B1)
-            UNLATCH(F_H)
-        ENDIF
+        FREE(F_B1)
         FREE(F_B2)
     ENDIF
     RETURN
 ENDIF 
 IFNOT(CD_S4_HC) 
     RESERVE(H_T3)
-    SCREEN(4,3,"H3 Occupied")
     THROW(9017)
     FWD(20) 
     AT(CD_S4_HC) 
     DELAY(1000)
     ESTOP
+    SCREEN(4,3,"H3 Occupied")
     STASH(THC)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -224,66 +227,43 @@ IFNOT(CD_S4_HC)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
-        IF(F_H)
-            FREE(F_B1)
-            UNLATCH(F_H)
-        ENDIF
+        FREE(F_B1)
         FREE(F_B2)
     ENDIF
-    FREE(F_B2)
     RETURN
 ENDIF 
 IFNOT(CD_S4_HD) 
     RESERVE(H_T4)
-    SCREEN(4,4,"H4 Occupied")
     THROW(9016)
     FWD(20) 
     AT(CD_S4_HD) 
     DELAY(1000)
     STASH(THD)
     ESTOP
+    SCREEN(4,3,"H3 Occupied")
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
-        IF(F_H)
-            FREE(F_B1)
-            UNLATCH(F_H)
-        ENDIF 
+        FREE(F_B1) 
+        FREE(F_B2)
     ENDIF
-    FREE(F_B2)
     RETURN
 ENDIF 
 DONE
 
-//parkRelease Release the block the train has come from dependant on turnout position
-SEQUENCE(702) //Release Parked Block dependant on turnout thrown
-    IFTHROWN(9012) //Track FD1
-        FREE(H_T1)
-        SCREEN(2,1,"")
-        CLEAR_STASH(THA)
-        RETURN
-    ENDIF
-    IFTHROWN(9013) //Track FD2
-        FREE(H_T2)
-        SCREEN(2,2,"")
-        CLEAR_STASH(THB)
-        RETURN
-    ENDIF
-    IFTHROWN(9014) //Track FD3
-        FREE(H_T3)
-        SCREEN(2,3,"")
-        CLEAR_STASH(THC)
-        RETURN
-    ENDIF
-    IFCLOSED(9014) //Track FD4
-        FREE(H_T4)
-        SCREEN(2,4,"")
-        CLEAR_STASH(THD)
-        RETURN
-    ENDIF
- DONE   
 
-
+SEQUENCE(702)
+    AT(CD_F3_F1)
+    AMBER(SIG_F4)
+    FREE(F_B2)
+    IFTHROWN(9027)
+        CLOSE(9027)
+    ENDIF
+    IFTHROWN(9028)
+        CLOSE(9028)
+    ENDIF
+    RETURN
+DONE

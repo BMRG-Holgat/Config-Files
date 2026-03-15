@@ -374,6 +374,7 @@ AUTOMATION(1321,"C: Run Track 1") //Auto Track 1
         FON(0)
     ELSE
         PRINT("No Train")
+        CALL(351)
         RETURN
     ENDIF 
     FOLLOW(1302)
@@ -390,6 +391,7 @@ AUTOMATION(1322,"C: Run Track 2") //Auto Track 2
       FON(0)
     ELSE
         PRINT("No Train")
+        CALL(351)
         RETURN
     ENDIF
     FOLLOW(1302)
@@ -406,6 +408,7 @@ AUTOMATION(1323,"C: Run Track 3") //Auto Track 3
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(351)
         RETURN
     ENDIF
     FOLLOW(1302)
@@ -422,6 +425,7 @@ AUTOMATION(1324,"C: Run Track 4") //Auto Track 4
       FON(0)
     ELSE
       PRINT("No Train")
+      CALL(351)
       RETURN
     ENDIF
     FOLLOW(1302)
@@ -438,6 +442,7 @@ AUTOMATION(1325,"C: Run Track 5") //Auto Track 5
      FON(0)
     ELSE
       PRINT("No Train")
+      CALL(351)
       RETURN
     ENDIF
     FOLLOW(1302)

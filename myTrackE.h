@@ -5,7 +5,7 @@
 * V 0.1.0
 *           590 - 594 Free yard tracks
 *           595 - 599 Reserve yard tracks
-*           501 - Park Train
+*           501 - 1501> Train
 *           502 Around We Go
 *           1501 - Park Train
 
@@ -115,7 +115,17 @@ AUTOMATION(1503,"E: To the Station")
     ENDIF
 DONE
 
-SEQUENCE(1504)  //Around we go station  switching
+AUTOMATION(1504,"E: Holgate")
+    CALL(550)
+    FON(0)
+    CALL(500)
+    CALL(515)
+    CALL(516)
+    CALL(701)
+DONE
+
+
+SEQUENCE(1505)  //Around we go station  switching
     CALL(550)
     FON(0)
     PRINT("Calling 500")
@@ -159,16 +169,6 @@ SEQUENCE(1504)  //Around we go station  switching
         RETURN 
     ENDIF
 DONE
-
-
-//Exit from holgate to track E
-SEQUENCE(1505)
-    CALL(751)
-    CALL(512)
-
-    RETURN
-DONE
-
 
 SEQUENCE(500)
     IFRESERVE(E_B1)
@@ -230,7 +230,7 @@ SEQUENCE(504)
     RESTORE_SPEED
     IFRED(SIG_E2)
         SPEED(35)
-        PRINT("speed 30")
+        PRINT("speed 35")
     ENDIF
     AT(CD_S5_E)
     RETURN
@@ -239,7 +239,7 @@ DONE
 SEQUENCE(505)
     IFRED(SIG_E2)
         SPEED(30)
-        PRINT("speed 20")
+        PRINT("speed 30")
     ENDIF
     RETURN 
 DONE
@@ -263,7 +263,7 @@ SEQUENCE(506)
     ENDIF
     IFAMBER(SIG_E2)
         SPEED(38)
-        PRINT("speed 30")
+        PRINT("speed 38")
     ENDIF
     AT(CD_S3_E)
     SAVE_SPEED
@@ -385,8 +385,36 @@ SEQUENCE(514)
     RETURN
 DONE
 
+SEQUENCE(515)
+    CALL(553)
+    CALL(551)
+    IFLOCO(SoundLoco) 
+        FON(1)
+    ENDIF
+    RED(SIG_E4)
+    IFRESERVE(F_B2)
+        IFCLOSED(9030)
+            THROW(9030)
+            THROW(9031)
+            RED(SIG_F4)
+        ENDIF
+         IFAMBER(SIG_F4)
+            SPEED(38)
+        ENDIF
+    ELSE
+        AT(CD_S9_E)
+        WAIT_WHILE_RED(SIG_E4)
+        FOLLOW(515)
+    ENDIF
+    AT(CD_S9_F1)
+    SAVE_SPEED
+    RETURN 
+DONE
 
-
+SEQUENCE(516)
+    RED(SIG_E4)
+    RETURN
+DONE
 
     //Auto Park Sequence
 SEQUENCE(552)
@@ -490,6 +518,7 @@ AUTOMATION(1521,"E: Run Track 1") //Auto Track 1
         FON(0)
     ELSE
         PRINT("No Train")
+        CALL(551)
         RETURN
     ENDIF 
         FOLLOW(1502)
@@ -506,6 +535,7 @@ AUTOMATION(1522,"E: Run Track 2") //Auto Track 2
       FON(0)
     ELSE
         PRINT("No Train")
+        CALL(551)
         RETURN
     ENDIF
         FOLLOW(1502)
@@ -522,6 +552,7 @@ AUTOMATION(1523,"E: Run Track 3") //Auto Track 3
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(551)
         RETURN
     ENDIF
         FOLLOW(1502)
@@ -538,6 +569,7 @@ AUTOMATION(1524,"E: Run Track 4") //Auto Track 4
       FON(0)
     ELSE
         PRINT("No Train")
+        CALL(551)
         RETURN
     ENDIF
         FOLLOW(1502)
@@ -554,6 +586,7 @@ AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
      FON(0)
     ELSE
         PRINT("No Train")
+        CALL(551)
         RETURN
     ENDIF
         FOLLOW(1502)
@@ -598,7 +631,8 @@ ENDIF
 DONE   
 
 
-AUTOMATION(1532,"E: Holgate")
+//AUTOMATION(1532,"E: Holgate")
+SEQUENCE(1532)
     CALL(550)
     IFNOT(autoRunning_E)
         IFRESERVE(E_B1)
