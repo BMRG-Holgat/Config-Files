@@ -19,6 +19,8 @@
 *           1425 - Track 5
 *
 */
+ALIAS(PARKING,40)
+
 SEQUENCE(450) //Disable routes
     ROUTE_DISABLED(402)
     ROUTE_DISABLED(1402)
@@ -132,7 +134,7 @@ SEQUENCE(452)
 IFNOT(CD_F2_D1) 
     RESERVE(D_B7)
     CLOSE(9130)
-    FWD(30) 
+    FWD(PARKING) 
     AT(CD_F2_D1) 
     DELAY(2500)
     ESTOP
@@ -143,7 +145,7 @@ ENDIF
 IFNOT(CD_F2_D2) 
     RESERVE(D_B8)
     THROW(9131)
-    FWD(30) 
+    FWD(PARKING) 
     AT(CD_F2_D2) 
     DELAY(1500)
     ESTOP
@@ -154,7 +156,7 @@ ENDIF
 IFNOT(CD_F2_D3) 
     RESERVE(D_B9)
     THROW(9132)
-    FWD(30) 
+    FWD(PARKING) 
     AT(CD_F2_D3) 
     DELAY(700)
     ESTOP
@@ -166,7 +168,7 @@ ENDIF
 IFNOT(CD_F2_D4) 
     RESERVE(D_B10)
     THROW(9133)
-    FWD(30) 
+    FWD(PARKING) 
     AT(CD_F2_D4) 
     DELAY(750)
     ESTOP
@@ -177,7 +179,7 @@ ENDIF
 IFNOT(CD_F2_D5) 
     RESERVE(D_B11)
     CLOSE(9133)
-    FWD(30) 
+    FWD(PARKING) 
     AT(CD_F2_D5) 
     DELAY(750)
     ESTOP
@@ -227,7 +229,7 @@ SEQUENCE(400)//Leave yard to Station not stopping
         CLOSE(9002) //close turnouts D-C
         FWD(20) //Move forward Speed 30
     ELSE
-        FOLLOW(1402)
+        FOLLOW(400)
     ENDIF
     AT(CD_S1_D)
     RETURN 
@@ -262,6 +264,7 @@ SEQUENCE(402)
         SAVE_SPEED
     ELSE
         SAVE_SPEED
+        DELAY(2000)
         WAIT_WHILE_RED(SIG_D1)
         FOLLOW(402)
     ENDIF
@@ -335,9 +338,9 @@ SEQUENCE(406) //Progress to Block 5
         IFTHROWN(2024)
             CLOSE(2024)
         ENDIF
+        RESTORE_SPEED
     ELSE 
         AT(CD_S9_D1)
-        SAVE_SPEED
         WAIT_WHILE_RED(SIG_D4)
         FOLLOW(406)
     ENDIF
@@ -358,22 +361,22 @@ SEQUENCE(408) //Progress to Block5
     RESERVE(D_B6) //Reserve Next block 
     RESTORE_SPEED  
     FREE(D_B3)
+    GREEN(SIG_D2)
+    AMBER(SIG_D3)
     AT(CD_F7_D)
     RETURN 
 DONE
 
 SEQUENCE(409)
     AMBER(SIG_D4)   
-    AMBER(SIG_D3)
-    GREEN(SIG_D2)
+    GREEN(SIG_D3)
     FREE(D_B4)
     AT(CD_F6_D)
     RETURN 
 DONE
 
 SEQUENCE(410)
-    GREEN(SIG_D4)
-    GREEN(SIG_D3)    
+    GREEN(SIG_D4)    
     FREE(D_B5)
     RETURN
 DONE
@@ -424,7 +427,7 @@ SEQUENCE(414)
     CLOSE(9010)
     FREE(D_B2)
     FREE(C_B3)
-FOLLOW(206)
+FOLLOW(290)
 
 
 //ALMOST THERE

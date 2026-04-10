@@ -54,6 +54,7 @@ AUTOMATION(1202,"B: Around we go")
     CALL(202)
     CALL(203)
     CALL(204)
+SEQUENCE(290)
     CALL(205)
     CALL(206)
     CALL(207)
@@ -81,7 +82,7 @@ SEQUENCE(200)
     ELSE
         FOLLOW(200)
     ENDIF 
-    SPEED(20)
+    SPEED(30)
     AT(CD_S1_B)
     IFLOCO(SoundLoco)
         FON(1)
@@ -118,8 +119,6 @@ SEQUENCE(202) //Progress to Block2
         ENDIF
         IFAMBER(SIG_B1)
             SPEED(35)
-        ELSE 
-            SPEED(40)
         ENDIF
     ELSE
         DELAY(4000)
@@ -135,14 +134,11 @@ SEQUENCE(203) //Progress to Block 3
     RED(SIG_B1)
     IFRESERVE(B_B3) //Reserve Next block
         IFAMBER(SIG_B2)
-        SPEED(35)
-    ELSE
-        SPEED(40)
-        SAVE_SPEED
-    ENDIF
+            SPEED(35)
+        ENDIF
     ELSE
        IF(CD_S3_B)
-        WAIT_WHILE_RED(SIG_B2)
+            WAIT_WHILE_RED(SIG_B2)
        ENDIF
       FOLLOW(203)
     ENDIF    
@@ -290,7 +286,7 @@ IFNOT(CD_F2_B1)
     RESERVE(B_B7)
     SCREEN(2,1,"Block B7 Reserved")
     CLOSE(9110)
-    FWD(30) 
+    FWD(40) 
     AT(CD_F2_B1)
     DELAY(2000)
     ESTOP
@@ -303,7 +299,7 @@ IFNOT(CD_F2_B2)
     RESERVE(B_B8)
     SCREEN(2,2,"Block B8 Reserved")
     THROW(9111)
-    FWD(30) 
+    FWD(40) 
     AT(CD_F2_B2) 
     DELAY(1500)
     ESTOP
@@ -316,7 +312,7 @@ IFNOT(CD_F2_B3)
     RESERVE(B_B9)
     SCREEN(2,3,"Block B9 Reserved")
     THROW(9112)
-    FWD(30) 
+    FWD(40) 
     AT(CD_F2_B3) 
     DELAY(500)
     ESTOP
@@ -329,7 +325,7 @@ IFNOT(CD_F3_B4)
     RESERVE(B_B10)
     SCREEN(2,4,"Block B10 Reserved")
     THROW(9113)
-    FWD(30) 
+    FWD(40) 
     AT(CD_F3_B4) 
     DELAY(500)
     ESTOP
@@ -342,7 +338,7 @@ IFNOT(CD_F3_B5)
     RESERVE(B_B11)
     SCREEN(2,5,"Block B11 Reserved")
     CLOSE(9113)
-    FWD(30) 
+    FWD(40) 
     AT(CD_F3_B5) 
     DELAY(500)
     ESTOP

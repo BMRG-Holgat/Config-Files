@@ -16,6 +16,8 @@
 SEQUENCE(550) //Disable routes
     ROUTE_DISABLED(1502)
     ROUTE_DISABLED(1503)
+    ROUTE_DISABLED(1504)
+    ROUTE_DISABLED(1506)
     ROUTE_DISABLED(1521)
     ROUTE_DISABLED(1522)
     ROUTE_DISABLED(1523)
@@ -27,6 +29,8 @@ DONE
 SEQUENCE(551) //Enable routes
     ROUTE_ACTIVE(1502)
     ROUTE_ACTIVE(1503)
+    ROUTE_ACTIVE(1504)
+    ROUTE_ACTIVE(1506)
     ROUTE_ACTIVE(1521)
     ROUTE_ACTIVE(1522)
     ROUTE_ACTIVE(1523)
@@ -124,6 +128,13 @@ AUTOMATION(1504,"E: Holgate")
     CALL(701)
 DONE
 
+AUTOMATION(1506,"E: E -> C")
+    CALL(550)
+    CALL(517)
+    CALL(518)
+    CALL(551)
+    CALL(390)
+DONE
 
 SEQUENCE(1505)  //Around we go station  switching
     CALL(550)
@@ -169,6 +180,9 @@ SEQUENCE(1505)  //Around we go station  switching
         RETURN 
     ENDIF
 DONE
+
+
+
 
 SEQUENCE(500)
     IFRESERVE(E_B1)
@@ -416,6 +430,44 @@ SEQUENCE(516)
     RETURN
 DONE
 
+SEQUENCE(517) //Start of E -> C
+    FON(0)
+    IFRESERVE(D_B5)
+        IFRESERVE(C_B1)  
+         IFCLOSED(9024)
+            THROW(9024) //close turnouts E -> C rear
+         ENDIF
+        ELSE
+            FREE(D_B5)
+            FOLLOW(517)
+        ENDIF
+    ELSE 
+        FOLLOW(517)
+    ENDIF
+    SPEED(20)
+    AT(CD_S9_C)
+    RETURN
+DONE
+
+SEQUENCE(518)
+    CALL(553)
+    CALL(551)
+    IFLOCO(SoundLoco) 
+        FON(1) //Sound loco if the train has a sound decoder
+    ENDIF
+    IFRED(SIG_C4)
+        SPEED(20)
+    ENDIF
+    IFAMBER(SIG_C4)
+        SPEED(30)
+    ENDIF
+    IFGREEN(SIG_C4)
+        SPEED(40)
+    ENDIF
+    AT(CD_S9_C2)
+    SAVE_SPEED
+    RETURN
+DONE
     //Auto Park Sequence
 SEQUENCE(552)
 IFNOT(CD_F8_E1) 

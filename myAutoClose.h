@@ -84,6 +84,13 @@ ONBUTTON(CD_F3_E)
         CLOSE(9011)
     ENDIF
 DONE
+
+ONBUTTON(CD_S6_C)
+    IFTHROWN(9024)
+        CLOSE(9024)
+        FREE(D_B5)
+    ENDIF
+DONE
 /*
 // Holgate Exit Board 3
 ONBUTTON(CD_F3_F) 

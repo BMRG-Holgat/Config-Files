@@ -63,15 +63,41 @@ DONE
 ROUTE(1014,"Lights: House")
 IFNOT(Latch_light_house)
     SET(432)
-    SET(433)
-    SET(434)
-    SET(435)
+SET(433)
+SET(434)
+SET(435)
+SET(436)
+SET(437)
+SET(438)
+SET(439)
+SET(440)
+SET(441)
+SET(442)
+SET(443)
+SET(444)
+SET(445)
+SET(446)
+SET(447)
+
     LATCH(Latch_light_house)
 ELSE 
     RESET(432)
-    RESET(433)
-    RESET(434)
-    RESET(435)
+RESET(433)
+RESET(434)
+RESET(435)
+RESET(436)
+RESET(437)
+RESET(438)
+RESET(439)
+RESET(440)
+RESET(441)
+RESET(442)
+RESET(443)
+RESET(444)
+RESET(445)
+RESET(446)
+RESET(447)
+
     UNLATCH(Latch_light_house)
 ENDIF 
 DONE
@@ -96,7 +122,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1016,"Lights: House2_Bed")
+ROUTE(1016,"Lights: House1+2 Rear")
 IFNOT(Latch_House_1_2_Bed)
     SET(House_1_2_Bed)
 ELSE 
@@ -104,7 +130,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1017,"Lights: House3")
+ROUTE(1017,"Lights: House8 Upper")
 IFNOT(Latch_light_house)
     SET(440)
 ELSE 
@@ -112,7 +138,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1018,"Lights: House4")
+ROUTE(1018,"Lights: House7+8 Rear")
 IFNOT(Latch_light_house)
     SET(441)
 ELSE 
@@ -120,7 +146,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1019,"Lights: House5")
+ROUTE(1019,"Lights: House10 Upper")
 IFNOT(Latch_light_house)
     SET(443)
 ELSE 
@@ -128,7 +154,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1020,"Lights: House6")
+ROUTE(1020,"Lights: House9 Upper")
 IFNOT(Latch_light_house)
     SET(444)
 ELSE 
@@ -136,7 +162,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1021,"Lights: House7")
+ROUTE(1021,"Lights: House9+10 Lower")
 IFNOT(Latch_light_house)
     SET(445)
 ELSE 
@@ -144,7 +170,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1022,"Lights: House8")
+ROUTE(1022,"Lights: House7 Red")
 IFNOT(Latch_light_house)
     SET(446)
 ELSE 
@@ -152,7 +178,7 @@ ELSE
 ENDIF 
 DONE
 
-ROUTE(1023,"Lights: House8")
+ROUTE(1023,"Lights: House5 Red")
 IFNOT(Latch_light_house)
     SET(447)
 ELSE 

@@ -24,6 +24,7 @@ SEQUENCE(350) //Disable routes
    ROUTE_DISABLED(1324)
    ROUTE_DISABLED(1325)
    ROUTE_DISABLED(1302)
+   ROUTE_DISABLED(1303)
    RETURN
 DONE
 
@@ -34,7 +35,7 @@ SEQUENCE(351) //Enable routes
     ROUTE_ACTIVE(1324)
     ROUTE_ACTIVE(1325)
     ROUTE_ACTIVE(1302)
-
+    ROUTE_ACTIVE(1303)
 RETURN
 DONE
 
@@ -52,6 +53,7 @@ AUTOMATION(1302,"C: Around we go")
     CALL(300) //Leave yard
     PRINT("Calling 301")
     CALL(301) // Approach bridge
+SEQUENCE(390) //Possible jump in point from other sequence
     PRINT("Calling 302")
     CALL(302) //Reserve Block 2 and wait for signal
     PRINT("Calling 303")
@@ -82,20 +84,21 @@ AUTOMATION(1303,"C: Change to E")
     PRINT("Calling 302")
     CALL(302) //Reserve Block 2 and wait for signal
     PRINT("Calling 303")
-    CALL(303) //Reserved block 2
-    PRINT("Calling 304")
-    CALL(304) //Check signal
-    PRINT("Calling 305")
-    CALL(305) //Approach gantry 2       
-    PRINT("Calling 306")
-    CALL(306) //Bypass station
-    FOFF(1)
-    PRINT("Calling 507")    
-    CALL(507)
+    CALL(303) //Reserved block 2     
+    PRINT("Calling 308")
+    CALL(308) // Move to E
+    PRINT("Calling 310")
+    CALL(310)
+    PRINT("Calling 311")
+    CALL(311)
+    PRINT("Calling 312")
+    CALL(312)
     PRINT("Calling 508")
     CALL(508)
     PRINT("Calling 509")
     CALL(509)
+    PRINT("Calling 510")
+    CALL(510)
     PRINT("Calling 552 Autopark")
     CALL(552)
     FOFF(0)
@@ -304,15 +307,24 @@ DONE
 
 SEQUENCE(308)
     RED(SIG_C2)
-    IFRESERVE(E_B3)
-        IFCLOSED(9011)
-            THROW(9011) //Close C->E if thrown to prevent deadlock
-        ENDIF
+    IFRESERVE(D_B2)
+        IFRESERVE(E_B3)
+            IFCLOSED(9011)
+                THROW(9011) //Close C->E if thrown to prevent deadlock
+            ENDIF
+            FREE(C_B1)
+        ELSE
+            AT(CD_S4_C)
+            FREE(D_B2)
+            WAIT_WHILE_RED(SIG_C2)
+            FOLLOW(308)
+        ENDIF   
     ELSE
         AT(CD_S4_C)
         WAIT_WHILE_RED(SIG_C2)
         FOLLOW(308)
-    ENDIF   
+    ENDIF
+    AT(CD_S3_C)
     RESTORE_SPEED
     RETURN
 DONE
@@ -324,9 +336,43 @@ SEQUENCE(309)
 DONE
 
 SEQUENCE(310)
-
+    RED(SIG_C2)
+    AT(CD_S3_E1)
     RETURN 
 DONE
+
+SEQUENCE(311)
+    IFRESERVE(E_B4)
+        IFTHROWN(9003)
+            CLOSE(9003)
+        ENDIF
+        AT(CD_S1_E)
+        AMBER(SIG_C4)
+        FREE(C_B2)
+    ELSE
+        RESERVE(E_S_B4)
+        IFCLOSED(9003)
+            THROW(9003)
+        ENDIF
+    ENDIF
+    AT(CD_F2_E)        
+    RESTORE_SPEED
+    RETURN
+DONE
+
+SEQUENCE(312)
+    IFTHROWN(9011)
+        CLOSE(9011)
+    ENDIF
+    FREE(D_B2)
+    IFRED(SIG_C4)
+    ELSE
+        GREEN(SIG_C4)
+    ENDIF
+    RETURN
+DONE
+
+
 
 //parkRelease Release the block the train has come from dependant on turnout position
 SEQUENCE(353) //Release Parked Block dependant on turnout thrown

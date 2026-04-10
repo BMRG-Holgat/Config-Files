@@ -66,6 +66,7 @@ ROUTE(994,"System: Set Default Positions")
     defaultPosition(UGS_T2_H) 
     defaultPosition(DGS_T4_A__DFM_T5_E) 
     defaultPosition(DGS_T5_A__DFM_T7_E)
+    defaultPosition(UFM_T6_A__UGS_T5_E)
     CLOSE(UFM_T4_A__DMF_T3_E)
     defaultPosition(DMF_T13_E__DMF_T12_A) // Set track 1 exit on Yard C.
     defaultPosition(DFM_T15_E__DFM_T14_A) //Set track 1 access on Yard E.
