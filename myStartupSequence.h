@@ -5,6 +5,10 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
+ALIAS(STARTING_SPEED,30)
+ALIAS(PARKING_SPEED,40)
+ALIAS(AMBER_SPEED,40)
+ALIAS(STANDARD_SPEED,60)
 ALIAS(BIG_RED_BUTTON,175)
 ALIAS(Latch_build,174)
 ALIAS(Latch_default,173)
