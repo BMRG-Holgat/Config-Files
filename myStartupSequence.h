@@ -5,6 +5,10 @@
 * This file is for reassembly testing of the layout before trains are run
 *
 */
+//Standard speed settings
+ALIAS(PARKING,40)
+ALIAS(Reduced_Parking,25)
+
 ALIAS(BIG_RED_BUTTON,175)
 ALIAS(Latch_build,174)
 ALIAS(Latch_default,173)
