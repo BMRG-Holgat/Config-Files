@@ -192,7 +192,7 @@ SEQUENCE(500)
     ELSE 
         FOLLOW(500)
     ENDIF
-    SPEED(20)
+    SPEED(STARTING_SPEED)
     AT(CD_F9_E)
     RETURN 
 DONE
@@ -204,7 +204,7 @@ SEQUENCE(501)
         FON(1)
     ENDIF
     IFRED(SIG_E4)
-        SPEED(20)
+        SPEED(STARTING_SPEED)
     ENDIF
     AT(CD_S9_E)
     SAVE_SPEED
@@ -217,17 +217,19 @@ SEQUENCE(502)
             CLOSE(9022)
         ENDIF
         IFAMBER(SIG_E4)
-            SPEED(38)
+            SPEED(AMBER_SPEED)
+            SAVE_SPEED
         ENDIF
         IFGREEN(SIG_E4)
-            SPEED(45)
+            SPEED(STANDARD_SPEED)
+            SAVE_SPEED
         ENDIF
     ELSE 
         WAIT_WHILE_RED(SIG_E4)
         FOLLOW(502)
     ENDIF
     AT(CD_S9_E1)
-    SAVE_SPEED
+    RESTORE_SPEED
     RETURN 
 DONE
 
@@ -473,7 +475,7 @@ SEQUENCE(552)
 IFNOT(CD_F8_E1) 
     RESERVE(E_B6)
     CLOSE(9141)
-    FWD(30) 
+    FWD(PARKING_SPEED) 
     AT(CD_F8_E1) 
     DELAY(1500)
     ESTOP
@@ -484,7 +486,7 @@ ENDIF
 IFNOT(CD_F8_E2) 
     RESERVE(E_B7)
     THROW(9141)
-    FWD(30) 
+    FWD(PARKING_SPEED) 
     AT(CD_F8_E2)
     DELAY(1000)
     ESTOP
@@ -495,7 +497,7 @@ ENDIF
 IFNOT(CD_F8_E3) 
     RESERVE(E_B8)
     THROW(9142)
-    FWD(30) 
+    FWD(PARKING_SPEED) 
     AT(CD_F8_E3) 
     DELAY(500)
     ESTOP
@@ -506,7 +508,7 @@ ENDIF
 IFNOT(CD_F7_E4) 
     RESERVE(E_B9)
     THROW(9143)
-    FWD(30) 
+    FWD(PARKING_SPEED) 
     AT(CD_F7_E4) 
     DELAY(250)
     ESTOP
@@ -517,7 +519,7 @@ ENDIF
 IFNOT(CD_F7_E5) 
     RESERVE(E_B10)
     CLOSE(9144)
-    FWD(30) 
+    FWD(PARKING_SPEED) 
     AT(CD_F7_E5)
     DELAY(250)
     ESTOP
