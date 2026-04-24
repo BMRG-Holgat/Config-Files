@@ -1,0 +1,221 @@
+Absolutely — here’s a **clean working document** you can actually build from. I’ve stripped out the noise and kept only the engineering decisions that matter.
+
+---
+
+# 📘 I²C OVER CAT5 – PRACTICAL DESIGN GUIDE (FOR YOUR SYSTEM)
+
+## 🎯 Goal
+
+Run multiple I²C device clusters (MCP23017, PCA9685, OLED) over Cat5 using a mux, with stable operation and no bus failures.
+
+---
+
+# ⚠️ CORE PROBLEM (WHY YOUR CURRENT DESIGN FAILS)
+
+Your current architecture uses:
+
+* P82B715DR in **daisy chains**
+* Multiple pull-up domains
+* Mixed I²C devices on long Cat5 runs
+
+### Result:
+
+* Bus capacitance overload
+* Signal distortion
+* MUX channel selection failures (`status=2`)
+* Intermittent or stuck I²C buses
+
+---
+
+# ❌ WHAT NOT TO DO
+
+### 🚫 Do NOT:
+
+* Chain multiple P82B715 extenders
+* Run raw I²C directly over Cat5 without buffering
+* Mix multiple pull-up networks per cable
+* Treat I²C like Ethernet (it is not packet-based)
+
+---
+
+# ✅ CORRECT SYSTEM ARCHITECTURE
+
+## 🧠 PRINCIPLE
+
+> I²C must be **segmented**, not extended repeatedly.
+
+---
+
+## 🏗️ RECOMMENDED TOPOLOGY
+
+### ✔ Standard structure:
+
+```text
+Controller
+   │
+   ├── :contentReference[oaicite:1]{index=1}
+   │
+   ├── Channel 1 → local devices (short bus)
+   ├── Channel 2 → local devices (short bus)
+   ├── Channel 3 → local devices (short bus)
+   │
+   └── Channel 4 → CAT5 DISTRIBUTED SYSTEM
+                    │
+                    ├── Buffer → Node A (MCP23017 / PCA9685 / OLED)
+                    ├── Buffer → Node B
+                    ├── Buffer → Node C
+```
+
+---
+
+# 🧩 BEST HARDWARE APPROACH
+
+## 🥇 OPTION 1 (RECOMMENDED): Proper I²C over Cat5
+
+Use:
+
+* TCA9617A
+
+### Rules:
+
+* ONE buffer per Cat5 cable
+* NO chaining buffers
+* Each branch is independent
+
+### Wiring:
+
+```text
+MUX → TCA9617A → Cat5 → device cluster
+```
+
+---
+
+## 🥈 OPTION 2: Differential Cat5 (robust but more complex)
+
+Use:
+
+* PCA9615
+
+### When to use:
+
+* Long cables (>2–5m)
+* High noise environments
+* Industrial setups
+
+### Wiring:
+
+```text
+MUX → PCA9615 → Cat5 → PCA9615 → cluster
+```
+
+---
+
+## 🥉 OPTION 3: P82B715 (LIMITED USE ONLY)
+
+Only acceptable if:
+
+* One per Cat5 run
+* No daisy chaining
+* Short distances (<1–2m)
+
+---
+
+# 🔌 CAT5 WIRING RULES
+
+## For single-ended I²C (TCA9617A)
+
+Use:
+
+* SDA → twisted pair
+* SCL → twisted pair
+* GND → spare pair
+
+### Pin pairing suggestion:
+
+| Cat5 pair | Signal |
+| --------- | ------ |
+| Pair 1    | SDA    |
+| Pair 2    | SCL    |
+| Pair 3    | GND    |
+| Pair 4    | Power  |
+
+---
+
+## For differential I²C (PCA9615)
+
+| Pair   | Signal      |
+| ------ | ----------- |
+| Pair 1 | SDA+ / SDA− |
+| Pair 2 | SCL+ / SCL− |
+
+---
+
+# ⚡ DESIGN RULES (CRITICAL)
+
+## 1. One buffer per cable
+
+Never chain extenders.
+
+---
+
+## 2. One pull-up domain per segment
+
+* Each buffered node has its own pull-ups
+* Remove duplicates on breakout boards if needed
+
+---
+
+## 3. Keep MUX local
+
+* Only mux short, clean buses
+* Do NOT place mux behind long chains
+
+---
+
+## 4. Keep speeds conservative
+
+* Start at **100 kHz**
+* Increase only if stable
+
+---
+
+## 5. Treat each Cat5 run as a separate bus
+
+Not part of a shared global I²C line.
+
+---
+
+# 🧠 WHY THIS WORKS (IMPORTANT)
+
+This design fixes your current failure mode because:
+
+| Problem               | Fix                     |
+| --------------------- | ----------------------- |
+| Capacitance overload  | Bus segmentation        |
+| Signal distortion     | Proper buffering        |
+| ACK failures          | Clean timing domains    |
+| MUX `status=2` errors | Stable downstream buses |
+
+---
+
+# 🚀 FINAL RECOMMENDATION
+
+For your system:
+
+### ✔ Best practical solution
+
+Use:
+
+* TCA9617A
+* One per Cat5 branch
+* Keep current MCP23017 / PCA9685 / OLED unchanged
+
+---
+
+# 🧾 ONE-SENTENCE SUMMARY
+
+> Replace chained P82B715 extenders with **one proper buffer per Cat5 branch**, and treat each branch as an independent I²C domain.
+
+---
+
+If you want next, I can turn this into a **wiring diagram specific to your 5 branches** so you can literally rebuild it step-by-step without guessing.
