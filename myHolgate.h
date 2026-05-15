@@ -216,8 +216,9 @@ PRINT("trying to get into HB")
     IFTHROWN(9031)
         CLOSE(9031)
     ENDIF
-        FREE(F_B1)
-        FREE(F_B2)
+    FREE(F_B1)
+    FREE(F_B2)
+    PRINT("Freed F1 & F2")
     RETURN
 ENDIF 
 IFNOT(CD_S4_HC) 
@@ -319,3 +320,126 @@ SEQUENCE(753)
                 RETURN  
         ENDIF
 DONE
+
+SEQUENCE(703) //Testing new stash controlled siding
+    IFSTASH(THA)
+        PRINT("H1 Occupied")
+        ROUTE_CAPTION(1721,"Occupied")
+        ROUTE_ACTIVE(1721)
+        CALL(704)
+        RETURN
+    ELSE
+        RESERVE(H_T1)
+        CLOSE(9019)
+        FWD(20) 
+        AT(CD_S4_HA) 
+        DELAY(2000)
+        PRINT("STOP")
+        STOP
+        STASH(THA)
+        IFTHROWN(9030)
+            CLOSE(9030)
+            FREE(E_B1)
+        ENDIF
+        IFTHROWN(9031)
+            CLOSE(9031)
+        ENDIF
+        FREE(F_B1)
+        FREE(F_B2)
+        PRINT("FREED b1 & b2")
+        PRINT("HA Complete")
+        RETURN
+    ENDIF
+DONE
+
+SEQUENCE(704)
+    IFSTASH(THB)
+        PRINT("H2 Occupied")
+        ROUTE_CAPTION(1722,"Occupied")
+        ROUTE_ACTIVE(1722)
+        CALL(705)
+        RETURN
+    ELSE
+        RESERVE(H_T2)
+        THROW(9019)
+        FWD(20) 
+        AT(CD_S4_HB) 
+        DELAY(2000)
+        PRINT("STOP")
+        STOP
+        STASH(THB)
+        IFTHROWN(9030)
+            CLOSE(9030)
+            FREE(E_B1)
+        ENDIF
+        IFTHROWN(9031)
+            CLOSE(9031)
+        ENDIF
+        FREE(F_B1)
+        FREE(F_B2)
+        PRINT("FREED b1 & b2")
+        PRINT("HB Complete")
+        RETURN
+    ENDIF
+DONE
+
+SEQUENCE(705)
+    IFSTASH(THC)
+        PRINT("H3 Occupied")
+        ROUTE_CAPTION(1723,"Occupied")
+        ROUTE_ACTIVE(1723)
+        CALL(706)
+        RETURN
+    ELSE
+        RESERVE(H_T3)
+        THROW(9017)
+        FWD(20) 
+        AT(CD_S4_HC) 
+        DELAY(2000)
+        PRINT("STOP")
+        STOP
+        STASH(THC)
+        IFTHROWN(9030)
+            CLOSE(9030)
+            FREE(E_B1)
+        ENDIF
+        IFTHROWN(9031)
+            CLOSE(9031)
+        ENDIF
+        FREE(F_B1)
+        FREE(F_B2)
+        PRINT("FREED b1 & b2")
+        PRINT("HC Complete")
+        RETURN
+    ENDIF
+DONE
+
+SEQUENCE(706)
+    IFSTASH(THD)
+        PRINT("H4 Occupied")
+        ROUTE_CAPTION(1724,"Occupied")
+        ROUTE_ACTIVE(1724)
+        RETURN
+    ELSE
+        RESERVE(H_T4)
+        THROW(9016)
+        FWD(20) 
+        AT(CD_S4_HD) 
+        DELAY(2000)
+        PRINT("STOP")
+        STOP
+        STASH(THD)
+        IFTHROWN(9030)
+            CLOSE(9030)
+            FREE(E_B1)
+        ENDIF
+        IFTHROWN(9031)
+            CLOSE(9031)
+        ENDIF
+        FREE(F_B1)
+        FREE(F_B2)
+        PRINT("FREED b1 & b2")
+        PRINT("HD Complete")
+        RETURN
+    ENDIF
+DONE 
