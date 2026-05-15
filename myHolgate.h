@@ -24,28 +24,32 @@ SEQUENCE(751)
     RETURN
 DONE
 
-
 AUTOMATION(1700,"H: Exit to F")
     CALL(750)
     IFSTASH(THET)
         IFRESERVE(F_B3)
             PRINT("Ready to leave")
             THROW(9028)
+            IFGREEN(SIG_F4)
+                AMBER(SIG_F4)
+            ENDIF
             PICKUP_STASH(THET)
-            FWD(30)
+            FWD(10)
             AT(CD_S3_F1)
             RED(SIG_H1)
+            SPEED(20)
+            CALL(753)
         ELSE
             PRINT("Waiting for block F3")
             FOLLOW(1700)
         ENDIF
     ELSE
         PRINT("No Train")
-        RETURN
+        FOLLOW(1700)
     ENDIF  
-    CALL(608)
-    CALL(609)
-    CALL(610) 
+    AT(CD_S1_F)
+    SPEED(30)
+    FOLLOW(620)
 DONE
 
 AUTOMATION(1701,"H: Exit to E")
@@ -172,10 +176,12 @@ PRINT("Trying to get into HA")
     CLOSE(9019)
     FWD(20) 
     AT(CD_S4_HA) 
-    DELAY(1100)
+    DELAY(2000)
     PRINT("STOP")
-    ESTOP
+    STOP
     SCREEN(4,1,"H1 Occupied")
+    ROUTE_CAPTION(1721,"Occupied")
+    ROUTE_ACTIVE(1721)
     STASH(THA)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -183,10 +189,10 @@ PRINT("Trying to get into HA")
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
-        FREE(F_B1)
-        FREE(F_B2)
-        PRINT("FREED b1 & b2")
     ENDIF
+    FREE(F_B1)
+    FREE(F_B2)
+    PRINT("FREED b1 & b2")
     PRINT("HA Complete")
     RETURN
     PRINT("DID NOT RETURN")
@@ -197,9 +203,11 @@ PRINT("trying to get into HB")
     THROW(9019)
     FWD(20) 
     AT(CD_S4_HB) 
-    DELAY(1000)
-    ESTOP
+    DELAY(1500)
+    STOP
     SCREEN(4,2,"H2 Occupied")
+    ROUTE_CAPTION(1722,"Occupied")
+    ROUTE_ACTIVE(1722)
     STASH(THB)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -207,9 +215,9 @@ PRINT("trying to get into HB")
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
+    ENDIF
         FREE(F_B1)
         FREE(F_B2)
-    ENDIF
     RETURN
 ENDIF 
 IFNOT(CD_S4_HC) 
@@ -217,9 +225,11 @@ IFNOT(CD_S4_HC)
     THROW(9017)
     FWD(20) 
     AT(CD_S4_HC) 
-    DELAY(1000)
-    ESTOP
+    DELAY(1500)
+    STOP
     SCREEN(4,3,"H3 Occupied")
+    ROUTE_CAPTION(1723,"Occupied")
+    ROUTE_ACTIVE(1723)
     STASH(THC)
     IFTHROWN(9030)
         CLOSE(9030)
@@ -227,9 +237,9 @@ IFNOT(CD_S4_HC)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
+    ENDIF
         FREE(F_B1)
         FREE(F_B2)
-    ENDIF
     RETURN
 ENDIF 
 IFNOT(CD_S4_HD) 
@@ -237,19 +247,21 @@ IFNOT(CD_S4_HD)
     THROW(9016)
     FWD(20) 
     AT(CD_S4_HD) 
-    DELAY(1000)
+    DELAY(1500)
     STASH(THD)
-    ESTOP
-    SCREEN(4,3,"H3 Occupied")
+    STOP
+    SCREEN(4,4,"H4 Occupied")
+    ROUTE_CAPTION(1724,"Occupied")
+    ROUTE_ACTIVE(1724)
     IFTHROWN(9030)
         CLOSE(9030)
         FREE(E_B1)
     ENDIF
     IFTHROWN(9031)
         CLOSE(9031)
+    ENDIF
         FREE(F_B1) 
         FREE(F_B2)
-    ENDIF
     RETURN
 ENDIF 
 DONE
@@ -266,4 +278,44 @@ SEQUENCE(702)
         CLOSE(9028)
     ENDIF
     RETURN
+DONE
+
+//ParkRelease Release the block and stash of the relevant track
+SEQUENCE(753) 
+    IFCLOSED(9012)
+        IFTHROWN(9013)
+            FREE(H_T2)
+            CLEAR_STASH(THB)
+            ROUTE_DISABLED(1722)
+            ROUTE_CAPTION(1722,"Empty")
+            SCREEN(4,2,"H2 Empty")
+            RETURN
+        ENDIF
+        IFCLOSED(9013)
+            IFTHROWN(9014)
+                FREE(H_T3)
+                ROUTE_DISABLED(1723)
+                ROUTE_CAPTION(1723,"Empty")
+                CLEAR_STASH(THC)
+                SCREEN(4,3,"H3 Empty")
+                RETURN
+            ENDIF
+            IFCLOSED(9014)
+                FREE(H_T4)
+                CLEAR_STASH(THD)
+                ROUTE_DISABLED(1724)
+                ROUTE_CAPTION(1724,"Empty")
+                SCREEN(4,4,"H4 Empty")
+                RETURN 
+            ENDIF
+        ENDIF
+    ELSE
+            IFTHROWN(9012)
+                FREE(H_T1)
+                CLEAR_STASH(THA)
+                ROUTE_DISABLED(1721)
+                ROUTE_CAPTION(1721,"Empty")
+                SCREEN(4,1,"H1 Empty")
+                RETURN  
+        ENDIF
 DONE

@@ -49,19 +49,33 @@ DONE
 AUTOMATION(1202,"B: Around we go")
     CALL(250)
     FON(0)
+    PRINT("Calling 200")
     CALL(200)
+    PRINT("Calling 201")
     CALL(201)
+    PRINT("Calling 202")
     CALL(202)
+    PRINT("Calling 203")
     CALL(203)
+    PRINT("Calling 204")
     CALL(204)
+    PRINT("Sequence 290")
 SEQUENCE(290)
+    PRINT("Calling 205")
     CALL(205)
+    PRINT("Calling 206")
     CALL(206)
+    PRINT("Calling 207")
     CALL(207)
+    PRINT("Calling 208")
     CALL(208)
+    PRINT("Calling 209")
     CALL(209)
+    PRINT("Calling 210")
     CALL(210)
+    PRINT("Calling 211")
     CALL(211)
+    PRINT("Calling Park")
     CALL(252)
     FOFF(0)
     PRINT("Ended")
@@ -88,6 +102,7 @@ SEQUENCE(200)
         FON(1)
     ENDIF
     SAVE_SPEED
+    PRINT("SAVE_SPEED 200")
     RETURN
 DONE
 
@@ -96,8 +111,8 @@ SEQUENCE(201) //Progress to Block2
     CALL(253)
     CALL(251)
     AT(CD_S1_B1)
-    SPEED(45)
     SAVE_SPEED
+    PRINT("SAVE_SPEED 201")
     RETURN
 DONE
 
@@ -119,17 +134,18 @@ SEQUENCE(202) //Progress to Block2
             CLOSE(9010) //close turnouts D->B
         ENDIF
         IFAMBER(SIG_B1)
+            PRINT("SAVE_SPEED IFAMBER 202")
             SPEED(35)
+            SAVE_SPEED
         ENDIF
     ELSE
-        DELAY(4000)
+        AT(CD_S1_B1)
+        SAVE_SPEED
+        PRINT("SAVE_SPEED AT WAIT_WHILE_RED 202")
         WAIT_WHILE_RED(SIG_B1)
         FOLLOW(202)
     ENDIF    
     AT(CD_S2_B)
-    IFGREEN(SIG_B1)
-        RESTORE_SPEED
-    ENDIF
     RETURN
 DONE
 
@@ -138,6 +154,11 @@ SEQUENCE(203) //Progress to Block 3
     IFRESERVE(B_B3) //Reserve Next block
         IFAMBER(SIG_B2)
             SPEED(35)
+            PRINT("SET SPEED 35 IFAMBER 203")
+        ENDIF
+        IFGREEN(SIG_B2)
+            RESTORE_SPEED
+            PRINT("RESTORE_SPEED IFGREEN 203")
         ENDIF
     ELSE
        IF(CD_S3_B)
@@ -147,26 +168,29 @@ SEQUENCE(203) //Progress to Block 3
     ENDIF    
     AT(CD_S4_B)
     FREE(B_B1)
-    IFGREEN(SIG_B2)
-        RESTORE_SPEED
-    ENDIF   
+//    IFGREEN(SIG_B2)
+//        RESTORE_SPEED
+//    ENDIF   
     RETURN
 DONE
 
 SEQUENCE(204)
     AT(CD_S5_B)
-    IFTHROWN(9004)
+    IFTHROWN(9004) //If moved from Track A to Track B close points
         CLOSE(9004) // close turnouts A->B
     ENDIF
     RED(SIG_B2)   
     IFRED(SIG_B3)
         SPEED(15)
+        PRINT("SET SPEED 15 IFRED 204")
     ENDIF
     IFAMBER(SIG_B3)
         SPEED(25)
+        PRINT("SET SPEED IFAMBER 204")
     ENDIF
     IFGREEN(SIG_B3)
         RESTORE_SPEED
+        PRINT("RESTORE_SPEED IFGREEN 204")
     ENDIF
     AT(CD_S6_B)
     RETURN
@@ -176,6 +200,7 @@ SEQUENCE(205) //Progress to Block4
     IFRESERVE(B_B4) //Reserve Next block
         IFGREEN(SIG_B3)
             RESTORE_SPEED
+            PRINT("RESTORE_SPEED IFGREEN 205")
         ENDIF
         IFTHROWN(9020)
             CLOSE(9020) // prevent route A-B
@@ -183,8 +208,10 @@ SEQUENCE(205) //Progress to Block4
         ENDIF
         IFAMBER(SIG_B3)
             SPEED(35)
+            PRINT("SET SPEED 34 IFAMBER 205")
         ELSE
             RESTORE_SPEED
+            PRINT("RESTORE_SPEED 205")
         ENDIF
     ELSE
         AT(CD_S7_B)
@@ -209,8 +236,10 @@ SEQUENCE(207)
         ENDIF
         IFAMBER(SIG_B4)
             SPEED(35)
+            PRINT("SET SPEED IFAMBER 207")
         ELSE
             RESTORE_SPEED
+            PRINT("RESTORE_SPEED 207")
         ENDIF
     ELSE
         AT(CD_S9_B)
@@ -232,6 +261,7 @@ DONE
 
 SEQUENCE(209) //Progress to Block6
     FOFF(1)
+    FREE(B_B4)
     GREEN(SIG_B2)
     AMBER(SIG_B3)
     AT(CD_F7_B)
@@ -240,7 +270,7 @@ DONE
 
 SEQUENCE(210) //Progress to Block6
     RESERVE(B_B6) //Reserve Next block
-    FREE(B_B4) //Free previous block
+//    FREE(B_B4) //Free previous block
     GREEN(SIG_B3)
     AMBER(SIG_B4)
     SPEED(35)

@@ -36,6 +36,7 @@ AUTOMATION(1602,"F: Around we go" )
     CALL(603)
     CALL(604)
     CALL(605)
+    SEQUENCE(620) //CALL FROM HOGATE
     CALL(606)
     CALL(607)
     FOFF(1)
@@ -100,6 +101,11 @@ SEQUENCE(601)
         FOLLOW(601)
     ENDIF
     AT(CD_S9_F1)
+    IFLOCO(SoundLoco)
+        FON(2)
+        DELAY(250)
+        FOFF(2)
+    ENDIF
     SAVE_SPEED
     RETURN
 DONE
@@ -124,7 +130,7 @@ DONE
         SPEED(30)
         PRINT("speed 30")
     ENDIF
-    AT(CD_S4_F)
+    AT(CD_S5_F)
     RETURN 
 DONE  
 
@@ -161,23 +167,28 @@ SEQUENCE(606)
 DONE
 
 SEQUENCE(607)
-    AMBER(SIG_F4)
-    FREE(F_B2)
+    IFCLOSED(9028)
+    PRINT("CHANGING TO AMBER SIG_F4")
+        AMBER(SIG_F4)
+        FREE(F_B2)
+    ENDIF
     IFTHROWN(9027)
         CLOSE(9027)
     ENDIF
-    IFTHROWN(9028)
-        CLOSE(9028)
-    ENDIF
-    AT(CD_F3_F1)
+    AT(CD_F2_F)
     RETURN
 DONE
 
 SEQUENCE(608)
     IFRESERVE(F_B5)
+        IFTHROWN(9028)
+            CLOSE(9028)
+            CALL(751)
+        ELSE
+        GREEN(SIG_F4)
+        ENDIF
         FREE(F_B3)
         AMBER(SIG_F2)
-        GREEN(SIG_F4)
         SPEED(30)
     ELSE
         ESTOP
