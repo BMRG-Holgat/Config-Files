@@ -34,21 +34,26 @@ AUTOMATION(1700,"H: Exit to F")
                 AMBER(SIG_F4)
             ENDIF
             PICKUP_STASH(THET)
+            FON(2)
+            DELAY(2000)
+            FOFF(2)
             FWD(10)
             AT(CD_S3_F1)
             RED(SIG_H1)
             SPEED(20)
             CALL(753)
+            PRINT("Returned from 753")
         ELSE
             PRINT("Waiting for block F3")
             FOLLOW(1700)
         ENDIF
     ELSE
         PRINT("No Train")
-        FOLLOW(1700)
+        DONE
     ENDIF  
     AT(CD_S1_F)
     SPEED(30)
+    SAVE_SPEED
     FOLLOW(620)
 DONE
 
@@ -96,12 +101,14 @@ AUTOMATION(1721,"H:  Exit Track 1")
         PRINT("No Train")
         RETURN
     ENDIF
+    FON(2)
+    DELAY(1500)
+    FOFF(2)
     FWD(20)
     AT(CD_S3_H_ext)
     STOP
     STASH(THET)
     CALL(751)
-    RETURN
 DONE
 
 AUTOMATION(1722,"H:  Exit Track 2")
@@ -122,7 +129,6 @@ AUTOMATION(1722,"H:  Exit Track 2")
     STOP
     STASH(THET)
     CALL(751)
-    RETURN
 DONE
 
 AUTOMATION(1723,"H:  Exit Track 3")
@@ -143,7 +149,6 @@ AUTOMATION(1723,"H:  Exit Track 3")
     STOP
     STASH(THET)
     CALL(751)
-    RETURN
 DONE
 
 AUTOMATION(1724,"H:  Exit Track 4")
@@ -164,7 +169,6 @@ AUTOMATION(1724,"H:  Exit Track 4")
     STOP
     STASH(THET)
     CALL(751)
-    RETURN
 DONE
 
 
@@ -324,8 +328,6 @@ DONE
 SEQUENCE(703) //Testing new stash controlled siding
     IFSTASH(THA)
         PRINT("H1 Occupied")
-        ROUTE_CAPTION(1721,"Occupied")
-        ROUTE_ACTIVE(1721)
         CALL(704)
         RETURN
     ELSE
@@ -348,6 +350,9 @@ SEQUENCE(703) //Testing new stash controlled siding
         FREE(F_B2)
         PRINT("FREED b1 & b2")
         PRINT("HA Complete")
+        ROUTE_CAPTION(1721,"Occupied")
+        ROUTE_ACTIVE(1721)
+        SCREEN(4,1,"H1 Occupied")
         RETURN
     ENDIF
 DONE
@@ -355,8 +360,6 @@ DONE
 SEQUENCE(704)
     IFSTASH(THB)
         PRINT("H2 Occupied")
-        ROUTE_CAPTION(1722,"Occupied")
-        ROUTE_ACTIVE(1722)
         CALL(705)
         RETURN
     ELSE
@@ -377,6 +380,9 @@ SEQUENCE(704)
         ENDIF
         FREE(F_B1)
         FREE(F_B2)
+        ROUTE_CAPTION(1722,"Occupied")
+        ROUTE_ACTIVE(1722)
+        SCREEN(4,2,"H2 Occupied")
         PRINT("FREED b1 & b2")
         PRINT("HB Complete")
         RETURN
@@ -386,8 +392,6 @@ DONE
 SEQUENCE(705)
     IFSTASH(THC)
         PRINT("H3 Occupied")
-        ROUTE_CAPTION(1723,"Occupied")
-        ROUTE_ACTIVE(1723)
         CALL(706)
         RETURN
     ELSE
@@ -408,6 +412,9 @@ SEQUENCE(705)
         ENDIF
         FREE(F_B1)
         FREE(F_B2)
+        ROUTE_CAPTION(1723,"Occupied")
+        ROUTE_ACTIVE(1723)
+        SCREEN(4,3,"H3 Occupied")
         PRINT("FREED b1 & b2")
         PRINT("HC Complete")
         RETURN
@@ -417,8 +424,6 @@ DONE
 SEQUENCE(706)
     IFSTASH(THD)
         PRINT("H4 Occupied")
-        ROUTE_CAPTION(1724,"Occupied")
-        ROUTE_ACTIVE(1724)
         RETURN
     ELSE
         RESERVE(H_T4)
@@ -438,6 +443,9 @@ SEQUENCE(706)
         ENDIF
         FREE(F_B1)
         FREE(F_B2)
+        ROUTE_CAPTION(1724,"Occupied")
+        ROUTE_ACTIVE(1724)
+        SCREEN(4,4,"H4 Occupied")
         PRINT("FREED b1 & b2")
         PRINT("HD Complete")
         RETURN

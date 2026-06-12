@@ -125,7 +125,7 @@ AUTOMATION(1504,"E: Holgate")
     CALL(500)
     CALL(515)
     CALL(516)
-    CALL(701)
+    CALL(703)
 DONE
 
 AUTOMATION(1506,"E: E -> C")

@@ -37,12 +37,25 @@ AUTOMATION(1602,"F: Around we go" )
     CALL(604)
     CALL(605)
     SEQUENCE(620) //CALL FROM HOGATE
+    PRINT("FROM 1700 -> 620")
+    PRINT("Call 606")
     CALL(606)
+    PRINT("Return 606")
+    PRINT("Call 607")
     CALL(607)
+    PRINT("Return 607")
     FOFF(1)
+    PRINT("Call 608")
     CALL(608)
+    PRINT("Return 608")
+    PRINT("Call 609")
     CALL(609)
+    PRINT("Return 609")
+    PRINT("Call 610")
     CALL(610)
+    PRINT("Return 610")
+    PRINT("CALL 619")
+    CALL(619)
     FOFF(0) 
     IF(autoRunning_F)
         RETURN
@@ -86,6 +99,7 @@ SEQUENCE(601)
     ENDIF
     IFRESERVE(F_B2)
     FREE(F_B6)
+        PRINT("FREED 126")
         IFTHROWN(9022)
             CLOSE(9022)
         ENDIF
@@ -99,7 +113,7 @@ SEQUENCE(601)
             SPEED(45)
         ENDIF
     ELSE
-        DELAY(4000)
+        AT(CD_S9_F)
         WAIT_WHILE_RED(SIG_F4)
         FOLLOW(601)
     ENDIF
@@ -139,7 +153,9 @@ DONE
 
 SEQUENCE(605)
     IFRESERVE(F_B3)
+        PRINT("RESERVE 123")
         FREE(F_B1)
+        PRINT("FREED 121")
         IFTHROWN(9028)
             CLOSE(9028)
         ENDIF
@@ -161,8 +177,10 @@ DONE
 SEQUENCE(606)
     RED(SIG_F2)
     IFRESERVE(F_B4)
+    PRINT("RESERVE 124")
         RESTORE_SPEED
     ELSE
+        ESTOP
         FOLLOW(606)
     ENDIF
     AT(CD_F1_F)
@@ -171,9 +189,10 @@ DONE
 
 SEQUENCE(607)
     IFCLOSED(9028)
-    PRINT("CHANGING TO AMBER SIG_F4")
-        AMBER(SIG_F4)
+        PRINT("9028 CLOSED")
+        AMBER(SIG_F4)       
         FREE(F_B2)
+        PRINT("FREED 122")
     ENDIF
     IFTHROWN(9027)
         CLOSE(9027)
@@ -184,38 +203,50 @@ DONE
 
 SEQUENCE(608)
     IFRESERVE(F_B5)
+    PRINT("RESERVED 125")
         IFTHROWN(9028)
             CLOSE(9028)
             CALL(751)
-        ELSE
-        GREEN(SIG_F4)
         ENDIF
-        FREE(F_B3)
-        AMBER(SIG_F2)
         SPEED(30)
     ELSE
         ESTOP
         FOLLOW(608)
     ENDIF
+    AT(CD_F3_F)
+    RETURN 
+DONE
+
+SEQUENCE(609)
+    IFRED(SIG_F4)
+    ELSE
+        GREEN(SIG_F4)
+    ENDIF
+    FREE(F_B3)
+    PRINT("FREED 123")
+    AMBER(SIG_F2)
     AT(CD_F5_F)
     RETURN
 DONE
 
-SEQUENCE(609)
+SEQUENCE(610)
     IFRESERVE(F_B6)
+    PRINT("RESERVED 126")
         SPEED(30)
         FREE(F_B4)
+        PRINT("FREED 124")
         GREEN(SIG_F2)
-    ELSE    
+    ELSE  
         ESTOP
-        FOLLOW(609)
+        FOLLOW(610)
     ENDIF
     AT(CD_F8_F)
     RETURN
 DONE
 
-SEQUENCE(610)
+SEQUENCE(619)
     FREE(F_B5)
+    PRINT("FREED 125")
     ESTOP
     RETURN
 DONE
@@ -262,6 +293,7 @@ SEQUENCE(615)
 PRINT("SEQ 615")
     IFSTASH(THD)
         RED(SIG_F4)
+        SCREEN(4,5,"Holgate Full")
         FOLLOW(616)
     ELSE
         RETURN
