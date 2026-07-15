@@ -90,6 +90,15 @@ HAL(NeoPixel,720,20,NEO_RGB,{I2CMux_0,SubBus_4,0x61})
 //#include "myAutoSignals.h"
 #include "myStashAlias.h"
 
+//include track automations
+#include "myTrackA.h"
+#include "myTrackB.h"
+#include "myTrackC.h"
+#include "myTrackD.h"
+#include "myTrackE.h"
+#include "myTrackF.h"
+#include "myHolgate.h"
+#include "mySidingRoutes.h"
 /*
 #include "DCC.h"
 STEALTH_GLOBAL(
@@ -290,15 +299,7 @@ AUTOSTART SEQUENCE(180)
   */
 DONE
 
-//include track automations
-#include "myTrackA.h"
-#include "myTrackB.h"
-#include "myTrackC.h"
-#include "myTrackD.h"
-#include "myTrackE.h"
-#include "myTrackF.h"
-#include "myHolgate.h"
-#include "mySidingRoutes.h"
+
 
 //Show Sensors
 //JMRI_SENSOR(316,16) //

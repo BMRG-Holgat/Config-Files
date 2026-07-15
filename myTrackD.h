@@ -17,29 +17,46 @@
 *           1423 - Track 3
 *           1424 - Track 4
 *           1425 - Track 5
+*           1430 - Breaktime Select
+*           1431 - Breaktime
 *
 */
 
 
+
 SEQUENCE(450) //Disable routes
-    ROUTE_DISABLED(402)
+    ROUTE_DISABLED(1401)
     ROUTE_DISABLED(1402)
     ROUTE_DISABLED(1403)
     ROUTE_DISABLED(1404)
+    ROUTE_DISABLED(1421)
+    ROUTE_DISABLED(1422)
+    ROUTE_DISABLED(1423)
+    ROUTE_DISABLED(1424)
+    ROUTE_DISABLED(1425)
+    ROUTE_DISABLED(1430)
+    ROUTE_DISABLED(1431)
    RETURN
 DONE
 
 SEQUENCE(451) //Enable routes
-    ROUTE_ACTIVE(402)
+    ROUTE_ACTIVE(1401)
     ROUTE_ACTIVE(1402)
     ROUTE_ACTIVE(1403)
     ROUTE_ACTIVE(1404)
+    ROUTE_ACTIVE(1421)
+    ROUTE_ACTIVE(1422)
+    ROUTE_ACTIVE(1423)
+    ROUTE_ACTIVE(1424)
+    ROUTE_ACTIVE(1425)
+    ROUTE_ACTIVE(1430)
+    ROUTE_ACTIVE(1431)
 RETURN
 DONE
 
 AUTOMATION(1401,"D: Park Train") 
     ROUTE_HIDDEN(1401)
-    CALL(452)
+    CALL(454)
     ROUTE_ACTIVE(1401)
 DONE
 
@@ -69,7 +86,7 @@ AUTOMATION(1402, "D: Around We Go") //Leave yard to Station not stopping
     CALL(409)
     PRINT("Calling 410")
     CALL(410)
-    CALL(452) //Auto Park at end of route   
+    CALL(454) //Auto Park at end of route   
     FOFF(0)
     PRINT("D: Ended")
     IF(autoRunning_D)
@@ -105,7 +122,7 @@ AUTOMATION(1403, "D: Station Stop") //Leave yard to Station not stopping
     CALL(409)
     PRINT("Calling 410")
     CALL(410)
-    CALL(452) //Auto Park at end of route   
+    CALL(454) //Auto Park at end of route   
     FOFF(0)
     PRINT("D: Ended")
     IF(autoRunning_D)
@@ -130,63 +147,116 @@ AUTOMATION(1404, "D: Change to Track B") //Leave yard to Station not stopping
 DONE
 
 //Auto Park Sequence
-SEQUENCE(452)
-IFNOT(CD_F2_D1) 
-    RESERVE(D_B7)
-    CLOSE(9130)
-    FWD(PARKING) 
-    AT(CD_F2_D1) 
-    DELAY(2500)
-    ESTOP
-    FREE(D_B6)
-    STASH(TD1)
-    RETURN
-ENDIF 
-IFNOT(CD_F2_D2) 
-    RESERVE(D_B8)
-    THROW(9131)
-    FWD(PARKING) 
-    AT(CD_F2_D2) 
-    DELAY(1500)
-    ESTOP
-    FREE(D_B6)
-    STASH(TD2)
-    RETURN
-ENDIF 
-IFNOT(CD_F2_D3) 
-    RESERVE(D_B9)
-    THROW(9132)
-    FWD(PARKING) 
-    AT(CD_F2_D3) 
-    DELAY(700)
-    ESTOP
-    FREE(D_B6)
-    STASH(TD3)
+SEQUENCE(454)
+    IFSTASH(TD1)
+        FOLLOW(455)
+    ELSE
+        IFRESERVE(D_B7)
+            SCREEN(3,5,"Loading Track 1")
+            SCREEN(2,5,"Loading Track D1")
+            CLOSE(9130)
+            FWD(PARKING)
+            AT(CD_F2_D1)
+            DELAY(2500)
+            ESTOP
+            FREE(D_B6)
+            STASH(TD1)
+            SCREEN(3,5,"")
+            SCREEN(2,5,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
 
-    RETURN
-ENDIF 
-IFNOT(CD_F2_D4) 
-    RESERVE(D_B10)
-    THROW(9133)
-    FWD(PARKING) 
-    AT(CD_F2_D4) 
-    DELAY(750)
-    ESTOP
-    FREE(D_B6)
-    STASH(TD4)
-    RETURN
-ENDIF 
-IFNOT(CD_F2_D5) 
-    RESERVE(D_B11)
-    CLOSE(9133)
-    FWD(PARKING) 
-    AT(CD_F2_D5) 
-    DELAY(750)
-    ESTOP
-    FREE(D_B6)
-    STASH(TD5)
-    RETURN
-ENDIF 
+//Track 2
+SEQUENCE(455)
+    IFSTASH(TD2)
+        FOLLOW(456)
+    ELSE
+        IFRESERVE(D_B8)
+            SCREEN(3,5,"Loading Track 2")
+            SCREEN(2,5,"Loading Track D2")
+            THROW(9131)
+            FWD(PARKING)
+            AT(CD_F2_D2)
+            DELAY(1500)
+            ESTOP
+            FREE(D_B6)
+            STASH(TD2)
+            SCREEN(3,5,"")
+            SCREEN(2,5,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track3
+SEQUENCE(456)
+    IFSTASH(TD3)
+        FOLLOW(457)
+    ELSE
+        IFRESERVE(D_B9)
+            SCREEN(3,5,"Loading Track 3")
+            SCREEN(2,5,"Loading Track D3")
+            THROW(9132)
+            FWD(PARKING)
+            AT(CD_F2_D3)
+            DELAY(700)
+            ESTOP
+            FREE(D_B6)
+            STASH(TD3)
+            SCREEN(3,5,"")
+            SCREEN(2,5,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 4
+SEQUENCE(457)
+    IFSTASH(TD4)
+        FOLLOW(458)
+    ELSE
+        IFRESERVE(D_B10)
+            SCREEN(3,5,"Loading Track 4")
+            SCREEN(2,5,"Loading Track D4")
+            THROW(9133)
+            FWD(PARKING)
+            AT(CD_F2_D4)
+            DELAY(750)
+            ESTOP
+            FREE(D_B6)
+            STASH(TD4)
+            SCREEN(3,5,"")
+            SCREEN(2,5,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 5
+SEQUENCE(458)
+    IFSTASH(TD5)
+        SCREEN(3,5,"Yard B full!")
+        SCREEN(2,5,"Yard B Full")
+        ESTOP
+        FOLLOW(454)
+    ELSE
+        IFRESERVE(D_B11)
+            SCREEN(3,5,"Loading Track 5")
+            SCREEN(2,5,"Loading Track D5")
+            CLOSE(9133)
+            FWD(PARKING)
+            AT(CD_F2_D5)
+            DELAY(500)
+            ESTOP
+            FREE(D_B6)
+            STASH(TD5)
+            SCREEN(3,5,"")
+            SCREEN(2,5,"")
+            RETURN
+        ENDIF
+    ENDIF
 DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
@@ -521,15 +591,15 @@ PRINT("CALLED 1425")
     ENDIF
 DONE
 
-ROUTE(1400,"D: Breaktime Select") //Select whether to run auto or not
+ROUTE(1430,"D: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_D)
         UNLATCH(autoSelected_D)
         ROUTE_HIDDEN(1431)
-        ROUTE_CAPTION(1400,"Enable")
+        ROUTE_CAPTION(1430,"Enable")
     ELSE
         LATCH(autoSelected_D)
         ROUTE_ACTIVE(1431)
-        ROUTE_CAPTION(1400,"Disable")
+        ROUTE_CAPTION(1430,"Disable")
     ENDIF
 DONE
 

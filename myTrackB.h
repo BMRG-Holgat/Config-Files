@@ -6,16 +6,20 @@
 *           290 - 294 Free yard tracks
 *           295 - 299 Reserve yard tracks
 *           289 Auto Park
-*           1200 - Breaktime Select
-*           1231 - Break time
+*           1201 - Auto parking AUTOMATIC
 *           1202 - Around we go
 *           1221 - Track 1
 *           1222 - Track 2
 *           1223 - Track 3
 *           1224 - Track 4
 *           1225 - Track 5
+*           1230 - Breaktime Select
+*           1231 - Break time
 *
 */
+
+
+
 //Release Block when loco is removed from track
 SEQUENCE(250) //Disable routes
    ROUTE_DISABLED(1202)
@@ -25,6 +29,8 @@ SEQUENCE(250) //Disable routes
     ROUTE_DISABLED(1223)
     ROUTE_DISABLED(1224)
     ROUTE_DISABLED(1225)
+    ROUTE_DISABLED(1230)
+    ROUTE_DISABLED(1231)
    RETURN
 DONE
 
@@ -36,13 +42,15 @@ SEQUENCE(251) //Enable routes
     ROUTE_ACTIVE(1223)
     ROUTE_ACTIVE(1224)
     ROUTE_ACTIVE(1225)
+    ROUTE_ACTIVE(1230)
+    ROUTE_ACTIVE(1231)
     RETURN
 DONE
 
 
 AUTOMATION(1201,"B: Park Train")  
     ROUTE_HIDDEN(1201) 
-    CALL(252)
+    CALL(254)
     ROUTE_ACTIVE(1201)   
 DONE
 
@@ -76,7 +84,7 @@ SEQUENCE(290)
     PRINT("Calling 211")
     CALL(211)
     PRINT("Calling Park")
-    CALL(252)
+    CALL(254)
     FOFF(0)
     PRINT("Ended")
     IF(autoRunning_B)
@@ -157,6 +165,7 @@ SEQUENCE(203) //Progress to Block 3
             PRINT("SET SPEED 35 IFAMBER 203")
         ENDIF
         IFGREEN(SIG_B2)
+            SAVE_SPEED
             RESTORE_SPEED
             PRINT("RESTORE_SPEED IFGREEN 203")
         ENDIF
@@ -181,7 +190,7 @@ SEQUENCE(204)
     ENDIF
     RED(SIG_B2)   
     IFRED(SIG_B3)
-        SPEED(15)
+        SPEED(22)
         PRINT("SET SPEED 15 IFRED 204")
     ENDIF
     IFAMBER(SIG_B3)
@@ -193,6 +202,9 @@ SEQUENCE(204)
         PRINT("RESTORE_SPEED IFGREEN 204")
     ENDIF
     AT(CD_S6_B)
+     IFRED(SIG_B3)
+        SPEED(15)
+    ENDIF
     RETURN
 DONE
 
@@ -209,9 +221,9 @@ SEQUENCE(205) //Progress to Block4
         IFAMBER(SIG_B3)
             SPEED(35)
             PRINT("SET SPEED 34 IFAMBER 205")
-        ELSE
-            RESTORE_SPEED
-            PRINT("RESTORE_SPEED 205")
+ //       ELSE
+ //           RESTORE_SPEED
+ //           PRINT("RESTORE_SPEED 205")
         ENDIF
     ELSE
         AT(CD_S7_B)
@@ -320,218 +332,119 @@ SEQUENCE(253) //Release Parked Block dependant on turnout thrown
 DONE
 
 //Auto Park Sequence
-SEQUENCE(252)
-IFNOT(CD_F2_B1) 
-    RESERVE(B_B7)
-    SCREEN(2,1,"Block B7 Reserved")
-    CLOSE(9110)
-    FWD(PARKING) 
-    AT(CD_F4_B1)
-    SPEED(Reduced_Parking)
-    AT(CD_F2_B1)
-    DELAY(2000)
-    ESTOP
-    FREE(B_B6)
-    SCREEN(4,6,"")
-    STASH(TB1)
-    RETURN
-ENDIF 
-IFNOT(CD_F2_B2) 
-    RESERVE(B_B8)
-    SCREEN(2,2,"Block B8 Reserved")
-    THROW(9111)
-    FWD(PARKING) 
-    AT(CD_F4_B2)
-    SPEED(Reduced_Parking) 
-    AT(CD_F2_B2) 
-    DELAY(1500)
-    ESTOP
-    FREE(B_B6)
-    SCREEN(4,6,"")
-    STASH(TB2)
-    RETURN
-ENDIF 
-IFNOT(CD_F2_B3) 
-    RESERVE(B_B9)
-    SCREEN(2,3,"Block B9 Reserved")
-    THROW(9112)
-    FWD(PARKING) 
-    AT(CD_F4_B3)
-    SPEED(Reduced_Parking)
-    AT(CD_F2_B3) 
-    DELAY(500)
-    ESTOP
-    FREE(B_B6)
-    SCREEN(4,6,"")
-    STASH(TB3)
-    RETURN
-ENDIF 
-IFNOT(CD_F3_B4) 
-    RESERVE(B_B10)
-    SCREEN(2,4,"Block B10 Reserved")
-    THROW(9113)
-    FWD(PARKING) 
-    AT(CD_F4_B4)
-    SPEED(Reduced_Parking)
-    AT(CD_F3_B4) 
-    DELAY(500)
-    ESTOP
-    FREE(B_B6)
-    SCREEN(4,6,"")
-    STASH(TB4)
-    RETURN
-ENDIF 
-IFNOT(CD_F3_B5) 
-    RESERVE(B_B11)
-    SCREEN(2,5,"Block B11 Reserved")
-    CLOSE(9113)
-    FWD(PARKING) 
-    AT(CD_F4_B1)
-    SPEED(Reduced_Parking) 
-    AT(CD_F3_B5) 
-    DELAY(500)
-    ESTOP
-    FREE(B_B6)
-    SCREEN(4,6,"")
-    STASH(TB5)
-    RETURN
-ENDIF 
+SEQUENCE(254)
+    IFSTASH(TB1)
+        FOLLOW(255)
+    ELSE
+        IFRESERVE(B_B7)
+            SCREEN(3,3,"Loading Track 1")
+            SCREEN(2,3,"Loading Track B1")
+            CLOSE(9110)
+            FWD(PARKING)
+            AT(CD_F2_B1)
+            DELAY(2000)
+            ESTOP
+            FREE(B_B6)
+            STASH(TB1)
+            SCREEN(3,3,"")
+            SCREEN(2,3,"")
+            RETURN
+        ENDIF
+    ENDIF
 DONE
 
-/*
-
-AUTOMATION(213,"B: Station Stop Manual") //Station Stop
-    CALL(250)
-    IFRESERVE(A_B1)
-        RESERVE(B_B1) //Reserve Station block  
-        IFTHROWN(9001)
-            CLOSE(9001) //close turnouts A - B
-        ENDIF
-        IFCLOSED(9026)
-            THROW(9026) //close turnouts B - A
-        ENDIF 
-        IFCLOSED(UGS_T2_H) //Close Header
-            THROW(UGS_T2_H) 
-        ENDIF  
-        SPEED(20)
+//Track 2
+SEQUENCE(255)
+    IFSTASH(TB2)
+        FOLLOW(256)
     ELSE
-        FOLLOW(213)
+        IFRESERVE(B_B8)
+            SCREEN(3,3,"Loading Track 2")
+            SCREEN(2,3,"Loading Track B2")
+            THROW(9111)
+            FWD(PARKING)
+            AT(CD_F2_B2)
+            DELAY(1500)
+            ESTOP
+            FREE(B_B6)
+            STASH(TB2)
+            SCREEN(3,3,"")
+            SCREEN(2,3,"")
+            RETURN
+        ENDIF
     ENDIF
-    AT(CD_S1_A)
-FOLLOW(214)
+DONE
 
-SEQUENCE(214) //Stop at station
-    CALL(251)
-    STOP
-    CALL(200)
-    DELAYRANDOM(10000,15000)
-FOLLOW(215)
-
-SEQUENCE(215) //Release turnout block and set turnouts for return to A
-    IFRESERVE(B_B2)
-        IFRESERVE(A_B2) //reserve Block 2
-            IFCLOSED(9004)
-                THROW(9004) //close turnouts A->B
-            ENDIF
-        ENDIF
-        IFTHROWN(9007)
-            CLOSE(9007) //close turnouts B->A
-        ENDIF
-        GREEN(SIG_B1)
+//Track3
+SEQUENCE(256)
+    IFSTASH(TB3)
+        FOLLOW(257)
     ELSE
-        RED(SIG_A1) //Set signal to red if block 2 not free
-        STOP
-        FOLLOW(215)
-    ENDIF
-    AT(CD_S2_A)
-FOLLOW(216)
-
-SEQUENCE(216)
-    RED(SIG_A1)
-    FREE(A_B1)
-    IFTHROWN(9026)
-        CLOSE(9026) //close turnouts B->A 
-    ENDIF
-FOLLOW(205)
-    
-// Start of main FULL AUTOMATIONS for track B
-
-AUTOMATION(1213,"B: Station Stop Auto") //Station Stop
-    CALL(250)
-    IFRESERVE(A_B1)
-        RESERVE(B_B1) //Reserve Station block  
-        IFTHROWN(9001)
-            CLOSE(9001) //close turnouts A - B
+        IFRESERVE(B_B9)
+            SCREEN(3,3,"Loading Track 3")
+            SCREEN(2,3,"Loading Track B3")
+            THROW(9112)
+            FWD(PARKING)
+            AT(CD_F2_B3)
+            DELAY(500)
+            ESTOP
+            FREE(B_B6)
+            STASH(TB3)
+            SCREEN(3,3,"")
+            SCREEN(2,3,"")
+            RETURN
         ENDIF
-        IFCLOSED(9026)
-            THROW(9026) //close turnouts B - A
-        ENDIF 
-        IFCLOSED(UGS_T2_H) //Close Header
-            THROW(UGS_T2_H) 
-        ENDIF  
-        FWD(20)
+    ENDIF
+DONE
+
+//Track 4
+SEQUENCE(257)
+    IFSTASH(TB4)
+        FOLLOW(258)
     ELSE
-        FOLLOW(1213)
-    ENDIF
-    AT(CD_S1_AA)
-    SAVE_SPEED
-FOLLOW(1214)
-
-SEQUENCE(1214) //Stop at station
-    CALL(251)
-    IFLOCO(89,90)
-        FON(1)
-    ENDIF
-    DELAY(3000)
-    STOP
-    CALL(200)
-    FREE(B_B1)
-    IFLOCO(89,90)
-        FON(8)
-    ENDIF
-    DELAYRANDOM(10000,15000)
-    IFLOCO(89,90)
-        DELAY(500)
-        FON(4)
-        DELAY(19000)
-        FOFF(4)
-        DELAY(500)
-        FON(10)
-        DELAY(500)
-        FOFF(10)
-    RESTORE_SPEED
-FOLLOW(1215)
-
-SEQUENCE(1215) //Release turnout block and set turnouts for return to A
-    IFRESERVE(B_B2)
-        IFRESERVE(A_B2) //reserve Block 2
-            IFCLOSED(9004)
-                THROW(9004) //close turnouts A->B
-            ENDIF
+        IFRESERVE(B_B10)
+            SCREEN(3,3,"Loading Track 4")
+            SCREEN(2,3,"Loading Track B4")
+            THROW(9113)
+            FWD(PARKING)
+            AT(CD_F3_B4)
+            DELAY(500)
+            ESTOP
+            FREE(B_B6)
+            STASH(TB4)
+            SCREEN(3,3,"")
+            SCREEN(2,3,"")
+            RETURN
         ENDIF
-        IFTHROWN(9007)
-            CLOSE(9007) //close turnouts B->A
-        ENDIF
-        GREEN(SIG_B1)
+    ENDIF
+DONE
+
+//Track 5
+SEQUENCE(258)
+    IFSTASH(TB5)
+        SCREEN(3,3,"Yard B full!")
+        SCREEN(2,3,"Yard B Full")
+        ESTOP
+        FOLLOW(254)
     ELSE
-        RED(SIG_A1) //Set signal to red if block 2 not free
-        WAIT_WHILE_RED(SIG_A1)
-        FOLLOW(1215)
+        IFRESERVE(B_B11)
+            SCREEN(3,3,"Loading Track 5")
+            SCREEN(2,3,"Loading Track B5")
+            CLOSE(9113)
+            FWD(PARKING)
+            AT(CD_F3_B5)
+            DELAY(500)
+            ESTOP
+            FREE(B_B6)
+            STASH(TB5)
+            SCREEN(3,3,"")
+            SCREEN(2,3,"")
+            RETURN
+        ENDIF
     ENDIF
-    AT(CD_S2_A)
-FOLLOW(1216)
+DONE
 
-SEQUENCE(1216)
-    SPEED(45)
-    RED(SIG_A1)
-    FREE(A_B1)
-    FREE(A_B2)
-    IFTHROWN(9026)
-        CLOSE(9026) //close turnouts B->A 
-    ENDIF
-    SAVE_SPEED
-FOLLOW(1205)
-*/
+
 
 AUTOMATION(1221,"B: Run Track 1") //Auto Track 1
    CALL(250)
@@ -619,44 +532,15 @@ AUTOMATION(1225,"B: Run Track 5") //Auto Track 5
 DONE
 
 
-/*
-//Suggested improvements for track selection
-//select different route depending on reserve status of blocks
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-DELAY(.....) 
-IFRESERVEB_B2) FOLLOW(1213) ENDIF
-/// had two goes .. no banana
-DONE
-SEQUENCE1213)
-.... carry on with block reserved
-
-
-HAL(Bitmap,777,1)
-
-RESET(777)
-BITMAP_OR(777,5)  // start counter at 5
-
-SEQUENCE(xxxx)
-  IFRESERVE(yyyy) FOLLOW(zzzz) DONE
-  DELAY(1000)
-  BITMAP_DEC(777)
-  IF(777) FOLLOW(xxxx)
-  // no banana
-  DONE
-SEQUENCE(zzzz)
-  // Have banana 
-*/
-
-
-ROUTE(1200,"B: Breaktime Select") //Select whether to run auto or not
+ROUTE(1230,"B: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_B)
         UNLATCH(autoSelected_B)
         ROUTE_HIDDEN(1231)
-        ROUTE_CAPTION(1300,"Enable")
+        ROUTE_CAPTION(1230,"Enable")
     ELSE
         LATCH(autoSelected_B)
         ROUTE_ACTIVE(1231)
-        ROUTE_CAPTION(1300,"Disable")
+        ROUTE_CAPTION(1230,"Disable")
     ENDIF
 DONE
 
