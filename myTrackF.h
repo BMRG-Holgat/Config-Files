@@ -118,17 +118,21 @@ SEQUENCE(601)
         FOLLOW(601)
     ENDIF
     AT(CD_S9_F1)
-    IFLOCO(SoundLoco)
-        FON(2)
-        DELAY(250)
-        FOFF(2)
-    ENDIF
     SAVE_SPEED
     RETURN
 DONE
 
 SEQUENCE(602)
     RED(SIG_F4)
+    IFLOCO(SoundLoco)
+        FON(2)
+        DELAY(1000)
+        FOFF(2)
+        DELAY(1500)
+        FON(2) 
+        DELAY(1000)
+        FOFF(2)
+    ENDIF
     AT(CD_S6_F)
     RETURN
 DONE
@@ -332,6 +336,15 @@ SEQUENCE(617)
         FOLLOW(614)
     ENDIF
     AT(CD_S9_F1)
+    IFLOCO(SoundLoco)
+        FON(2)
+        DELAY(1000)
+        FOFF(2)
+        DELAY(1500)
+        FON(2) 
+        DELAY(1000)
+        FOFF(2)
+    ENDIF
     SAVE_SPEED
     RETURN
 DONE

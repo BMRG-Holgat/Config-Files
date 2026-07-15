@@ -2,47 +2,53 @@
 * myTrackC.h
 * Add in the routes for trackD only
 *
-* V 0.1.0
+* V 0.1.2
 *           390 - 394 Free yard tracks
 *           395 - 399 Reserve yard tracks
 *           301 - Auto Park
-*           1300 - Breaktime Select
-*           1301 - Break time
-*           1302 Around We Go
+*           1301 - Automatic parking
+*           1302 - Around We Go
+*           1303 - C -> E
 *           1321 - Track 1
 *           1322 - Track 2
 *           1323 - Track 3
 *           1324 - Track 4
-*           1325 - TRack 5
+*           1325 - Track 5
+*           1330 - Breaktime Select
+*           1331 - Breaktime 
 *
 */
 
 SEQUENCE(350) //Disable routes
-   ROUTE_DISABLED(1321)
-   ROUTE_DISABLED(1322)
-   ROUTE_DISABLED(1323)
-   ROUTE_DISABLED(1324)
-   ROUTE_DISABLED(1325)
-   ROUTE_DISABLED(1302)
-   ROUTE_DISABLED(1303)
-   RETURN
+    ROUTE_DISABLED(1302)
+    ROUTE_DISABLED(1303)
+    ROUTE_DISABLED(1321)
+    ROUTE_DISABLED(1322)
+    ROUTE_DISABLED(1323)
+    ROUTE_DISABLED(1324)
+    ROUTE_DISABLED(1325)
+    ROUTE_DISABLED(1330)
+    ROUTE_DISABLED(1331)
+    RETURN
 DONE
 
 SEQUENCE(351) //Enable routes
+    ROUTE_ACTIVE(1302)
+    ROUTE_ACTIVE(1303)
     ROUTE_ACTIVE(1321)
     ROUTE_ACTIVE(1322)
     ROUTE_ACTIVE(1323)
     ROUTE_ACTIVE(1324)
     ROUTE_ACTIVE(1325)
-    ROUTE_ACTIVE(1302)
-    ROUTE_ACTIVE(1303)
+    ROUTE_ACTIVE(1330)
+    ROUTE_ACTIVE(1331)
 RETURN
 DONE
 
 //Manually activate the auto park sequence
 AUTOMATION(1301,"C: Park Train")   
     ROUTE_HIDDEN(1301)
-    CALL(352)
+    CALL(354)
     ROUTE_ACTIVE(1301)
 DONE
 
@@ -99,8 +105,8 @@ AUTOMATION(1303,"C: Change to E")
     CALL(509)
     PRINT("Calling 510")
     CALL(510)
-    PRINT("Calling 552 Autopark")
-    CALL(552)
+    PRINT("Calling 554 Autopark")
+    CALL(554)
     FOFF(0)
     PRINT("Ended")
     IF(autoRunning_C)
@@ -113,57 +119,117 @@ DONE
 
 
 //Auto Park Sequence
-SEQUENCE(352)
-IFNOT(CD_F8_C1) 
-    RESERVE(C_B6)
-    CLOSE(9123)
-    RESTORE_SPEED 
-    AT(CD_F8_C1)
-    DELAY(3000) ESTOP
-    FREE(C_B5)
-    STASH(TC1)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_C2) 
-    RESERVE(C_B7)
-    THROW(9123)
-    RESTORE_SPEED 
-    AT(CD_F8_C2) 
-    DELAY(2000) ESTOP
-    FREE(C_B5)
-    STASH(TC2)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_C3) 
-    RESERVE(C_B8)
-    THROW(9122)
-    RESTORE_SPEED 
-    AT(CD_F8_C3)
-    DELAY(1600) ESTOP
-    FREE(C_B5)
-    STASH(TC3)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_C4) 
-    RESERVE(C_B9)
-    THROW(9121)
-    RESTORE_SPEED 
-    AT(CD_F8_C4)
-    DELAY(600) ESTOP
-    FREE(C_B5)
-    STASH(TC4)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_C5) 
-    RESERVE(C_B10)
-    CLOSE(9120)
-    RESTORE_SPEED 
-    AT(CD_F8_C5) 
-    DELAY(400) ESTOP
-    FREE(C_B5)
-    STASH(TC5)
-    RETURN
-ENDIF 
+//Track 1 
+SEQUENCE(354)
+    IFSTASH(TC1)
+        FOLLOW(355)
+    ELSE
+        IFRESERVE(C_B6)
+            SCREEN(4,4,"Loading Track 1")
+            SCREEN(2,4,"Loading Track C1")
+            CLOSE(9123)
+            FWD(PARKING)
+            AT(CD_F8_C1)
+            DELAY(3000)
+            ESTOP
+            FREE(C_B5)
+            STASH(TC1)
+            SCREEN(4,4,"")
+            SCREEN(2,4,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 2
+SEQUENCE(355)
+    IFSTASH(TC2)
+        FOLLOW(356)
+    ELSE
+        IFRESERVE(C_B7)
+            SCREEN(4,4,"Loading Track 2")
+            SCREEN(2,4,"Loading Track C2")
+            THROW(9123)
+            FWD(PARKING)
+            AT(CD_F8_C2)
+            DELAY(2000)
+            ESTOP
+            FREE(C_B5)
+            STASH(TC2)
+            SCREEN(4,4,"")
+            SCREEN(2,4,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track3
+SEQUENCE(356)
+    IFSTASH(TC3)
+        FOLLOW(357)
+    ELSE
+        IFRESERVE(C_B8)
+            SCREEN(4,4,"Loading Track 3")
+            SCREEN(2,4,"Loading Track C3")
+            THROW(9122)
+            FWD(PARKING)
+            AT(CD_F8_C3)
+            DELAY(1600)
+            ESTOP
+            FREE(C_B5)
+            STASH(TC3)
+            SCREEN(4,4,"")
+            SCREEN(2,4,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 4
+SEQUENCE(357)
+    IFSTASH(TC4)
+        FOLLOW(358)
+    ELSE
+        IFRESERVE(C_B9)
+            SCREEN(4,4,"Loading Track 4")
+            SCREEN(2,4,"Loading Track C4")
+            THROW(9121)
+            FWD(PARKING)
+            AT(CD_F8_C4)
+            DELAY(600)
+            ESTOP
+            FREE(C_B5)
+            STASH(TC4)
+            SCREEN(4,4,"")
+            SCREEN(2,4,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 5
+SEQUENCE(358)
+    IFSTASH(TC5)
+        SCREEN(4,4,"Yard C full!")
+        SCREEN(2,4,"Yard C Full")
+        ESTOP
+        FOLLOW(354)
+    ELSE
+        IFRESERVE(C_B10)
+            SCREEN(4,4,"Loading Track 5")
+            SCREEN(2,4,"Loading Track C5")
+            CLOSE(9120)
+            FWD(PARKING)
+            AT(CD_F8_C5)
+            DELAY(400)
+            ESTOP
+            FREE(C_B5)
+            STASH(TC5)
+            SCREEN(4,4,"")
+            SCREEN(2,4,"")
+            RETURN
+        ENDIF
+    ENDIF
 DONE
 
 //Automated drive
@@ -301,7 +367,7 @@ SEQUENCE(307)
     ENDIF
     FREE(C_B4)
     SCREEN(4,4,"")
-    CALL(352) //Auto Park
+    CALL(354) //Auto Park
     RETURN
 DONE
 
@@ -402,7 +468,7 @@ SEQUENCE(353) //Release Parked Block dependant on turnout thrown
     ENDIF
     IFCLOSED(9129) //Track FD5
         FREE(C_B10)
-        SCREEN(2,5,"")
+        SCREEN(2,4,"")
         CLEAR_STASH(TC5)
         RETURN
     ENDIF
@@ -497,15 +563,15 @@ AUTOMATION(1325,"C: Run Track 5") //Auto Track 5
    ENDIF 
 DONE
 
-ROUTE(1300,"C: Breaktime Select") //Select whether to run auto or not
+ROUTE(1330,"C: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_C)
         UNLATCH(autoSelected_C)
-        ROUTE_HIDDEN(1301)
-        ROUTE_CAPTION(1300,"Enable")
+        ROUTE_HIDDEN(1331)
+        ROUTE_CAPTION(1330,"Enable")
     ELSE
         LATCH(autoSelected_C)
-        ROUTE_ACTIVE(1301)
-        ROUTE_CAPTION(1300,"Disable")
+        ROUTE_ACTIVE(1331)
+        ROUTE_CAPTION(1330,"Disable")
     ENDIF
 DONE
 
@@ -513,9 +579,9 @@ DONE
 //Automatic Running
 AUTOMATION(1331,"C: Break time")
 PRINT("At start of auto selection for C")
-    SCREEN(2,5,"Yard C Automatic")
-    SCREEN(3,5,"Yard C Automatic")
-    SCREEN(4,5,"Yard C Automatic")
+    SCREEN(2,4,"Yard C Automatic")
+    SCREEN(3,4,"Yard C Automatic")
+    SCREEN(4,4,"Yard C Automatic")
 IF(autoSelected_C)
     LATCH(autoRunning_C) //Full auto Track C
     ROUTE_DISABLED(1331)
@@ -525,9 +591,9 @@ IF(autoSelected_C)
 ELSE
     ROUTE_ACTIVE(1331)
     ROUTE_CAPTION(1331,"STOPPED")
-    SCREEN(2,5,"")
-    SCREEN(3,5,"")
-    SCREEN(4,5,"")
+    SCREEN(2,4,"")
+    SCREEN(3,4,"")
+    SCREEN(4,4,"")
     UNLATCH(autoRunning_C) //Full auto Track B
     DONE
 ENDIF

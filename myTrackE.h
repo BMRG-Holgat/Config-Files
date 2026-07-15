@@ -8,16 +8,33 @@
 *           501 - 1501> Train
 *           502 Around We Go
 *           1501 - Park Train
-
+*           1502 - Around we go
+*           1503 - Station stop
+*           1504 - E -> Holgate  hand off to Holgate storage
+*           1505 - Auto station stop/bypass // not working atm
+*           1506 - E -> C
+*           1507 - E -> F
+*           Track Exits auto
+*           1521 - Track 1
+*           1522 - Track 2
+*           1523 - Track 3
+*           1524 - Track 4
+*           1525 - Track 5
+*
+*           Automatics
+*           1530 - Break Select
+*           1531 - Break time automatic running
 *
 *
 */
+//#include "myTrackE_alt.h"
 
 SEQUENCE(550) //Disable routes
     ROUTE_DISABLED(1502)
     ROUTE_DISABLED(1503)
     ROUTE_DISABLED(1504)
     ROUTE_DISABLED(1506)
+    ROUTE_DISABLED(1507)
     ROUTE_DISABLED(1521)
     ROUTE_DISABLED(1522)
     ROUTE_DISABLED(1523)
@@ -31,6 +48,7 @@ SEQUENCE(551) //Enable routes
     ROUTE_ACTIVE(1503)
     ROUTE_ACTIVE(1504)
     ROUTE_ACTIVE(1506)
+    ROUTE_ACTIVE(1507)
     ROUTE_ACTIVE(1521)
     ROUTE_ACTIVE(1522)
     ROUTE_ACTIVE(1523)
@@ -41,7 +59,7 @@ DONE
 
 AUTOMATION(1501,"E: Park Train")
     ROUTE_HIDDEN(1501)
-    CALL(552)
+    CALL(554)
     ROUTE_ACTIVE(1501)
 DONE
 
@@ -71,8 +89,8 @@ AUTOMATION(1502,"E: Around we go")
     CALL(509)
     PRINT("Calling 510")
     CALL(510)
-    PRINT("Calling 552 Autopark")
-    CALL(552)
+    PRINT("Calling 554 Autopark")
+    CALL(554)
     FOFF(0)
     PRINT("Ended")
     IF(autoRunning_E)
@@ -110,8 +128,8 @@ AUTOMATION(1503,"E: To the Station")
     CALL(509)
     PRINT("Calling 510")
     CALL(510)
-    PRINT("Calling 552 Autopark")
-    CALL(552)
+    PRINT("Calling 554 Autopark")
+    CALL(554)
     FOFF(0)
     PRINT("Ended")
     IF(autoRunning_E)
@@ -134,6 +152,11 @@ AUTOMATION(1506,"E: E -> C")
     CALL(518)
     CALL(551)
     CALL(390)
+DONE
+
+AUTOMATION(1507,"E -> F")
+    CALL(500)
+    FON(0)
 DONE
 
 SEQUENCE(1505)  //Around we go station  switching
@@ -172,8 +195,8 @@ SEQUENCE(1505)  //Around we go station  switching
     CALL(508)
     PRINT("Calling 509")
     CALL(509)
-    PRINT("Calling 552 Autopark")
-    CALL(552)
+    PRINT("Calling 554 Autopark")
+    CALL(554)
     FOFF(0)
     PRINT("Ended")
     IF(autoRunning_E)
@@ -233,6 +256,15 @@ DONE
 
 SEQUENCE(503) //Bypass station
     RED(SIG_E4)
+    IFLOCO(SoundLoco)
+        FON(2)
+        DELAY(1000)
+        FOFF(2)
+        DELAY(1500)
+        FON(2) 
+        DELAY(1000)
+        FOFF(2)
+    ENDIF
     AT(CD_S6_E)    
     RETURN 
 DONE
@@ -242,6 +274,7 @@ SEQUENCE(504)
         THROW(9003)
     ENDIF
     RESTORE_SPEED
+    DELAY(1500)
     IFRED(SIG_E2)
         SPEED(35)
         PRINT("speed 35")
@@ -276,8 +309,8 @@ SEQUENCE(506)
         FOLLOW(506)
     ENDIF
     IFAMBER(SIG_E2)
-        SPEED(38)
-        PRINT("speed 38")
+        SPEED(40)
+        PRINT("speed 40")
     ENDIF
     AT(CD_S3_E)
     SAVE_SPEED
@@ -468,63 +501,117 @@ SEQUENCE(518)
     SAVE_SPEED
     RETURN
 DONE
-    //Auto Park Sequence
-SEQUENCE(552)
-IFNOT(CD_F8_E1) 
-    RESERVE(E_B6)
-    CLOSE(9141)
-    FWD(30) 
-    AT(CD_F8_E1) 
-    DELAY(1500)
-    ESTOP
-    FREE(E_B5)
-    STASH(TE1)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_E2) 
-    RESERVE(E_B7)
-    THROW(9141)
-    FWD(30) 
-    AT(CD_F8_E2)
-    DELAY(1000)
-    ESTOP
-    FREE(E_B5)
-    STASH(TE2)
-    RETURN
-ENDIF 
-IFNOT(CD_F8_E3) 
-    RESERVE(E_B8)
-    THROW(9142)
-    FWD(30) 
-    AT(CD_F8_E3) 
-    DELAY(500)
-    ESTOP
-    FREE(E_B5)
-    STASH(TE3)
-    RETURN
-ENDIF 
-IFNOT(CD_F7_E4) 
-    RESERVE(E_B9)
-    THROW(9143)
-    FWD(30) 
-    AT(CD_F7_E4) 
-    DELAY(250)
-    ESTOP
-    FREE(E_B5)
-    STASH(TE4)
-    RETURN
-ENDIF 
-IFNOT(CD_F7_E5) 
-    RESERVE(E_B10)
-    CLOSE(9144)
-    FWD(30) 
-    AT(CD_F7_E5)
-    DELAY(250)
-    ESTOP
-    FREE(E_B5)
-    STASH(TE5)
-    RETURN
-ENDIF 
+//Track 1 
+SEQUENCE(554)
+    IFSTASH(TE1)
+        FOLLOW(555)
+    ELSE
+        IFRESERVE(E_B6)
+            SCREEN(4,6,"Loading Track 1")
+            SCREEN(2,6,"Loading Track E1")
+            CLOSE(9141)
+            FWD(PARKING)
+            AT(CD_F8_E1)
+            DELAY(1000)
+            ESTOP
+            FREE(E_B5)
+            STASH(TE1)
+            SCREEN(4,6,"")
+            SCREEN(2,6,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 2
+SEQUENCE(555)
+    IFSTASH(TE2)
+        FOLLOW(556)
+    ELSE
+        IFRESERVE(E_B7)
+            SCREEN(4,6,"Loading Track 2")
+            SCREEN(2,6,"Loading Track E2")
+            THROW(9141)
+            FWD(PARKING)
+            AT(CD_F8_E2)
+            DELAY(1000)
+            ESTOP
+            FREE(E_B5)
+            STASH(TE2)
+            SCREEN(4,6,"")
+            SCREEN(2,6,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track3
+SEQUENCE(556)
+    IFSTASH(TE3)
+        FOLLOW(557)
+    ELSE
+        IFRESERVE(E_B8)
+            SCREEN(4,6,"Loading Track 3")
+            SCREEN(2,6,"Loading Track E3")
+            THROW(9142)
+            FWD(PARKING)
+            AT(CD_F8_E3)
+            DELAY(1000)
+            ESTOP
+            FREE(E_B5)
+            STASH(TE3)
+            SCREEN(4,6,"")
+            SCREEN(2,6,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 4
+SEQUENCE(557)
+    IFSTASH(TE4)
+        FOLLOW(558)
+    ELSE
+        IFRESERVE(E_B9)
+            SCREEN(4,6,"Loading Track 4")
+            SCREEN(2,6,"Loading Track E4")
+            THROW(9143)
+            FWD(PARKING)
+            AT(CD_F7_E4)
+            DELAY(1000)
+            ESTOP
+            FREE(E_B5)
+            STASH(TE4)
+            SCREEN(4,6,"")
+            SCREEN(2,6,"")
+            RETURN
+        ENDIF
+    ENDIF
+DONE
+
+//Track 5
+SEQUENCE(558)
+    IFSTASH(TE5)
+        SCREEN(4,6,"Yard E full!")
+        SCREEN(2,6,"Yard E Full")
+        ESTOP
+        FOLLOW(554)
+    ELSE
+        IFRESERVE(E_B10)
+            SCREEN(4,6,"Loading Track 5")
+            SCREEN(2,6,"Loading Track E5")
+            CLOSE(9144)
+            FWD(PARKING)
+            AT(CD_F7_E5)
+            DELAY(1000)
+            ESTOP
+            FREE(E_B5)
+            STASH(TE5)
+            SCREEN(4,6,"")
+            SCREEN(2,6,"")
+            RETURN
+        ENDIF
+    ENDIF
 DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
@@ -647,15 +734,15 @@ AUTOMATION(1525,"E: Run Track 5") //Auto Track 5
    ENDIF 
 DONE
 
-ROUTE(1500,"E: Breaktime Select") //Select whether to run auto or not
+ROUTE(1530,"E: Breaktime Select") //Select whether to run auto or not
     IF(autoSelected_E)
         UNLATCH(autoSelected_E)
         ROUTE_HIDDEN(1531)
-        ROUTE_CAPTION(1500,"Enable")
+        ROUTE_CAPTION(1530,"Enable")
     ELSE
         LATCH(autoSelected_E)
         ROUTE_ACTIVE(1531)
-        ROUTE_CAPTION(1500,"Disable")
+        ROUTE_CAPTION(1530,"Disable")
     ENDIF
 DONE
 
