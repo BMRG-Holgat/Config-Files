@@ -34,6 +34,7 @@ ALIAS(E_STN,210) // Track E Station
 ALIAS(F_H,211)
 ALIAS(CHOOSE_STN,212)
 
+
 //Route latches to prevent Signals changing
 ALIAS(AUTO_A,210)
 ALIAS(AUTO_B,211)

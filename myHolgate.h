@@ -107,6 +107,7 @@ AUTOMATION(1721,"H:  Exit Track 1")
     FOFF(2)
     FWD(20)
     AT(CD_S3_H_ext)
+    DELAY(1000)
     STOP
     STASH(THET)
     CALL(751)
@@ -127,6 +128,7 @@ AUTOMATION(1722,"H:  Exit Track 2")
     ENDIF
     FWD(20)
     AT(CD_S3_H_ext)
+    DELAY(1000)
     STOP
     STASH(THET)
     CALL(751)
@@ -147,6 +149,7 @@ AUTOMATION(1723,"H:  Exit Track 3")
     ENDIF
     FWD(20)
     AT(CD_S3_H_ext)
+    DELAY(1000)
     STOP
     STASH(THET)
     CALL(751)
@@ -167,6 +170,7 @@ AUTOMATION(1724,"H:  Exit Track 4")
     ENDIF
     FWD(20)
     AT(CD_S3_H_ext)
+    DELAY(1000)
     STOP
     STASH(THET)
     CALL(751)

@@ -92,6 +92,14 @@ SEQUENCE(290)
     ENDIF
 DONE   
 
+AUTOMATION(1203,"B: B TO A")
+    CALL(200)
+    CALL(201)
+    CALL(212)
+    CALL(213)
+    CALL(214)
+    FOLLOW(1103)
+DONE
 
 SEQUENCE(200) 
     IFRESERVE(B_B1) //Reserve Block 1
@@ -121,6 +129,52 @@ SEQUENCE(201) //Progress to Block2
     AT(CD_S1_B1)
     SAVE_SPEED
     PRINT("SAVE_SPEED 201")
+    RETURN
+DONE
+
+SEQUENCE(212)
+    RESERVE(B_B2) //Reserve Next block
+        IFRESERVE(A_B2)
+            RED(SIG_A1)
+            RESERVE(A_B3)
+            IFTHROWN(9004)
+                CLOSE(9004) //close turnouts A->B
+            ENDIF
+            IFCLOSED(9007)
+                THROW(9007) //close turnouts B->A   
+            ENDIF
+            SPEED(30)
+        ELSE
+            RED(SIG_B1)
+            SAVE_SPEED
+            DELAY(5000)
+            PRINT("SAVE_SPEED AT WAIT_WHILE_RED 202")
+            START_SHARED(215)
+//            WAIT_WHILE_RED(SIG_B1)
+            FOLLOW(212)
+        ENDIF    
+    AT(CD_S2_B)
+    RETURN      
+DONE
+
+SEQUENCE(213)
+    RED(SIG_B1)
+    RETURN
+DONE
+
+SEQUENCE(214)
+    AT(CD_S4_A)
+    DELAY(1000)
+    RED(SIG_A2)
+    AT(CD_S6_A)
+    RESTORE_SPEED
+    CLOSE(9007)
+    FREE(B_B2)
+    RETURN
+DONE
+
+SEQUENCE(215)
+    WAIT_WHILE_RED(SIG_B1)
     RETURN
 DONE
 

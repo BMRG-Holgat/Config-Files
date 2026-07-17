@@ -106,6 +106,14 @@ The configuration file for DCC-EX Command Station
 // is set (recommended), that password will be used for AP mode.
 // The AP mode password must be at least 8 characters long.
 //
+
+/*
+*
+* To set SSID, PASS and HOSTNAME under devel versions use the command
+* <C WIFI "bmrs_holgate" "bmrs_H0lg1t3">
+* <C WIFI HOSTNAME "Holgate">
+* copy & paste the above
+*/
 // Your SSID may not contain ``"'' (double quote, ASCII 0x22).
 //#define WIFI_SSID "Your network name"
 #define WIFI_SSID "bmrs_holgate"
