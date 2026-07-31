@@ -3,11 +3,10 @@
 * Add in the routes for trackD only
 *
 * V 0.1.0
-*           290 - 294 Free yard tracks
-*           295 - 299 Reserve yard tracks
 *           289 Auto Park
 *           1201 - Auto parking AUTOMATIC
 *           1202 - Around we go
+*           1203 - B to A change
 *           1221 - Track 1
 *           1222 - Track 2
 *           1223 - Track 3
@@ -20,10 +19,10 @@
 
 
 
-//Release Block when loco is removed from track
+//Disable Routes
 SEQUENCE(250) //Disable routes
-   ROUTE_DISABLED(1202)
-//    ROUTE_DISABLED(1203)
+    ROUTE_DISABLED(1202)
+    ROUTE_DISABLED(1203)
     ROUTE_DISABLED(1221)
     ROUTE_DISABLED(1222)
     ROUTE_DISABLED(1223)
@@ -35,8 +34,8 @@ SEQUENCE(250) //Disable routes
 DONE
 
 SEQUENCE(251) //Enable routes
-   ROUTE_ACTIVE(1202)
-//    ROUTE_ACTIVE(1203)
+    ROUTE_ACTIVE(1202)
+    ROUTE_ACTIVE(1203)
     ROUTE_ACTIVE(1221)
     ROUTE_ACTIVE(1222)
     ROUTE_ACTIVE(1223)
@@ -63,6 +62,7 @@ AUTOMATION(1202,"B: Around we go")
     CALL(201)
     PRINT("Calling 202")
     CALL(202)
+SEQUENCE(291) // Track A to B scenic
     PRINT("Calling 203")
     CALL(203)
     PRINT("Calling 204")
@@ -92,13 +92,13 @@ SEQUENCE(290)
     ENDIF
 DONE   
 
-AUTOMATION(1203,"B: B TO A")
+AUTOMATION(1203,"B: Scenic B to A")
     CALL(200)
     CALL(201)
     CALL(212)
     CALL(213)
     CALL(214)
-    FOLLOW(1103)
+    FOLLOW(1131)
 DONE
 
 SEQUENCE(200) 
@@ -133,24 +133,28 @@ SEQUENCE(201) //Progress to Block2
 DONE
 
 SEQUENCE(212)
-    RESERVE(B_B2) //Reserve Next block
-        IFRESERVE(A_B2)
-            RED(SIG_A1)
-            RESERVE(A_B3)
-            IFTHROWN(9004)
-                CLOSE(9004) //close turnouts A->B
+        IFRESERVE(A_B3)
+        PRINT("RESERVE A_B3")
+            IFRESERVE(A_B2)
+            PRINT("RESERVED A_B2")
+                RESERVE(B_B2) //Reserve Next block
+                RED(SIG_A1)
+                IFTHROWN(9004)
+                    CLOSE(9004) //close turnouts A->B
+                ENDIF
+                IFCLOSED(9007)
+                    THROW(9007) //close turnouts B->A   
+                ENDIF
+                SPEED(30)
+            ELSE
+                FREE(A_B3)
+                FOLLOW(212)
             ENDIF
-            IFCLOSED(9007)
-                THROW(9007) //close turnouts B->A   
-            ENDIF
-            SPEED(30)
         ELSE
             RED(SIG_B1)
-            SAVE_SPEED
             DELAY(5000)
-            PRINT("SAVE_SPEED AT WAIT_WHILE_RED 202")
-            START_SHARED(215)
-//            WAIT_WHILE_RED(SIG_B1)
+            STOP
+            PRINT("AWAITING A_B3 RESERVE 212")
             FOLLOW(212)
         ENDIF    
     AT(CD_S2_B)
@@ -164,6 +168,7 @@ DONE
 
 SEQUENCE(214)
     AT(CD_S4_A)
+    FREE(B_B1)
     DELAY(1000)
     RED(SIG_A2)
     AT(CD_S6_A)
@@ -173,10 +178,6 @@ SEQUENCE(214)
     RETURN
 DONE
 
-SEQUENCE(215)
-    WAIT_WHILE_RED(SIG_B1)
-    RETURN
-DONE
 
 SEQUENCE(202) //Progress to Block2
     IFRESERVE(B_B2) //Reserve Next block
@@ -200,6 +201,7 @@ SEQUENCE(202) //Progress to Block2
             SPEED(35)
             SAVE_SPEED
         ENDIF
+        RESTORE_SPEED
     ELSE
         AT(CD_S1_B1)
         SAVE_SPEED

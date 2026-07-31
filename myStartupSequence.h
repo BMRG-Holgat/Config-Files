@@ -6,8 +6,9 @@
 *
 */
 //Standard speed settings
-ALIAS(PARKING,40)
+ALIAS(PARKING,30)
 ALIAS(Reduced_Parking,25)
+ALIAS(AMBER_SPEED,30)
 
 ALIAS(BIG_RED_BUTTON,175)
 ALIAS(Latch_build,174)

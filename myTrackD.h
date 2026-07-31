@@ -146,6 +146,22 @@ AUTOMATION(1404, "D: Change to Track B") //Leave yard to Station not stopping
     //Changed to Track B at this point
 DONE
 
+AUTOMATION(1405,"D: Change to Track A")
+    CALL(450)
+    FON(0)
+    PRINT("Calling 400")
+    CALL(400)
+    PRINT("Calling 401")
+    CALL(401)
+    PRINT("Calling 415")
+    CALL(415)
+    PRINT("Calling 416")
+    CALL(416)
+    PRINT("Caling 417")
+    CALL(417)
+DONE
+
+
 //Auto Park Sequence
 SEQUENCE(454)
     IFSTASH(TD1)
@@ -459,46 +475,134 @@ SEQUENCE(411)
 DONE
 
 SEQUENCE(412)
-    RESERVE(D_B2) //Reserve Next block
-    RESERVE(B_B2) //Reserve block 2 on track B
-    RESERVE(B_B3) //Reserve block 3 on track B
-    RESERVE(C_B3) //Reserve block on track C Subject to change...
-    //Ensure route is set
-    IFTHROWN(9005)
-        CLOSE(9005)//ensure route is set
+    IFRESERVE(B_B3) //Reserve block 3 on track B
+    PRINT("RESERVED B_B3")
+        IFRESERVE(C_B3) //Reserve block 2 on track B
+        PRINT("RESERVED C_B3")
+            IFRESERVE(B_B2)
+            PRINT("RESERVED B_B2")
+                RESERVE(D_B2) //Reserve Next block    
+                //Ensure route is set
+                IFTHROWN(9005)
+                    CLOSE(9005)//ensure route is set
+                ENDIF
+                IFCLOSED(9010)
+                    THROW(9010)
+                ENDIF
+                SPEED(30) //Maybe too fast
+                SAVE_SPEED
+                CALL(453) //Release the Staging Yard Block
+            ELSE
+                FREE(C_B3)
+                FOLLOW(412)
+            ENDIF
+        ELSE
+            FREE(B_B3)
+            PRINT("Cleared B_B3")
+            RED(SIG_D1)
+            DELAY(5000)
+            STOP
+            FOLLOW(412)
+        ENDIF
+    ELSE
+        RED(SIG_D1)
+        DELAY(5000)
+        STOP
+        PRINT("Awaiting B_B3 reserve 412")
+        FOLLOW(412)
     ENDIF
-    IFTHROWN(9008)
-        CLOSE(9008)
-    ENDIF
-    IFTHROWN(9009)
-        CLOSE(9009)
-    ENDIF
-    IFCLOSED(9010)
-        THROW(9010)
-    ENDIF
-    SPEED(30) //Maybe too fast
-    CALL(400) //Release the Staging Yard Block
     AT(CD_S2_D)
     RETURN
 DONE
 
 SEQUENCE(413) //Progress to Block2
+    PRINT("At sq 413")
     RED(SIG_D1)
-    FWD(30) //Increase speed
     AT(CD_S4_B)
+    RED(SIG_B2)
     FREE(D_B1)
     AT(CD_S5_B)
     RETURN
 DONE    
 
 SEQUENCE(414)
-    RED(SIG_B2)
     AT(CD_S6_B)
+    RESTORE_SPEED
     CLOSE(9010)
     FREE(D_B2)
     FREE(C_B3)
 FOLLOW(290)
 
+SEQUENCE(415)
+    IFRESERVE(A_B3) //Reserve block 3 on track B
+    PRINT("RESERVED A_B3")
+        IFRESERVE(C_B3) //Reserve block 2 on track B
+        PRINT("RESERVED C_B3")
+            IFRESERVE(B_B2)
+            PRINT("RESERVED B_B2")
+                IFRESERVE(A_B2)
+                PRINT("RESERVED A_B2")
+                    RESERVE(D_B2) //Reserve Next block    
+                    //Ensure route is set
+                    IFCLOSED(9009)
+                        THROW(9009)//ensure route is set
+                    ENDIF
+                    SPEED(30) //Maybe too fast
+                    SAVE_SPEED
+                    CALL(453) //Release the Staging Yard Block
+                ELSE
+                    FREE(B_B2)
+                    PRINT("Cleared B_B2")
+                    RED(SIG_D1)
+                    DELAY(5000)
+                    STOP
+                    FOLLOW(415)
+                ENDIF
+            ELSE
+                FREE(C_B3)
+                PRINT("Cleared C_B3")
+                RED(SIG_D1)
+                DELAY(5000)
+                STOP
+                FOLLOW(415)
+            ENDIF
+        ELSE
+            FREE(A_B3)
+            PRINT("Cleared A_B3")
+            RED(SIG_D1)
+            DELAY(5000)
+            STOP
+            FOLLOW(415)
+        ENDIF
+    ELSE
+        RED(SIG_D1)
+        DELAY(5000)
+        STOP
+        PRINT("Awaiting A_B3 reserve 415")
+        FOLLOW(415)
+    ENDIF
+    AT(CD_S2_D)
+    RETURN
+DONE
+
+SEQUENCE(416)
+   PRINT("At sq 416")
+    RED(SIG_D1)
+    AT(CD_S4_A)
+    RED(SIG_A2)
+    FREE(D_B1)
+    AT(CD_S5_A)
+    RETURN
+DONE  
+
+SEQUENCE(417)
+    AT(CD_S6_A)
+    RESTORE_SPEED
+    CLOSE(9009)
+    FREE(D_B2)
+    FREE(C_B3)
+    FREE(B_B2)
+    FOLLOW(1131) //CHANGE THIS WHEN A IS CONVERTED TO CALL
 
 //ALMOST THERE
 AUTOMATION(1421,"D: Run Track 1") //Auto Track 1

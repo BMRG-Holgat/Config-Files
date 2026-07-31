@@ -14,20 +14,41 @@
 *
 */
 
+//Disable Routes
+SEQUENCE(150) //Disable routes
+    ROUTE_DISABLED(1110)
+    ROUTE_DISABLED(1111)
+    ROUTE_DISABLED(140)
+    ROUTE_DISABLED(141)
+   RETURN
+DONE
+
+SEQUENCE(151) //Enable routes
+    ROUTE_ACTIVE(1110)
+    ROUTE_ACTIVE(1111)
+    ROUTE_ACTIVE(140)
+    ROUTE_ACTIVE(141)
+    RETURN
+DONE
+
 //inital starting positions
 AUTOMATION(140,"A: Start Pos 2")
 ROUTE_HIDDEN(140)
 RESERVE(A_B7)
 SCREEN(3,7,"A_B7 Reserved")
 FWD(15)
-FOLLOW(1109)
+CALL(119)
+DONE
+
 
 AUTOMATION(141,"A: Start Pos 3")
 ROUTE_HIDDEN(141)
 RESERVE(A_B6)
 SCREEN(3,6,"A_B6 Reserved")
 FWD(15)
-FOLLOW(1107)
+CALL(117)
+RETURN
+DONE
 
 
 //Track A from yard
@@ -40,10 +61,65 @@ AUTOMATION(100,"A: Run Track A")
         ELSE    
             FOLLOW(100)
         ENDIF
-    FOLLOW(1100)
+    CALL(1110)
 DONE
 
-AUTOMATION(1100,"A: Around We Go Auto")
+AUTOMATION(1110,"A: Around we go")
+    CALL(150)
+    FON(0)
+    PRINT("CALL 110")
+    CALL(110)
+    CALL(151)
+    PRINT("CALL 111")
+    CALL(111)
+    PRINT("CALL 112")
+    SEQUENCE(130)
+    CALL(112)
+    SEQUENCE(1131)
+    PRINT("CALL 113")
+    CALL(113)
+    PRINT("CALL 114")
+    CALL(114)
+    PRINT("CALL 115")
+    CALL(115)
+    PRINT("CALL 116")
+    CALL(116)
+    PRINT("CALL 117")
+    CALL(117)
+    PRINT("CALL 118")
+    CALL(118)
+    PRINT("CALL 119")
+    CALL(119)
+    PRINT("Ended track A")
+DONE
+
+AUTOMATION(1111,"A: Station STOP")
+    PRINT("Call 110")
+    CALL(110)
+    RED(720)
+    RED(740)
+    PRINT("Call 120")
+    CALL(120)
+    GREEN(720)
+    GREEN(740)
+    FOLLOW(130)
+    PRINT("Ended A Station")
+
+DONE
+
+AUTOMATION(1112,"A: Scenic A to B")
+    CALL(150)
+    FON(0)
+    PRINT("CALL 110")
+    CALL(110)
+    CALL(151)
+    PRINT("CALL 121")
+    CALL(121)
+    FOLLOW(291)
+
+DONE
+
+SEQUENCE(110)
     IFRESERVE(A_B1)
         IFTHROWN(9026)
             CLOSE(9026)
@@ -54,17 +130,19 @@ AUTOMATION(1100,"A: Around We Go Auto")
         IFCLOSED(UGS_T2_H)
             THROW(UGS_T2_H)
         ENDIF
-    ELSE 
-        FOLLOW(1100)
+    ELSE
+        FOLLOW(110)
     ENDIF
     FWD(20)
     AT(CD_S1_A)
     FON(1)
     FREE(A_B7)
     AT(CD_S1_AA)
-FOLLOW(1101)
+    SAVE_SPEED
+    RETURN
+DONE
 
-SEQUENCE(1101)
+SEQUENCE(111)
     IFRESERVE(A_B2)
         IFTHROWN(9004)
             CLOSE(9004)
@@ -73,37 +151,44 @@ SEQUENCE(1101)
             CLOSE(9007)
         ENDIF
     ELSE
+        STOP
         WAIT_WHILE_RED(SIG_A1)
-        FOLLOW(1101)
+        FOLLOW(111)
     ENDIF
     IFAMBER(SIG_A1)
-        SPEED(20)
+        SPEED(AMBER_SPEED)
     ELSE
-        SPEED(30)
+        RESTORE_SPEED
     ENDIF
     AT(CD_S2_A)
-FOLLOW(1102)
+    SAVE_SPEED
+    RETURN
+DONE
 
-SEQUENCE(1102)
+SEQUENCE(112)
     RED(SIG_A1)
     IFRESERVE(A_B3)
-        SPEED(30)
+        RESTORE_SPEED
     ELSE
         AT(CD_S3_A) 
+        STOP
         WAIT_WHILE_RED(SIG_A2)
-        FOLLOW(1102)
+        FOLLOW(112)
     ENDIF
     IFAMBER(SIG_A2)
-        SPEED(20)
+        SPEED(AMBER_SPEED)
     ELSE 
-        SPEED(30)
+        RESTORE_SPEED
     ENDIF
     AFTER(CD_S3_A)
         FREE(A_B1)
-    AT(CD_S5_A)
-FOLLOW(1103)
+    AT(CD_S4_A)
+    SAVE_SPEED
+    DELAY(1000)
+    RETURN
+DONE
 
-SEQUENCE(1103)
+SEQUENCE(113)
     RED(SIG_A2)
     IFRESERVE(A_B4)
         IFTHROWN(UGS_T5_E__UFM_T6_A)
@@ -112,13 +197,20 @@ SEQUENCE(1103)
         ENDIF
     ELSE
         AT(CD_S7_A)
+        STOP
         WAIT_WHILE_RED(SIG_A3)
-        FOLLOW(1103)
+        FOLLOW(113)
+    ENDIF
+    IFAMBER(SIG_A3)
+        SPEED(AMBER_SPEED)
+    ELSE 
+        RESTORE_SPEED
     ENDIF
     AT(CD_S8_A)
-FOLLOW(1104)
+    RETURN
+DONE
 
-SEQUENCE(1104)
+SEQUENCE(114)
     RED(SIG_A3)
     AMBER(SIG_A1)
     FREE(A_B2)
@@ -128,27 +220,30 @@ SEQUENCE(1104)
         ENDIF
     ELSE
         AT(CD_S9_A)
+        STOP
         WAIT_WHILE_RED(SIG_A4)
-        FOLLOW(1104)
+        FOLLOW(114)
     ENDIF
     IFAMBER(SIG_A4)
         SPEED(20)
     ELSE
-        SPEED(30)
+        RESTORE_SPEED
     ENDIF
     AT(CD_S9_A1)
-FOLLOW(1105)
+    RETURN
+DONE
 
-SEQUENCE(1105)
+SEQUENCE(115)
     RED(SIG_A4)
     AMBER(SIG_A2)
     FREE(A_B3)
     GREEN(SIG_A1)
     FOFF(1)
     AT(CD_F7_A)
-FOLLOW(1106)
+    RETURN
+DONE
 
-SEQUENCE(1106)
+SEQUENCE(116)
     AMBER(SIG_A3)
     GREEN(SIG_A2)
     FREE(A_B4)
@@ -156,27 +251,76 @@ SEQUENCE(1106)
     FREE(A_B5)
     SPEED(20)
     AT(CD_F6_A)
-FOLLOW(1107)
+    RETURN
+DONE
 
-SEQUENCE(1107)
+SEQUENCE(117)
     AMBER(SIG_A4) 
     GREEN(SIG_A3)
     AT(CD_F4_A)
-FOLLOW(1108)
+    RETURN
+DONE
 
-SEQUENCE(1108)
+SEQUENCE(118)
     RESERVE(A_B7)
     FREE(A_B6)
     SPEED(20) 
     GREEN(SIG_A4)
     AT(CD_F2_A)
-FOLLOW(1109)
+    RETURN
+DONE
 
-SEQUENCE(1109) 
+SEQUENCE(119) 
     STOP
     FOFF(0)
     STASH(TA)
+    RETURN
 DONE
 
+SEQUENCE(120)
+    //Station STOP
+    DELAY(1000)
+    STOP 
+    IFLOCO(SoundLoco) 
+        DELAY(2000)
+        FON(1)
+        DELAY(500)
+        FOFF(1)
+    ENDIF
+    DELAYRANDOM(10000,25000)
+    RETURN
+DONE
 
-
+SEQUENCE(121)
+    IFRESERVE(B_B3)
+        IFRESERVE(A_B2)
+            IFRESERVE(B_B2)
+                IFCLOSED(9004)
+                    THROW(9004)
+                ENDIF 
+                IFTHROWN(9007)
+                    CLOSE(9007)
+                ENDIF
+                SPEED(30)
+                SAVE_SPEED
+            ELSE
+                FREE(A_B2)
+                FOLLOW(121)
+            ENDIF
+        ELSE
+            FREE(B_B3)
+            RED(SIG_A1)
+            DELAY(3000)
+            STOP
+            FOLLOW(121)
+        ENDIF
+    ELSE
+    IFAMBER(SIG_A1)
+        SPEED(AMBER_SPEED)
+    ELSE
+        RESTORE_SPEED
+    ENDIF
+    AT(CD_S2_A)
+    SAVE_SPEED
+    RETURN
+DONE
