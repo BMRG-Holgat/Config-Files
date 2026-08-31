@@ -297,7 +297,7 @@ SEQUENCE(615)
 PRINT("SEQ 615")
     IFSTASH(THD)
         RED(SIG_F4)
-        SCREEN(4,5,"Holgate Full")
+        SCREEN(4,8,"Holgate Full")
         FOLLOW(616)
     ELSE
         RETURN

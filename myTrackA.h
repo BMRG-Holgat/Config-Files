@@ -13,11 +13,25 @@
 * All basic sequences created
 *
 */
+/*
+*       1110 - Around we Go
+*       1111 - Station Stop
+*       1112 - Change to B North
+*       1113 - Change to B South
+*       1114 - Change to D South
+*       1120 - Run Track A
+*/
 
 //Disable Routes
 SEQUENCE(150) //Disable routes
+    SCREEN(2,0,"Automation running")
+    SCREEN(3,0,"Automation running")
     ROUTE_DISABLED(1110)
     ROUTE_DISABLED(1111)
+    ROUTE_DISABLED(1112)
+    ROUTE_DISABLED(1113)
+//    ROUTE_DISABLED(1114)
+    ROUTE_DISABLED(1120)
     ROUTE_DISABLED(140)
     ROUTE_DISABLED(141)
    RETURN
@@ -26,6 +40,10 @@ DONE
 SEQUENCE(151) //Enable routes
     ROUTE_ACTIVE(1110)
     ROUTE_ACTIVE(1111)
+    ROUTE_ACTIVE(1112)
+    ROUTE_ACTIVE(1113)
+//    ROUTE_ACTIVE(1114)
+    ROUTE_ACTIVE(1120)
     ROUTE_ACTIVE(140)
     ROUTE_ACTIVE(141)
     RETURN
@@ -53,13 +71,13 @@ DONE
 
 //Track A from yard
 
-AUTOMATION(100,"A: Run Track A")
+AUTOMATION(1120,"A: Run Track A")
     IFSTASH(TA)
             PICKUP_STASH(TA)
             FON(0)
 //            FON(1)
         ELSE    
-            FOLLOW(100)
+            FOLLOW(1120)
         ENDIF
     CALL(1110)
 DONE
@@ -103,11 +121,13 @@ AUTOMATION(1111,"A: Station STOP")
     GREEN(720)
     GREEN(740)
     FOLLOW(130)
+    SCREEN(2,1,"")
+    SCREEN(3,1,"")
     PRINT("Ended A Station")
 
 DONE
 
-AUTOMATION(1112,"A: Scenic A to B")
+AUTOMATION(1112,"A: Scenic A to B N")
     CALL(150)
     FON(0)
     PRINT("CALL 110")
@@ -115,6 +135,22 @@ AUTOMATION(1112,"A: Scenic A to B")
     CALL(151)
     PRINT("CALL 121")
     CALL(121)
+    FOLLOW(1291)
+
+DONE
+
+AUTOMATION(1113,"A Scenic A to B S")
+    CALL(150)
+    FON(0)
+    PRINT("Call 110")
+    CALL(110)
+    PRINT("Call 151")
+    CALL(151)
+    PRINT("Call 111")
+    CALL(111)
+    PRINT("Call 112")
+    CALL(112)
+    PRINT("Call 122")
     FOLLOW(291)
 
 DONE
@@ -135,7 +171,9 @@ SEQUENCE(110)
     ENDIF
     FWD(20)
     AT(CD_S1_A)
-    FON(1)
+    IFLOCO(SoundLoco)
+        FON(1)
+    ENDIF
     FREE(A_B7)
     AT(CD_S1_AA)
     SAVE_SPEED
@@ -322,5 +360,11 @@ SEQUENCE(121)
     ENDIF
     AT(CD_S2_A)
     SAVE_SPEED
+    RETURN
+DONE
+
+SEQUENCE(122) //track A -> B South
+    RED(SIG_A2)
+    
     RETURN
 DONE

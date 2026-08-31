@@ -749,9 +749,9 @@ DONE
 //Automatic Running
 AUTOMATION(1531,"E: Break time")
 PRINT("At start of auto selection for E")
-    SCREEN(2,7,"Yard E Automatic")
-    SCREEN(3,7,"Yard E Automatic")
-    SCREEN(4,7,"Yard E Automatic")
+    SCREEN(2,5,"Yard E Automatic")
+    SCREEN(3,5,"Yard E Automatic")
+    SCREEN(4,5,"Yard E Automatic")
 IF(autoSelected_E)
     LATCH(autoRunning_E) //Full auto Track E
     ROUTE_DISABLED(1531)

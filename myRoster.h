@@ -23,7 +23,7 @@ ROSTER(6643,"Colas Rail","Lights/Sound/*Short Horn/*Hi-Low/*Air Brake/*Pump/Coup
 ROSTER(2604,"Coal","Lights//Rear")
 ROSTER(89,"Azuma-89","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Door/*Compresser/Diesel/Speed Squeal/*Whistle/*Guard-Driver//*Sanders/*Nose Open/*Nose Close/*Announcement/*Speed detonators")
 ROSTER(90,"Azuma-90","Lights/Sound/*High Horn/*Low Horn/*Doors/*Brake/*Driver Door/*Compresser/Diesel/Speed Squeal/*Whistle/*Guard-Driver//*Sanders/*Nose Open/*Nose Close/*Announcement/*Speed detonators")
-
+ROSTER(8919,"BR Class 08","/Sound/*Brake/*Single Horn/*Double Horn/Cold Start/Engine Idle/Speed Lock/Exhauster/Flange/Guarf's Whistle/Buffer Clash/*Coupling/Compresser/*Sanders/Handbrake/Fuel Pump/Auto Wagon Buffer/Cab Door/Fade Sound/Draw Up/Squeeze Up/Going Under/Wipers/Station Announce/Spirax Valve/Shunting Mode/*Vol Down/*Vol Up")
 //Arthurs locos
 ROSTER(818,"08818 Blue","/Sound/*Brake sound/*Horn Single/*Horn Double/Cold Start/Engine Idle/Speed Lock/Exhauster/Flange Squeal/*Guard Whistle/*Buffer Clash/*Coupling/Compressor/*Sanding/Handbrake/Fuel Pump/*Wagon Buffering/Cab door/MUTE/*'Draw up'/'Squeeze Up'/'Going Under'/Wipers/*Station Sound/Spirax/SHUNT/VOL DOWN/VOL UP")
 ROSTER(2032,"20132 Railfreight","Lights/Sound/Active Brake/*Horn 1/*Horn 2/*Clag 2/Tail Lights/*Notch Up/*Brake Release/*Guard Whistle/Rail Echo/*Air Release/Cab Light/*Level Crossing/Motion Sounds/Truck Squeal/*Coupling Up/*Set off 2/*Horn 3/MUTE/SHUNT/*Horn 4/*Horn 5/*Horn 6/*AWS Bell//VOL DOWN/VOL UP")

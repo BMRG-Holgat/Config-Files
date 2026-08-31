@@ -12,6 +12,7 @@
 *           1402 - Around we go
 *           1403 - Station Stop
 *           1404 - Change to Track B
+*           1405 - Change to Track A
 *           1421 - Track 1
 *           1422 - Track 2
 *           1423 - Track 3
@@ -25,10 +26,13 @@
 
 
 SEQUENCE(450) //Disable routes
+SCREEN(2,0,"Automation running")
+SCREEN(3,0,"Automation running")
     ROUTE_DISABLED(1401)
     ROUTE_DISABLED(1402)
     ROUTE_DISABLED(1403)
     ROUTE_DISABLED(1404)
+    ROUTE_DISABLED(1405)
     ROUTE_DISABLED(1421)
     ROUTE_DISABLED(1422)
     ROUTE_DISABLED(1423)
@@ -43,6 +47,7 @@ SEQUENCE(451) //Enable routes
     ROUTE_ACTIVE(1401)
     ROUTE_ACTIVE(1402)
     ROUTE_ACTIVE(1403)
+    ROUTE_ACTIVE(1404)
     ROUTE_ACTIVE(1404)
     ROUTE_ACTIVE(1421)
     ROUTE_ACTIVE(1422)
@@ -79,6 +84,7 @@ AUTOMATION(1402, "D: Around We Go") //Leave yard to Station not stopping
     CALL(406)
     PRINT("Calling 407")
     CALL(407)
+    SEQUENCE(1408)
     FOFF(1)
     PRINT("Calling 408")
     CALL(408)
@@ -142,11 +148,17 @@ AUTOMATION(1404, "D: Change to Track B") //Leave yard to Station not stopping
     PRINT("Calling 413")
     CALL(413)
     PRINT("Calling 414")
+    SCREEN(2,5,"")
+    SCREEN(3,2,"B: (D-B) Switched")
     CALL(414)
     //Changed to Track B at this point
 DONE
 
 AUTOMATION(1405,"D: Change to Track A")
+SCREEN(3,3,"D: Change to A")
+SCREEN(3,1,"A:")
+SCREEN(3,2,"B:")
+SCREEN(2,5,"D: Change to A")
     CALL(450)
     FON(0)
     PRINT("Calling 400")
@@ -159,6 +171,12 @@ AUTOMATION(1405,"D: Change to Track A")
     CALL(416)
     PRINT("Caling 417")
     CALL(417)
+    SCREEN(2,5,"")
+    SCREEN(2,1,"A: (D-A) Switched")
+    SCREEN(3,3,"")
+    SCREEN(3,1,"A: (D-A) Switched")
+    PRINT("Following 1131")
+    FOLLOW(1131)
 DONE
 
 
@@ -602,7 +620,9 @@ SEQUENCE(417)
     FREE(D_B2)
     FREE(C_B3)
     FREE(B_B2)
-    FOLLOW(1131) //CHANGE THIS WHEN A IS CONVERTED TO CALL
+    RETURN
+DONE
+//    FOLLOW(113) //CHANGE THIS WHEN A IS CONVERTED TO CALL
 
 //ALMOST THERE
 AUTOMATION(1421,"D: Run Track 1") //Auto Track 1
@@ -714,9 +734,9 @@ IF(autoSelected_D)
     LATCH(autoRunning_D) //Full auto Track D
     ROUTE_DISABLED(1431)
     ROUTE_CAPTION(1431,"RUNNING")
-    SCREEN(2,6,"Yard D Automatic")
-    SCREEN(3,6,"Yard D Automatic")
-    SCREEN(4,6,"Yard D Automatic")
+    SCREEN(2,4,"Yard D Automatic")
+    SCREEN(3,4,"Yard D Automatic")
+    SCREEN(4,4,"Yard D Automatic")
     RANDOM_CALL(1421,1422,1423,1424,1425)
     FOLLOW(1431)
 ELSE

@@ -21,6 +21,8 @@
 
 //Disable Routes
 SEQUENCE(250) //Disable routes
+SCREEN(2,0,"Automation running")
+SCREEN(3,0,"Automation running")
     ROUTE_DISABLED(1202)
     ROUTE_DISABLED(1203)
     ROUTE_DISABLED(1221)
@@ -54,6 +56,8 @@ AUTOMATION(1201,"B: Park Train")
 DONE
 
 AUTOMATION(1202,"B: Around we go")
+SCREEN(2,2,"B:  Around we go")
+SCREEN(3,2,"B:  Around we go")
     CALL(250)
     FON(0)
     PRINT("Calling 200")
@@ -75,6 +79,7 @@ SEQUENCE(290)
     CALL(206)
     PRINT("Calling 207")
     CALL(207)
+SEQUENCE(1291)
     PRINT("Calling 208")
     CALL(208)
     PRINT("Calling 209")
@@ -240,7 +245,7 @@ SEQUENCE(203) //Progress to Block 3
 DONE
 
 SEQUENCE(204)
-    AT(CD_S5_B)
+    AT(CD_S4_B)
     IFTHROWN(9004) //If moved from Track A to Track B close points
         CLOSE(9004) // close turnouts A->B
     ENDIF
@@ -606,8 +611,8 @@ IF(autoSelected_B)
     LATCH(autoRunning_B) //Full auto Track B
     ROUTE_DISABLED(1231)
     ROUTE_CAPTION(1231,"RUNNING")
-    SCREEN(2,4,"Yard B Automatic")
-    SCREEN(3,4,"Yard B Automatic")
+    SCREEN(2,2,"Yard B Automatic")
+    SCREEN(3,2,"Yard B Automatic")
     SCREEN(4,4,"Yard B Automatic")
     RANDOM_CALL(1221,1222,1223,1224,1225)
     FOLLOW(1231)
