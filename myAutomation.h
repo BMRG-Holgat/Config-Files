@@ -197,11 +197,10 @@ DONE
 #include "EXRAIL2.h"
 
 STEALTH_GLOBAL(char rag(int16_t sigid) {
-    if(RMFT2::isSignal(sigid,SIGNAL_RED)) return 'R';
-    if(RMFT2::isSignal(sigid,SIGNAL_AMBER)) return 'Y';
-    if(RMFT2::isSignal(sigid,SIGNAL_GREEN)) return 'G';
-    return 'X';
-} 
+  auto rag=Signal::getState(sigid);
+  if (rag=='A') return 'Y';
+  return rag;
+}
 )
 
 STEALTH_GLOBAL(void ragSignal(int16_t sigid, int16_t vPin) {
