@@ -33,6 +33,7 @@
                   9901, 9905, 9906, 9907, 4626, 4560, 6643
 
 #define SpeedChange 4626,4560
+#define AzumaSound 89,90
 
 //Startup led sequence
 #define ledReset \

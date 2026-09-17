@@ -189,6 +189,7 @@ SEQUENCE(111)
             CLOSE(9007)
         ENDIF
     ELSE
+    DELAY(2000)
         STOP
         WAIT_WHILE_RED(SIG_A1)
         FOLLOW(111)

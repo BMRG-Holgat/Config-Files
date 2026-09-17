@@ -82,6 +82,8 @@ AUTOMATION(1402, "D: Around We Go") //Leave yard to Station not stopping
     CALL(405)
     PRINT("Calling 406")
     CALL(406)
+    PRINT("Calling 420")
+    CALL(420)
     PRINT("Calling 407")
     CALL(407)
     SEQUENCE(1408)
@@ -119,6 +121,8 @@ AUTOMATION(1403, "D: Station Stop") //Leave yard to Station not stopping
     CALL(405)
     PRINT("Calling 406")
     CALL(406)
+    PRINT("Calling 420")
+    CALL(420)
     PRINT("Calling 407")
     CALL(407)
     FOFF(1)
@@ -191,7 +195,6 @@ SEQUENCE(454)
             CLOSE(9130)
             FWD(PARKING)
             AT(CD_F2_D1)
-            DELAY(2500)
             ESTOP
             FREE(D_B6)
             STASH(TD1)
@@ -213,7 +216,6 @@ SEQUENCE(455)
             THROW(9131)
             FWD(PARKING)
             AT(CD_F2_D2)
-            DELAY(1500)
             ESTOP
             FREE(D_B6)
             STASH(TD2)
@@ -235,7 +237,6 @@ SEQUENCE(456)
             THROW(9132)
             FWD(PARKING)
             AT(CD_F2_D3)
-            DELAY(700)
             ESTOP
             FREE(D_B6)
             STASH(TD3)
@@ -257,7 +258,6 @@ SEQUENCE(457)
             THROW(9133)
             FWD(PARKING)
             AT(CD_F2_D4)
-            DELAY(750)
             ESTOP
             FREE(D_B6)
             STASH(TD4)
@@ -271,8 +271,8 @@ DONE
 //Track 5
 SEQUENCE(458)
     IFSTASH(TD5)
-        SCREEN(3,5,"Yard B full!")
-        SCREEN(2,5,"Yard B Full")
+        SCREEN(3,5,"Yard D full!")
+        SCREEN(2,5,"Yard D Full")
         ESTOP
         FOLLOW(454)
     ELSE
@@ -282,7 +282,6 @@ SEQUENCE(458)
             CLOSE(9133)
             FWD(PARKING)
             AT(CD_F2_D5)
-            DELAY(500)
             ESTOP
             FREE(D_B6)
             STASH(TD5)
@@ -331,11 +330,12 @@ DONE
 SEQUENCE(400)//Leave yard to Station not stopping
     IFRESERVE(D_B1) //Reserve Station block
         CLOSE(9002) //close turnouts D-C
-        FWD(20) //Move forward Speed 30
+        FWD(StartSpeed) //Move forward Speed 30
     ELSE
         FOLLOW(400)
     ENDIF
     AT(CD_S1_D)
+    SAVE_SPEED
     RETURN 
 DONE
 
@@ -378,31 +378,58 @@ SEQUENCE(402)
         SPEED(35) //Maybe too fast
     ENDIF
     AT(CD_S2_D)
+    RED(SIG_D1)
+    SAVE_SPEED
     RETURN 
 DONE    
 
 SEQUENCE(403) //Reserve Block 3
-    RED(SIG_D1)
     IFRESERVE(D_B3) //Reserve Next block
-        RESTORE_SPEED
+        PRINT("Reserved D_B3... 403")
+        IFAMBER(SIG_D2)
+            SPEED(35)
+            PRINT("Set speed 35 IFAMBER 403")
+        ENDIF
+        IFGREEN(SIG_D2)
+            SPEED(45)
+            SAVE_SPEED
+            RESTORE_SPEED
+            PRINT("RESTORE_SPEED IF GREEN 403")
+        ENDIF
     ELSE 
-        AT(CD_S3_D)
-        SAVE_SPEED
-        WAIT_WHILE_RED(SIG_D2)
+        IF(CD_S3_D)
+            PRINT("is SIG_D2 still red?")
+            WAIT_WHILE_RED(SIG_D2)
+        ENDIF
         FOLLOW(403)
     ENDIF
     AT(CD_S4_D)
+    RED(SIG_D2)
     FREE(D_B1)
     SCREEN(4,1,"")
-    AT(CD_S5_D)
     RETURN 
 DONE    
 
 SEQUENCE(404)
-    RED(SIG_D2)
-    AT(CD_S6_D) 
-    SAVE_SPEED
+    AT(CD_S5_D)
     IFRED(SIG_D3)
+        SPEED(22)
+        PRINT("SET SPEED 15 IFRED 404")
+    ENDIF
+    IFAMBER(SIG_D3)
+        SPEED(25)
+        PRINT("SET SPEED IFAMBER 404")
+    ENDIF
+    IFGREEN(SIG_D3)
+        RESTORE_SPEED
+        PRINT("RESTORE_SPEED IFGREEN 404")
+    ENDIF
+    AT(CD_S6_D)
+     IFRED(SIG_D3)
+        SPEED(15)
+    ENDIF
+    RETURN
+/*    IFRED(SIG_D3)
         SPEED(20)
     ENDIF
     IFAMBER(SIG_D3)
@@ -411,42 +438,48 @@ SEQUENCE(404)
         SPEED(35) 
         SAVE_SPEED
     ENDIF
-    RETURN 
+    RETURN */
 DONE
 
 SEQUENCE(405) //Progress to Block3
     IFRESERVE(D_B4)
-    IFTHROWN(9021)
-        CLOSE(9021)
-    ENDIF 
-    ELSE CALL(551)
+        IFGREEN(SIG_D3)
+            RESTORE_SPEED 
+            PRINT("Restore Speed IFGREEN 405")
+        ENDIF
+        IFAMBER(SIG_D3)
+            SPEED(AMBER_SPEED)
+        ENDIF
+        IFTHROWN(9021)
+            CLOSE(9021)
+        ENDIF 
+    ELSE 
         AT(CD_S7_D)
         WAIT_WHILE_RED(SIG_D3)
         FOLLOW(405)
     ENDIF 
-    IFAMBER(SIG_D3)
-        SPEED(23)
-    ELSE
-        RESTORE_SPEED
-    ENDIF
     AT(CD_S8_D)
     RETURN 
 DONE    
 
 SEQUENCE(406) //Progress to Block 5
+PRINT("SEQ 406")
     RED(SIG_D3)
+    FREE(D_B2)
+    AMBER(SIG_D1)
+    RETURN
+DONE
+
+SEQUENCE(420)
     IFRESERVE(D_B5)
-        AMBER(SIG_D1)
-        FREE(D_B2)
-        SCREEN(4,2,"")
-        IFTHROWN(2024)
-            CLOSE(2024)
+        IFTHROWN(9024)
+            CLOSE(9024)
         ENDIF
         RESTORE_SPEED
     ELSE 
         AT(CD_S9_D1)
         WAIT_WHILE_RED(SIG_D4)
-        FOLLOW(406)
+        FOLLOW(420)
     ENDIF
     RESTORE_SPEED
     AT(CD_S9_D)
@@ -457,6 +490,7 @@ SEQUENCE(407)
     RED(SIG_D4)
     GREEN(SIG_D1)
     AMBER(SIG_D2)
+    FREE(D_B3)
     AT(CD_F8_D)
     RETURN 
 DONE    
@@ -464,24 +498,26 @@ DONE
 SEQUENCE(408) //Progress to Block5  
     RESERVE(D_B6) //Reserve Next block 
     RESTORE_SPEED  
-    FREE(D_B3)
+    FREE(D_B4)
     GREEN(SIG_D2)
+    IFRED(SIG_D4)
+    ELSE
     AMBER(SIG_D3)
+    ENDIF
     AT(CD_F7_D)
     RETURN 
 DONE
 
 SEQUENCE(409)
-    AMBER(SIG_D4)   
-    GREEN(SIG_D3)
-    FREE(D_B4)
+    AMBER(SIG_D4) 
+    FREE(D_B5)  
+    GREEN(SIG_D3)    
     AT(CD_F6_D)
     RETURN 
 DONE
 
 SEQUENCE(410)
     GREEN(SIG_D4)    
-    FREE(D_B5)
     RETURN
 DONE
 

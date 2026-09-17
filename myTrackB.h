@@ -114,14 +114,11 @@ SEQUENCE(200)
         IFTHROWN(9026)
             CLOSE(9026) //close turnouts B - A
         ENDIF 
+        FWD(StartSpeed)
     ELSE
         FOLLOW(200)
-    ENDIF 
-    SPEED(30)
+    ENDIF  
     AT(CD_S1_B)
-    IFLOCO(SoundLoco)
-        FON(1)
-    ENDIF
     SAVE_SPEED
     PRINT("SAVE_SPEED 200")
     RETURN
@@ -131,6 +128,13 @@ DONE
 SEQUENCE(201) //Progress to Block2    
     CALL(253)
     CALL(251)
+        IFLOCO(SoundLoco)
+        FON(1)
+    ENDIF
+    IFLOCO(AzumaSound)
+        DELAY(1000)
+        FON(8)
+    ENDIF
     AT(CD_S1_B1)
     SAVE_SPEED
     PRINT("SAVE_SPEED 201")
@@ -237,15 +241,12 @@ SEQUENCE(203) //Progress to Block 3
       FOLLOW(203)
     ENDIF    
     AT(CD_S4_B)
-    FREE(B_B1)
-//    IFGREEN(SIG_B2)
-//        RESTORE_SPEED
-//    ENDIF   
+    FREE(B_B1)  
+    AT(CD_S4_B) 
     RETURN
 DONE
 
-SEQUENCE(204)
-    AT(CD_S4_B)
+SEQUENCE(204)    
     IFTHROWN(9004) //If moved from Track A to Track B close points
         CLOSE(9004) // close turnouts A->B
     ENDIF
@@ -280,11 +281,9 @@ SEQUENCE(205) //Progress to Block4
             CLOSE(9021) // prevent route A-D
         ENDIF
         IFAMBER(SIG_B3)
-            SPEED(35)
+            SPEED(AMBER_SPEED)
             PRINT("SET SPEED 34 IFAMBER 205")
- //       ELSE
- //           RESTORE_SPEED
- //           PRINT("RESTORE_SPEED 205")
+          PRINT("RESTORE_SPEED 205")
         ENDIF
     ELSE
         AT(CD_S7_B)
@@ -333,7 +332,12 @@ SEQUENCE(208) //Progress to Block6
 DONE
 
 SEQUENCE(209) //Progress to Block6
-    FOFF(1)
+    IFLOCO(SoundLoco)
+        FOFF(1)
+    ENDIF
+    IFLOCO(AzumaSound)
+        FOFF(8)
+    ENDIF 
     FREE(B_B4)
     GREEN(SIG_B2)
     AMBER(SIG_B3)
@@ -403,7 +407,6 @@ SEQUENCE(254)
             CLOSE(9110)
             FWD(PARKING)
             AT(CD_F2_B1)
-            DELAY(2000)
             ESTOP
             FREE(B_B6)
             STASH(TB1)
@@ -425,7 +428,6 @@ SEQUENCE(255)
             THROW(9111)
             FWD(PARKING)
             AT(CD_F2_B2)
-            DELAY(1500)
             ESTOP
             FREE(B_B6)
             STASH(TB2)
@@ -447,7 +449,6 @@ SEQUENCE(256)
             THROW(9112)
             FWD(PARKING)
             AT(CD_F2_B3)
-            DELAY(500)
             ESTOP
             FREE(B_B6)
             STASH(TB3)
@@ -469,7 +470,6 @@ SEQUENCE(257)
             THROW(9113)
             FWD(PARKING)
             AT(CD_F3_B4)
-            DELAY(500)
             ESTOP
             FREE(B_B6)
             STASH(TB4)
@@ -494,7 +494,6 @@ SEQUENCE(258)
             CLOSE(9113)
             FWD(PARKING)
             AT(CD_F3_B5)
-            DELAY(500)
             ESTOP
             FREE(B_B6)
             STASH(TB5)
