@@ -128,6 +128,8 @@ AUTOMATION(1111,"A: Station STOP")
 DONE
 
 AUTOMATION(1112,"A: Scenic A to B N")
+    SCREEN(2,1,"A: Scenic A to B N")
+    SCREEN(3,1,"A: Scenic A to B N")
     CALL(150)
     FON(0)
     PRINT("CALL 110")
@@ -135,7 +137,12 @@ AUTOMATION(1112,"A: Scenic A to B N")
     CALL(151)
     PRINT("CALL 121")
     CALL(121)
-    FOLLOW(1291)
+    PRINT("CALL 122")
+    CALL(122)
+    PRINT("CALL 123")
+    CALL(123)
+    PRINT("FOLLOW 291")
+    FOLLOW(291)
 
 DONE
 
@@ -147,15 +154,16 @@ AUTOMATION(1113,"A Scenic A to B S")
     PRINT("Call 151")
     CALL(151)
     PRINT("Call 111")
-    CALL(111)
-    PRINT("Call 112")
-    CALL(112)
-    PRINT("Call 122")
+    CALL(111) //
+    PRINT("Call 124")
+    CALL(124)
+    PRINT("Call 125")
+    CALL(125) 
     FOLLOW(291)
 
 DONE
 
-SEQUENCE(110)
+SEQUENCE(110) //Leave start position
     IFRESERVE(A_B1)
         IFTHROWN(9026)
             CLOSE(9026)
@@ -174,13 +182,17 @@ SEQUENCE(110)
     IFLOCO(SoundLoco)
         FON(1)
     ENDIF
+    IFLOCO(AzumaSound)
+        DELAY(1000)
+        FON(8)
+    ENDIF
     FREE(A_B7)
     AT(CD_S1_AA)
     SAVE_SPEED
     RETURN
 DONE
 
-SEQUENCE(111)
+SEQUENCE(111) 
     IFRESERVE(A_B2)
         IFTHROWN(9004)
             CLOSE(9004)
@@ -330,42 +342,82 @@ SEQUENCE(120)
     RETURN
 DONE
 
-SEQUENCE(121)
-    IFRESERVE(B_B3)
+SEQUENCE(121) //Traverse to track B from A North
+    IFRESERVE(B_B2)
         IFRESERVE(A_B2)
-            IFRESERVE(B_B2)
+            IFRESERVE(B_B3)
                 IFCLOSED(9004)
                     THROW(9004)
                 ENDIF 
                 IFTHROWN(9007)
                     CLOSE(9007)
                 ENDIF
-                SPEED(30)
+                SPEED(AMBER_SPEED)
                 SAVE_SPEED
             ELSE
                 FREE(A_B2)
+                RED(SIG_A1)
+                DELAY(2000)
+                STOP
                 FOLLOW(121)
             ENDIF
         ELSE
-            FREE(B_B3)
+            FREE(B_B2)
             RED(SIG_A1)
-            DELAY(3000)
+            DELAY(2000)
             STOP
             FOLLOW(121)
         ENDIF
     ELSE
-    IFAMBER(SIG_A1)
-        SPEED(AMBER_SPEED)
-    ELSE
-        RESTORE_SPEED
+        RED(SIG_A1)
+        DELAY(2000)
+        STOP
+        FOLLOW(121)
     ENDIF
     AT(CD_S2_A)
     SAVE_SPEED
     RETURN
 DONE
 
-SEQUENCE(122) //track A -> B South
-    RED(SIG_A2)
-    
+SEQUENCE(122) //track A -> B North
+    RED(SIG_A2) 
+    SCREEN(2,1,"")
+    SCREEN(3,1,"")
+    SCREEN(2,2,"B: A->B Around we go")
+    SCREEN(3,2,"B: A->B Around we go")
+    AT(CD_S4_B) 
+    RETURN
+DONE
+
+SEQUENCE(123) //track A -> B North
+    RED(SIG_B2) 
+    AT(CD_S5_B)
+    RETURN
+DONE
+
+SEQUENCE(124) //track A -> B South
+    IFRESERVE(B_B4)
+       IFCLOSED(9020)
+           THROW(9020)
+       ENDIF
+       SPEED(AMBER_SPEED)
+       SAVE_SPEED
+    ELSE
+        RED(SIG_A3)
+        AT(CD_S7_A)
+        STOP
+        FOLLOW(124)
+    ENDIF
+    AT(CD_S8_A)
+    RETURN
+DONE
+
+SEQUENCE(125) //track A -> B South
+    RED(SIG_A3)
+    SCREEN(2,1,"")
+    SCREEN(3,1,"")
+    SCREEN(2,2,"B: A->B Around we go")
+    SCREEN(3,2,"B: A->B Around we go")
+    AT(CD_S9_B)
     RETURN
 DONE

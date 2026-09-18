@@ -66,9 +66,9 @@ SCREEN(3,2,"B:  Around we go")
     CALL(201)
     PRINT("Calling 202")
     CALL(202)
-SEQUENCE(291) // Track A to B scenic
     PRINT("Calling 203")
     CALL(203)
+SEQUENCE(291) // Track A to B scenic North
     PRINT("Calling 204")
     CALL(204)
     PRINT("Sequence 290")
@@ -77,6 +77,7 @@ SEQUENCE(290)
     CALL(205)
     PRINT("Calling 206")
     CALL(206)
+SEQUENCE(292) //Track A to B scenic South
     PRINT("Calling 207")
     CALL(207)
 SEQUENCE(1291)
@@ -141,51 +142,7 @@ SEQUENCE(201) //Progress to Block2
     RETURN
 DONE
 
-SEQUENCE(212)
-        IFRESERVE(A_B3)
-        PRINT("RESERVE A_B3")
-            IFRESERVE(A_B2)
-            PRINT("RESERVED A_B2")
-                RESERVE(B_B2) //Reserve Next block
-                RED(SIG_A1)
-                IFTHROWN(9004)
-                    CLOSE(9004) //close turnouts A->B
-                ENDIF
-                IFCLOSED(9007)
-                    THROW(9007) //close turnouts B->A   
-                ENDIF
-                SPEED(30)
-            ELSE
-                FREE(A_B3)
-                FOLLOW(212)
-            ENDIF
-        ELSE
-            RED(SIG_B1)
-            DELAY(5000)
-            STOP
-            PRINT("AWAITING A_B3 RESERVE 212")
-            FOLLOW(212)
-        ENDIF    
-    AT(CD_S2_B)
-    RETURN      
-DONE
 
-SEQUENCE(213)
-    RED(SIG_B1)
-    RETURN
-DONE
-
-SEQUENCE(214)
-    AT(CD_S4_A)
-    FREE(B_B1)
-    DELAY(1000)
-    RED(SIG_A2)
-    AT(CD_S6_A)
-    RESTORE_SPEED
-    CLOSE(9007)
-    FREE(B_B2)
-    RETURN
-DONE
 
 
 SEQUENCE(202) //Progress to Block2
@@ -249,6 +206,7 @@ DONE
 SEQUENCE(204)    
     IFTHROWN(9004) //If moved from Track A to Track B close points
         CLOSE(9004) // close turnouts A->B
+        FREE(A_B2)
     ENDIF
     RED(SIG_B2)   
     IFRED(SIG_B3)
@@ -318,15 +276,28 @@ SEQUENCE(207)
         WAIT_WHILE_RED(SIG_B4)
         FOLLOW(207)
     ENDIF
-    AT(CD_F9_B)
+    IFTHROWN(9020)
+        AT(CD_F9_B)
+        RED(SIG_B4)
+        AT(CD_F8_B)
+        CLOSE(9020)
+        FREE(A_B3)
+        FREE(A_B4)
+    ELSE
+        AT(CD_F9_B) 
+    ENDIF
     RETURN
 DONE
 
 SEQUENCE(208) //Progress to Block6
     RED(SIG_B4)
-    AMBER(SIG_B2)
-    FREE(B_B3)
-    GREEN(SIG_B1)
+    IFNOT(CD_S7_B)
+        AMBER(SIG_B2)
+        FREE(B_B3)
+        GREEN(SIG_B1)
+    ELSE
+        FOLLOW(208)
+    ENDIF
     AT(CD_F8_B)
     RETURN
 DONE
@@ -361,6 +332,52 @@ SEQUENCE(211)
     RETURN
 DONE
 
+SEQUENCE(212)
+        IFRESERVE(A_B2)
+            PRINT("RESERVE A_B2")
+            IFRESERVE(A_B3)
+            PRINT("RESERVED A_B3")
+                RESERVE(B_B2) //Reserve Next block
+                RED(SIG_A1)
+                IFTHROWN(9004)
+                    CLOSE(9004) //close turnouts A->B
+                ENDIF
+                IFCLOSED(9007)
+                    THROW(9007) //close turnouts B->A   
+                ENDIF
+                SPEED(30)
+            ELSE
+                FREE(A_B2)
+                PRINT("CannoT reserve A_B3 212")
+                FOLLOW(212)
+            ENDIF
+        ELSE
+            RED(SIG_B1)
+            DELAY(5000)
+            STOP
+            PRINT("AWAITING A_B2 RESERVE 212")
+            FOLLOW(212)
+        ENDIF    
+    AT(CD_S2_B)
+    RETURN      
+DONE
+
+SEQUENCE(213)
+    RED(SIG_B1)
+    RETURN
+DONE
+
+SEQUENCE(214)
+    AT(CD_S4_A)
+    FREE(B_B1)
+    DELAY(1000)
+    RED(SIG_A2)
+    AT(CD_S6_A)
+    RESTORE_SPEED
+    CLOSE(9007)
+    FREE(B_B2)
+    RETURN
+DONE
 
 //parkRelease Release the block the train has come from dependant on turnout position
 SEQUENCE(253) //Release Parked Block dependant on turnout thrown
